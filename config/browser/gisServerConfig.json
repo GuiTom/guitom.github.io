@@ -1,0 +1,75 @@
+[
+{
+"name":"菜单一",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+},
+"subMenus":[
+{
+"name":"菜单一",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},{
+"name":"菜单一",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},
+{
+"name":"菜单一",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+}
+]
+},
+{
+"name":"菜单二",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},
+{
+"name":"菜单三",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},
+{
+"name":"菜单四",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},
+{
+"name":"菜单五",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+},
+{
+"name":"菜单六",
+"serviceUrl":"https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+"viewPort":
+{
+ "minX":-13834661.666904,"minY":331181.323482,"maxX":-8255704.998713 ,"maxY":9118038.075882
+}
+}
+]

@@ -1,0 +1,218 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="抖音数据分析服务">
+ 	<meta name="keywords" content="抖音排行榜,抖音数据,抖音营销-抖商助手 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>基本语法-python3教程</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #e2e2e2;
+        font-weight: bold;
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 1em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>基本语法-python3教程</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="2c6Ba358" class="item chapter normal">python3简介</div><div id="bA0332c7" class="item course normal">Windows下安装</div><div id="C12838cA" class="item course normal">Linux下安装</div><div id="8b320BA6" class="item course normal">Mac下安装</div><div id="8a70482B" class="item chapter normal">基本语法</div><div id="0A658BA6" class="item course normal">数据类型</div><div id="9303CBc7" class="item course normal">Number</div><div id="c9349ABa" class="item course normal">字符串</div><div id="3AC2c6BA" class="item course normal">正则匹配</div><div id="a2469092" class="item course normal">列表 list</div><div id="0117b3c7" class="item course normal">元组</div><div id="aBC84A59" class="item course normal">字典</div><div id="4b8ccBC2" class="item course normal">集合</div><div id="507B4c4C" class="item chapter normal">运算符</div><div id="982A21c1" class="item course normal">算术运算符</div><div id="8484b5B0" class="item course normal">关系运算符</div><div id="c476Cc31" class="item course normal">赋值运算符</div><div id="0Ab81b19" class="item course normal">位运算符</div><div id="C6AabA97" class="item course normal">成员运算符</div><div id="0768cA9a" class="item course normal">逻辑运算符</div><div id="A4218806" class="item course normal">身份运算符</div><div id="B14746ba" class="item chapter normal">流程控制</div><div id="8b1b5118" class="item course normal">条件控制</div><div id="B8C881B2" class="item course normal">循环语句</div><div id="304c96C5" class="item course normal">迭代器与生成器</div><div id="7728974A" class="item course normal">函数</div><div id="94a9b784" class="item course normal">模块</div><div id="925AbB6C" class="item course normal">输入输出</div><div id="8aBaC7b4" class="item course normal">文件操作</div><div id="469915Aa" class="item course normal">错误和异常</div><div id="2a78B0c1" class="item chapter normal">面向对象</div><div id="4a2c2bBA" class="item chapter normal">命名空间和作用域</div><div id="12CCc4A0" class="item chapter normal">标准库概览</div><div id="2142868c" class="item chapter normal">Python操作数据库</div><div id="50300125" class="item course normal">操作redis</div><div id="AcA970B3" class="item course normal">操作mysql</div><div id="1a7CC121" class="item course normal">操作Elastic Search</div><div id="9AaCbb30" class="item course normal selected">操作mongodb</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-8" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row ontent">
+             <div class="col-sm-12">
+                 <p>Python是一种计算机编程语言。计算机编程语言和我们日常使用的自然语言有所不同，最大的区别就是，自然语言在不同的语境下有不同的理解，而计算机要根据编程语言执行任务，就必须保证编程语言写出的程序决不能有歧义，所以，任何一种编程语言都有自己的一套语法，编译器或者解释器就是负责把符合语法的程序代码转换成CPU能够执行的机器码，然后执行。Python也不例外。</p><pre class="brush:python;toolbar:false">#&nbsp;print&nbsp;absolute&nbsp;value&nbsp;of&nbsp;an&nbsp;integer:&nbsp;
+a&nbsp;=&nbsp;1&nbsp;
+if&nbsp;a&nbsp;&gt;=&nbsp;0:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;print(a)&nbsp;
+else:&nbsp;print(-a)</pre><p>Python的语法比较简单，采用缩进方式，写出来的代码就像下面的样子：以#开头的语句是注释，注释是给人看的，可以是任意内容，解释器会忽略掉注释。其他每一行都是一个语句，当语句以冒号:结尾时，缩进的语句视为代码块。</p><p>缩进有利有弊。好处是强迫你写出格式化的代码，但没有规定缩进是几个空格还是Tab。按照约定俗成的惯例，应该始终坚持使用<span style="color: rgb(221, 0, 85);">4个空格</span>的缩进。</p><p>缩进的另一个好处是强迫你写出缩进较少的代码，你会倾向于把一段很长的代码拆分成若干函数，从而得到缩进较少的代码。</p><p>缩进的坏处就是“复制－粘贴”功能失效了，这是最坑爹的地方。当你重构代码时，粘贴过去的代码必须重新检查缩进是否正确。此外，IDE很难像格式化Java代码那样格式化Python代码。</p><p>最后，请务必注意，Python程序是<span style="color: red;">大小写敏感</span>的，如果写错了大小写，程序会报错。</p><h3 style="margin: 25px 0px 15px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(68, 68, 68); font-size: 18px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);">编码</h3><p>默认情况下，Python 3 源码文件以&nbsp;UTF-8&nbsp;编码，所有字符串都是 unicode 字符串。 当然你也可以为源码文件指定不同的编码</p><pre class="brush:python;toolbar:false">#&nbsp;-*-&nbsp;coding:&nbsp;utf8*-</pre><h3 style="margin: 25px 0px 15px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(68, 68, 68); font-size: 18px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);">注释</h3><p>Python中的注释有单行注释和多行注释：</p><p>Python中单行注释以&nbsp;#&nbsp;开头，例如：</p><pre class="brush:cpp;toolbar:false">#&nbsp;这是一个注释
+print(&quot;Hello,&nbsp;World!&quot;)</pre><p>多行注释用三个单引号&nbsp;&#39;&#39;&#39;&nbsp;或者三个双引号&nbsp;&quot;&quot;&quot;&nbsp;将注释括起来，例如:</p><pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+&#39;&#39;&#39;
+这是多行注释，用三个单引号
+这是多行注释，用三个单引号
+这是多行注释，用三个单引号
+&#39;&#39;&#39;
+print(&quot;Hello,&nbsp;World!&quot;)
+
+&quot;&quot;&quot;
+这是多行注释，用三个双引号
+这是多行注释，用三个双引号
+这是多行注释，用三个双引号
+&quot;&quot;&quot;
+print(&quot;Hello,&nbsp;World!&quot;)</pre><h3 style="margin: 25px 0px 15px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-weight: normal; color: rgb(68, 68, 68); font-size: 18px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);">小结</h3><p>Python使用缩进来组织代码块，请务必遵守约定俗成的习惯，坚持使用4个空格的缩进。</p><p>在文本编辑器中，需要设置把Tab自动转换为4个空格，确保不混用Tab和空格。</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线调试工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '395ac943';
+var article_id = '8a70482B';
+</script>
+
+	
+		<div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备17006386号-5</div>
+	
+</body>

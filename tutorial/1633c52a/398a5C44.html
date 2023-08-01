@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>算法思想分类-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>算法思想分类-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2 style="margin: 10px 0px; padding: 0px; color: rgb(0, 0, 0); font-size: 21px; line-height: 1.5;"><ul style="margin-left: 30px; padding: 0px;" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; font-size: 18px;">递归与分治法</span></strong></p></li></ul></h2><p><span style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; white-space: pre;"></span>直接或间接地调用自身的算法称为递归算法。 递归是算法设计与分析中经常使用的一种技术，描写叙述简单且易于理解。</span></p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span><span style="margin: 0px; padding: 0px; white-space: pre;"></span>分治法的设计思想是将一个规模为n难以解决的问题分解为k个规模较小的子问题，这些子问题<strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0);">相互独立</span></strong>且<strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; color: rgb(255, 102, 102);">与原问题同样</span></strong>。</p><p>递归地解这些子问题，然后将各子问题的解合并得到原问题的解。</p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span><span style="margin: 0px; padding: 0px; white-space: pre;"></span>典型样例：Fibonacci数列，阶乘，Hanoi塔；<span style="margin: 0px; padding: 0px;">二分法搜索、高速排序、合并排序。</span></p><h2 style="margin: 10px 0px; padding: 0px; color: rgb(0, 0, 0); font-size: 21px; line-height: 1.5;"><ul style="margin-left: 30px; padding: 0px;" class=" list-paddingleft-2"><li><p><span style="margin: 0px; padding: 0px; font-size: 18px;">动态规划法</span></p></li></ul></h2><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;">&nbsp;</span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;"><span style="margin: 0px; padding: 0px; white-space: pre;"></span>动态规划过程是：依据当前（阶段）状态，採取对应的决策，引起状态的转移。例如以下图，一个决策序列就是在变化的状态中产生出来的，</span><span style="margin: 0px; padding: 0px; font-size: 14px;">这样的多阶段最优化决策解决这个问题的过程就称为动态规划。</span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;"><br style="margin: 0px; padding: 0px;"/></span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;">&nbsp;<span style="margin: 0px; padding: 0px; color: rgb(255, 1, 2);">初始状态→│决策１│→│决策２│→…→│决策ｎ│→结束状态</span></span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="margin: 0px; padding: 0px; font-size: 12px;">图1 动态规划决策过程示意图</span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;"><br style="margin: 0px; padding: 0px;"/></span></p><p>动态规划算法与分治法类似，其思想也是将待求解问题分解成若干个子问题（一般每一个问题相应一个阶段），<span style="margin: 0px; padding: 0px; color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial;">按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了实用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其它局部解。依次解决各子问题，最后一个子问题就是初始问题的解。</span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; white-space: normal; background-color: rgb(255, 255, 255); color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;">&nbsp;&nbsp; &nbsp;因为动态规划解决的问题多数有重叠子问题这个特点，为降低反复计算，对每个子问题仅仅解一次，将其不同阶段的不同状态保存在一个二维数组中。</span></p><p style="margin-right: auto; margin-left: auto; padding: 0px; white-space: normal; background-color: rgb(255, 255, 255); color: rgb(94, 94, 94); font-family: Verdana, Helvetica, Arial; font-size: 13px;"><span style="margin: 0px; padding: 0px; font-size: 14px;">&nbsp;&nbsp; &nbsp;与分治法最大的区别是：<span style="margin: 0px; padding: 0px; color: rgb(255, 1, 2);">适合于用动态规划法求解的问题，经分解后得到的子问题往往不是互相独立的（即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解）</span>。</span></p><p>典型样例：最长公共子序列； 最大连续子序列和（<span style="margin: 0px; padding: 0px;text-decoration:underline;"><a target="_blank" href="http://blog.csdn.net/acema/article/details/27368891" style="margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(0, 0, 0); border-bottom: 1px dotted rgb(51, 51, 51);">最大m子段和</a></span>）。</p><h2 style="margin: 10px 0px; padding: 0px; color: rgb(0, 0, 0); font-size: 21px; line-height: 1.5;"><ul style="margin-left: 30px; padding: 0px;" class=" list-paddingleft-2"><li><p><span style="margin: 0px; padding: 0px; font-size: 18px;">贪心算法</span></p></li></ul></h2><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span><span style="margin: 0px; padding: 0px; white-space: pre;"></span>贪心算法在策略的运行过程中，总是做出对当前看来是最好的选择。也就是说贪心算法并不从整体最优上进行考虑，它所做出的选择仅仅是在某种意义上的局部最优选择。</p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span><span style="margin: 0px; padding: 0px; white-space: pre;"></span>贪心算法不能保证找到的解是最优解，但在某些情况下能够是最优解的近似解，甚至是最优解。</p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span><span style="margin: 0px; padding: 0px; white-space: pre;"></span>典型样例：哈夫曼编码；单源最短路径（Dijkstra算法）；最小生成树（Prim和Kruskal算法）</p><h2 style="margin: 10px 0px; padding: 0px; color: rgb(0, 0, 0); font-size: 21px; line-height: 1.5;"><ul style="margin-left: 30px; padding: 0px;" class=" list-paddingleft-2"><li><p><span style="margin: 0px; padding: 0px; font-size: 18px;">回溯法 （DFS搜索解空间）</span></p></li></ul></h2><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span>回溯法是以深度优先方式搜索问题解的算法，它适用于组合数较大的问题，能系统地搜索到一个问题的全部解惑任一解。</p><p><strong style="margin: 0px; padding: 0px;">回溯法解题通常包括3个步骤</strong>：①针对所给的问题，定义问题的解空间； &nbsp;②确定易于搜索的解空间的结构； ③ 以DFS搜索解空间，并在搜索过程中用剪枝函数（约束条件）避免无效搜索。</p><p><strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; white-space: pre;"></span>解空间树</strong>：</p><p><strong style="margin: 0px; padding: 0px;">①子集树</strong>：当所给问题是从n个元素的结合S中找出满足某种性质的子集时，对应的解空间树称为子集树。比如n个物品的0-1背包问题。这类子集树通常有2^n个叶节点，其节点总个数为为2^(n+1)-1。遍历子集树的不论什么算法均需O(2^n)的计算时间</p><p><strong style="margin: 0px; padding: 0px;">②排列树</strong>：当所给问题是确定n个元素满足某种性质的排列时，对应的解空间树成为排列树。比如旅行售货员问题。排列树通常有n！个叶节点，因此遍历排列树须要O(n!)的计算时间。</p><p><strong style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; white-space: pre;"></span>搜索实现</strong>能够递归，也能够用树的非递归深度优先遍历算法来实现（用到<strong style="margin: 0px; padding: 0px;">栈Stack</strong>）。</p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span>典型样例：八皇后（找出全部的解），<a target="_blank" href="http://blog.csdn.net/acema/article/details/8155389" style="margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(0, 0, 0); border-bottom: 1px dotted rgb(51, 51, 51);">N 皇后</a></p><h2 style="margin: 10px 0px; padding: 0px; color: rgb(0, 0, 0); font-size: 21px; line-height: 1.5;"><ul style="margin-left: 30px; padding: 0px;" class=" list-paddingleft-2"><li><p><span style="margin: 0px; padding: 0px; font-size: 18px;">分支界限法（BFS搜索解空间）</span></p></li></ul></h2><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span>分支界限法的求解目标是找出满足约束条件的一个解，或是在满足约束条件的解中找出使某一目标函数值达到极大或极小的解，即在某种意义下的最优解。（分支界限法与回溯法求解目标不同）</p><p><span style="margin: 0px; padding: 0px; white-space: pre;"></span>分支界限法以广度优先或以最小耗费（最大收益）优先的方式搜索解空间。所谓“分支”就是在扩展节点处，先生成其全部儿子节点（分支），然后在从当前的活结点表中选择下一个扩展节点，继续搜索。过程中能够用约束条件，进行剪枝。</p><p>常见的扩展节点的常见方式：<strong style="margin: 0px; padding: 0px;">先进先出FIFO队列&nbsp;</strong>和&nbsp;<strong style="margin: 0px; padding: 0px;">优先队列分支界限法</strong>。</p><p><span style="margin: 0px; padding: 0px;"><span style="margin: 0px; padding: 0px; white-space: pre;"></span>典型样例：单源最短路径</span></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = '398a5C44';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

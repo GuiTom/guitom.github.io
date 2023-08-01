@@ -1,0 +1,669 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>表格视图-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>表格视图-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h3>1、UITableViewDataSource数据源方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;返回第section组中有多少行
+-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;numberOfRowsInSection:(NSInteger)section;
+//&nbsp;返回多少组,没实现该方法,默认为1
+-&nbsp;(NSInteger)numberOfSectionsInTableView:(UITableView&nbsp;*)tableView;</pre><h3>2、UITableViewDelegate代理方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;即将显示tableviewcell时调用
+-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;willDisplayCell:(UITableViewCell&nbsp;*)cell&nbsp;forRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;
+//&nbsp;即将显示header时调用，在cell之后调用
+-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;willDisplayHeaderView:(UIView&nbsp;*)view&nbsp;forSection:(NSInteger)section&nbsp;NS_AVAILABLE_IOS(6_0);
+//&nbsp;即将显示footer时调用，在header之后调用
+-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;willDisplayFooterView:(UIView&nbsp;*)view&nbsp;forSection:(NSInteger)section&nbsp;NS_AVAILABLE_IOS(6_0);//&nbsp;在删除cell之后调用，停止显示cell的时候调用,界面不显示cell时。-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didEndDisplayingCell:(UITableViewCell&nbsp;*)cell&nbsp;forRowAtIndexPath:(NSIndexPath*)indexPath&nbsp;NS_AVAILABLE_IOS(6_0);//&nbsp;停止显示header的时候调用-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didEndDisplayingHeaderView:(UIView&nbsp;*)view&nbsp;forSection:(NSInteger)section&nbsp;NS_AVAILABLE_IOS(6_0);//&nbsp;停止显示footer的时候调用-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didEndDisplayingFooterView:(UIView&nbsp;*)view&nbsp;forSection:(NSInteger)section&nbsp;NS_AVAILABLE_IOS(6_0);</pre><h3>3、高度代理方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;在设置每行cell的高度，header的高度，footer的高度
+//&nbsp;设置某行cell高度
+-&nbsp;(CGFloat)tableView:(UITableView&nbsp;*)tableView&nbsp;heightForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;
+//&nbsp;设置header高度
+-&nbsp;(CGFloat)tableView:(UITableView&nbsp;*)tableView&nbsp;heightForHeaderInSection:(NSInteger)section;
+//&nbsp;设置footer高度
+-&nbsp;(CGFloat)tableView:(UITableView&nbsp;*)tableView&nbsp;heightForFooterInSection:(NSInteger)section;</pre><h3>4、设置分组View的方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;返回某个section对应的header标题
+-&nbsp;(NSString&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;titleForHeaderInSection:(NSInteger)section;
+//&nbsp;返回某个section对应的footer标题
+-&nbsp;(NSString&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;titleForFooterInSection:(NSInteger)section;
+//&nbsp;设置第section分组的header
+-&nbsp;(UIView&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;viewForHeaderInSection:(NSInteger)section;
+//&nbsp;设置第section分组的footer
+-&nbsp;(UIView&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;viewForFooterInSection:(NSInteger)section;</pre><h3>5、操作cell时调用的方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;cell选中时调用
+-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didSelectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;
+//&nbsp;cell取消选中时调用-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didDeselectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;NS_AVAILABLE_IOS(3_0);</pre><h3>6、编辑模式相关的代理方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;返回每一行cell的编辑模式，&nbsp;可以再次设置add或者删除操作。
+-&nbsp;(UITableViewCellEditingStyle)tableView:(UITableView&nbsp;*)tableView&nbsp;editingStyleForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;
+//&nbsp;cell左滑删除时，删除按钮的标题
+-&nbsp;(NSString&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;NS_AVAILABLE_IOS(3_0);
+//&nbsp;自定义编辑左滑后出现的界面。&nbsp;&nbsp;不止只有一个delete按钮，&nbsp;可以自行定义，返回一个数组。数组中放着UITableviewRowAction
+-&nbsp;(NSArray&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;editActionsForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;NS_AVAILABLE_IOS(8_0);
+//&nbsp;未实现&nbsp;默认为yes,进入编辑时，cell是否缩进。&nbsp;&nbsp;在开启编辑状态时调用。
+-&nbsp;(BOOL)tableView:(UITableView&nbsp;*)tableView&nbsp;shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;//&nbsp;右滑准备进行编辑的时候&nbsp;调用。&nbsp;将setediting&nbsp;=&nbsp;yes时不调用-&nbsp;(void)tableView:(UITableView*)tableView&nbsp;willBeginEditingRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;
+//&nbsp;完成编辑的时候调用
+-&nbsp;(void)tableView:(UITableView*)tableView&nbsp;didEndEditingRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;</pre><h3>6、索引</h3><pre class="line-numbers  language-objectivec">//返回要显示的section索引标题
+-&nbsp;(NSArray&nbsp;*)sectionIndexTitlesForTableView:(UITableView&nbsp;*)tableView;
+//&nbsp;return&nbsp;list&nbsp;of&nbsp;section&nbsp;titles&nbsp;to&nbsp;display&nbsp;in&nbsp;section&nbsp;index&nbsp;view&nbsp;(e.g.&nbsp;&quot;ABCD...Z#&quot;)
+//&nbsp;点击右侧索引表项时调用
+-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;sectionForSectionIndexTitle:(NSString&nbsp;*)title&nbsp;atIndex:(NSInteger)index;
+//&nbsp;返回指定点所在位置的indexPath
+-&nbsp;(NSIndexPath&nbsp;*)indexPathForRowAtPoint:(CGPoint)point;
+//&nbsp;返回指定cell所在的indexPath
+-&nbsp;(NSIndexPath&nbsp;*)indexPathForCell:(UITableViewCell&nbsp;*)cell;
+//&nbsp;返回指定范围rect中的所有cell的indexPath
+-&nbsp;(NSArray&nbsp;*)indexPathsForRowsInRect:(CGRect)rect;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;returns&nbsp;nil&nbsp;if&nbsp;rect&nbsp;not&nbsp;valid
+//&nbsp;返回索引indexPath所指向的cell。
+-&nbsp;(UITableViewCell&nbsp;*)cellForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath;</pre><h3>7、UITableView的属性和构造方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;cell的构造方法,自定义cell时,如果要初始化设置cell属性时,可以重写该方法,在方法内部设置
+-&nbsp;(instancetype)initWithFrame:(CGRect)frame&nbsp;style:(UITableViewStyle)style;
+//&nbsp;UITableView的类型:&nbsp;plain类型和group分组类型@property&nbsp;(nonatomic,&nbsp;readonly)&nbsp;UITableViewStyle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style;
+//&nbsp;数据源
+@property&nbsp;(nonatomic,&nbsp;assign)&nbsp;&nbsp;&nbsp;id&nbsp;&lt;UITableViewDataSource&gt;&nbsp;dataSource;
+//&nbsp;代理
+@property&nbsp;(nonatomic,&nbsp;assign)&nbsp;&nbsp;&nbsp;id&nbsp;&lt;UITableViewDelegate&gt;&nbsp;&nbsp;&nbsp;delegate;
+//&nbsp;设置所有cell的行高,默认44
+@property&nbsp;(nonatomic)&nbsp;CGFloat&nbsp;rowHeight;
+//&nbsp;分组头部高度
+@property&nbsp;(nonatomic)CGFloat&nbsp;sectionHeaderHeight;
+//&nbsp;分组尾部高度
+@property&nbsp;(nonatomic)&nbsp;CGFloat&nbsp;sectionFooterHeight;
+//&nbsp;cell估算高度,默认0
+@property&nbsp;(nonatomic)&nbsp;CGFloat&nbsp;estimatedRowHeight&nbsp;NS_AVAILABLE_IOS(7_0);
+//&nbsp;分组头部估算高度
+@property&nbsp;(nonatomic)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CGFloat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;estimatedSectionHeaderHeight&nbsp;NS_AVAILABLE_IOS(7_0);//&nbsp;分组微博估算高度@property&nbsp;(nonatomic)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CGFloat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;estimatedSectionFooterHeight&nbsp;NS_AVAILABLE_IOS(7_0);//&nbsp;分割线内边距@property&nbsp;(nonatomic)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIEdgeInsets&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separatorInset&nbsp;NS_AVAILABLE_IOS(7_0)&nbsp;UI_APPEARANCE_SELECTOR;&nbsp;//&nbsp;allows&nbsp;customization&nbsp;of&nbsp;the&nbsp;frame&nbsp;of&nbsp;cell&nbsp;separators</pre><h3>8、cell刷新方法</h3><pre class="line-numbers  language-cpp">//&nbsp;重新载入tableview所有cell&nbsp;&nbsp;一般是在数据源有改变的时候-&nbsp;(void)reloadData;
+//&nbsp;重新载入，section的索引标题。-&nbsp;(void)reloadSectionIndexTitles&nbsp;NS_AVAILABLE_IOS(3_0);
+//&nbsp;reloads&nbsp;the&nbsp;index&nbsp;bar.</pre><h3>8、UITableView滚动方法</h3><pre class="line-numbers  language-objectivec">//&nbsp;根据传入的indexPath，滚动到相对应的位置，第二个参数是控制对应的cell再滚动后处于tableview的顶部/底部/中部等-&nbsp;(void)scrollToRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;atScrollPosition:(UITableViewScrollPosition)scrollPosition&nbsp;animated:(BOOL)animated;//&nbsp;滚动到被选中项。&nbsp;&nbsp;滚动后处于tableview的顶部/底部/中部等-&nbsp;(void)scrollToNearestSelectedRowAtScrollPosition:(UITableViewScrollPosition)scrollPosition&nbsp;animated:(BOOL)animated;</pre><h3>9、插入,删除,刷新,移动section组</h3><pre class="line-numbers  language-objectivec">//&nbsp;插入,删除,刷新,移动section组//&nbsp;插入section
+-&nbsp;(void)insertSections:(NSIndexSet&nbsp;*)sections&nbsp;withRowAnimation:(UITableViewRowAnimation)animation;
+//&nbsp;删除section
+-&nbsp;(void)deleteSections:(NSIndexSet&nbsp;*)sections&nbsp;withRowAnimation:(UITableViewRowAnimation)animation;
+//&nbsp;刷新section
+-&nbsp;(void)reloadSections:(NSIndexSet&nbsp;*)sections&nbsp;withRowAnimation:(UITableViewRowAnimation)animation&nbsp;NS_AVAILABLE_IOS(3_0);//&nbsp;移动section-&nbsp;(void)moveSection:(NSInteger)section&nbsp;toSection:(NSInteger)newSection&nbsp;NS_AVAILABLE_IOS(5_0);</pre><h1>实战演习</h1><p style="text-align:center"><img src="/upload/image/20191121/144654554297.png"/></p><h2>1、多选</h2><blockquote><p>在结算购物车的时候，我们需要选中多组cell，我们往往都是写了很多代码，很是麻烦，其实tableView有一个自带属性：删除多个Cell，这个时候我们可以稍作修改，就可以做成我们想要的购物车了,十分简单.</p></blockquote><h5>效果图：</h5><p style="text-align:center"><img src="/upload/image/20191117/212111520924.png"/></p><h4>注意点：</h4><p>1、[_tableView setEditing:YES animated:YES];//设为为编辑状态，不然不会出现左侧圆圈</p><p>2、设置编辑状态的代理。<br/>编辑状态UITableViewCellEditingStyle有三种模式<br/>UITableViewCellEditingStyleDelete<br/>UITableViewCellEditingStyleInsert<br/>UITableViewCellEditingStyleNone<br/>多选框的风格, 只需要风格同时包含UITableViewCellEditingStyleDelete和UITableViewCellEditingStyleInsert就可以了</p><pre class="line-numbers  language-objectivec">-&nbsp;(UITableViewCellEditingStyle)tableView:(UITableView&nbsp;*)tableView&nbsp;editingStyleForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;UITableViewCellEditingStyleDelete&nbsp;|&nbsp;UITableViewCellEditingStyleInsert;}</pre><p>3、选中是会出现蓝色背景，要是感觉不好看，可以修改</p><pre class="line-numbers  language-cpp">cell.multipleSelectionBackgroundView&nbsp;=&nbsp;[UIView&nbsp;new];</pre><p>4、修改有点击选中图标的颜色</p><pre class="line-numbers  language-objectivec">cell.tintColor&nbsp;=&nbsp;[UIColor&nbsp;redColor];</pre><p>5、不想使用默认图标的话，也可以在自定义</p><pre class="line-numbers  language-objectivec">-(void)layoutSubviews{
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(UIControl&nbsp;*control&nbsp;in&nbsp;self.subviews){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([control&nbsp;isMemberOfClass:NSClassFromString(@&quot;UITableViewCellEditControl&quot;)]){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(UIView&nbsp;*v&nbsp;in&nbsp;control.subviews)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([v&nbsp;isKindOfClass:&nbsp;[UIImageView&nbsp;class]])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIImageView&nbsp;*img=(UIImageView&nbsp;*)v;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.selected)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.image=[UIImage&nbsp;imageNamed:@&quot;xuanzhong_icon&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.image=[UIImage&nbsp;imageNamed:@&quot;weixuanzhong_icon&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;layoutSubviews];}//适配第一次图片为空的情况-&nbsp;(void)setEditing:(BOOL)editing&nbsp;animated:(BOOL)animated{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;setEditing:editing&nbsp;animated:animated];
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(UIControl&nbsp;*control&nbsp;in&nbsp;self.subviews){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([control&nbsp;isMemberOfClass:NSClassFromString(@&quot;UITableViewCellEditControl&quot;)]){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(UIView&nbsp;*v&nbsp;in&nbsp;control.subviews)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([v&nbsp;isKindOfClass:&nbsp;[UIImageView&nbsp;class]])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIImageView&nbsp;*img=(UIImageView&nbsp;*)v;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!self.selected)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.image=[UIImage&nbsp;imageNamed:@&quot;weixuanzhong_icon&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><p>6、第一次点击选中，第二次点击删除</p><pre class="line-numbers  language-objectivec">//已经选中了某一行-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didSelectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([_selectArray&nbsp;containsObject:_dataSource[indexPath.row]])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;[_selectArray&nbsp;addObject:_dataSource[indexPath.row]];}//不选的时候删除-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didDeselectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath{
+&nbsp;&nbsp;&nbsp;&nbsp;[_selectArray&nbsp;removeObject:indexPath];}</pre><p>7、全选选中与清空</p><pre class="line-numbers  language-objectivec">-&nbsp;(void)SelectButton:(UIButton*)button{
+&nbsp;&nbsp;&nbsp;&nbsp;button.selected&nbsp;=&nbsp;!button.selected;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(button.selected)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//==================全选================
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//选中tableView中所有的indexPath
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*&nbsp;array&nbsp;=&nbsp;[_tableView&nbsp;indexPathsForRowsInRect:CGRectMake(0,&nbsp;0,&nbsp;SCREEN_WIDTH,&nbsp;_tableView.contentSize.height)];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(NSIndexPath&nbsp;*&nbsp;indexPath&nbsp;in&nbsp;array)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_tableView&nbsp;selectRowAtIndexPath:indexPath&nbsp;animated:YES&nbsp;scrollPosition:UITableViewScrollPositionNone];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_selectArray&nbsp;removeAllObjects];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_selectArray&nbsp;addObjectsFromArray:_dataSource];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//============全选清空====================
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(NSIndexPath&nbsp;*&nbsp;indexPath&nbsp;in&nbsp;_selectArray)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_tableView&nbsp;deselectRowAtIndexPath:indexPath&nbsp;animated:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//将选中下标数组清空
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_selectArray&nbsp;removeAllObjects];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_tableView&nbsp;reloadData];
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;}</pre><h2>2、索引</h2><blockquote><p>tableView 自带有索引条，要是项目对索引没有太大的要求，可以直接使用tableView自带的索引。当我们需要一些特定的索引条的时候，我们可以自定制，自定制思路：1、在屏幕滚动查看当前屏幕中最上面出现的是哪一组，屏幕滚动的时候有一个代理。2、找到最上面出现的是哪一组。<br/>我们可以根据情况定制索引条。这里我只是介绍一下自带索引。</p></blockquote><h5>效果图</h5><p style="text-align:center"><img data-original-src="//upload-images.jianshu.io/upload_images/2348494-97c5f0f2a474e2ed.gif" data-original-width="401" data-original-height="733" data-original-format="image/gif" data-original-filesize="50486" class="" data-image-index="2" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/2348494-97c5f0f2a474e2ed.gif?imageMogr2/auto-orient/strip|imageView2/2/w/401/format/webp"/></p><p><br/></p><p>设置索引栏,常要用的一些方法</p><pre class="line-numbers  language-objectivec">//设置索引栏
+&nbsp;&nbsp;&nbsp;&nbsp;//背景色设置
+&nbsp;&nbsp;&nbsp;&nbsp;_tableView.sectionIndexBackgroundColor&nbsp;=&nbsp;[UIColor&nbsp;grayColor];
+&nbsp;&nbsp;&nbsp;&nbsp;//索引颜色
+&nbsp;&nbsp;&nbsp;&nbsp;_tableView.sectionIndexColor&nbsp;=&nbsp;[UIColor&nbsp;redColor];
+&nbsp;&nbsp;&nbsp;&nbsp;//点中时背景色
+&nbsp;&nbsp;&nbsp;&nbsp;_tableView.sectionIndexTrackingBackgroundColor&nbsp;=&nbsp;[UIColor&nbsp;blueColor];</pre><p>需要遵守的代理方法</p><pre class="line-numbers  language-objectivec">#pragma&nbsp;mark&nbsp;-&nbsp;索引栏显示-&nbsp;(NSArray&lt;NSString&nbsp;*&gt;&nbsp;*)sectionIndexTitlesForTableView:(UITableView&nbsp;*)tableView{
+&nbsp;&nbsp;&nbsp;&nbsp;//需要将每一组的title拿出来存放到数组中并且返回
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableArray&nbsp;*&nbsp;array&nbsp;=&nbsp;[[NSMutableArray&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(JJHCarGroup&nbsp;*&nbsp;carGroup&nbsp;in&nbsp;_dataSource)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[array&nbsp;addObject:carGroup.title];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;[array&nbsp;insertObject:@&quot;#&quot;&nbsp;atIndex:0];
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array;}-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;sectionForSectionIndexTitle:(NSString&nbsp;*)title&nbsp;atIndex:(NSInteger)index{
+&nbsp;&nbsp;&nbsp;&nbsp;//默认返回的是index，如果标题前面有其它东西，比如联系人列表最前面有个#号，需要返回index-1，否则和预期的不匹配。
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;index&nbsp;-&nbsp;1;}</pre><h2>3、搜索栏</h2><blockquote><p>UISearchBar 是苹果自带的原生搜索框，简单好用，如果没有什么特殊的需求，我们完全可以使用这个搜索框</p></blockquote><h5>效果图</h5><p style="text-align:center"><img data-original-src="//upload-images.jianshu.io/upload_images/2348494-c1a1f3773296c096.gif" data-original-width="401" data-original-height="733" data-original-format="image/gif" data-original-filesize="35665" class="" data-image-index="3" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/2348494-c1a1f3773296c096.gif?imageMogr2/auto-orient/strip|imageView2/2/w/401/format/webp"/></p><p>搜索.gif</p><p>1、初始化：UISearchBar继承于UIView，我们可以像创建View那样创建searchBar</p><pre class="line-numbers  language-objectivec">&nbsp;UISearchBar&nbsp;*&nbsp;bar&nbsp;=&nbsp;[[UISearchBar&nbsp;alloc]initWithFrame:CGRectMake(20,&nbsp;100,&nbsp;250,&nbsp;40)];
+&nbsp;&nbsp;[self.view&nbsp;addSubview:bar];</pre><p>2、这个属性可以设置searchBar的搜索框的风格，枚举如下</p><pre class="line-numbers  language-objectivec">@property(nonatomic)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIBarStyle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;barStyle;&nbsp;typedef&nbsp;NS_ENUM(NSInteger,&nbsp;UIBarStyle)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;UIBarStyleDefault&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;0,//默认风格&nbsp;白色搜索框，多出的背景为灰色
+&nbsp;&nbsp;&nbsp;&nbsp;UIBarStyleBlack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1,//黑色风格，黑色的搜索框
+&nbsp;&nbsp;&nbsp;&nbsp;//下面两个枚举已经被禁用，作用和黑色风格一样
+&nbsp;&nbsp;&nbsp;&nbsp;UIBarStyleBlackOpaque&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1,&nbsp;//&nbsp;Deprecated.&nbsp;Use&nbsp;UIBarStyleBlack
+&nbsp;&nbsp;&nbsp;&nbsp;UIBarStyleBlackTranslucent&nbsp;=&nbsp;2,&nbsp;//&nbsp;Deprecated.&nbsp;Use&nbsp;UIBarStyleBlack&nbsp;and&nbsp;set&nbsp;the&nbsp;translucent&nbsp;property&nbsp;to&nbsp;YES};</pre><p>3、UISearchBar常用属性</p><pre class="line-numbers  language-objectivec">//&nbsp;自适应大小
+&nbsp;&nbsp;&nbsp;&nbsp;[searchBar&nbsp;sizeToFit];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;1.设置搜索框的样式
+&nbsp;&nbsp;&nbsp;&nbsp;[searchBar&nbsp;setBarStyle:UIBarStyleDefault];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;2.设置背景图片(该方法可以去掉UISearchBar上下的两条线)
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.backgroundImage&nbsp;=&nbsp;[UIImage&nbsp;imageNamed:@&quot;search_bg_icon&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;3.设置主题颜色
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.barTintColor&nbsp;=&nbsp;[UIColor&nbsp;redColor];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;4.设置外边框颜色
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.barTintColor&nbsp;=&nbsp;[UIColor&nbsp;greenColor];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;5.设置光标颜色
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.tintColor&nbsp;=&nbsp;[UIColor&nbsp;cyanColor];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;6.设置是否透明
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.translucent&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;7.设置占位文字
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.placeholder&nbsp;=&nbsp;@&quot;占位文字&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;8.输入框中间的提示文字
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.prompt&nbsp;=&nbsp;@&quot;提示文字&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;9.显示搜索框右侧的搜索结果按钮
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.showsSearchResultsButton&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;10.搜索框右侧的搜索结果按钮是否选中
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.searchResultsButtonSelected&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;11.设置UISearchBar背景的偏移量
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.searchFieldBackgroundPositionAdjustment&nbsp;=&nbsp;UIOffsetMake(50,&nbsp;20);
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;12.设置UISearchBar开始编辑时文本的偏移量
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.searchTextPositionAdjustment&nbsp;=&nbsp;UIOffsetMake(50,&nbsp;20);
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;13.开始编辑时键盘上方出现一个遮盖视图
+&nbsp;&nbsp;&nbsp;&nbsp;UIView&nbsp;*view&nbsp;=&nbsp;[[UIView&nbsp;alloc]&nbsp;initWithFrame:CGRectMake(0,&nbsp;0,&nbsp;0,&nbsp;266)];
+&nbsp;&nbsp;&nbsp;&nbsp;view.backgroundColor&nbsp;=&nbsp;[UIColor&nbsp;yellowColor];
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.inputAccessoryView&nbsp;=&nbsp;view;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;14.设置键盘的样式
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.keyboardType&nbsp;=&nbsp;UIKeyboardTypeASCIICapable;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;15.是否显示搜索框下面的选项条
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.showsScopeBar&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;16.搜索框下面选项条中选项的名称
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.scopeButtonTitles&nbsp;=&nbsp;@[@&quot;aaaa&quot;,@&quot;bbbb&quot;,@&quot;cccc&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;17.选项条的背景图片
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.scopeBarBackgroundImage&nbsp;=&nbsp;[UIImage&nbsp;imageNamed:@&quot;ios_v4_preview_2&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;18.选项条默认选中的按钮下标
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.selectedScopeButtonIndex&nbsp;=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;19.显示输入框右侧的书形图标
+&nbsp;&nbsp;&nbsp;&nbsp;searchBar.showsBookmarkButton&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;20.显示右侧的取消按钮(无动画)//&nbsp;&nbsp;&nbsp;&nbsp;searchBar.showsCancelButton&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;21.显示右侧的取消按钮(有动画)
+&nbsp;&nbsp;&nbsp;&nbsp;[searchBar&nbsp;setShowsCancelButton:YES&nbsp;animated:YES];</pre><p>4、UISearchBar的代理方法</p><pre class="line-numbers  language-objectivec">//&nbsp;开始编辑时会来到该方法-&nbsp;(void)searchBarTextDidBeginEditing:(UISearchBar&nbsp;*)searchBar//&nbsp;结束编辑时会来到该方法-&nbsp;(void)searchBarTextDidEndEditing:(UISearchBar&nbsp;*)searchBar//&nbsp;开始编辑时会来到该方法(可以在该方法判断是否允许用户输入)-&nbsp;(BOOL)searchBarShouldBeginEditing:(UISearchBar&nbsp;*)searchBar//&nbsp;结束编辑时会来到该方法-&nbsp;(BOOL)searchBarShouldEndEditing:(UISearchBar&nbsp;*)searchBar//&nbsp;点击取消按钮时会来到该方法-&nbsp;(void)searchBarCancelButtonClicked:(UISearchBar&nbsp;*)searchBar//&nbsp;点击键盘的搜索按钮时会来到该方法-&nbsp;(void)searchBarSearchButtonClicked:(UISearchBar&nbsp;*)searchBar//&nbsp;输入框内容发生改变时,会来到该方法-&nbsp;(void)searchBar:(UISearchBar&nbsp;*)searchBar&nbsp;textDidChange:(NSString&nbsp;*)searchText</pre><p>5、简单项目代码</p><pre class="line-numbers  language-objectivec">@interface&nbsp;ViewController6&nbsp;()&nbsp;&lt;UISearchResultsUpdating&gt;/**
+&nbsp;*&nbsp;&nbsp;搜索控制器
+&nbsp;*/@property&nbsp;(nonatomic)&nbsp;UISearchController&nbsp;*&nbsp;searchController;/**
+&nbsp;*&nbsp;&nbsp;搜索结果存放数组
+&nbsp;*/@property&nbsp;(nonatomic)&nbsp;NSMutableArray&nbsp;*&nbsp;searchResultsArray;@end@implementation&nbsp;LZBViewController6-&nbsp;(void)viewDidLoad&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Do&nbsp;any&nbsp;additional&nbsp;setup&nbsp;after&nbsp;loading&nbsp;the&nbsp;view.
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchResultsArray&nbsp;=&nbsp;[[NSMutableArray&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;createSearchController];}-&nbsp;(void)createSearchController{
+&nbsp;&nbsp;&nbsp;&nbsp;//创建搜索控制器。参数写nil代表使用当前控制器的view来显示搜索结果
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchController&nbsp;=&nbsp;[[UISearchController&nbsp;alloc]&nbsp;initWithSearchResultsController:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;//设置搜索结果更新代理，实现协议中方法，更新搜索结果
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchController.searchResultsUpdater&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//两个属性设置
+&nbsp;&nbsp;&nbsp;&nbsp;//显示搜索结果时是否添加半透明覆盖层&nbsp;&nbsp;&nbsp;默认YES
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchController.dimsBackgroundDuringPresentation&nbsp;=&nbsp;NO;
+&nbsp;&nbsp;&nbsp;&nbsp;//搜索的时候是否隐藏导航栏&nbsp;&nbsp;&nbsp;默认YES
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchController.hidesNavigationBarDuringPresentation&nbsp;=&nbsp;NO;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//设置搜索栏显示到tableView头部视图上面
+&nbsp;&nbsp;&nbsp;&nbsp;self.tableView.tableHeaderView&nbsp;=&nbsp;self.searchController.searchBar;}#pragma&nbsp;mark&nbsp;-&nbsp;搜索更新结果方法实现-&nbsp;(void)updateSearchResultsForSearchController:(UISearchController&nbsp;*)searchController{
+&nbsp;&nbsp;&nbsp;&nbsp;//取出搜索栏里面的内容
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*&nbsp;text&nbsp;=&nbsp;searchController.searchBar.text;
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*&nbsp;array&nbsp;=&nbsp;[self.dataModel&nbsp;searchWithText:text];
+&nbsp;&nbsp;&nbsp;&nbsp;self.searchResultsArray.array&nbsp;=&nbsp;array;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//让tableView重新刷新数据
+&nbsp;&nbsp;&nbsp;&nbsp;[self.tableView&nbsp;reloadData];}#pragma&nbsp;mark&nbsp;-&nbsp;因为使用的是同一个表格视图，所以需要重写表格视图所有方法-&nbsp;(NSInteger)numberOfSectionsInTableView:(UITableView&nbsp;*)tableView{
+&nbsp;&nbsp;&nbsp;&nbsp;//判断当前搜索控制器是否处在活动状态
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.searchController.isActive)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[super&nbsp;numberOfSectionsInTableView:tableView];}-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;numberOfRowsInSection:(NSInteger)section{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.searchController.isActive)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.searchResultsArray.count;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[super&nbsp;tableView:tableView&nbsp;numberOfRowsInSection:section];}-&nbsp;(UITableViewCell&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;cellForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.searchController.isActive)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//取出一个空闲cell，将里面的内容改变
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UITableViewCell&nbsp;*&nbsp;cell&nbsp;=&nbsp;[tableView&nbsp;dequeueReusableCellWithIdentifier:@&quot;cell&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.textLabel.text&nbsp;=&nbsp;self.searchResultsArray[indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cell;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[super&nbsp;tableView:tableView&nbsp;cellForRowAtIndexPath:indexPath];}</pre><h2>4、左右联动</h2><h5>效果图</h5><p style="text-align:center"><img data-original-src="//upload-images.jianshu.io/upload_images/2348494-f9c2f7813856fdc1.gif" data-original-width="401" data-original-height="733" data-original-format="image/gif" data-original-filesize="1378749" class="" data-image-index="4" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/2348494-f9c2f7813856fdc1.gif?imageMogr2/auto-orient/strip|imageView2/2/w/401/format/webp"/></p><p><br/></p><h3>实现 tableView联动 主要分两种状况(需要创建两个tableView)</h3><h5>1、点击 左侧 cell 让右侧 tableView 滚到对应位置</h5><pre class="line-numbers  language-objectivec">//MARK:&nbsp;-&nbsp;点击&nbsp;cell&nbsp;的代理方法-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didSelectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;判断是否为&nbsp;左侧&nbsp;的&nbsp;tableView
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;self.leftTableView)&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;计算出&nbsp;右侧&nbsp;tableView&nbsp;将要&nbsp;滚动的&nbsp;位置
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*moveToIndexPath&nbsp;=&nbsp;[NSIndexPath&nbsp;indexPathForRow:0&nbsp;inSection:indexPath.row];
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;将&nbsp;rightTableView&nbsp;移动到对应的&nbsp;位置
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.rightTableView&nbsp;scrollToRowAtIndexPath:moveToIndexPath&nbsp;atScrollPosition:UITableViewScrollPositionTop&nbsp;animated:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><h5>2、滑动 右侧 tableView 让左侧 tableView 滚到对应位置</h5><blockquote><p>[self.rightTableView indexPathsForVisibleRows] 返回 所有显示在界面的 cell 的 indexPath</p></blockquote><pre class="line-numbers  language-objectivec">//MARK:&nbsp;-&nbsp;一个方法就能搞定&nbsp;右边滑动时跟左边的联动-&nbsp;(void)scrollViewDidScroll:(UIScrollView&nbsp;*)scrollView&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;如果是&nbsp;左侧的&nbsp;tableView&nbsp;直接return
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(scrollView&nbsp;==&nbsp;self.leftTableView)&nbsp;return;
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;取出显示在&nbsp;视图&nbsp;且最靠上&nbsp;的&nbsp;cell&nbsp;的&nbsp;indexPath
+&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*topHeaderViewIndexpath&nbsp;=&nbsp;[[self.rightTableView&nbsp;indexPathsForVisibleRows]&nbsp;firstObject];
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;左侧&nbsp;talbelView&nbsp;移动到的位置&nbsp;indexPath
+&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*moveToIndexpath&nbsp;=&nbsp;[NSIndexPath&nbsp;indexPathForRow:topHeaderViewIndexpath.section&nbsp;inSection:0];
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;移动&nbsp;左侧&nbsp;tableView&nbsp;到&nbsp;指定&nbsp;indexPath&nbsp;居中显示
+&nbsp;&nbsp;&nbsp;&nbsp;[self.leftTableView&nbsp;selectRowAtIndexPath:moveToIndexpath&nbsp;animated:YES&nbsp;scrollPosition:UITableViewScrollPositionMiddle];}</pre><h5>代码：</h5><pre class="line-numbers  language-objectivec">#import&nbsp;&quot;ViewController.h&quot;#import&nbsp;&quot;food.h&quot;#import&nbsp;&quot;foodGroup.h&quot;#import&nbsp;&quot;LeftTableViewCell.h&quot;#import&nbsp;&quot;RightTableViewCell.h&quot;#import&nbsp;&quot;UIImageView+WebCache.h&quot;#define&nbsp;leftTableWidth&nbsp;&nbsp;[UIScreen&nbsp;mainScreen].bounds.size.width&nbsp;*&nbsp;0.3#define&nbsp;rightTableWidth&nbsp;[UIScreen&nbsp;mainScreen].bounds.size.width&nbsp;*&nbsp;0.7#define&nbsp;ScreenWidth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIScreen&nbsp;mainScreen].bounds.size.width#define&nbsp;ScreenHeight&nbsp;&nbsp;&nbsp;&nbsp;[UIScreen&nbsp;mainScreen].bounds.size.height#define&nbsp;leftCellIdentifier&nbsp;&nbsp;@&quot;leftCellIdentifier&quot;#define&nbsp;rightCellIdentifier&nbsp;@&quot;rightCellIdentifier&quot;@interface&nbsp;ViewController&nbsp;()&lt;UITableViewDataSource,&nbsp;UITableViewDelegate&gt;{
+&nbsp;&nbsp;&nbsp;&nbsp;//数据源
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableArray&nbsp;*_dataSource;
+&nbsp;&nbsp;&nbsp;&nbsp;}@property&nbsp;(nonatomic,&nbsp;weak)&nbsp;UITableView&nbsp;*leftTableView;@property&nbsp;(nonatomic,&nbsp;weak)&nbsp;UITableView&nbsp;*rightTableView;@end@implementation&nbsp;ViewController-&nbsp;(void)viewDidLoad&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+&nbsp;&nbsp;&nbsp;&nbsp;_dataSource&nbsp;=&nbsp;[[NSMutableArray&nbsp;alloc]init];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:_leftTableView];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:_rightTableView];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;createleftTableView];
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;createRightTableView];
+&nbsp;&nbsp;&nbsp;&nbsp;//获取数据源
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;getDataSource];
+&nbsp;&nbsp;&nbsp;&nbsp;}-&nbsp;(void)createleftTableView{
+&nbsp;&nbsp;&nbsp;&nbsp;UITableView&nbsp;*tableView&nbsp;=&nbsp;[[UITableView&nbsp;alloc]initWithFrame:CGRectMake(0,&nbsp;64,&nbsp;leftTableWidth,&nbsp;ScreenHeight-64)];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:tableView];
+&nbsp;&nbsp;&nbsp;&nbsp;_leftTableView&nbsp;=&nbsp;tableView;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.delegate&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.dataSource&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;[tableView&nbsp;registerClass:[LeftTableViewCell&nbsp;class]&nbsp;forCellReuseIdentifier:leftCellIdentifier];
+&nbsp;&nbsp;&nbsp;&nbsp;}-&nbsp;(void)createRightTableView{
+&nbsp;&nbsp;&nbsp;&nbsp;UITableView&nbsp;*tableView&nbsp;=&nbsp;[[UITableView&nbsp;alloc]&nbsp;initWithFrame:CGRectMake(leftTableWidth,&nbsp;64,&nbsp;rightTableWidth,&nbsp;ScreenHeight-64)];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:tableView];
+&nbsp;&nbsp;&nbsp;&nbsp;_rightTableView&nbsp;=&nbsp;tableView;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.delegate&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.dataSource&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;_rightTableView.rowHeight&nbsp;=&nbsp;80;
+&nbsp;&nbsp;&nbsp;&nbsp;[tableView&nbsp;registerNib:[UINib&nbsp;nibWithNibName:@&quot;RightTableViewCell&quot;&nbsp;bundle:nil]&nbsp;forCellReuseIdentifier:rightCellIdentifier];}//获取数据源-&nbsp;(void)getDataSource{
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*path&nbsp;=&nbsp;[[NSBundle&nbsp;mainBundle]&nbsp;pathForResource:@&quot;meituan&quot;&nbsp;ofType:@&quot;json&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSData&nbsp;*data&nbsp;=&nbsp;[NSData&nbsp;dataWithContentsOfFile:path];
+&nbsp;&nbsp;&nbsp;&nbsp;NSDictionary&nbsp;*dict&nbsp;=&nbsp;[NSJSONSerialization&nbsp;JSONObjectWithData:data&nbsp;options:NSJSONReadingAllowFragments&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*foodGroups&nbsp;=&nbsp;dict[@&quot;data&quot;][@&quot;food_spu_tags&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(NSDictionary&nbsp;*foodGroupsDic&nbsp;in&nbsp;foodGroups)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodGroup&nbsp;*MyGroup&nbsp;=&nbsp;[[foodGroup&nbsp;alloc]init];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyGroup.name&nbsp;=&nbsp;foodGroupsDic[@&quot;name&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*&nbsp;foodArray&nbsp;=&nbsp;foodGroupsDic[@&quot;spus&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(NSDictionary&nbsp;*foodDic&nbsp;in&nbsp;foodArray)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;food&nbsp;*MyFood&nbsp;=&nbsp;[[food&nbsp;alloc]init];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyFood.name&nbsp;=&nbsp;foodDic[@&quot;name&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyFood.ImageURL&nbsp;=&nbsp;foodDic[@&quot;picture&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyFood.month_saled_content&nbsp;=&nbsp;foodDic[@&quot;month_saled_content&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MyGroup.foodArray&nbsp;addObject:MyFood];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_dataSource&nbsp;addObject:MyGroup];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[_leftTableView&nbsp;reloadData];
+&nbsp;&nbsp;&nbsp;&nbsp;[_rightTableView&nbsp;reloadData];}#pragma&nbsp;mark&nbsp;-&nbsp;数据源//返回指定的组数,如果是多组，必须实现这个方法，返回指定组数，如果是一组，这个方法可以不实现，默认是一组-&nbsp;(NSInteger)numberOfSectionsInTableView:(UITableView&nbsp;*)tableView{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;_leftTableView)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_dataSource.count;}//返回指定组的行数-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;numberOfRowsInSection:(NSInteger)section{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;_leftTableView)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_dataSource.count;
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodGroup&nbsp;*Group&nbsp;=&nbsp;_dataSource[section];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Group.foodArray.count;
+&nbsp;&nbsp;&nbsp;&nbsp;}}-&nbsp;(UITableViewCell*)tableView:(UITableView&nbsp;*)tableView&nbsp;cellForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath{
+
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;_leftTableView)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//左边cell
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LeftTableViewCell&nbsp;*cell&nbsp;=&nbsp;[tableView&nbsp;dequeueReusableCellWithIdentifier:leftCellIdentifier&nbsp;forIndexPath:indexPath];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodGroup&nbsp;*Group&nbsp;=&nbsp;_dataSource[indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.textLabel.text&nbsp;=&nbsp;Group.name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.textLabel.adjustsFontSizeToFitWidth&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cell;
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//右边cell
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RightTableViewCell&nbsp;*cell&nbsp;=&nbsp;[tableView&nbsp;dequeueReusableCellWithIdentifier:rightCellIdentifier&nbsp;forIndexPath:indexPath];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodGroup&nbsp;*Group&nbsp;=&nbsp;_dataSource[indexPath.section];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;food&nbsp;*MyFood&nbsp;=&nbsp;Group.foodArray[indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.foodNameLabel.text&nbsp;=&nbsp;MyFood.name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.xiaoLiangLAbel.text&nbsp;=&nbsp;MyFood.month_saled_content;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[cell.MYHeadImageView&nbsp;sd_setImageWithURL:[NSURL&nbsp;URLWithString:MyFood.ImageURL]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cell;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}-&nbsp;(NSString&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;titleForHeaderInSection:(NSInteger)section{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;_rightTableView)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foodGroup&nbsp;*Group&nbsp;=&nbsp;_dataSource[section];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Group.name;
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;}}#pragma&nbsp;mark&nbsp;-&nbsp;滑动&nbsp;右侧&nbsp;tableView&nbsp;让左侧&nbsp;tableView&nbsp;滚到对应位置//MARK:&nbsp;-&nbsp;一个方法就能搞定&nbsp;右边滑动时跟左边的联动-&nbsp;(void)scrollViewDidScroll:(UIScrollView&nbsp;*)scrollView&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;如果是&nbsp;左侧的&nbsp;tableView&nbsp;直接return
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(scrollView&nbsp;==&nbsp;self.leftTableView)&nbsp;return;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;取出显示在&nbsp;视图&nbsp;且最靠上&nbsp;的&nbsp;cell&nbsp;的&nbsp;indexPath
+&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*topHeaderViewIndexpath&nbsp;=&nbsp;[[self.rightTableView&nbsp;indexPathsForVisibleRows]&nbsp;firstObject];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;左侧&nbsp;talbelView&nbsp;移动的&nbsp;indexPath
+&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*moveToIndexpath&nbsp;=&nbsp;[NSIndexPath&nbsp;indexPathForRow:topHeaderViewIndexpath.section&nbsp;inSection:0];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;移动&nbsp;左侧&nbsp;tableView&nbsp;到&nbsp;指定&nbsp;indexPath&nbsp;居中显示
+&nbsp;&nbsp;&nbsp;&nbsp;[self.leftTableView&nbsp;selectRowAtIndexPath:moveToIndexpath&nbsp;animated:YES&nbsp;scrollPosition:UITableViewScrollPositionMiddle];
+&nbsp;&nbsp;&nbsp;&nbsp;}//MARK:&nbsp;-&nbsp;点击右侧&nbsp;cell&nbsp;的代理方法-&nbsp;(void)tableView:(UITableView&nbsp;*)tableView&nbsp;didSelectRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;选中&nbsp;左侧&nbsp;的&nbsp;tableView
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(tableView&nbsp;==&nbsp;self.leftTableView)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSIndexPath&nbsp;*moveToIndexPath&nbsp;=&nbsp;[NSIndexPath&nbsp;indexPathForRow:0&nbsp;inSection:indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;将右侧&nbsp;tableView&nbsp;移动到指定位置
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.rightTableView&nbsp;selectRowAtIndexPath:moveToIndexPath&nbsp;animated:YES&nbsp;scrollPosition:UITableViewScrollPositionTop];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;取消选中效果
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.rightTableView&nbsp;deselectRowAtIndexPath:moveToIndexPath&nbsp;animated:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;}}@end</pre><h2>5、分组的展开收起</h2><h5>效果图</h5><p style="text-align:center"><img data-original-src="//upload-images.jianshu.io/upload_images/2348494-b725bee7b6b20a2f.gif" data-original-width="298" data-original-height="566" data-original-format="image/gif" data-original-filesize="26493" class="" data-image-index="5" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/2348494-b725bee7b6b20a2f.gif?imageMogr2/auto-orient/strip|imageView2/2/w/298/format/webp"/></p><p>展开收起.gif</p><blockquote><p>定义一个section对象，保存一个isExpand标识来判断展开与收起状态。点击的时候设置下isExpand，然后reload下就行了。</p></blockquote><h5>核心代码</h5><pre class="line-numbers  language-kotlin">-&nbsp;(NSInteget)cellForRowAtIndexPath:(NSIndexPath)indexPath{
+&nbsp;&nbsp;&nbsp;&nbsp;if(section.isExpand){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;dataSource[indexPath.section].count;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><h5>完整代码</h5><pre class="line-numbers  language-objectivec">-&nbsp;(void)loadData&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!self.dataArray)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.dataArray&nbsp;=&nbsp;[NSMutableArray&nbsp;array];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!self.isExpland)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.isExpland&nbsp;=&nbsp;[NSMutableArray&nbsp;array];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;//这里用一个二维数组来模拟数据。
+&nbsp;&nbsp;&nbsp;&nbsp;self.dataArray&nbsp;=&nbsp;[NSArray&nbsp;arrayWithObjects:@[@&quot;a&quot;,@&quot;b&quot;,@&quot;c&quot;,@&quot;d&quot;],@[@&quot;d&quot;,@&quot;e&quot;,@&quot;f&quot;],@[@&quot;h&quot;,@&quot;i&quot;,@&quot;j&quot;,@&quot;m&quot;,@&quot;n&quot;],nil].mutableCopy;
+
+&nbsp;&nbsp;&nbsp;&nbsp;//用0代表收起，非0（不一定是1）代表展开，默认都是收起的
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;self.dataArray.count;&nbsp;i++)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.isExpland&nbsp;addObject:@0];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;[self.tableView&nbsp;reloadData];}#pragma&nbsp;mark&nbsp;-&nbsp;Table&nbsp;view&nbsp;data&nbsp;source-&nbsp;(NSInteger)numberOfSectionsInTableView:(UITableView&nbsp;*)tableView&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.dataArray.count;}-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;numberOfRowsInSection:(NSInteger)section&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//这里是关键，如果选中
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*array&nbsp;=&nbsp;self.dataArray[section];
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([self.isExpland[section]&nbsp;boolValue])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array.count;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}}-&nbsp;(UITableViewCell&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;cellForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;UITableViewCell&nbsp;*cell&nbsp;=&nbsp;[tableView&nbsp;dequeueReusableCellWithIdentifier:@&quot;cell&quot;&nbsp;forIndexPath:indexPath];
+
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(cell&nbsp;==&nbsp;nil)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell&nbsp;=&nbsp;[[UITableViewCell&nbsp;alloc]&nbsp;initWithStyle:UITableViewCellStyleValue1&nbsp;reuseIdentifier:@&quot;cell&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;cell.textLabel.text&nbsp;=&nbsp;self.dataArray[indexPath.section][indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cell;}-&nbsp;(UIView&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;viewForHeaderInSection:(NSInteger)section&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;UIButton&nbsp;*headerSection&nbsp;=&nbsp;[[UIButton&nbsp;alloc]&nbsp;initWithFrame:CGRectMake(0,&nbsp;0,&nbsp;kScreenWidth,&nbsp;44)];
+&nbsp;&nbsp;&nbsp;&nbsp;headerSection.tag&nbsp;=&nbsp;666+section;
+
+&nbsp;&nbsp;&nbsp;&nbsp;//标题
+&nbsp;&nbsp;&nbsp;&nbsp;[headerSection&nbsp;setTitle:[NSString&nbsp;stringWithFormat:@&quot;第%@组&quot;,@(section)]&nbsp;forState:UIControlStateNormal];
+
+&nbsp;&nbsp;&nbsp;&nbsp;[headerSection&nbsp;addTarget:self&nbsp;action:@selector(buttonAction:)&nbsp;forControlEvents:UIControlEventTouchUpInside];
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;headerSection;}-&nbsp;(CGFloat)tableView:(UITableView&nbsp;*)tableView&nbsp;heightForHeaderInSection:(NSInteger)section&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;44;}-&nbsp;(void)buttonAction:(UIButton&nbsp;*)button&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSInteger&nbsp;section&nbsp;=&nbsp;button.tag&nbsp;-&nbsp;666;
+&nbsp;&nbsp;&nbsp;&nbsp;self.isExpland[section]&nbsp;=&nbsp;[self.isExpland[section]&nbsp;isEqual:@0]?@1:@0;
+&nbsp;&nbsp;&nbsp;&nbsp;NSIndexSet&nbsp;*set&nbsp;=&nbsp;[NSIndexSet&nbsp;indexSetWithIndex:section];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.tableView&nbsp;reloadSections:set&nbsp;withRowAnimation:UITableViewRowAnimationFade];
+}</pre><p>原文链接：https://www.jianshu.com/p/fb444a830728<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '60b7AC6B';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

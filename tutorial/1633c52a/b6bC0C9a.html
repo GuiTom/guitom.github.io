@@ -1,0 +1,250 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>快速排序-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>快速排序-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">排序流程</h2><p>快速排序算法通过多次比较和交换来实现排序，其排序流程如下：<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(1)首先设定一个分界值，通过该分界值将数组分成左右两部分。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(2)将大于或等于分界值的数据集中到数组右边，小于分界值的数据集中到数组的左边。此时，左边部分中各元素都小于或等于分界值，而右边部分中各元素都大于或等于分界值。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(3)然后，左边和右边的数据可以独立排序。对于左侧的数组数据，又可以取一个分界值，将该部分数据分成左右两部分，同样在左边放置较小值，右边放置较大值。右侧的数组数据也可以做类似处理。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(4)重复上述过程，可以看出，这是一个递归定义。通过递归将左侧部分排好序后，再递归排好右侧部分的顺序。当左、右两个部分各数据排序完成后，整个数组的排序也就完成了。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">排序流程</h2><p>快速排序算法通过多次比较和交换来实现排序，其排序流程如下：<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(1)首先设定一个分界值，通过该分界值将数组分成左右两部分。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(2)将大于或等于分界值的数据集中到数组右边，小于分界值的数据集中到数组的左边。此时，左边部分中各元素都小于或等于分界值，而右边部分中各元素都大于或等于分界值。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(3)然后，左边和右边的数据可以独立排序。对于左侧的数组数据，又可以取一个分界值，将该部分数据分成左右两部分，同样在左边放置较小值，右边放置较大值。右侧的数组数据也可以做类似处理。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p>(4)重复上述过程，可以看出，这是一个递归定义。通过递归将左侧部分排好序后，再递归排好右侧部分的顺序。当左、右两个部分各数据排序完成后，整个数组的排序也就完成了。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a><a style="color: rgb(19, 110, 194);" name="ref_2"></a></p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub19016_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="排序步骤"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">排序步骤</h2><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub19016_2_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="原理"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2-1"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;"><br/></h3><p>设要排序的<a target="_blank" href="https://baike.baidu.com/item/%E6%95%B0%E7%BB%84" style="color: rgb(19, 110, 194); text-decoration-line: none;">数组</a>是A[0]……A[N-1]，首先任意选取一个数据（通常选</p><p><a class="image-link" nslog-type="9317" href="https://baike.baidu.com/pic/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/369842/0/b7003af33a87e950707fdf2110385343fbf2b416?fr=lemma&ct=single" target="_blank" title="快排图" style="color: rgb(19, 110, 194); text-decoration-line: none; display: block; width: 220px; height: 168px;"><img class="" src="/upload/image/2019111/214235400943.png" alt="快排图" style="border: 0px; display: block; margin: 0px auto; width: 220px; height: 168px;"/></a><span class="description" style="display: block; color: rgb(85, 85, 85); font-size: 12px; text-indent: 0px; font-family: 宋体; overflow-wrap: break-word; word-break: break-all; line-height: 15px; padding: 8px 7px; min-height: 12px; border-top: 1px solid rgb(224, 224, 224);">快排图</span></p><p>用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它左边，所有比它大的数都放到它右边，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的<a target="_blank" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" style="color: rgb(19, 110, 194); text-decoration-line: none;">排序算法</a>，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动。<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>一趟快速排序的算法是：<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>1）设置两个变量i、j，<a target="_blank" href="https://baike.baidu.com/item/%E6%8E%92%E5%BA%8F" style="color: rgb(19, 110, 194); text-decoration-line: none;">排序</a>开始的时候：i=0，j=N-1；<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>2）以第一个数组元素作为关键数据，赋值给<span style="font-weight: 700;">key</span>，即<span style="font-weight: 700;">key</span>=A[0]；<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>3）从j开始向前搜索，即由后开始向前搜索(j--)，找到第一个小于<span style="font-weight: 700;">key</span>的值A[j]，将A[j]和A[i]的值交换；<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>4）从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于<span style="font-weight: 700;">key</span>的A[i]，将A[i]和A[j]的值交换；<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p>5）重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于<span style="font-weight: 700;">key</span>,4中A[i]不大于<span style="font-weight: 700;">key</span>的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_19016"></a>&nbsp;<a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a><a style="color: rgb(19, 110, 194);" name="ref_1"></a></p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub19016_2_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="排序演示"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2-2"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">排序演示</h3><p>假设一开始序列{x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">i</span>}是：5，3，7，6，4，1，0，2，9，10，8。</p><p>此时，ref=5，i=1，j=11，从后往前找，第一个比5小的数是x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">8</span>=2，因此序列为：2，3，7，6，4，1，0，5，9，10，8。</p><p>此时i=1，j=8，从前往后找，第一个比5大的数是x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">3</span>=7，因此序列为：2，3，5，6，4，1，0，7，9，10，8。</p><p>此时，i=3，j=8，从第8位往前找，第一个比5小的数是x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">7</span>=0，因此：2，3，0，6，4，1，5，7，9，10，8。</p><p>此时，i=3，j=7，从第3位往后找，第一个比5大的数是x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">4</span>=6，因此：2，3，0，5，4，1，6，7，9，10，8。</p><p>此时，i=4，j=7，从第7位往前找，第一个比5小的数是x<span style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; bottom: -0.25em;">6</span>=1，因此：2，3，0，1，4，5，6，7，9，10，8。</p><p>此时，i=4，j=6，从第4位往后找，直到第6位才有比5大的数，这时，i=j=6，ref成为一条分界线，它之前的数都比它小，之后的数都比它大，对于前后两部分数，可以采用同样的方法来排序。<span class="sup--normal" data-sup="3" data-ctrmap=":3," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[3]</span></p><p><span class="sup--normal" data-sup="3" data-ctrmap=":3," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;"></span></p><p><code class="cpp keyword bold" style="font-family: Consolas, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, Courier, monospace !important; font-size: 1em !important; border-radius: 0px !important; background: none !important; border: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px !important; position: static !important; right: auto !important; top: auto !important; vertical-align: baseline !important; width: auto !important; box-sizing: content-box !important; font-weight: 700 !important; min-height: auto !important; color: rgb(0, 102, 153) !important;"></code></p><pre class="brush:cpp;toolbar:false">void&nbsp;sort(int&nbsp;*a,&nbsp;int&nbsp;left,&nbsp;int&nbsp;right)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(left&nbsp;&gt;=&nbsp;right)/*如果左边索引大于或者等于右边的索引就代表已经整理完成一个组了*/
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i&nbsp;=&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;j&nbsp;=&nbsp;right;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;key&nbsp;=&nbsp;a[left];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;while(i&nbsp;&lt;&nbsp;j)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*控制在当组内寻找一遍*/
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(i&nbsp;&lt;&nbsp;j&nbsp;&amp;&amp;&nbsp;key&nbsp;&lt;=&nbsp;a[j])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*而寻找结束的条件就是，1，找到一个小于或者大于key的数（大于或小于取决于你想升
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序还是降序）2，没有符合条件1的，并且i与j的大小没有反转*/&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j--;/*向前寻找*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[i]&nbsp;=&nbsp;a[j];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*找到一个这样的数后就把它赋给前面的被拿走的i的值（如果第一次循环且key是
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[left]，那么就是给key）*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(i&nbsp;&lt;&nbsp;j&nbsp;&amp;&amp;&nbsp;key&nbsp;&gt;=&nbsp;a[i])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*这是i在当组内向前寻找，同上，不过注意与key的大小关系停止循环和上面相反，
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为排序思想是把数往两边扔，所以左右两边的数大小与key的关系相反*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a[j]&nbsp;=&nbsp;a[i];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;a[i]&nbsp;=&nbsp;key;/*当在当组内找完一遍以后就把中间数key回归*/
+&nbsp;&nbsp;&nbsp;&nbsp;sort(a,&nbsp;left,&nbsp;i&nbsp;-&nbsp;1);/*最后用同样的方式对分出来的左边的小组进行同上的做法*/
+&nbsp;&nbsp;&nbsp;&nbsp;sort(a,&nbsp;i&nbsp;+&nbsp;1,&nbsp;right);/*用同样的方式对分出来的右边的小组进行同上的做法*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*当然最后可能会出现很多分左右，直到每一组的i&nbsp;=&nbsp;j&nbsp;为止*/
+}
+int&nbsp;main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;a[]&nbsp;=&nbsp;{5,7,3,4,9};
+&nbsp;&nbsp;&nbsp;&nbsp;sort(a,0,4);
+&nbsp;&nbsp;&nbsp;&nbsp;for(int&nbsp;i=0;i&lt;5;i++){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;%d&quot;,a[i]);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+}</pre><p><span class="sup--normal" data-sup="3" data-ctrmap=":3," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;"></span><br/></p><p><a href="https://blog.csdn.net/qq_36770641/article/details/82669788" target="_blank">相关文章</a>：<a href="https://blog.csdn.net/qq_36770641/article/details/82669788" target="_self">为什么说快速排序是性能最好的排序算法</a></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'b6bC0C9a';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>哈希表查找-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>哈希表查找-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>一、什么是Hash表</p><p>要想知道什么是哈希表，那得先了解哈希函数</p><p>哈希函数</p><p>对比之前博客讨论的二叉排序树 二叉平衡树 红黑树 B B+树，它们的查找都是先从根节点进行查找，从节点取出数据或索引与查找值进行比较。那么，有没有一种函数H，根据这个函数和查找关键字key，可以直接确定查找值所在位置，而不需要一个个比较。这样就**“预先知道”**key所在的位置，直接找到数据，提升效率。</p><p>即</p><p>地址index=H（key）</p><p>说白了，hash函数就是根据key计算出应该存储地址的位置，而哈希表是基于哈希函数建立的一种查找表</p><p><br/></p><p>二、哈希函数的构造方法</p><p>根据前人经验，统计出如下几种常用hash函数的构造方法：</p><p>直接定制法</p><p>哈希函数为关键字的线性函数如 H（key）=a*key+b</p><p>这种构造方法比较简便，均匀，但是有很大限制，仅限于地址大小=关键字集合的情况</p><p>使用举例：</p><p>假设需要统计中国人口的年龄分布，以10为最小单元。今年是2018年，那么10岁以内的分布在2008-2018，20岁以内的分布在1998-2008……假设2018代表2018-2008直接的数据，那么关键字应该是2018，2008，1998……</p><p>那么可以构造哈希函数H（key）=（2018-key）/10=201-key/10</p><p>那么hash表建立如下</p><p><br/></p><p>index<span style="white-space:pre">	</span>key<span style="white-space:pre">	</span>年龄<span style="white-space:pre">	</span>人数（假设数据）</p><p>0<span style="white-space:pre">	</span>2018<span style="white-space:pre">	</span>0-10<span style="white-space:pre">	</span>200W</p><p>1<span style="white-space:pre">	</span>2008<span style="white-space:pre">	</span>10-20<span style="white-space:pre">	</span>250W</p><p>2<span style="white-space:pre">	</span>1998<span style="white-space:pre">	</span>20-30<span style="white-space:pre">	</span>253W</p><p>3<span style="white-space:pre">	</span>1988<span style="white-space:pre">	</span>30-40<span style="white-space:pre">	</span>300W</p><p><br/></p><p><br/></p><p>使用举例</p><p>我们知道身份证号是有规律的，现在我们要存储一个班级学生的身份证号码，假设这个班级的学生都出生在同一个地区，同一年，那么他们的身份证的前面数位都是相同的，那么我们可以截取后面不同的几位存储，假设有5位不同，那么就用这五位代表地址。</p><p>H（key）=key%100000</p><p>此种方法通常用于数字位数较长的情况，必须数字存在一定规律，其必须知道数字的分布情况，比如上面的例子，我们事先知道这个班级的学生出生在同一年，同一个地区。</p><p>平方取中法</p><p>如果关键字的每一位都有某些数字重复出现频率很高的现象，可以先求关键字的平方值，通过平方扩大差异，而后取中间数位作为最终存储地址。</p><p>使用举例</p><p>比如key=1234 1234^2=1522756 取227作hash地址</p><p>比如key=4321 4321^2=18671041 取671作hash地址</p><p>这种方法适合事先不知道数据并且数据长度较小的情况</p><p>折叠法</p><p>如果数字的位数很多，可以将数字分割为几个部分，取他们的叠加和作为hash地址</p><p>使用举例</p><p>比如key=123 456 789</p><p>我们可以存储在61524，取末三位，存在524的位置</p><p>该方法适用于数字位数较多且事先不知道数据分布的情况</p><p>除留余数法用的较多</p><p>H（key）=key MOD p （p&lt;=m m为表长）</p><p>很明显，如何选取p是个关键问题。</p><p><br/></p><p>使用举例</p><p>比如我们存储3 6 9，那么p就不能取3</p><p>因为 3 MOD 3 == 6 MOD 3 == 9 MOD 3</p><p>p应为不大于m的质数或是不含20以下的质因子的合数，这样可以减少地址的重复（冲突）</p><p><br/></p><p>比如key = 7，39，18，24，33，21时取表长m为9 p为7 那么存储如下</p><p><br/></p><p>index<span style="white-space:pre">	</span>0<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>2<span style="white-space:pre">	</span>3<span style="white-space:pre">	</span>4<span style="white-space:pre">	</span>5<span style="white-space:pre">	</span>6<span style="white-space:pre">	</span>7<span style="white-space:pre">	</span>8</p><p>key<span style="white-space:pre">	</span>7<span style="white-space:pre">	</span>21（冲突后移）<span style="white-space:pre">		</span>24<span style="white-space:pre">	</span>4<span style="white-space:pre">	</span>18（冲突后移）<span style="white-space:pre">	</span>33冲突后移）<span style="white-space:pre">		</span></p><p>**随机数法** H（key） =Random（key） 取关键字的随机函数值为它的散列地址</p><p>hash函数设计的考虑因素</p><p>1.计算散列地址所需要的时间（即hash函数本身不要太复杂）</p><p>2.关键字的长度</p><p>3.表长</p><p>4.关键字分布是否均匀，是否有规律可循</p><p>5.设计的hash函数在满足以上条件的情况下尽量减少冲突</p><p><br/></p><p>三、哈希冲突</p><p>即不同key值产生相同的地址，H（key1）=H（key2）</p><p>比如我们上面说的存储3 6 9，p取3是</p><p>3 MOD 3 == 6 MOD 3 == 9 MOD 3</p><p>此时3 6 9都发生了hash冲突</p><p><br/></p><p>哈希冲突的解决方案</p><p>不管hash函数设计的如何巧妙，总会有特殊的key导致hash冲突，特别是对动态查找表来说。</p><p>hash函数解决冲突的方法有以下几个常用的方法</p><p>1.开放定制法</p><p>2.链地址法</p><p>3.公共溢出区法</p><p>建立一个特殊存储空间，专门存放冲突的数据。此种方法适用于数据和冲突较少的情况。</p><p>4.再散列法</p><p>准备若干个hash函数，如果使用第一个hash函数发生了冲突，就使用第二个hash函数，第二个也冲突，使用第三个……</p><p>重点了解一下开放定制法和链地址法</p><p><br/></p><p>开放定制法</p><p>首先有一个H（key）的哈希函数</p><p>如果H（key1）=H（keyi）</p><p>那么keyi存储位置Hi=(H(key)+di)MODmH_i=(H(key)+d_i)MOD mH&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;=(H(key)+d&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;)MODmm为表长</p><p>did_id&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;有三种取法</p><p>1）线性探测再散列</p><p>di=c∗id_i=c*id&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;=c∗i</p><p>2）平方探测再散列</p><p>di=12,−12,22,−22d_i=1^2,-1^2,2^2,-2^2d&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;=1&nbsp;</p><p>2</p><p>&nbsp;,−1&nbsp;</p><p>2</p><p>&nbsp;,2&nbsp;</p><p>2</p><p>&nbsp;,−2&nbsp;</p><p>2</p><p>&nbsp;……</p><p>3）随机探测在散列（双探测再散列）</p><p>did_id&nbsp;</p><p>i</p><p><span style="white-space:pre">	</span></p><p>&nbsp;是一组伪随机数列</p><p>注意</p><p>增量di应该具有以下特点（完备性）：产生的Hi（地址）均不相同，且所产生的s（m-1）个Hi能覆盖hash表中的所有地址</p><p><br/></p><p>平方探测时表长m必须为4j+3的质数（平方探测表长有限制）</p><p>随机探测时m和di没有公因子（随机探测di有限制）</p><p>三种开放定址法解决冲突方案的例子</p><p>废话不多说，上例子就明白了</p><p>有一组数据</p><p>19 01 23 14 55 68 11 86 37要存储在表长11的数组中，其中H（key）=key MOD 11</p><p>那么按照上面三种解决冲突的方法，存储过程如下：</p><p>（表格解释：从前向后插入数据，如果插入位置已经占用，发生冲突，冲突的另起一行，计算地址，直到地址可用，后面冲突的继续向下另起一行。最终结果取最上面的数据（因为是最“占座”的数据））</p><p>线性探测再散列</p><p>我们取di=1，即冲突后存储在冲突后一个位置，如果仍然冲突继续向后</p><p><br/></p><p>index<span style="white-space:pre">	</span>0<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>2<span style="white-space:pre">	</span>3<span style="white-space:pre">	</span>4<span style="white-space:pre">	</span>5<span style="white-space:pre">	</span>6<span style="white-space:pre">	</span>7<span style="white-space:pre">	</span>8<span style="white-space:pre">	</span>9<span style="white-space:pre">	</span>10</p><p>key<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">		</span>14<span style="white-space:pre">					</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span></p><p>23冲突<span style="white-space:pre">	</span>23<span style="white-space:pre">								</span></p><p>68冲突<span style="white-space:pre">	</span>68冲突<span style="white-space:pre">	</span>68<span style="white-space:pre">						</span></p><p>11冲突<span style="white-space:pre">	</span>11冲突<span style="white-space:pre">	</span>11冲突<span style="white-space:pre">	</span>11冲突<span style="white-space:pre">	</span>11冲突<span style="white-space:pre">	</span>11<span style="white-space:pre">					</span></p><p>37冲突<span style="white-space:pre">	</span>37冲突<span style="white-space:pre">	</span>37<span style="white-space:pre">				</span></p><p>最终存储结果<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>23<span style="white-space:pre">	</span>14<span style="white-space:pre">	</span>68<span style="white-space:pre">	</span>11<span style="white-space:pre">	</span>37<span style="white-space:pre">		</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span></p><p>**平方探测再散列**</p><p>index<span style="white-space:pre">	</span>0<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>2<span style="white-space:pre">	</span>3<span style="white-space:pre">	</span>4<span style="white-space:pre">	</span>5<span style="white-space:pre">	</span>6<span style="white-space:pre">	</span>7<span style="white-space:pre">	</span>8<span style="white-space:pre">	</span>9<span style="white-space:pre">	</span>10</p><p>key<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">		</span>14<span style="white-space:pre">	</span>37<span style="white-space:pre">				</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span></p><p>23冲突<span style="white-space:pre">	</span>H（23）+1<span style="white-space:pre">								</span></p><p>H（68）-1冲突<span style="white-space:pre">	</span>68冲突<span style="white-space:pre">	</span>H（68）+1冲突<span style="white-space:pre">			</span>H（68）+4<span style="white-space:pre">				</span></p><p>11冲突<span style="white-space:pre">	</span>H（11）+1冲突<span style="white-space:pre">									</span>H（11）-1</p><p>最终存储结果<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>23<span style="white-space:pre">	</span>14<span style="white-space:pre">	</span>37<span style="white-space:pre">		</span>68<span style="white-space:pre">		</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span>11</p><p>**随机探测在散列（双探测再散列）** 发生冲突后 H（key）‘=(H(key)+di)MOD m 在该例子中 H（key）=key MOD 11 我们取di=key MOD 10 +1 则有如下结果：</p><p>index<span style="white-space:pre">	</span>0<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>2<span style="white-space:pre">	</span>3<span style="white-space:pre">	</span>4<span style="white-space:pre">	</span>5<span style="white-space:pre">	</span>6<span style="white-space:pre">	</span>7<span style="white-space:pre">	</span>8<span style="white-space:pre">	</span>9<span style="white-space:pre">	</span>10</p><p>key<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>68<span style="white-space:pre">	</span>14<span style="white-space:pre">					</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span></p><p>23冲突<span style="white-space:pre">				</span>H（23）+3+1<span style="white-space:pre">					</span></p><p>11冲突<span style="white-space:pre">		</span>H（11）+1+1冲突<span style="white-space:pre">		</span>H（11）+1+1+1+1<span style="white-space:pre">						</span></p><p>（H（37）+8）模11冲突<span style="white-space:pre">			</span>37冲突<span style="white-space:pre">			</span>（H（37）+8+8+8）模11<span style="white-space:pre">		</span>（H（37）+8+8）模11冲突<span style="white-space:pre">	</span></p><p>最终存储结果<span style="white-space:pre">	</span>55<span style="white-space:pre">	</span>1<span style="white-space:pre">	</span>68<span style="white-space:pre">	</span>14<span style="white-space:pre">	</span>23<span style="white-space:pre">		</span>11<span style="white-space:pre">	</span>37<span style="white-space:pre">	</span>19<span style="white-space:pre">	</span>86<span style="white-space:pre">	</span></p><p>链地址法</p><p>产生hash冲突后在存储数据后面加一个指针，指向后面冲突的数据</p><p>上面的例子，用链地址法则是下面这样：</p><p><br/></p><p><br/></p><p>四、hash表的查找</p><p>查找过程和造表过程一致，假设采用开放定址法处理冲突，则查找过程为：</p><p>对于给定的key，计算hash地址index = H（key）</p><p>如果数组arr【index】的值为空 则查找不成功</p><p>如果数组arr【index】== key 则查找成功</p><p>否则 使用冲突解决方法求下一个地址，直到arr【index】== key或者 arr【index】==null</p><p><br/></p><p>hash表的查找效率</p><p>决定hash表查找的ASL因素：</p><p>1）选用的hash函数</p><p>2）选用的处理冲突的方法</p><p>3）hash表的饱和度，装载因子 α=n/m(n表示实际装载数据长度 m为表长)</p><p>一般情况，假设hash函数是均匀的，则在讨论ASL时可以不考虑它的因素</p><p>hash表的ASL是处理冲突方法和装载因子的函数</p><p>前人已经证明，查找成功时如下结果：</p><p><br/></p><p><br/></p><p>可以看到无论哪个函数，装载因子越大，平均查找长度越大，那么装载因子α越小越好？也不是，就像100的表长只存一个数据，α是小了，但是空间利用率不高啊，这里就是时间空间的取舍问题了。通常情况下，认为α=0.75是时间空间综合利用效率最高的情况。</p><p><br/></p><p>上面的这个表可是特别有用的。假设我现在有10个数据，想使用链地址法解决冲突，并要求平均查找长度&lt;2</p><p>那么有1+α/2 &lt;2</p><p>α&lt;2</p><p>即 n/m&lt;2 (n=10)</p><p>m&gt;10/2</p><p>m&gt;5 即采用链地址法，使得平均查找长度&lt; 2 那么m&gt;5</p><p><br/></p><p>之前我的博客讨论过各种树的平均查找长度，他们都是基于存储数据n的函数，而hash表不同，他是基于装载因子的函数，也就是说，当数据n增加时，我可以通过增加表长m，以维持装载因子不变，确保ASL不变。</p><p>那么hash表的构造应该是这样的：</p><p><br/></p><p><br/></p><p>五、hash表的删除</p><p>首先链地址法是可以直接删除元素的，但是开放定址法是不行的，拿前面的双探测再散列来说，假如我们删除了元素1，将其位置置空，那 23就永远找不到了。正确做法应该是删除之后置入一个原来不存在的数据，比如-1</p><p><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'b2A8C43b';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

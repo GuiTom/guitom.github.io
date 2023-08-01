@@ -1,0 +1,288 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>常用lldb命令-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>常用lldb命令-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px;">1.1 p、po 打印值</p><p>打印相关的命令有：p、po。<br/>p 和 po 的区别在于使用 po 只会输出对应的值，而 p 则会返回值的类型以及命令结果的引用名。</p><p><br/></p><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">1.2 expression 修改参数值</p><p>感觉exp命令是调试过程中最有价值有命令了，它可以打印值、修改值。</p><pre class="brush:cpp;toolbar:false">//expression打印值
+(lldb)&nbsp;expression&nbsp;width
+(CGFloat)&nbsp;$5&nbsp;=&nbsp;67
+//expression修改值
+(lldb)&nbsp;expression&nbsp;width&nbsp;=&nbsp;80
+(CGFloat)&nbsp;$6&nbsp;=&nbsp;80
+//打印修改后结果
+(lldb)&nbsp;p&nbsp;width
+(CGFloat)&nbsp;$7&nbsp;=&nbsp;80
+(lldb)</pre><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">1.3 call 方法调用</p><p>在断点调用某个方法，�并输出此方法的返回值。</p><pre class="brush:cpp;toolbar:false">(lldb)&nbsp;call&nbsp;width
+(CGFloat)&nbsp;$12&nbsp;=&nbsp;70
+(lldb)&nbsp;call&nbsp;endTime
+(__NSCFString&nbsp;*)&nbsp;$16&nbsp;=&nbsp;0x0000608000437660&nbsp;@&quot;08-11&nbsp;11:43&quot;</pre><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 22px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2 Thread</p><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2.1 堆栈打印 thread backtrace</p><p>如果嫌堆栈打印太长，可以加一个值限制，如bt 10，只打印</p><pre class="brush:cpp;toolbar:false">(lldb)&nbsp;bt&nbsp;10
+*&nbsp;thread&nbsp;#1,&nbsp;queue&nbsp;=&nbsp;&#39;com.apple.main-thread&#39;,&nbsp;stop&nbsp;reason&nbsp;=&nbsp;breakpoint&nbsp;1.1
+&nbsp;&nbsp;*&nbsp;frame&nbsp;#0:&nbsp;0x00000001005e4906&nbsp;DiDi`-[FW_HomeCell_HotBill&nbsp;setDataSource:](self=0x00007fd3938a7800,
+&nbsp;&nbsp;&nbsp;_cmd=&quot;setDataSource:&quot;,&nbsp;dataSource=0x00006080001c8bb0)&nbsp;at&nbsp;FW_HomeCell.m:357
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#1:&nbsp;0x00000001009a9fd7&nbsp;DiDi`-[FW_MyHomeTableView&nbsp;tableView:cellForRowAtIndexPath:]
+&nbsp;&nbsp;&nbsp;&nbsp;(self=0x00007fd3921fec00,&nbsp;_cmd=&quot;tableView:cellForRowAtIndexPath:&quot;,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView=0x00007fd3921fec00,&nbsp;indexPath=0xc000000000000316)&nbsp;at&nbsp;FW_MyHomeTableView.m:247
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#2:&nbsp;0x00000001055a2ab2&nbsp;UIKit`-[UITableView&nbsp;_createPreparedCellForGlobalRow:withIndexPath:willDisplay:]&nbsp;+&nbsp;750
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#3:&nbsp;0x00000001055a2cf8&nbsp;UIKit`-[UITableView&nbsp;_createPreparedCellForGlobalRow:willDisplay:]&nbsp;+&nbsp;74
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#4:&nbsp;0x0000000105577639&nbsp;UIKit`-[UITableView&nbsp;_updateVisibleCellsNow:isRecursive:]&nbsp;+&nbsp;2845
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#5:&nbsp;0x00000001055abccc&nbsp;UIKit`-[UITableView&nbsp;_performWithCachedTraitCollection:]&nbsp;+&nbsp;111
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#6:&nbsp;0x0000000105592e7a&nbsp;UIKit`-[UITableView&nbsp;layoutSubviews]&nbsp;+&nbsp;233
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#7:&nbsp;0x00000001054f955b&nbsp;UIKit`-[UIView(CALayerDelegate)&nbsp;layoutSublayersOfLayer:]&nbsp;+&nbsp;1268
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#8:&nbsp;0x0000000105114904&nbsp;QuartzCore`-[CALayer&nbsp;layoutSublayers]&nbsp;+&nbsp;146
+&nbsp;&nbsp;&nbsp;&nbsp;frame&nbsp;#9:&nbsp;0x0000000105108526&nbsp;QuartzCore`CA::Layer::layout_if_needed(CA::Transaction*)&nbsp;+&nbsp;370</pre><h4>2.2 thread return 跳出当前方法的执行</h4><p>//跳出方法</p><p>(lldb) thread return</p><p>//让带有返回int值的方法直接跳出，并返回值10</p><p>(lldb) thread return 10</p><p><br/></p><h4 style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2.3 流程控制</h4><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 20px; word-break: break-word; color: rgb(64, 64, 64); font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">实际上使用xcode自带的可视化工具来控制“继续”“暂停”“下一步”“进入”“跳出”更简单</p><pre class="brush:cpp;toolbar:false">继续：continue,&nbsp;c
+下一步：next,&nbsp;n
+进入：step,&nbsp;s
+跳出：finish,&nbsp;f</pre><h4 style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2.4 跳帧 frame select N</h4><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 20px; word-break: break-word; color: rgb(64, 64, 64); font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2.1中打印有10帧，如果我想跳转到第1帧：<span style="box-sizing: border-box; font-weight: 600;">frame select 1</span></p><pre class="brush:cpp;toolbar:false">a(lldb)&nbsp;frame&nbsp;select&nbsp;1
+frame&nbsp;#1:&nbsp;0x0000000105e91c3c&nbsp;DiDi`-[FW_HomeViewController&nbsp;tableView:cellForRowAtIndexPath:](self=0x00007fbf9f73b410,&nbsp;_cmd=&quot;tableView:cellForRowAtIndexPath:&quot;,&nbsp;tableView=0x00007fbfa11dc400,&nbsp;indexPath=0xc000000000a00316)&nbsp;at&nbsp;FW_HomeViewController.m:597
+&nbsp;&nbsp;&nbsp;594&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;595&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;596&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;3:&nbsp;{
+-&gt;&nbsp;597&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.�[4md�[0mataSource&nbsp;=&nbsp;_hotBills[indexPath.row];
+&nbsp;&nbsp;&nbsp;598&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell.textSelect&nbsp;=&nbsp;^(UITextField&nbsp;*text)&nbsp;{
+&nbsp;&nbsp;&nbsp;599&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weakSelf.curruntText&nbsp;=&nbsp;text;
+&nbsp;&nbsp;&nbsp;600&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</pre><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">2.5 查看帧变量 frame variable</p><pre class="brush:cpp;toolbar:false">(lldb)&nbsp;frame&nbsp;variable
+(FW_HomeViewController&nbsp;*)&nbsp;self&nbsp;=&nbsp;0x00007faccbf587d0
+(SEL)&nbsp;_cmd&nbsp;=&nbsp;&quot;tableView:cellForRowAtIndexPath:&quot;
+(UITableView&nbsp;*)&nbsp;tableView&nbsp;=&nbsp;0x00007faccd09b400
+(NSIndexPath&nbsp;*)&nbsp;indexPath&nbsp;=&nbsp;0xc000000000000316
+(FW_HomeViewController&nbsp;*)&nbsp;weakSelf&nbsp;=&nbsp;0x00007faccbf587d0
+(FW_HomeCell_HotBill&nbsp;*)&nbsp;cell&nbsp;=&nbsp;0x00007faccc101a00
+(UIView&nbsp;*)&nbsp;model&nbsp;=&nbsp;0x00007fff52c13d90
+(FW_HomeCell_HotBill&nbsp;*)&nbsp;billCell&nbsp;=&nbsp;0x00000001124e99f6</pre><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 20px; font-family: -apple-system, system-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">参考:https://www.jianshu.com/p/7fb43e0b956a</p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '97cc9C51';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

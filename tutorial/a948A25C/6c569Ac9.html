@@ -1,0 +1,243 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>异步绘制-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>异步绘制-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">很久以前就看过这篇文章,但是也只是看过就过了,没有去整理思路,最近有时间把一些点整理一下.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">通读下来可以<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">总结一下对性能优化,在这里也就是提高界面流畅度的宗旨只有一句话唯而已:把能异步执行的都尽量异步执行.</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">在我这篇里主要记录一下<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">文本的异步绘制</span>,先上两个视频,异步处理前后的差异,我直接把</span><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;">YYFPSLabel<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">拿过来用了,检测FPS的变化情况:</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><img src="/upload/image/20191114/162631482635.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">可以看到,在滑动很快的时候,FPS最低已经达到了20几.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162633571017.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">&nbsp;经过异步绘制处理之后,可以看到无论如何滑动,FPS一直保持在60.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">这是我写的一个小demo:<a href="https://github.com/alan12138/Interview-question/tree/master/3/AsyncLabel" style="margin: 0px; padding: 0px; color: rgb(7, 93, 179);">https://github.com/alan12138/Interview-question/tree/master/3/AsyncLabel</a>,也就是上面运行案例的代码.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">前后对比的效果就是将cell中的label使用UILabel和使用自定义label之后的效果.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">&nbsp;首先,<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">其实这种优化是对流畅度非常敏感的界面来说的,一般场景很少需要做这样的优化,并且,只有在文字非常多且复杂,滑动非常快的时候才能明显的感觉到差别.</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">如果项目中某个地方需要优化,而你也想尝试一下使用YYAsyncLayer,并且对文字的处理比较简单,可以将demo中的ATLabel拿来参考,当然直接使用YYLabel是最好的选择,ATLabel只是用来演示YYAsyncLayer的使用,并且非常简陋.</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">&nbsp;不谈<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYLabel</span>内部各种复杂的处理,他是直接继承自<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">UIView</span>,自己造了个Label控件出来,但是从异步绘制的角度来说,其原理就是,<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">将本来UILabel所做的绘制文字的工作拿过来自己做,并放在子线程异步执行.</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">下面简单分析一下<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYAsyncLayer</span>的内部原理:</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">其中涉及到了四个类:</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p class="p1" style="margin: 10px auto; padding: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Menlo; color: rgb(43, 131, 159); background-color: rgb(239, 255, 236); white-space: normal;">YYAsyncLayer</p><p class="p1" style="margin: 10px auto; padding: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Menlo; color: rgb(43, 131, 159); background-color: rgb(239, 255, 236); white-space: normal;">YYTransaction</p><p class="p1" style="margin: 10px auto; padding: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Menlo; color: rgb(43, 131, 159); background-color: rgb(239, 255, 236); white-space: normal;">YYSentinel</p><p class="p1" style="margin: 10px auto; padding: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Menlo; color: rgb(43, 131, 159); background-color: rgb(239, 255, 236); white-space: normal;">YYDispatchQueuePool</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">先从<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYTransaction<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">开始说起,每一个<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYTransaction</span>对象相当于一个异步绘制任务.</span></span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">ATLabel</span>中在以下需要调用重绘的方法中都提交了<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">contentsNeedUpdated</span>任务,</span></span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162634876550.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">查看<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">commit</span>方法可以看到,他使用了一个<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">Set</span>来存储这些任务.并且在其中调用了一个方法:</span><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;">YYTransactionSetup</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><img src="/upload/image/20191114/162635993903.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">看一下<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYTransactionSetup<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">方法:</span></span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);"><img src="/upload/image/20191114/162635429319.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">&nbsp;可以看到这个方法中的代码只会执行一次,也就是在第一次<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">commit</span>&nbsp;的时候执行一次,之后便不会再执行了.方法内部初始化了一个<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">Set</span>对象,用来收集绘制任务,并做了<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">runloop</span>监听,在<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">runloop</span>等待和退出之前,也就是空闲的时候,调用回调方法.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162635593555.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">&nbsp;而在这个回调方法中,便是执行所有收集到的绘制任务.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt; color: rgb(255, 0, 0);">综上所述,在label需要重绘的时候,作者将绘制任务收集起来,并在runloop空闲的时候一起执行.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">接下来看一下作者是如何执行这些任务的:</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">可以看到每个绘制任务都是调用<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">display<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">方法,而<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">display<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">中执行的</span></span></span></span></span><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;">_displayAsync</span><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">方法便是对异步绘制的处理,也就是说每个绘制任务最终都会调用到这个方法.</span></span></span></span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><img src="/upload/image/20191114/162635808822.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;">&nbsp;_displayAsync</span><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">方法:</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162635843939.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">在ATLabel中可以看到</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162635838519.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">作者重写了<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">layerClass</span>方法,并返回了<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYAsyncLayer.class</span>,也就是将当前label的layer替换为了<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYAsyncLayer</span>.然后便可以通过实现<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYAsyncLayer</span>的代理方法</span><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;">newAsyncDisplayTask<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">.将<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">ATLabel</span>我们自己对文字绘制的实现异步执行.</span></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0); font-size: 14pt;"><span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(0, 0, 0);">&nbsp;上面圈出来的便是对代理中我们<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">task.display</span>代码实现的调用.,可以看到是在异步代码块中.</span></span><span class="s1" style="margin: 0px; padding: 0px; line-height: 1.5;"><br style="margin: 0px; padding: 0px;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">回到<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">YYAsyncLayer</span>的&nbsp;<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">_displayAsync</span>方法,可以看到最后回到主线程将绘制内容赋值,便完成了整个流程.</span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;"><img src="/upload/image/20191114/162635588571.png" alt="" style="margin: 0px; padding: 0px; border: 0px; max-width: 900px; height: auto;"/></span></p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);">&nbsp;</p><p style="margin: 10px auto; padding: 0px; line-height: 1.5; font-size: 13px; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(254, 254, 242);"><span style="margin: 0px; padding: 0px; line-height: 1.5; font-size: 14pt;">最后,还有作者一些细节性的处理我没有写下来,有兴趣可以自己研究一下,比如<span style="margin: 0px; padding: 0px; line-height: 1.5; color: rgb(255, 0, 0);">计数器的使用,hash的处理,队列数量的控制,cancel()的处理,还有一些绘制相关的工作</span>,作者短短的几百行代码凝聚了很多智慧.</span></p><p><a href="https://www.cnblogs.com/alan12138/p/11661587.html" target="_blank">原文地址</a>:<a href="https://www.cnblogs.com/alan12138/p/11661587.html">https://www.cnblogs.com/alan12138/p/11661587.html</a></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '6c569Ac9';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

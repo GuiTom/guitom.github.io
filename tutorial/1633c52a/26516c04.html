@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>A星寻路算法-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>A星寻路算法-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">很多游戏特别是rts，rpg类游戏，都需要用到寻路。寻路算法有深度优先搜索（DFS），广度优先搜索(BFS)，A星算法等，而A星算法是一种具备启发性策略的算法，效率是几种算法中最高的，因此也成为游戏中最常用的寻路算法。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">直入正题：</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">在游戏设计中，地图可以划分为若干大小相同的方块区域（方格），这些方格就是寻路的基本单元。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">在确定了寻路的开始点，结束点的情况下，假定每个方块都有一个F值，该值代表了在当前路线下选择走该方块的代价。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>而A星寻路的思路很简单：从开始点，每走一步都选择代价最小的格子走，直到达到结束点。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">A星算法核心公式就是F值的计算：</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>F = G + H</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">F - 方块的总移动代价<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>G - 开始点到当前方块的移动代价<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>H - 当前方块到结束点的预估移动代价</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">以下详细解释这个公式，方便更好地理解它。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">G值是怎么计算的？</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>假设现在我们在某一格子，邻近有8个格子可走，当我们往上、下、左、右这4个格子走时，移动代价为10；当往左上、左下、右上、右下这4个格子走时，移动代价为14；即走斜线的移动代价为走直线的1.4倍。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>这就是G值最基本的计算方式，适用于大多数2.5Drpg页游。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">基本公式：<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>G = 移动代价</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">根据游戏需要，G值的计算可以进行拓展。如加上地形因素对寻路的影响。格子地形不同，那么选择通过不同地形格子，移动代价肯定不同。同一段路，平地地形和丘陵地形，虽然都可以走，但平地地形显然更易走。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>我们可以给不同地形赋予不同代价因子，来体现出G值的差异。如给平地地形设置代价因子为1，丘陵地形为2，在移动代价相同情况下，平地地形的G值更低，算法就会倾向选择G值更小的平地地形。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">拓展公式：<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>G = 移动代价 * 代价因子</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">H值是如何预估出来的？</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>很显然，在只知道当前点，结束点，不知道这两者的路径情况下，我们无法精确地确定H值大小，所以只能进行预估。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>有多种方式可以预估H值，如曼哈顿距离、欧式距离、对角线估价，最常用最简单的方法就是使用曼哈顿距离进行预估：<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>H = 当前方块到结束点的水平距离 + 当前方块到结束点的垂直距离</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">题外话：A星算法之所以被认为是具有启发策略的算法，在于其可通过预估H值，降低走弯路的可能性，更容易找到一条更短的路径。其他不具有启发策略的算法，没有做预估处理，只是穷举出所有可通行路径，然后从中挑选一条最短的路径。这也是A星算法效率更高的原因。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">每个方块的G值、H值是怎么确定的呢？</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>G值 = 父节点的G值 + 父节点到当前点的移动代价<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>H值 = 当前点到结束点的曼哈顿距离</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">最后，A星算法还需要用到两个列表：</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">开放列表</span>&nbsp;- 用于记录所有可考虑选择的格子<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">封闭列表</span>&nbsp;- 用于记录所有不再考虑的格子</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">以上就是要完成A星算法所需要的东西,而算法的过程并不复杂。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">A星算法伪码：</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>a、将开始点记录为当前点P<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>b、将当前点P放入封闭列表<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>c、搜寻点P所有邻近点，假如某邻近点既没有在开放列表或封闭列表里面，则计算出该邻近点的F值，并设父节点为P，然后将其放入开放列表<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>d、判断开放列表是否已经空了，如果没有说明在达到结束点前已经找完了所有可能的路径点，寻路失败，算法结束；否则继续。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>e、从开放列表拿出一个F值最小的点，作为寻路路径的下一步。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>f、判断该点是否为结束点，如果是，则寻路成功，算法结束；否则继续。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>g、将该点设为当前点P，跳回步骤c。</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: 700; overflow-wrap: break-word;">后续优化</span></p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">以上就是A星算法最基本的原理，明白了基本原理，用2,3百行代码写出一个可用的A星算法并不难。当然A星算法在实际应用中不仅于此，还可以对细节进行优化：</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">1、选择排序更快的二叉树来作为开放列表，帮助我们更快地从开放列表中取出F值最小的点；</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">2、对何种情况下可以走斜线路径加以判断；</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">3、采用布兰森汉姆算法预先判断两点是否可以直接通行，可通行就直接返回两点的直线路径，不可直接通行再采用A星算法寻路，提高寻路效率；</p><p style="margin-top: 0px; margin-bottom: 16px; white-space: normal; box-sizing: border-box; outline: 0px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-wrap: break-word; font-variant-ligatures: common-ligatures; background-color: rgb(255, 255, 255);">4、A星算法得出寻路路径后，可采用弗洛伊德算法对路径进行平滑处理，使人物走动更为自然</p><p style="white-space: normal;"><a href="https://blog.csdn.net/sryan/article/details/52400186" target="_blank">原文链接</a>:<a href="https://blog.csdn.net/sryan/article/details/52400186">https://blog.csdn.net/sryan/article/details/52400186</a></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = '26516c04';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

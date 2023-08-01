@@ -1,0 +1,352 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>AVL树-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>AVL树-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2 style="font-size: 21px; line-height: 1.5; margin: 10px 0px; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">AVL树(平衡二叉树)：</h2><p>AVL树本质上是一颗二叉查找树，但是它又具有以下特点：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。在AVL树中任何节点的两个子树的高度最大差别为一，所以它也被称为平衡二叉树。下面是平衡二叉树和非平衡二叉树对比的例图：</p><p style="text-align:center"><img src="/upload/image/20191024/075541465331.png"/></p><h2 style="font-size: 21px; line-height: 1.5; margin: 10px 0px; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">AVL树的作用：</h2><p>　　我们知道，对于一般的二叉搜索树（Binary Search Tree），其期望高度（即为一棵平衡树时）为log2n，其各操作的时间复杂度（O(log2n)）同时也由此而决定。但是，在某些极端的情况下（如在插入的序列是有序的时），二叉搜索树将退化成近似链或链，此时，其操作的时间复杂度将退化成线性的，即O(n)。我们可以通过随机化建立二叉搜索树来尽量的避免这种情况，但是在进行了多次的操作之后，由于在删除时，我们总是选择将待删除节点的后继代替它本身，这样就会造成总是右边的节点数目减少，以至于树向左偏沉。这同时也会造成树的平衡性受到破坏，提高它的操作的时间复杂度。</p><p>　　例如：我们按顺序将一组数据1,2,3,4,5,6分别插入到一颗空二叉查找树和AVL树中，插入的结果如下图：</p><p><img src="/upload/image/20191024/075638267131.png" alt="" width="363" height="228" style="border: 0px; max-width: 900px; height: auto; float: left;"/>　　　　　　　　<img src="/upload/image/20191024/075638479120.png" alt="" style="border: 0px; max-width: 900px; height: auto; float: left;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">由上图可知，同样的结点，由于插入方式不同导致树的高度也有所不同。特别是在带插入结点个数很多且正序的情况下，会导致二叉树的高度是O(N)，而AVL树就不会出现这种情况，树的高度始终是O(lgN).高度越小，对树的一些基本操作的时间复杂度就会越小。这也就是我们引入AVL树的原因</p><h2 style="font-size: 21px; line-height: 1.5; margin: 10px 0px; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">AVL树的基本操作：</h2><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　AVL树的操作基本和二叉查找树一样，这里我们关注的是两个变化很大的操作：插入和删除！</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　我们知道，AVL树不仅是一颗二叉查找树，它还有其他的性质。如果我们按照一般的二叉查找树的插入方式可能会破坏AVL树的平衡性。同理，在删除的时候也有可能会破坏树的平衡性，所以我们要做一些特殊的处理，包括：单旋转和双旋转！</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　<strong>AVL树的插入，单旋转的第一种情况---右旋：</strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075638493968.png" alt="" style="border: 0px; max-width: 900px; height: auto; display: block; margin-left: auto; margin-right: auto;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　由上图可知：在插入之前树是一颗AVL树，而插入之后结点T的左右子树高度差的绝对值不再 &lt; 1,此时AVL树的平衡性被破坏，我们要对其进行旋转。由上图可知我们是在结点T的左结点的左子树上做了插入元素的操作，我们称这种情况为左左情况，我们应该进行右旋转(只需旋转一次，故是单旋转)。具体旋转步骤是：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　T向右旋转成为L的右结点，同时，Y放到T的左孩子上。这样即可得到一颗新的AVL树，旋转过程图如下：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075638638821.png" alt="" style="border: 0px; max-width: 900px; height: 200px; display: block; margin-left: auto; margin-right: auto; width: 726px;" width="726" height="200"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong>　</strong>　左左情况的右旋举例：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075638863795.png" alt="" style="border: 0px; max-width: 900px; height: auto; display: block; margin-left: auto; margin-right: auto;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong>　　AVL树的插入，单旋转的第一种情况---左旋：</strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　<img src="/upload/image/20191024/075638495003.png" alt="" style="border: 0px; max-width: 900px; height: auto; display: block; margin-left: auto; margin-right: auto;"/><br/><strong><br/></strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　由上图可知：在插入之前树是一颗AVL树，而插入之后结点T的左右子树高度差的绝对值不再 &lt; 1,此时AVL树的平衡性被破坏，我们要对其进行旋转。由上图可知我们是在结点T的右结点的右子树上做了插入元素的操作，我们称这种情况为右右情况，我们应该进行左旋转(只需旋转一次，故事单旋转)。具体旋转步骤是：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　T向右旋转成为R的左结点，同时，Y放到T的左孩子上。这样即可得到一颗新的AVL树，旋转过程图如下：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　<img src="/upload/image/20191024/075638689394.png" alt="" style="border: 0px; max-width: 900px; height: 169px; display: block; margin-left: auto; margin-right: auto; width: 701px;" width="701" height="169"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　右右情况的左旋举例：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075639632503.png" alt="" style="border: 0px; max-width: 900px; height: auto; display: block; margin-left: auto; margin-right: auto;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　以上就是插入操作时的单旋转情况！我们要注意的是：谁是T谁是L，谁是R还有谁是X,Y,Z!T始终是开始不平衡的左右子树的根节点。显然L是T的左结点，R是T的右节点。X、Y、Y是子树当然也可以为NULL.NULL归NULL，但不能破坏插入时我上面所说的左左情况或者右右情况。</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　<strong>AVL树的插入，双旋转的第一种情况---左右(先左后右)旋：</strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong><img src="/upload/image/20191024/075639454306.png" alt="" style="border: 0px; max-width: 900px; height: 252px; display: block; margin-left: auto; margin-right: auto; width: 738px;" width="738" height="252"/></strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">&nbsp;</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">由　　上图可知，我们在T结点的左结点的右子树上插入一个元素时，会使得根为T的树的左右子树高度差的绝对值不再 &lt; 1，如果只是进行简单的右旋，得到的树仍然是不平衡的。我们应该按照如下图所示进行二次旋转：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　<img src="/upload/image/20191024/075639652062.png" alt="" width="738" height="206" style="border: 0px; max-width: 900px; height: 206px; display: block; margin-left: auto; margin-right: auto; width: 738px;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　左右情况的左右旋转实例：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075639379155.png" alt="" width="698" height="199" style="border: 0px; max-width: 900px; height: 199px; display: block; margin-left: auto; margin-right: auto; width: 698px;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　<strong>AVL树的插入，双旋转的第二种情况---右左(先右后左)旋：</strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong><img src="/upload/image/20191024/075639304028.png" alt="" style="border: 0px; max-width: 900px; height: 230px; display: block; margin-left: auto; margin-right: auto; width: 736px;" width="736" height="230"/></strong></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　由上图可知，我们在T结点的右结点的左子树上插入一个元素时，会使得根为T的树的左右子树高度差的绝对值不再 &lt; 1，如果只是进行简单的左旋，得到的树仍然是不平衡的。我们应该按照如下图所示进行二次旋转：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075639851620.png" alt="" width="734" height="204" style="border: 0px; max-width: 900px; height: 204px; display: block; margin-left: auto; margin-right: auto; width: 734px;"/></p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　右左情况的右左旋转实例：</p><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><img src="/upload/image/20191024/075639818651.png" alt="" width="728" height="198" style="border: 0px; max-width: 900px; height: 198px; display: block; margin-left: auto; margin-right: auto; width: 728px;"/></p><h2 style="font-size: 21px; line-height: 1.5; margin: 10px 0px; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">AVL树的插入代码实现:(仅供参考)</h2><p style="margin: 10px auto; font-family: &quot;black Verdana&quot;, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　懂了以上单旋转和双旋转的原理之后，那么代码写起来也就比较简单了，以下是我写的代码，如果有错还望大家不吝指正。（参考数据结构与算法分析-Weiss著）</p><p><br/></p><pre class="brush:cpp;toolbar:false">#include&nbsp;&lt;iostream&gt;
+using&nbsp;namespace&nbsp;std;
+#define&nbsp;DataType&nbsp;int
+/*
+&nbsp;&nbsp;&nbsp;&nbsp;定义AVL树的结构体，链式
+*/
+typedef&nbsp;struct&nbsp;AvlNode{
+&nbsp;&nbsp;&nbsp;&nbsp;DataType&nbsp;&nbsp;&nbsp;&nbsp;data;
+&nbsp;&nbsp;&nbsp;&nbsp;AvlNode&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;m_pLeft;
+&nbsp;&nbsp;&nbsp;&nbsp;AvlNode&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;m_pRight;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;height;
+}*AvlTree,*Position,AvlNode;
+//求两个数的最大值
+int&nbsp;Max(int&nbsp;a,int&nbsp;b)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a&gt;b?a:b;
+}
+//求树的高度
+int&nbsp;Height(&nbsp;AvlTree&nbsp;T)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(NULL&nbsp;==&nbsp;T)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;-1;
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;T-&gt;height;
+}
+//单旋转右旋
+AvlTree&nbsp;singleRotateWithRight(AvlTree&nbsp;T)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;AvlTree&nbsp;L&nbsp;=&nbsp;T-&gt;m_pLeft;
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pLeft&nbsp;=&nbsp;L-&gt;m_pRight;
+&nbsp;&nbsp;&nbsp;&nbsp;L-&gt;m_pRight&nbsp;=&nbsp;T;
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;height&nbsp;=&nbsp;Max(&nbsp;Height(T-&gt;m_pLeft),Height(T-&gt;m_pRight)&nbsp;)&nbsp;+&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;L-&gt;height&nbsp;=&nbsp;Max(&nbsp;Height(L-&gt;m_pLeft),Height(L-&gt;m_pRight)&nbsp;)&nbsp;+&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;L;&nbsp;&nbsp;&nbsp;&nbsp;//此时L成为根节点了（可参考AVL的插入的左左情况的右旋图）
+}
+//单旋转左旋
+AvlTree&nbsp;singleRotateWithLeft(AvlTree&nbsp;T)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;AvlTree&nbsp;R&nbsp;=&nbsp;T-&gt;m_pRight;
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pRight&nbsp;=&nbsp;R-&gt;m_pLeft;
+&nbsp;&nbsp;&nbsp;&nbsp;R-&gt;m_pLeft&nbsp;=&nbsp;T;
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;height&nbsp;=&nbsp;Max(&nbsp;Height(T-&gt;m_pLeft),Height(T-&gt;m_pRight)&nbsp;)&nbsp;+&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;R-&gt;height&nbsp;=&nbsp;Max(&nbsp;Height(R-&gt;m_pLeft),Height(R-&gt;m_pRight)&nbsp;)&nbsp;+&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;R;&nbsp;&nbsp;&nbsp;&nbsp;//此时R成为根节点了（可参考AVL的插入的左左情况的左旋图）
+}
+//双旋转，先左后右
+AvlTree&nbsp;doubleRotateWithLeft(AvlTree&nbsp;T)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//先左后右
+{
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pLeft&nbsp;=&nbsp;singleRotateWithLeft(T-&gt;m_pLeft);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;singleRotateWithRight(T);
+}
+//双旋转，先右后左
+AvlTree&nbsp;doubleRotateWithRight(AvlTree&nbsp;T)&nbsp;&nbsp;&nbsp;&nbsp;//先右后左
+{
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pRight&nbsp;=&nbsp;singleRotateWithRight(T-&gt;m_pRight);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;singleRotateWithLeft(T);
+}
+AvlTree&nbsp;AvlTreeInsert(AvlTree&nbsp;T,&nbsp;DataType&nbsp;x)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(T&nbsp;==&nbsp;NULL)&nbsp;&nbsp;&nbsp;&nbsp;//如果树为空
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;=&nbsp;(AvlNode&nbsp;*)malloc(sizeof(struct&nbsp;AvlNode));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(T)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;data&nbsp;=&nbsp;x;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pLeft&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pRight&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;height&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;&quot;空间不够&quot;&nbsp;&lt;&lt;&nbsp;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;x&nbsp;&lt;&nbsp;T-&gt;data)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//如果插入到T结点的左子树上
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pLeft&nbsp;=&nbsp;AvlTreeInsert(T-&gt;m_pLeft,x);&nbsp;&nbsp;&nbsp;&nbsp;//先插入，后旋转
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(Height(T-&gt;m_pLeft)&nbsp;-&nbsp;Height(T-&gt;m_pRight)&nbsp;==&nbsp;2)&nbsp;//只有可能是这个
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(x&nbsp;&lt;&nbsp;T-&gt;m_pLeft-&gt;data)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//左左情况，只需要右旋转
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;=&nbsp;singleRotateWithRight(&nbsp;T&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//左右情况，双旋转,先左
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;=&nbsp;doubleRotateWithLeft(&nbsp;T&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;x&nbsp;&gt;&nbsp;T-&gt;data&nbsp;)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;m_pRight&nbsp;=&nbsp;AvlTreeInsert(T-&gt;m_pRight,x);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(Height(T-&gt;m_pRight)&nbsp;-&nbsp;Height(T-&gt;m_pLeft)&nbsp;==&nbsp;2)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(x&nbsp;&gt;&nbsp;T-&gt;m_pRight-&gt;data)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//右右情况，进行左旋
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;=&nbsp;singleRotateWithLeft(&nbsp;T&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//左右情况，双旋转,先右
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;=&nbsp;doubleRotateWithRight(&nbsp;T&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;//如果这个数已经存在，那么不进行插入
+&nbsp;&nbsp;&nbsp;&nbsp;T-&gt;height&nbsp;=&nbsp;Max(Height(T-&gt;m_pLeft),Height(T-&gt;m_pRight))&nbsp;+&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;T;
+}
+//递归实现中序遍历
+void&nbsp;inOrderVisitUseRecur(const&nbsp;AvlTree&nbsp;pCurrent)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(pCurrent)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inOrderVisitUseRecur(pCurrent-&gt;m_pLeft);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;pCurrent-&gt;data&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pCurrent-&gt;m_pLeft)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;leftChild:&nbsp;&quot;&lt;&lt;pCurrent-&gt;m_pLeft-&gt;data;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;leftChild:&nbsp;&quot;&lt;&lt;&quot;NULL&quot;&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pCurrent-&gt;m_pRight)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;rightChild:&nbsp;&quot;&lt;&lt;pCurrent-&gt;m_pRight-&gt;data;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;rightChild:&nbsp;&quot;&lt;&lt;&nbsp;&quot;NULL&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inOrderVisitUseRecur(pCurrent-&gt;m_pRight);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+int&nbsp;main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;AvlTree&nbsp;root&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,1);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,2);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,3);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,4);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,5);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,6);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,7);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,8);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,9);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,10);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,11);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,12);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,13);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,14);
+&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;AvlTreeInsert(root,15);
+&nbsp;&nbsp;&nbsp;&nbsp;inOrderVisitUseRecur(root);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+}</pre><p><a href="https://www.qtxjc.com/algorithm_visual/AVLtree.html" target="_blank"><span style="color: rgb(255, 0, 0);">本算法动画演示</span>:https://www.qtxjc.com/algorithm_visual/AVLtree.html</a></p><p><span class="cnblogs_code_copy" style="padding-right: 5px; line-height: 1.5 !important;"><a title="复制代码" style="color: rgb(120, 175, 211); text-decoration-line: underline; border: none !important;">原文出处:</a><a href="https://www.cnblogs.com/zhuwbox/p/3636783.html">https://www.cnblogs.com/zhuwbox/p/3636783.html</a></span><br/></p><p><a href="http://www.sohu.com/a/270452030_478315" target="_blank" textvalue="更多参考:">更多参考:</a><a href="http://www.sohu.com/a/270452030_478315">http://www.sohu.com/a/270452030_478315</a></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'B8CBb284';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

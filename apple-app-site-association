@@ -1,0 +1,15 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "4U8957UB6C.com.directBankApp.test",
+                "paths": [ "*" ]
+            },
+            {        {
+                "appID": "SNM23S7N87.com.directBankApp.test",
+                "paths": [ "*" ]
+            }
+        ]
+       }
+}

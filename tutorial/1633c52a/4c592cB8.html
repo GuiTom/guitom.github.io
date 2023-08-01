@@ -1,0 +1,413 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>最优二叉搜索树-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>最优二叉搜索树-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h1 class="postTitle" style="font-size: 28px; line-height: 1.5; margin: 10px 0px; font-family: Helvetica, Verdana, Arial, sans-serif; white-space: normal;"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">二叉查找树</a></h1><p style="margin: 10px auto;"><strong>摘要：</strong></p><p style="margin: 10px auto;">　　本章介绍了二叉查找树的概念及操作。主要内容包括二叉查找树的性质，如何在二叉查找树中查找最大值、最小值和给定的值，如何找出某一个元素的前驱和后继，如何在二叉查找树中进行插入和删除操作。在二叉查找树上执行这些基本操作的时间与树的高度成正比，一棵随机构造的二叉查找树的期望高度为O(lgn)，从而基本动态集合的操作平均时间为θ(lgn)。</p><p style="margin: 10px auto;"><strong>1、二叉查找树</strong></p><p style="margin: 10px auto;">　　二叉查找树是按照二叉树结构来组织的，因此可以用二叉链表结构表示。二叉查找树中的关键字的存储方式满足的特征是：<span style="color: rgb(255, 0, 0);"><strong>设x为二叉查找树中的一个结点。如果y是x的左子树中的一个结点，则key[y]≤key[x]。如果y是x的右子树中的一个结点，则key[x]≤key[y]。</strong>根据二叉查找树的特征可知，采用中根遍历一棵二叉查找树，可以得到树中关键字有小到大的序列。<a href="http://www.cnblogs.com/Anker/archive/2013/01/27/2878594.html">http://www.cnblogs.com/Anker/archive/2013/01/27/2878594.html</a>介绍了二叉树概念及其遍历。一棵二叉树查找及其中根遍历结果如下图所示：</span></p><p style="margin: 10px auto;"><img src="/upload/image/20191114/214314766961.png" alt="" style="border: 0px; max-width: 900px; height: 177px; width: 734px;" width="734" height="177"/></p><p style="margin: 10px auto;">书中给出了一个定理：<span style="color: rgb(0, 0, 255);"><strong>如果x是一棵包含n个结点的子树的根，则其中根遍历运行时间为θ(n)。</strong></span></p><p style="margin: 10px auto;"><strong>问题：</strong>二叉查找树性质与最小堆之间有什么区别？能否利用最小堆的性质在O(n)时间内，按序输出含有n个结点的树中的所有关键字？</p><p style="margin: 10px auto;"><strong>2、查询二叉查找树</strong></p><p style="margin: 10px auto;">　　二叉查找树中最常见的操作是查找树中的某个关键字，除了基本的查询，还支持最大值、最小值、前驱和后继查询操作，书中就每种查询进行了详细的讲解。</p><p style="margin: 10px auto;"><strong>（1）查找SEARCH</strong></p><p style="margin: 10px auto;">　　在二叉查找树中查找一个给定的关键字k的过程与二分查找很类似，根据二叉查找树在的关键字存放的特征，很容易得出查找过程：首先是关键字k与树根的关键字进行比较，如果k大比根的关键字大，则在根的右子树中查找，否则在根的左子树中查找，重复此过程，直到找到与遇到空结点为止。例如下图所示的查找关键字13的过程：（查找过程每次在左右子树中做出选择，减少一半的工作量）</p><p style="margin: 10px auto;"><img src="/upload/image/20191114/214314530634.png" alt="" style="border: 0px; max-width: 900px; height: 528px; width: 736px;" width="736" height="528"/></p><p style="margin: 10px auto;">书中给出了查找过程的递归和非递归形式的伪代码：</p><pre class="brush:cpp;toolbar:false">TREE_SEARCH(x,k)
+&nbsp;&nbsp;if&nbsp;x=NULL&nbsp;or&nbsp;k=key[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;return&nbsp;x
+&nbsp;&nbsp;if(k&lt;key[x])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;return&nbsp;TREE_SEARCH(left[x],k)
+&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;return&nbsp;TREE_SEARCH(right[x],k)</pre><pre style="margin-top: 0px; margin-bottom: 0px; white-space: pre-wrap; overflow-wrap: break-word; font-family: &quot;Courier New&quot; !important;">ITERATIVE_TREE_SEARCH(x,k)
+&nbsp;&nbsp;while&nbsp;x!=NULL&nbsp;and&nbsp;k!=key[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;if&nbsp;k&lt;key[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;x=left[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;x=right[x]
+&nbsp;&nbsp;&nbsp;return&nbsp;x</pre><p style="margin: 10px auto;"><strong>（2）查找最大关键字和最小关键字</strong></p><p style="margin: 10px auto;">　　根据二叉查找树的特征，很容易查找出最大和最小关键字。查找二叉树中的最小关键字：从根结点开始，沿着各个节点的left指针查找下去，直到遇到NULL时结束。如果一个结点x无左子树，则以x为根的子树中，最小关键字就是key[x]。查找二叉树中的最大关键字：从根结点开始，沿着各个结点的right指针查找下去，直到遇到NULL时结束。书中给出了查找最大最小关键字的伪代码：</p><pre style="margin-top: 0px; margin-bottom: 0px; white-space: pre-wrap; overflow-wrap: break-word; font-family: &quot;Courier New&quot; !important;">TREE_MINMUM(x)
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;left[x]&nbsp;!=&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;x=left[x]&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;x</pre><pre style="margin-top: 0px; margin-bottom: 0px; white-space: pre-wrap; overflow-wrap: break-word; font-family: &quot;Courier New&quot; !important;">TREE_MAXMUM(x)
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;right[x]&nbsp;!=&nbsp;NULL3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;x=&nbsp;right[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;x</pre><p style="margin: 10px auto;"><strong>（3）前驱和后继</strong></p><p style="margin: 10px auto;">　　给定一个二叉查找树中的结点，找出在中序遍历顺序下某个节点的前驱和后继。如果树中所有关键字都不相同，则某一结点x的前驱就是小于key[x]的所有关键字中最大的那个结点，后继即是大于key[x]中的所有关键字中最小的那个结点。根据二叉查找树的结构和性质，不用对关键字做任何比较，就可以找到某个结点的前驱和后继。</p><p style="margin: 10px auto;">　　查找前驱步骤：先判断x是否有左子树，如果有则在left[x]中查找关键字最大的结点，即是x的前驱。如果没有左子树，则从x继续向上执行此操作，直到遇到某个结点是其父节点的右孩子结点。例如下图查找结点7的前驱结点6过程：<img src="/upload/image/20191114/214315814659.png" alt="" style="border: 0px; max-width: 900px; height: 527px; width: 732px;" width="732" height="527"/></p><p style="margin: 10px auto;">　　查找后继步骤：先判断x是否有右子树，如果有则在right[x]中查找关键字最小的结点，即使x的后继。如果没有右子树，则从x的父节点开始向上查找，直到遇到某个结点是其父结点的左儿子的结点时为止。例如下图查找结点13的后继结点15的过程：<img src="/upload/image/20191114/214315692809.png" alt="" style="border: 0px; max-width: 900px; height: 516px; width: 736px;" width="736" height="516"/></p><p style="margin: 10px auto;">书中给出了求x结点后继结点的伪代码:</p><p><br/></p><pre style="margin-top: 0px; margin-bottom: 0px; white-space: pre-wrap; overflow-wrap: break-word; font-family: &quot;Courier New&quot; !important;">TREE_PROCESSOR(x)
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;right[x]&nbsp;!=&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;return&nbsp;TREE_MINMUM(right(x))
+&nbsp;&nbsp;&nbsp;&nbsp;y=parent[x]
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;y!=&nbsp;NULL&nbsp;and&nbsp;x&nbsp;==right[y]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;x&nbsp;=&nbsp;y
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y=parent[y]
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;y</pre><p><br/></p><p style="margin: 10px auto;">定理：对一棵高度为h的二叉查找，动态集合操作SEARCH、MINMUM、MAXMUM、SUCCESSOR、PROCESSOR等的运行时间均为O(h)。</p><p style="margin: 10px auto;"><strong>3、插入和删除</strong></p><p style="margin: 10px auto;">　　插入和删除会引起二叉查找表示的动态集合的变化，难点在在插入和删除的过程中要保持二叉查找树的性质。插入过程相当来说要简单一些，删除结点比较复杂。</p><p style="margin: 10px auto;"><strong>（1）插入</strong></p><p style="margin: 10px auto;">　　插入结点的位置对应着查找过程中查找不成功时候的结点位置，因此需要从根结点开始查找带插入结点位置，找到位置后插入即可。下图所示插入结点过程：</p><p style="margin: 10px auto;"><img src="/upload/image/20191114/214315660557.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto;">书中给出了插入过程的伪代码：</p><pre class="brush:cpp;toolbar:false">TREE_INSERT(T,z)
+&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;=root[T]
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;x&nbsp;!=&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;y&nbsp;=x
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;key[z]&nbsp;&lt;&nbsp;key[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;x=left[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;x=right[x]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent[z]&nbsp;=y
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;y=NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;root[T]&nbsp;=z
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;key[z]&gt;key[y]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;&nbsp;keft[y]&nbsp;&nbsp;=&nbsp;z
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;right[y]&nbsp;=z</pre><p style="margin: 10px auto;">插入过程运行时间为O(h)，h为树的高度。</p><p style="margin: 10px auto;"><strong>（2）删除</strong></p><p style="margin: 10px auto;">　　从二叉查找树中删除给定的结点z，分三种情况讨论：</p><p style="margin: 10px auto;">&lt;1&gt;结点z没有左右子树，则修改其父节点p[z]，使其为NULL。删除过程如下图所示：<img src="/upload/image/20191114/214316820094.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto;">&lt;2&gt;如果结点z只有一个子树（左子树或者右子树），通过在其子结点与父节点建立一条链来删除z。删除过程如下图所示：<img src="/upload/image/20191114/214316631055.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto;">&lt;3&gt;如果z有两个子女，则先删除z的后继y（y没有左孩子），在用y的内容来替代z的内容。<img src="/upload/image/20191114/214316123833.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto;">书中给出了删除过程的伪代码：</p><pre class="brush:cpp;toolbar:false">TREE_DELETE(T,z)
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;left[z]&nbsp;==NULL&nbsp;or&nbsp;right[z]&nbsp;==&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;y=z
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;y=TREE_SUCCESSOR(z)
+&nbsp;&nbsp;&nbsp;if&nbsp;left[y]&nbsp;!=&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;x=left[y]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;x=right[y]
+&nbsp;&nbsp;&nbsp;if&nbsp;x!=&nbsp;NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;parent[x]&nbsp;=&nbsp;parent[y]
+&nbsp;&nbsp;&nbsp;if&nbsp;p[y]&nbsp;==NULL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;root[T]&nbsp;=x
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;y&nbsp;=&nbsp;left[[prarnt[y]]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;left[parent[y]]&nbsp;=&nbsp;x
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;right[parent[y]]&nbsp;=x
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;y!=z
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;key[z]&nbsp;=&nbsp;key[y]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copy&nbsp;y&#39;s&nbsp;data&nbsp;into&nbsp;z
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;y</pre><p style="margin: 10px auto;"><span style="color: rgb(0, 0, 255);"><strong>定理：对高度为h的二叉查找树，动态集合操作INSERT和DELETE的运行时间为O(h)。</strong></span></p><p style="margin: 10px auto;"><strong>4、实现测试</strong></p><p style="margin: 10px auto;">　　采用C++语言实现一个简单的二叉查找树，支持动态集合的基本操作：search、minmum、maxmum、predecessor、successor、insert和delete。设计的二叉查找树结构如下所示：</p><pre class="brush:cpp;toolbar:false">template&nbsp;&lt;class&nbsp;T&gt;
+class&nbsp;&nbsp;BinarySearchTreeNode
+{
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;elem;
+&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;BinarySearchTreeNode&lt;T&gt;&nbsp;*parent;
+&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;left;
+&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;right;
+};
+
+template&nbsp;&lt;class&nbsp;T&gt;
+class&nbsp;BinarySearchTree
+{
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTree();
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;tree_insert(const&nbsp;T&amp;&nbsp;elem);
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;tree_remove(const&nbsp;T&amp;&nbsp;elem&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;tree_search(const&nbsp;T&amp;&nbsp;elem)const;
+&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;tree_minmum(BinarySearchTreeNode&lt;T&gt;*&nbsp;root)const;
+&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;tree_maxmum(BinarySearchTreeNode&lt;T&gt;*&nbsp;root)const;
+&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;tree_successor(const&nbsp;T&amp;&nbsp;elem)&nbsp;const;
+&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;tree_predecessor(const&nbsp;T&amp;&nbsp;elem)const;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;empty()&nbsp;const;
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;inorder_tree_walk()const;
+&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;get_root()const&nbsp;{return&nbsp;root;}
+private:
+&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;root;
+};</pre><p style="margin: 10px auto;">&nbsp;完整程序如下所示：</p><p><img id="code_img_closed_651663b2-8875-4a9d-aa60-03c427350108" class="code_img_closed" src="/upload/image/20191114/214317411125.png" alt="" style="border: 0px; vertical-align: middle; padding-right: 5px; max-width: 900px; height: auto;"/><span class="cnblogs_code_collapse" style="border-width: 1px; border-style: solid; border-color: rgb(128, 128, 128); background-color: rgb(255, 255, 255); padding: 2px; line-height: 1.5 !important;">View Code</span></p><p style="margin: 10px auto;">程序测试结果如下所示：</p><p style="margin: 10px auto;"><img src="/upload/image/20191114/214317460134.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/><br/>　　二叉树实现时候添加了一个父结点指针，方便寻找给定结点的前驱和后继。二叉树中删除操作实现比较复杂，需要分类讨论，我分三种情况进行讨论，程序写的有些繁琐，可以进行优化。优化后的代码如下：</p><pre class="brush:cpp;toolbar:false">template&nbsp;&lt;class&nbsp;T&gt;
+int&nbsp;BinarySearchTree&lt;T&gt;::tree_delete(const&nbsp;T&amp;&nbsp;elem)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//找到该元素对应的结点
+&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTreeNode&lt;T&gt;*&nbsp;pnode&nbsp;=&nbsp;tree_search(elem);
+&nbsp;&nbsp;&nbsp;&nbsp;if(NULL&nbsp;!=&nbsp;pnode)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BinarySearchTreeNode&lt;T&gt;&nbsp;*qnode,*tnode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//判断结点是否有左右孩子
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pnode-&gt;left&nbsp;==&nbsp;NULL&nbsp;||&nbsp;pnode-&gt;right&nbsp;==&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qnode&nbsp;=&nbsp;pnode;&nbsp;&nbsp;&nbsp;//有一个左孩子或者一个右孩子和没有左右孩子
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qnode&nbsp;=&nbsp;tree_search(tree_successor(elem));&nbsp;//有左右孩子
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(NULL&nbsp;!=&nbsp;qnode-&gt;left)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tnode&nbsp;=&nbsp;qnode-&gt;left;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tnode&nbsp;=&nbsp;qnode-&gt;right;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(NULL&nbsp;!=&nbsp;tnode)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tnode-&gt;parent&nbsp;=&nbsp;qnode-&gt;parent;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(qnode-&gt;parent&nbsp;==&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;tnode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(qnode&nbsp;==&nbsp;qnode-&gt;parent-&gt;left)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qnode-&gt;parent-&gt;left&nbsp;=&nbsp;tnode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qnode-&gt;parent-&gt;right&nbsp;=&nbsp;tnode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(qnode&nbsp;!=&nbsp;pnode)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnode-&gt;elem&nbsp;=&nbsp;qnode-&gt;elem;&nbsp;&nbsp;//将后继结点的值复制到要删除的结点的值
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;qnode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;-1;
+}</pre><p style="margin: 10px auto;"><strong>5、随机构造二叉查找树</strong></p><p style="margin: 10px auto;">　　二叉查找上各种基本操作的运行时间都是O(h)，h为树的高度。但是在元素插入和删除过程中，树的高度会发生改变。如果n个元素按照严格增长的顺序插入，那个构造出的二叉查找树的高度为n-1。例如按照先后顺序插入7、15、18、20、34、46、59元素构造二叉查找树，二叉查找树结构如下所示：</p><p style="margin: 10px auto;"><img src="/upload/image/20191114/214317433999.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">&nbsp;</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">&nbsp;</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">&nbsp;</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>1、前言：</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　接着学习动态规划方法，最优二叉查找树问题。二叉查找树参考<a href="http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html">http://www.cnblogs.com/Anker/archive/2013/01/28/2880581.html</a>。如果在二叉树中查找元素不考虑概率及查找不成功的情况下，可以采用红黑树或者平衡二叉树来搜索，这样可以在O(lgn)时间内完成。而现实生活中，查找的关键字是有一定的概率的，就是说有的关键字可能经常被搜索，而有的很少被搜索，而且搜索的关键字可能不存在，为此需要根据关键字出现的概率构建一个二叉树。比如中文输入法字库中各词条（单字、词组等）的先验概率，针对用户习惯可以自动调整词频——所谓动态调频、高频先现原则，以减少用户翻查次数，使得经常用的词汇被放置在前面，这样就能有效地加快查找速度。这就是最优二叉树所要解决的问题。</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>2、问题描述</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　 &nbsp;&nbsp;给定一个由n个互异的关键字组成的有序序列K={k<sub>1</sub>&lt;k<sub>2</sub>&lt;k<sub>3</sub>&lt;,……,&lt;k<sub>n</sub>}和它们被查询的概率P={p<sub>1</sub>,p<sub>2</sub>,p<sub>3</sub>,……,p<sub>n</sub>}，要求构造一棵二叉查找树T，使得查询所有元素的总的代价最小。对于一个搜索树，当搜索的元素在树内时，表示搜索成功。当不在树内时，表示搜索失败，用一个“虚叶子节点”来标示搜索失败的情况，因此需要n+1个虚叶子节点{d<sub>0</sub>&lt;d<sub>1</sub>&lt;……&lt;d<sub>n</sub>}，对于应d<sub>i</sub>的概率序列是Q={q<sub>0</sub>,q<sub>1</sub>,……,q<sub>n</sub>}。其中d<sub>0</sub>表示搜索元素小于k<sub>1</sub>的失败结果，d<sub>n</sub>表示搜索元素大于k<sub>n</sub>的失败情况。d<sub>i</sub>（0&lt;i&lt;n）表示搜索节点在k<sub>i</sub>和k<sub>(i+1)</sub>之间时的失败情况。因此有如下公式：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214317183622.png" alt="" width="219" height="59" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　由每个关键字和每个虚拟键被搜索的概率，可以确定在一棵给定的二叉查找树T内一次搜索的期望代价。设一次搜索的实际代价为检查的节点个数，即在T内搜索所发现的节点的深度加上1。所以在T内一次搜索的期望代价为：<img src="/upload/image/20191114/214317169364.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">需要注意的是：一棵最优二叉查找树不一定是一棵整体高度最小的树，也不一定总是把最大概率的关键字放在根部。</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>（3）动态规划求解过程</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>1）最优二叉查找树的结构</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　如果一棵最优二叉查找树T有一棵包含关键字k<sub>i</sub>，……，k<sub>j</sub>的子树T&#39;，那么这棵子树T’对于对于关键字k<sub>i</sub>，……k<sub>j</sub>和虚拟键d<sub>i-1</sub>，……，d<sub>j</sub>的子问题也必定是最优的。</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>2）一个递归解</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　定义e[i,j]为搜索一棵包含关键字ki，……，kj的最优二叉查找树的期望代价，则分类讨论如下：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">当j=i-1时，说明此时只有虚拟键d<sub>i-1</sub>，故e[i,i-1] = q<sub>i-1</sub></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">当j≥i时，需要从k<sub>i</sub>，……，k<sub>j</sub>中选择一个跟k<sub>r</sub>，然后用关键字k<sub>i</sub>，……，k<sub>r-1</sub>来构造一棵最优二叉查找树作为左子树，用关键字k<sub>r+1</sub>，……，k<sub>j</sub>来构造一棵最优二叉查找树作为右子树。定义一棵有关键字k<sub>i</sub>，……，k<sub>j</sub>的子树，定义概率的总和为：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214318219505.png" alt="" width="213" height="71" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">因此如果k<sub>r</sub>是一棵包含关键字k<sub>i</sub>，……，k<sub>j</sub>的最优子树的根，则有：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214318654944.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214318236613.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">&nbsp;</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">故e[i,j]重写为：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214318395509.png" alt="" width="360" height="33" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">最终的递归式如下：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214318434374.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>3）计算一棵最优二叉查找树的期望搜索代价</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　将e[i,j]的值保存到一个二维数组e[1..1+n,0..n]中，用root[i,j]来记录关键字ki，……，kj的子树的根，采用二维数组root[1..n,1..n]来表示。为了提高效率，防止重复计算，需要个二维数组w[1..n+1,0...n]来保存w(i,j)的值，其中w[i,j] = w[i,j-1]+p<sub>j</sub>+q<sub>j。</sub>数组给出了计算过程的伪代码：</p><pre class="brush:cpp;toolbar:false">OPTIMAL_BST(p,q,n)
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i=1&nbsp;to&nbsp;n+1&nbsp;&nbsp;&nbsp;&nbsp;//初始化e和w的值
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;e[i,i-1]&nbsp;=&nbsp;qi-1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w[i,i-1]&nbsp;=&nbsp;qi-1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;l=1&nbsp;to&nbsp;n
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;for&nbsp;i=1&nbsp;to&nbsp;n-l+1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;j=i+l-1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i,j]&nbsp;=&nbsp;MAX;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w[i,j]&nbsp;=&nbsp;w[i,j-1]+pj+qj;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;r=i&nbsp;to&nbsp;j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;t=e[i,r-1]+e[r+1,j]+w[i,j]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;t&lt;e[i,j]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;e[i,j]&nbsp;=&nbsp;t;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root[i,j]&nbsp;=&nbsp;r;
+return&nbsp;e&nbsp;and&nbsp;root;</pre><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>4）构造一棵最优二叉查找树</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　根据地第三步中得到的root表，可以递推出各个子树的根，从而可以构建出一棵最优二叉查找树。从root[1,n]开始向下递推，一次找出树根，及左子树和右子树。</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><strong>4、编程实现</strong></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">　　针对一个具体的实例编程实现，现在有5个关键字，其出现的概率P={0.15，0.10，0.05，0.10，0.20}，查找虚拟键的概率q={0.05，0.10，0.05，0.05，0.05，0.10}。采用C++语言是实现如下：</p><pre class="brush:cpp;toolbar:false">#include&lt;iostream&gt;
+using&nbsp;namespace&nbsp;std;
+const&nbsp;int&nbsp;N=5;
+const&nbsp;int&nbsp;MAX=9999999;
+float&nbsp;p[N+1]={0,0.15,0.10,0.05,0.1,0.20};
+float&nbsp;q[N+1]={0.05,0.10,0.05,0.05,0.05,0.10};
+float&nbsp;e[N+2][N+1];
+int&nbsp;root[N+1][N+1];
+float&nbsp;w[N+2][N+1];
+void&nbsp;optimal_bst_search_tree(float&nbsp;p[],float&nbsp;q[],int&nbsp;n)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i;
+&nbsp;&nbsp;&nbsp;&nbsp;for(i=1;i&lt;=n+1;i++)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i][i-1]=q[i-1];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w[i][i-1]=q[i-1];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;l,j,r;
+&nbsp;&nbsp;&nbsp;&nbsp;for(l=1;l&lt;=n;l++)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(i=1;i&lt;=n-l+1;i++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j=i+l-1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i][j]=MAX;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w[i][j]=w[i][j-1]+p[j]+q[j];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(r=i;r&lt;=j;r++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;t=e[i][r-1]+e[r+1][j]+w[i][j];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(t&lt;e[i][j])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e[i][j]=t;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root[i][j]=r;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+void&nbsp;print_root()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i,j;
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&quot;各子树的根：&quot;&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;for(i=1;i&lt;=N;i++)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=1;j&lt;=N;j++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;root[i][j]&lt;&lt;&quot;&nbsp;&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+void&nbsp;construct_optimal_bst(int&nbsp;i,int&nbsp;j)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(i&lt;=j)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;r=root[i][j];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;r&lt;&lt;&quot;&nbsp;&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;construct_optimal_bst(i,r-1);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;construct_optimal_bst(r+1,j);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+void&nbsp;print_bst(int&nbsp;i,int&nbsp;j)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;if(i==1&amp;&amp;j==N)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&quot;root&nbsp;is&nbsp;&quot;&lt;&lt;root[i][j]&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;if(i&lt;j)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;r=root[i][j];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(i!=r)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&quot;left&nbsp;child&nbsp;root&nbsp;&quot;&lt;&lt;root[i][r-1]&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print_bst(i,root[i][j]-1);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(j!=r)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&quot;right&nbsp;child&nbsp;root&nbsp;&quot;&lt;&lt;root[r+1][j]&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print_bst(root[i][j]+1,j);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+int&nbsp;main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;optimal_bst_search_tree(p,q,N);
+&nbsp;&nbsp;&nbsp;&nbsp;print_root();
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;&quot;构造的最优二叉树：&quot;&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;construct_optimal_bst(1,5);
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;print_bst(1,5);
+}</pre><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;">运行结果：</p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><img src="/upload/image/20191114/214319768404.png" alt="" style="border: 0px; max-width: 900px; height: auto;"/></p><p style="margin: 10px auto; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: medium; white-space: normal;"><a href="https://www.cnblogs.com/alantu2018/p/8462110.html" target="_blank">原文</a>:<a href="https://www.cnblogs.com/alantu2018/p/8462110.html">https://www.cnblogs.com/alantu2018/p/8462110.html</a></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = '4c592cB8';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

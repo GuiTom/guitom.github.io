@@ -1,0 +1,200 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="抖音数据分析服务">
+ 	<meta name="keywords" content="抖音排行榜,抖音数据,抖音营销-抖商助手 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>python3简介-python3教程</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #e2e2e2;
+        font-weight: bold;
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 1em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>python3简介-python3教程</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="2c6Ba358" class="item chapter normal">python3简介</div><div id="bA0332c7" class="item course normal">Windows下安装</div><div id="C12838cA" class="item course normal">Linux下安装</div><div id="8b320BA6" class="item course normal">Mac下安装</div><div id="8a70482B" class="item chapter normal">基本语法</div><div id="0A658BA6" class="item course normal">数据类型</div><div id="9303CBc7" class="item course normal">Number</div><div id="c9349ABa" class="item course normal">字符串</div><div id="3AC2c6BA" class="item course normal">正则匹配</div><div id="a2469092" class="item course normal">列表 list</div><div id="0117b3c7" class="item course normal">元组</div><div id="aBC84A59" class="item course normal">字典</div><div id="4b8ccBC2" class="item course normal">集合</div><div id="507B4c4C" class="item chapter normal">运算符</div><div id="982A21c1" class="item course normal">算术运算符</div><div id="8484b5B0" class="item course normal">关系运算符</div><div id="c476Cc31" class="item course normal">赋值运算符</div><div id="0Ab81b19" class="item course normal">位运算符</div><div id="C6AabA97" class="item course normal">成员运算符</div><div id="0768cA9a" class="item course normal">逻辑运算符</div><div id="A4218806" class="item course normal">身份运算符</div><div id="B14746ba" class="item chapter normal">流程控制</div><div id="8b1b5118" class="item course normal">条件控制</div><div id="B8C881B2" class="item course normal">循环语句</div><div id="304c96C5" class="item course normal">迭代器与生成器</div><div id="7728974A" class="item course normal">函数</div><div id="94a9b784" class="item course normal">模块</div><div id="925AbB6C" class="item course normal">输入输出</div><div id="8aBaC7b4" class="item course normal">文件操作</div><div id="469915Aa" class="item course normal">错误和异常</div><div id="2a78B0c1" class="item chapter normal">面向对象</div><div id="4a2c2bBA" class="item chapter normal">命名空间和作用域</div><div id="12CCc4A0" class="item chapter normal">标准库概览</div><div id="2142868c" class="item chapter normal">Python操作数据库</div><div id="50300125" class="item course normal">操作redis</div><div id="AcA970B3" class="item course normal">操作mysql</div><div id="1a7CC121" class="item course normal">操作Elastic Search</div><div id="9AaCbb30" class="item course normal selected">操作mongodb</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-8" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row ontent">
+             <div class="col-sm-12">
+                 <p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">Python 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。</p><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">Python 是一种解释型语言：</strong>&nbsp;这意味着开发过程中没有了编译这个环节。类似于PHP和Perl语言。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">Python 是交互式语言：</strong>&nbsp;这意味着，您可以在一个Python提示符，直接互动执行写你的程序。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">Python 是面向对象语言:</strong>&nbsp;这意味着Python支持面向对象的风格或代码封装在对象的编程技术。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">Python 是初学者的语言：</strong>Python 对初级程序员而言，是一种伟大的语言，它支持广泛的应用程序开发，从简单的文字处理到 WWW 浏览器再到游戏。</p></li></ul><h2 style="margin: 10px 0px; padding: 0px; font-size: 21px; line-height: 1.5; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Python特点</h2><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">1.易于学习：</strong>Python有相对较少的关键字，结构简单，和一个明确定义的语法，学习起来更加简单。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">2.易于阅读：</strong>Python代码定义的更清晰。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">3.易于维护：</strong>Python的成功在于它的源代码是相当容易维护的。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">4.一个广泛的标准库：</strong>Python的最大的优势之一是丰富的库，跨平台的，在UNIX，Windows和Macintosh兼容很好。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">5.互动模式：</strong>互动模式的支持，您可以从终端输入执行代码并获得结果的语言，互动的测试和调试代码片断。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">6.可移植：</strong>基于其开放源代码的特性，Python已经被移植（也就是使其工作）到许多平台。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">7.可扩展：</strong>如果你需要一段运行很快的关键代码，或者是想要编写一些不愿开放的算法，你可以使用C或C++完成那部分程序，然后从你的Python程序中调用。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">8.数据库：</strong>Python提供所有主要的商业数据库的接口。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">9.GUI编程：</strong>Python支持GUI可以创建和移植到许多系统调用。</p></li><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">10.可嵌入:&nbsp;</strong>你可以将Python嵌入到C/C++程序，让你的程序的用户获得&quot;脚本化&quot;的能力。</p></li></ul><h2 style="margin: 10px 0px; padding: 0px; font-size: 21px; line-height: 1.5; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">Python与其他语言比较</strong></h2><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;">C 和 Python、Java、C#等</strong></p></li></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">　　</strong>C语言： 代码编译得到<strong style="margin: 0px; padding: 0px;">机器码</strong>&nbsp;，机器码在处理器上直接执行，每一条指令控制CPU工作</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　其他语言： 代码编译得到<strong style="margin: 0px; padding: 0px;">字节码</strong>&nbsp;，虚拟机执行字节码并转换成机器码再后在处理器上执行</p><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;">Python 和</strong>&nbsp;<strong style="margin: 0px; padding: 0px;">C</strong>（Python这门语言是由C开发而来）</p></li></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　对于使用：Python的类库齐全并且使用简洁，如果要实现同样的功能，Python 10行代码可以解决，C可能就需要100行甚至更多.</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　对于速度：Python的运行速度相较与C相比，绝逼是慢了</p><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;">Python 和 Java、C#等</strong></p></li></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">　　</strong>对于使用：Linux原装Python，其他语言没有；以上几门语言都有非常丰富的类库支持</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　对于速度：Python在速度上可能稍显逊色</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">所以，Python和其他语言没有什么本质区别，其他区别在于：擅长某领域、人才丰富、先入为主。</p><h2 style="margin: 10px 0px; padding: 0px; font-size: 21px; line-height: 1.5; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">Python解释器的种类</strong></h2><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p style="margin: 10px auto; padding: 0px;"><strong style="margin: 0px; padding: 0px;">CPython</strong></p><p style="margin: 10px auto; padding: 0px;">&nbsp; &nbsp;&nbsp;当我们从<a href="https://www.python.org/" target="_blank" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0);">Python官方网站</a>下载并安装好Python 3.5后，我们就直接获得了一个官方版本的解释器：CPython。这个解释器是用C语言开发的，所以叫CPython。在命令行下运行<code style="margin: 0px; padding: 0px;">python</code>就是启动CPython解释器。</p></li><li><p><strong style="margin: 0px; padding: 0px;">IPython</strong></p></li></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　IPython是基于CPython之上的一个交互式解释器，也就是说，IPython只是在交互方式上有所增强，但是执行Python代码的功能和CPython是完全一样的。好比很多国产浏览器虽然外观不同，但内核其实都是调用了IE。</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　CPython用<code style="margin: 0px; padding: 0px;">&gt;&gt;&gt;</code>作为提示符，而IPython用<code style="margin: 0px; padding: 0px;">In [序号]:</code>作为提示符。</p><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;">Jyhton</strong><br data-filtered="filtered" style="margin: 0px; padding: 0px;"/></p><p style="margin: 10px auto; padding: 0px;">&nbsp; &nbsp; Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。</p></li><li><p><strong style="margin: 0px; padding: 0px;">IronPython</strong><br data-filtered="filtered" style="margin: 0px; padding: 0px;"/></p><p style="margin: 10px auto; padding: 0px;">&nbsp; &nbsp; IronPython和Jython类似，只不过IronPython是运行在微软.Net平台上的Python解释器，可以直接把Python代码编译成.Net的字节码。</p></li><li><p><strong style="margin: 0px; padding: 0px;">PyPy（特殊）</strong><br data-filtered="filtered" style="margin: 0px; padding: 0px;"/></p><p style="margin: 10px auto; padding: 0px;">&nbsp; &nbsp; PyPy是另一个Python解释器，它的目标是执行速度。PyPy采用<a href="http://en.wikipedia.org/wiki/Just-in-time_compilation" target="_blank" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0);">JIT技术</a>，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。</p></li></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">　　　 &nbsp;绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。如果你的代码要放到PyPy下执行，就需要了解<a href="http://pypy.readthedocs.org/en/latest/cpython_differences.html" target="_blank" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0);">PyPy和CPython的不同点</a>。<a style="margin: 0px; padding: 0px;" name="#Jython"></a></p><ul style="margin-left: 30px; padding: 0px; word-break: break-all; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><ul style="list-style-type: square;" class=" list-paddingleft-2"><li><p><strong style="margin: 0px; padding: 0px;">RubyPython、Brython ...</strong></p></li></ul></ul><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">PyPy，在Python的基础上对Python的字节码进一步处理，从而提升执行速度！</strong></p><h2 style="margin: 10px 0px; padding: 0px; font-size: 21px; line-height: 1.5; font-family: Verdana, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">Python2.x与Python3.x版本区别</strong></h2><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">Python的3.0版本，常被称为Python 3000，或简称Py3k。相对于Python的早期版本，这是一个较大的升级。为了不带入过多的累赘，Python 3.0在设计的时候没有考虑向下兼容。</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);"><a href="http://www.cnblogs.com/wushuaishuai/p/7693003.html" target="_blank" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0);">Python2.x与3.x版本区别&nbsp;</a></p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">查看Python版本</p><p style="margin: 10px auto; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);">python -V</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线调试工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '395ac943';
+var article_id = '2c6Ba358';
+</script>
+
+	
+		<div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备17006386号-5</div>
+	
+</body>

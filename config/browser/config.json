@@ -1,0 +1,22 @@
+ [
+   {"name":"爱上网",
+     "items": [
+       { "name":"百度","icon_url":"baidu","url":"https://www.baidu.com/"},
+       { "name":"腾讯" , "icon_url":"qqnews","url":"https://xw.qq.com/" },
+       { "name":"京东" , "icon_url":"jd","url":"http://m.jd.com/" },
+       { "name":"新浪" , "icon_url":"sina","url":"https://sina.cn/" },
+       { "name":"淘宝" , "icon_url":"taomf","url":"https://h5.m.taobao.com/" },
+       { "name":"网易新闻" , "icon_url":"http://whqt360.com/config/browser/icons/1.png","url":"https://3g.163.com/touch/news/" },
+       {"name":"网址导航" , "icon_url":"http://pp.myapp.com/ma_icon/0/icon_42357511_1521705207/96","url":"http://m.2345.com/" }
+     ]
+   },
+   {"name":"会生活",
+     "items": [
+       { "name":"小游戏" , "icon_url":"youxi","url":"http://h.4399.com/wap/?301" },
+       { "name":"酷狗音乐" , "icon_url":"kugou","url":"http://m.kugou.com/" },
+       { "name":"人人直播" , "icon_url":"rdsp","url":"http://activity.renren.com/home?channelId=10003#homepage" },
+       { "name":"蜻蜓FM" , "icon_url":"http://pp.myapp.com/ma_icon/0/icon_94755_1523927315/96","url":"http://m.qingting.fm" }
+     ]
+   }
+
+ ]

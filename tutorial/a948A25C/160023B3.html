@@ -1,0 +1,267 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>NSUserDefaults-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>NSUserDefaults-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>NSUserDefaults</p><p>NSUserDefaults是最常使用的轻量级的数据存储方式，NSUserDefaults用来存储 用户设置 系统配置等一些小的数据。相当于全局的变量</p><p><br/></p><p>NSUserDefaults是单例的，也是线程安全的，是以键值对 key-value 的形式保存在沙盒中。数据是明文存储在 plist 文件中，不安全，即使只是修改一个 key 都会 load 整个文件，数据多加载慢(IO 内存)，不适合存储大量数据。</p><p><br/></p><p>存储路径为：沙盒路径的Library——&gt;Preferences文件夹中</p><p><br/></p><p>支持的数据类型有NSString、 NSNumber、NSDate、 NSArray、NSDictionary、BOOL、NSInteger、NSFloat等系统定义的数据类型</p><p><br/></p><p>储存与读取</p><p>储存</p><p><br/></p><pre class="brush:cpp;toolbar:false">-&nbsp;(void)setObject:(nullable&nbsp;id)value&nbsp;forKey:(NSString&nbsp;*)defaultName;
+读取
+-&nbsp;(nullable&nbsp;id)objectForKey:(NSString&nbsp;*)defaultName;
+注：对相同的Key赋值约等于一次覆盖，要保证每一个Key的唯一性
+&nbsp;&nbsp;&nbsp;&nbsp;//储存
+&nbsp;&nbsp;&nbsp;&nbsp;NSUserDefaults&nbsp;*user1&nbsp;=&nbsp;[NSUserDefaults&nbsp;standardUserDefaults];
+&nbsp;&nbsp;&nbsp;&nbsp;[user1&nbsp;setObject:@&quot;123456&quot;&nbsp;forKey:@&quot;userPassWord&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//读取
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*passWord&nbsp;=&nbsp;[user1&nbsp;objectForKey:@&quot;userPassWord&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;passWord&nbsp;=&nbsp;%@&quot;,passWord);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//注意：对相同的Key赋值约等于一次覆盖，要保证每一个Key的唯一性</pre><p>执行结果</p><p><br/></p><p>2019-05-24 15:46:28.783819+0800 MGNSUserDefaults[3880:831485] passWord = 123456</p><p><br/></p><p>NSUserDefaults 存储的对象全是不可变的</p><p>例如，如果我想要存储一个 NSMutableArray 对象，我必须先创建一个不可变数组（NSArray）再将它存入NSUserDefaults中去，代码如下：</p><p><br/></p><pre class="brush:cpp;toolbar:false">&nbsp;&nbsp;&nbsp;&nbsp;//数组
+&nbsp;&nbsp;&nbsp;&nbsp;//储存
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableArray&nbsp;*mutableArray&nbsp;=&nbsp;[NSMutableArray&nbsp;arrayWithObjects:@&quot;123&quot;,@&quot;234&quot;,&nbsp;nil];
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*array&nbsp;=&nbsp;[NSArray&nbsp;arrayWithArray:mutableArray];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSUserDefaults&nbsp;*user2&nbsp;=&nbsp;[NSUserDefaults&nbsp;standardUserDefaults];
+&nbsp;&nbsp;&nbsp;&nbsp;[user2&nbsp;setObject:array&nbsp;forKey:@&quot;arrTest&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//读取
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*arrTest&nbsp;=&nbsp;[user1&nbsp;objectForKey:@&quot;arrTest&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;arrTest&nbsp;=&nbsp;%@&quot;,arrTest);</pre><p><br/></p><p>执行结果</p><p><br/></p><p>2019-05-24 15:54:39.725060+0800 MGNSUserDefaults[3890:833450] arrTest = (</p><p>123,</p><p>234</p><p>)</p><p><br/></p><p>取出数据是一样的，是不可变的</p><p>不可以出现下面的情况</p><p><br/></p><pre class="brush:cpp;toolbar:false">&nbsp;&nbsp;&nbsp;&nbsp;mutableArray&nbsp;*arrTest&nbsp;=&nbsp;[user1&nbsp;objectForKey:@&quot;arrTest&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;arrTest&nbsp;=&nbsp;%@&quot;,arrTest);</pre><p>1</p><p>2</p><p>移除数据</p><p>removeObjectForKey:</p><pre class="brush:cpp;toolbar:false">&nbsp;&nbsp;&nbsp;&nbsp;[[NSUserDefaults&nbsp;standardUserDefaults]&nbsp;removeObjectForKey:@&quot;key&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[[NSUserDefaults&nbsp;standardUserDefaults]&nbsp;synchronize];</pre><p><br/></p><p>强制写入磁盘</p><p>NSUserDefaults是定时把缓存中的数据写入磁盘的，而不是即时写入，为了防止在写完NSUserDefaults后程序退出导致的数据丢失，可以在写入数据后使用synchronize强制立即将数据写入磁盘：</p><pre class="brush:cpp;toolbar:false">&nbsp;&nbsp;[[NSUserDefaults&nbsp;standardUserDefaults]&nbsp;synchronize];</pre><p><br/></p><p>NSUserDefaults的相关类方法</p><p>// 同步对共享对象的任何的更改默认用户和从内存中释放它</p><p>resetStandardUserDefaults</p><p><br/></p><p>// 返回共享默认对象</p><p>+ (NSUserDefaults *)standardUserDefaultsaddSuiteNamed：</p><p><br/></p><p>// 插入到接收器的搜索列表中指定的域名</p><p>- (void)addSuiteNamed:( NSString *) suiteName</p><p><br/></p><p>// 返回布尔值与指定键相关联</p><p>- (BOOL)boolForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回与指定键相关联的数组</p><p>- ( NSArray *)arrayForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回数据对象与指定键相关联</p><p>- ( NSData *)dataForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回Dictionary对象与指定键相关联</p><p>- ( NSDictionary *)dictionaryForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回一个字典，它包含在搜索列表中的域的所有键值对联合（ NSData ， NSString ， NSNumber ， NSDate ，NSArray，或者NSDictionary ）</p><p>- ( NSDictionary *)dictionaryRepresentation</p><p><br/></p><p>// 消除了在标准应用程序域指定的默认键值</p><p>- (void)removeObjectForKey:( NSString *) defaultName</p><p><br/></p><p>// 删除指定的从用户的默认持久域的内容</p><p>- (void)removePersistentDomainForName:( NSString *) domainName</p><p><br/></p><p>// 设置指定的默认键到指定的布尔值</p><p>- (void)setBool:(BOOL) value forKey:( NSString *) defaultName</p><p><br/></p><p>// 设置为指定的字典持久域</p><p>- (void)setPersistentDomain:( NSDictionary *) domain forName:( NSString *) domainName</p><p><br/></p><p>// 设置指定的默认键到指定的URL值</p><p>- (void)setURL:( NSURL *) url forKey:( NSString *) defaultName</p><p><br/></p><p>// 设置为指定的字典挥发性域</p><p>- (void)setVolatileDomain:( NSDictionary *) domain forName:( NSString *) domainName</p><p><br/></p><p>// 返回与指定键关联的字符串数组</p><p>- ( NSArray *)stringArrayForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回与指定键关联的字符串</p><p>- ( NSString *)stringForKey:( NSString *) defaultName</p><p><br/></p><p>//返回NSURL实例与指定键相关联</p><p>- ( NSURL *)URLForKey:( NSString *) defaultName&nbsp;</p><p><br/></p><p>// 返回double值与指定键相关联</p><p>- (double)doubleForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回浮点值与指定键相关联</p><p>- (float)floatForKey:( NSString *) defaultName</p><p><br/></p><p>// 返回NSUserDefaults对象初始化的用户帐户的默认为指定的</p><p>- (id)initWithUser:( NSString *) username</p><p><br/></p><p>// 返回整数值与指定键关联</p><p>- （ NSInteger NSInteger )integerForKey:( NSString *) defaultName</p><p><br/></p><p>// 判断这个key是否存在</p><p>- (BOOL)objectIsForcedForKey:( NSString *) key</p><p><br/></p><p>// 返回与指定默认的第一个发生关联的对象</p><p>- (id)objectForKey:( NSString *) defaultName</p><p><br/></p><p><br/></p><p>域</p><p>NSUserDefaults数据库之中其实是由多个层级的域组成的，当你读取一个键值的数据时，NSUserDefaults从上到下透过域的层级寻找正确的值，不同的域有不同的功能，有些域是可持久的，有些域则不行。</p><p><br/></p><p>应用域（application domain）是最重要的域，它存储着App通过NSUserDefaults set…forKey添加的设置；</p><p>注册域（registration domain）仅有较低的优先权，只有在应用域没有找到值时才从注册域去寻找；</p><p>全局域（global domain）是存储着系统的设置；</p><p>语言域（language-specific domains）包括地区、日期等；</p><p>参数域（ argument domain）有最高优先权。</p><p><br/></p><p>原文链接：https://blog.csdn.net/jackjia2015/article/details/90597134</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '160023B3';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

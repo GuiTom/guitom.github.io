@@ -1,0 +1,290 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>音频播放-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>音频播放-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>在移动应用中，我们通常将声音的播放分成两类：一种是一次性播放的简单音效（包括手机振动），音效通常很短暂，只要实现让其播放即可，播放完成即结束；另一种指的是可精确控制的音乐播放，可以控制音乐播放，暂停，继续播放，音量控制，循环播放等等。在IOS中这两种声音播放分别通过AudioToolbox.framework和AVFoundation.framework框架来实现，前者是系统音效播放，后者是AVAudioPlayer播放器对象。</p><h1>使用System Sound Service播放简短音效</h1><h1>AudioToolbox.framework</h1><p>AudioToolbox.framework是基于C语言的一个框架，播放音效其实是将短音频注册到System Sound Service，System Sound Service是一种简单、底层的声音播放服务。</p><h1>System Sound Service音效播放的限制</h1><p>音频播放时间不能超过30s；<br/>数据必须是PCM或者IMA4格式；<br/>音频文件必须打包成“.caf .aif .wav”中的一种(实际mp3也可以)；</p><h1>System Sound Service播放音效的步骤</h1><p>1.调用AudioServicesCreateSystemSoundID(CFURLRef inFileURL, SystemSoundID* outSystemSoundID)函数获得系统声音的ID;<br/>2.可选择使用AudioServicesAddSystemSoundCompletion(SystemSoundID inSystemSoundID, CFRunLoopRef inRunLoop, CFStringRef inRunLoopMode, AudioServicesSystemSoundCompletionProc inCompletionRoutine, void*inClientData)方法注册回调函数监听音效播放结束事件。<br/>3.调用AudioServicesPlaySystemSound(SystemSoundID inSystemSoundID)或AudioServicesPlayAlertSound(SystemSoundID inSystemSoundID)方法播放音效（后者带有震动效果）。<br/>【注】：震动效果的播放有一个专用的枚举ID变量：kSystemSoundID_Vibrate，可直接使用AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);函数播放震动效果。</p><h1>示例代码和Demo</h1><pre class="line-numbers  language-objectivec">#import&nbsp;&quot;ViewController.h&quot;&nbsp;#import&nbsp;&lt;AudioToolbox/AudioToolbox.h&gt;&nbsp;//&nbsp;System&nbsp;Sound&nbsp;Service&nbsp;//&nbsp;定义sound的ID&nbsp;static&nbsp;SystemSoundID&nbsp;system_sound_id_0&nbsp;=&nbsp;0;@interface&nbsp;ViewController&nbsp;()@end@implementation&nbsp;ViewController-&nbsp;(void)viewDidLoad&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;注册声音ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;registerSoundWithName:@&quot;effect&quot;&nbsp;andID:system_sound_id_0];}//&nbsp;系统声音资源注册函数&nbsp;-&nbsp;(void)&nbsp;registerSoundWithName:&nbsp;(NSString&nbsp;*)name&nbsp;andID:(SystemSoundID)sound_id&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;1.获取音频文件url&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*audioFile=[[NSBundle&nbsp;mainBundle]&nbsp;pathForResource:name&nbsp;ofType:@&quot;mp3&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*fileUrl=[NSURL&nbsp;fileURLWithPath:audioFile];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;2.将音效文件加入到系统音频服务中并返回一个长整形ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AudioServicesCreateSystemSoundID((__bridge&nbsp;CFURLRef)(fileUrl),&nbsp;&amp;system_sound_id_0);
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;3.注册一个播放完成回调函数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AudioServicesAddSystemSoundCompletion(system_sound_id_0,&nbsp;NULL,&nbsp;NULL,&nbsp;soundCompleteCallback,&nbsp;NULL);}//&nbsp;声音播放完成回调&nbsp;void&nbsp;soundCompleteCallback(SystemSoundID&nbsp;sound_id,void&nbsp;*data)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;声音已经播放完成...&nbsp;}//&nbsp;手机震动&nbsp;-&nbsp;(IBAction)vibrate&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);}//&nbsp;播放短暂音频&nbsp;-&nbsp;(IBAction)playShortMusic&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;AudioServicesPlaySystemSound(system_sound_id_0);&nbsp;&nbsp;//&nbsp;播放音效&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//AudioServicesPlayAlertSound(system_sound_id_0);&nbsp;//&nbsp;播放音效并震动&nbsp;}@end</pre><h1>使用AVAudioPlayer播放、控制音乐</h1><p>AVAudioPlayer是一个支持多种音频格式的播放器对象，可以实现对音乐的全面控制。首先看一下AVAudioPlayer的常用属性和方法以及代理事件（只列出常用的其他的可直接到AVAudioPlayer头文件中了解）：</p><h1>AVAudioPlayer的属性</h1><p>@property(readonly, getter=isPlaying) BOOL playin // 音乐是否正在播放<br/>@property(readonly) NSTimeInterval duration // 整首音乐的时长<br/>@property float pan // 立体声平衡，-1表示完全左声道，0表示左右声道平衡，1表示完全为右声道<br/>@property float volume &nbsp;// 音量大小，范围为0-1.0<br/>@property BOOL enableRate &nbsp; // 是否允许改变播放速率<br/>@property float rate &nbsp; &nbsp;// 播放速率(前提enableRate要为YES)，范围0.5-2.0，1.0表示正常播放<br/>@property NSTimeInterval currentTime &nbsp; &nbsp;// 已经播放的时长，不包括暂停时间<br/>@property(readonly) NSTimeInterval deviceCurrentTime // 设备播放音频的时间，包括暂停期间的时间<br/>@property NSInteger numberOfLoops &nbsp; // 循环播放次数，0表示不循环，小于0表示无限循环，大于0则表示循环次数</p><h1>AVAudioPlayer的实例方法</h1><p>-(instancetype)initWithContentsOfURL:(NSURL *)url error:(NSError * *)outError // 使用文件URL初始化播放器，注意这个URL不能是HTTP URL，AVAudioPlayer不支持加载网络媒体流，只能播放本地文件<br/>-(BOOL)prepareToPlay // 加载音频文件到缓冲区，这个函数如果不手动提前调用在调用play函数时也会自动调用<br/>-(BOOL)play // 播放音频文件<br/>-(BOOL)playAtTime:(NSTimeInterval)time &nbsp;// 在指定的时间开始播放音频(iOS4以后可用)<br/>-(void)pause // 暂停播放<br/>-(void)stop // 停止播放</p><h1>AVAudioPlayer的代理事件</h1><p>-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag &nbsp;// 音频播放完成<br/>-(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error &nbsp; &nbsp;// 音频解码发生错误</p><h1>AVAudioPlayer的后台播放</h1><p>上面的音乐播放只能在app内部进行，当退出应用（按下home键）时会停止播放音乐，再次进入应用时才会继续播放，因此要开启后台服务才能在应用退出后继续在后台播放音乐，一种实现方法是在AppDelegate中应用将要退出的代理事件中开启激活后台服务【但这个也只能在后台持续播放一定的时间，要想持续一直播放需要申请后台服务ID】：</p><pre class="line-numbers  language-objectivec">-&nbsp;(void)applicationWillResignActive:(UIApplication&nbsp;*)application&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;开启后台处理多媒体事件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[UIApplication&nbsp;sharedApplication]&nbsp;beginReceivingRemoteControlEvents];
+&nbsp;&nbsp;&nbsp;&nbsp;AVAudioSession&nbsp;*session=[AVAudioSession&nbsp;sharedInstance];
+&nbsp;&nbsp;&nbsp;&nbsp;[session&nbsp;setActive:YES&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;后台播放(只能播放一定时间)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[session&nbsp;setCategory:AVAudioSessionCategoryPlayback&nbsp;error:nil];}</pre><p>另外要在工程中开启后台模式（Targets -&gt;Capabilities -&gt;BackgroundModes(Audio,AirPlay,and Picture in picture) -&gt;ON）：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4982523-e1fcceeb3be6ce03.png" data-original-width="1136" data-original-height="266" data-original-format="image/png" data-original-filesize="138577" class="" data-image-index="1" style="cursor: zoom-in; width: 738px; height: 208px;" src="//upload-images.jianshu.io/upload_images/4982523-e1fcceeb3be6ce03.png?imageMogr2/auto-orient/strip|imageView2/2/w/1136/format/webp" width="738" height="208"/></p><p>35.png</p><h1>AVAudioPlayer使用的示例代码和Demo</h1><p>这里实现一首音乐的播放，暂停，使用一个UIProcessView显示播放进度，使用一个UISlider控制音乐的音量。</p><pre class="line-numbers  language-objectivec">#import&nbsp;&quot;ViewController.h&quot;&nbsp;#import&nbsp;&lt;AVFoundation/AVFoundation.h&gt;&nbsp;@interface&nbsp;ViewController&nbsp;()&lt;AVAudioPlayerDelegate&gt;@property&nbsp;(nonatomic,&nbsp;strong)AVAudioPlayer&nbsp;*audioPlayer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;定义一个播放器【一个播放器只能播放一首音乐，多首音乐需要定义一个播放器数组】&nbsp;@property&nbsp;(nonatomic,&nbsp;weak)IBOutlet&nbsp;UIProgressView&nbsp;*processView;&nbsp;//&nbsp;进度条显示音乐播放进度&nbsp;@property&nbsp;(nonatomic,&nbsp;weak)IBOutlet&nbsp;UISlider&nbsp;*slider;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;滑动条用于调节音量&nbsp;@property&nbsp;(nonatomic,&nbsp;weak)NSTimer&nbsp;*timer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;进度更新定时器&nbsp;@end@implementation&nbsp;ViewController//&nbsp;audioPlayer懒加载getter方法&nbsp;-&nbsp;(AVAudioPlayer&nbsp;*)audioPlayer&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!_audioPlayer)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;资源路径&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*urlStr&nbsp;=&nbsp;[[NSBundle&nbsp;mainBundle]pathForResource:@&quot;snow&quot;&nbsp;ofType:@&quot;wav&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*url&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:urlStr];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;初始化播放器，注意这里的Url参数只能为本地文件路径，不支持HTTP&nbsp;Url&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_audioPlayer&nbsp;=&nbsp;[[AVAudioPlayer&nbsp;alloc]initWithContentsOfURL:url&nbsp;error:&amp;error];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//设置播放器属性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_audioPlayer.numberOfLoops&nbsp;=&nbsp;0;//&nbsp;不循环&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_audioPlayer.delegate&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_audioPlayer.volume&nbsp;=&nbsp;0.5;&nbsp;//&nbsp;音量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_audioPlayer&nbsp;prepareToPlay];//&nbsp;加载音频文件到缓存【这个函数在调用play函数时会自动调用】&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(error){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;初始化播放器过程发生错误,错误信息:%@&quot;,error.localizedDescription);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_audioPlayer;}//&nbsp;视图加载&nbsp;-&nbsp;(void)viewDidLoad&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;开启定时器&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_timer&nbsp;=&nbsp;[NSTimer&nbsp;scheduledTimerWithTimeInterval:0.2&nbsp;target:self&nbsp;selector:@selector(update)&nbsp;userInfo:nil&nbsp;repeats:true];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;初始化进度条为0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.processView&nbsp;setProgress:0&nbsp;animated:false];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;初始化进度条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_slider&nbsp;setMinimumValue:0];
+&nbsp;&nbsp;&nbsp;&nbsp;[_slider&nbsp;setMaximumValue:1.0];
+&nbsp;&nbsp;&nbsp;&nbsp;[_slider&nbsp;setValue:0.5];
+&nbsp;&nbsp;&nbsp;&nbsp;[_slider&nbsp;setContinuous:true];
+&nbsp;&nbsp;&nbsp;&nbsp;[_slider&nbsp;addTarget:self&nbsp;action:@selector(sliderValChanged)&nbsp;forControlEvents:UIControlEventValueChanged];}//&nbsp;定时更新&nbsp;-&nbsp;(void)update&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;更新进度条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_audioPlayer&nbsp;&amp;&amp;&nbsp;_audioPlayer.isPlaying)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_processView&nbsp;setProgress:(_audioPlayer.currentTime/_audioPlayer.duration)&nbsp;animated:true];
+&nbsp;&nbsp;&nbsp;&nbsp;}}//&nbsp;滑动条值改变触发事件&nbsp;-&nbsp;(void)sliderValChanged&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;改变音量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_audioPlayer)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_audioPlayer&nbsp;setVolume:_slider.value];
+&nbsp;&nbsp;&nbsp;&nbsp;}}#pragma&nbsp;maek&nbsp;-IBAction&nbsp;//&nbsp;播放&nbsp;-&nbsp;(IBAction)play:(id)sender&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[self.audioPlayer&nbsp;play];}//&nbsp;暂停&nbsp;-&nbsp;(IBAction)pause:(id)sender&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[self.audioPlayer&nbsp;pause];}#pragma&nbsp;mark&nbsp;-播放器播放代理事件&nbsp;-&nbsp;(void)audioPlayerDidFinishPlaying:(AVAudioPlayer&nbsp;*)player&nbsp;successfully:(BOOL)flag&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;播放完成...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放完成...&quot;);}-&nbsp;(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer&nbsp;*)player&nbsp;error:(NSError&nbsp;*)error&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;播放器解码错误...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器解码错误...&quot;);}@end</pre><p><img data-original-src="//upload-images.jianshu.io/upload_images/4982523-dfa152ade6cb5bac.png" data-original-width="640" data-original-height="1136" data-original-format="image/png" data-original-filesize="604847" class="" data-image-index="2" style="cursor: zoom-in; width: 498px; height: 930px;" src="//upload-images.jianshu.io/upload_images/4982523-dfa152ade6cb5bac.png?imageMogr2/auto-orient/strip|imageView2/2/w/640/format/webp" width="498" height="930"/></p><p><br/></p><p>原文链接：https://www.jianshu.com/p/2652f70969ae<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '6496bB16';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

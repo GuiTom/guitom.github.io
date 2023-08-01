@@ -1,0 +1,364 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>锁-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>锁-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>在平时开发中我们经常会使用多线程，多线程为我们带来了很大便利，也提高了程序的执行效率，但同时也带来了<code>Data race</code>，<code>Data race</code>的定义很简单：当至少有两个线程同时访问同一个变量，而且至少其中有一个是写操作时，就发生了<code>Data race</code>。所以这是就要利用一些同步机制来确保数据的准确性，锁就是同步机制中的一种。</p><p><br/></p><h2>怎么检测项目中的<code>Data race</code>？</h2><p><br/></p><p style="text-align:center"><img data-original-src="//upload-images.jianshu.io/upload_images/1457495-7da10e7cbd400978.png" data-original-width="2160" data-original-height="1122" data-original-format="" data-original-filesize="216121" class="" data-image-index="1" src="/upload/image/2019113/162221952515.png" width="620" height="295" style="text-align: center; white-space: normal; cursor: zoom-in; width: 620px; height: 295px;"/></p><p><br/>只需要在设置中勾选<code>Thread Sanitizer</code> 即可，顺便可以勾选<code>Pause on issues</code> 就可以断点到相应的代码。<br/>更多延伸内容请参考Peak君的<a href="http://mrpeak.cn/blog/thread-sanitizer/" target="_blank" rel="nofollow">如何用Xcode8解决多线程问题</a>和<a href="http://www.mrpeak.cn/blog/ios-thread-safety/" target="_blank" rel="nofollow">iOS多线程到底不安全在哪里？</a></p><p><br/></p><p>下面就进入正题简单聊一聊iOS中的锁，以及相关的内容（由于本人能力有限，文中难免有一些遗漏或者错误，请各位看官不吝赐教！谢谢！🙏)</p><h2>简单的性能测试</h2><p>下图是我针对iOS中的锁自己测试得出的，图中数字代表每次加解锁需要消耗的时间，单位为ns。<a href="https://github.com/maligh/ML-Objective-C-Demo/tree/master/LockPerformance" target="_blank" rel="nofollow">代码在这里</a>，代码参考自YY大神的<a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="nofollow">不再安全的 OSSpinLock</a>，基本跟YY大神的图差不多😉，YY大神的单位是μs，应该是1000次的，或者写错了吧~<br/></p><p><img src="/upload/image/202068/163135502613.png" width="746" height="356" style="width: 746px; height: 356px;"/></p><p>LockPerformance.jpg</p><p><br/></p><ul class=" list-paddingleft-2"><li><p>注：运行手机： iphone6s plus ，系统版本：11.2.2，Xcode9.2；数字的单位为ns（得出的具体数值是跑了多次取的均值）。</p></li></ul><p>值得注意的是：1.这个数字仅仅代表每次加解锁的耗时，并不能全方面的代表性能。2.不同的机型和系统，不同的循环次数可能结果会略微有些差异。<br/>但是还是可以看出<code>@synchronized:</code>是表现最差的。</p><p><strong>在具体说这些锁之前，先来说几个概念定义：</strong>(参考<a href="https://www.wikipedia.org/" target="_blank" rel="nofollow">维基百科</a>)</p><ol class=" list-paddingleft-2"><li><p><strong>临界区：</strong>指的是一块对公共资源进行访问的代码，并非一种机制或是算法。</p></li><li><p><strong>自旋锁：</strong>是用于多线程同步的一种锁，线程反复检查锁变量是否可用。由于线程在这一过程中保持执行，因此是一种<code>忙等待</code>。一旦获取了自旋锁，线程会一直保持该锁，直至显式释放自旋锁。 自旋锁避免了进程上下文的调度开销，因此对于线程只会阻塞很短时间的场合是有效的。</p></li><li><p><strong>互斥锁（Mutex）：</strong>是一种用于多线程编程中，防止两条线程同时对同一公共资源（比如全局变量）进行读写的机制。该目的通过将代码切片成一个一个的临界区而达成。</p></li><li><p><strong>读写锁：</strong>是计算机程序的并发控制的一种同步机制，也称“共享-互斥锁”、多读者-单写者锁) 用于解决多线程对公共资源读写问题。读操作可并发重入，写操作是互斥的。 读写锁通常用互斥锁、条件变量、信号量实现。</p></li><li><p><strong>信号量（semaphore）：</strong>是一种更高级的同步机制，<code>互斥锁</code>可以说是semaphore在仅取值0/1时的特例。<code>信号量</code>可以有更多的取值空间，用来实现更加复杂的同步，而不单单是线程间互斥。</p></li><li><p><strong>条件锁：</strong>就是条件变量，当进程的某些资源要求不满足时就进入休眠，也就是锁住了。当资源被分配到了，条件锁打开，进程继续运行。</p></li></ol><h2>互斥锁</h2><p><strong>1.NSLock：</strong>是Foundation框架中以对象形式暴露给开发者的一种锁，（Foundation框架同时提供了<code>NSConditionLock</code>，<code>NSRecursiveLock</code>，<code>NSCondition</code>）<code>NSLock</code>定义如下：</p><pre class="line-numbers  language-objectivec">@protocol&nbsp;NSLocking-&nbsp;(void)lock;
+-&nbsp;(void)unlock;
+@end
+@interface&nbsp;NSLock&nbsp;:&nbsp;NSObject&nbsp;&lt;NSLocking&gt;
+&nbsp;{@private
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;*_priv;}
+-&nbsp;(BOOL)tryLock;
+-&nbsp;(BOOL)lockBeforeDate:(NSDate&nbsp;*)limit;
+@property&nbsp;(nullable,&nbsp;copy)&nbsp;NSString&nbsp;*name&nbsp;
+@end</pre><p>tryLock 和 lock 方法都会请求加锁，唯一不同的是trylock在没有获得锁的时候可以继续做一些任务和处理。lockBeforeDate方法也比较简单，就是在limit时间点之前获得锁，没有拿到返回NO。<br/><strong>实际项目中：</strong>NSLock在<a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking/AFURLSessionManager.m" target="_blank" rel="nofollow">AFNetworking的AFURLSessionManager.m</a>中应用如下：</p><pre class="line-numbers  language-objectivec">-&nbsp;(instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration&nbsp;*)configuration&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;self.lock&nbsp;=&nbsp;[[NSLock&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;self.lock.name&nbsp;=&nbsp;AFURLSessionManagerLockName;
+&nbsp;&nbsp;&nbsp;&nbsp;...
+}
+-&nbsp;(void)setDelegate:(AFURLSessionManagerTaskDelegate&nbsp;*)delegate
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forTask:(NSURLSessionTask&nbsp;*)task{
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;[self.lock&nbsp;lock];
+&nbsp;&nbsp;&nbsp;&nbsp;self.mutableTaskDelegatesKeyedByTaskIdentifier[@(task.taskIdentifier)]&nbsp;=&nbsp;delegate;
+&nbsp;&nbsp;&nbsp;&nbsp;[delegate&nbsp;setupProgressForTask:task];
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;addNotificationObserverForTask:task];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.lock&nbsp;unlock];
+}</pre><p><strong>2.pthread_mutex：</strong><br/><strong>实际项目中：</strong> 在<a href="https://github.com/ibireme/YYKit/blob/3869686e0e560db0b27a7140188fad771e271508/YYKit/Cache/YYMemoryCache.m" target="_blank" rel="nofollow">YYKit的YYMemoryCach中可以看到</a></p><pre class="line-numbers  language-objectivec">-&nbsp;(instancetype)init&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_init(&amp;_lock,&nbsp;NULL);
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;
+}
+&nbsp;&nbsp;&nbsp;&nbsp;
+-&nbsp;(void)_trimToCost:(NSUInteger)costLimit&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;BOOL&nbsp;finish&nbsp;=&nbsp;NO;
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_lock(&amp;_lock);
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(costLimit&nbsp;==&nbsp;0)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_lru&nbsp;removeAll];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(_lru-&gt;_totalCost&nbsp;&lt;=&nbsp;costLimit)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock(&amp;_lock);
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(finish)&nbsp;return;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableArray&nbsp;*holder&nbsp;=&nbsp;[NSMutableArray&nbsp;new];
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(!finish)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(pthread_mutex_trylock(&amp;_lock)&nbsp;==&nbsp;0)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_lru-&gt;_totalCost&nbsp;&gt;&nbsp;costLimit)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_YYLinkedMapNode&nbsp;*node&nbsp;=&nbsp;[_lru&nbsp;removeTailNode];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(node)&nbsp;[holder&nbsp;addObject:node];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pthread_mutex_unlock(&amp;_lock);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usleep(10&nbsp;*&nbsp;1000);&nbsp;//10&nbsp;ms
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;...
+}</pre><p><strong>3.@synchronized:</strong><br/><strong>实际项目中：</strong>AFNetworking中 isNetworkActivityOccurring属性的getter方法</p><pre class="line-numbers  language-objectivec">-&nbsp;(BOOL)isNetworkActivityOccurring&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;@synchronized(self)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.activityCount&nbsp;&gt;&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p>关于 @synchronized推荐扩展阅读 &nbsp;<a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/" target="_blank" rel="nofollow">关于 @synchronized，这儿比你想知道的还要多</a></p><h2>自旋锁</h2><p><strong>1.OSSpinLock:</strong></p><pre class="line-numbers  language-csharp">OSSpinLock&nbsp;lock&nbsp;=&nbsp;OS_SPINLOCK_INIT;OSSpinLockLock(&amp;lock);
+...
+OSSpinLockUnlock(&amp;lock);</pre><p>上面是OSSpinLock使用方式，编译会报警告，已经废弃了，OSSpinLock大家也已经不再用它了，因为它在某一些场景下已经不安全了，可以参考 YY大神的<a href="https://blog.ibireme.com/2016/01/16/spinlock_is_unsafe_in_ios/" target="_blank" rel="nofollow">不再安全的 OSSpinLock</a>，在Protocol Buffers项目中你可以看到这样的注释，大家已经用新的方案替换了。</p><pre class="line-numbers  language-cpp">&nbsp;//&nbsp;NOTE:&nbsp;OSSpinLock&nbsp;may&nbsp;seem&nbsp;like&nbsp;a&nbsp;good&nbsp;fit&nbsp;here&nbsp;but&nbsp;Apple&nbsp;engineers&nbsp;have
+&nbsp;&nbsp;//&nbsp;pointed&nbsp;out&nbsp;that&nbsp;they&nbsp;are&nbsp;vulnerable&nbsp;to&nbsp;live&nbsp;locking&nbsp;on&nbsp;iOS&nbsp;in&nbsp;cases&nbsp;of
+&nbsp;&nbsp;//&nbsp;priority&nbsp;inversion:
+&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;http://mjtsai.com/blog/2015/12/16/osspinlock-is-unsafe/
+&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;https://lists.swift.org/pipermail/swift-dev/Week-of-Mon-20151214/000372.html</pre><p><strong>os_unfair_lock:</strong>(互斥锁)<br/>os_unfair_lock 是苹果官方推荐的替换OSSpinLock的方案，但是它在iOS10.0以上的系统才可以调用。os_unfair_lock是一种互斥锁，它不会向自旋锁那样忙等，而是等待线程会休眠。</p><pre class="line-numbers  language-cpp">os_unfair_lock_t&nbsp;unfairLock;unfairLock&nbsp;=&nbsp;&amp;(OS_UNFAIR_LOCK_INIT);
+os_unfair_lock_lock(unfairLock);
+os_unfair_lock_unlock(unfairLock);</pre><h2>读写锁</h2><p>上文有说到，读写锁又称共享-互斥锁，<strong>pthread_rwlock，它是像dispatch_barrier_async一样，可以提供多读单写功能的 posix API。</strong></p><pre class="line-numbers  language-cpp">//加读锁pthread_rwlock_rdlock(&amp;rwlock);
+//解锁pthread_rwlock_unlock(&amp;rwlock);
+//加写锁pthread_rwlock_wrlock(&amp;rwlock);
+//解锁pthread_rwlock_unlock(&amp;rwlock);</pre><h2>递归锁</h2><p>递归锁有一个特点，就是同一个线程可以加锁N次而不会引发死锁。<br/><strong>1.NSRecursiveLock:</strong><br/>NSRecursiveLock在<a href="https://github.com/ibireme/YYKit/blob/4e1bd1cfcdb3331244b219cbd37cc9b1ccb62b7a/YYKit/Image/YYWebImageOperation.m" target="_blank" rel="nofollow">YYKit中YYWebImageOperation.m</a>中有用到：</p><pre class="line-numbers  language-csharp">_lock&nbsp;=&nbsp;[NSRecursiveLock&nbsp;new];
+-&nbsp;(void)dealloc&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[_lock&nbsp;lock];
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;...
+&nbsp;&nbsp;&nbsp;&nbsp;[_lock&nbsp;unlock];
+}</pre><p><strong>2.pthread_mutex(recursive):</strong><br/>pthread_mutex锁也支持递归，只需要设置PTHREAD_MUTEX_RECURSIVE即可</p><p>（实际上，NSLock,NSRecursiveLock,NSCondition是对pthread_mutex_t 和pthread_cond_t 的封装）</p><pre class="line-numbers  language-csharp">pthread_mutex_t&nbsp;lock;
+pthread_mutexattr_t&nbsp;attr;
+pthread_mutexattr_init(&amp;attr);
+pthread_mutexattr_settype(&amp;attr,&nbsp;PTHREAD_MUTEX_RECURSIVE);
+pthread_mutex_init(&amp;lock,&nbsp;&amp;attr);
+pthread_mutexattr_destroy(&amp;attr);
+pthread_mutex_lock(&amp;lock);
+pthread_mutex_unlock(&amp;lock);</pre><h2>条件锁</h2><p><strong>1. NSCondition:</strong><br/><strong>定义：</strong></p><pre class="line-numbers  language-objectivec">@interface&nbsp;NSCondition&nbsp;:&nbsp;NSObject&nbsp;&lt;NSLocking&gt;&nbsp;
+{
+@private
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;*_priv;
+}
+-&nbsp;(void)wait;
+-&nbsp;(BOOL)waitUntilDate:(NSDate&nbsp;*)limit;
+-&nbsp;(void)signal;
+-&nbsp;(void)broadcast;</pre><p>遵循NSLocking协议，使用的时候同样是lock,unlock加解锁，wait是傻等，waitUntilDate:方法是等一会，都会阻塞掉线程，signal是唤起一个在等待的线程，broadcast是广播全部唤起。</p><pre class="line-numbers  language-csharp">NSCondition&nbsp;*lock&nbsp;=&nbsp;[[NSCondition&nbsp;alloc]&nbsp;init];//Son&nbsp;线程dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,&nbsp;0),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;lock];
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(No&nbsp;Money)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;wait];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;The&nbsp;money&nbsp;has&nbsp;been&nbsp;used&nbsp;up.&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;unlock];});
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;//Father线程dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,&nbsp;0),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;lock];
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;Work&nbsp;hard&nbsp;to&nbsp;make&nbsp;money.&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;signal];
+&nbsp;&nbsp;&nbsp;&nbsp;[lock&nbsp;unlock];
+});</pre><p><span style="color: rgb(63, 63, 63);">（实际上，NSLock,NSRecursiveLock,NSCondition是对pthread_mutex_t 和pthread_cond_t 的封装，而NSConditionLock是对NSCondition的封装)</span></p><p><strong>2.NSConditionLock:</strong><br/><strong>定义：</strong></p><pre class="line-numbers  language-objectivec">@interface&nbsp;NSConditionLock&nbsp;:&nbsp;NSObject&nbsp;&lt;NSLocking&gt;&nbsp;{
+@private
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;*_priv;
+}
+-&nbsp;(instancetype)initWithCondition:(NSInteger)condition
+@property&nbsp;(readonly)&nbsp;NSInteger&nbsp;condition;
+-&nbsp;(void)lockWhenCondition:(NSInteger)condition;
+-&nbsp;(BOOL)tryLock;
+-&nbsp;(BOOL)tryLockWhenCondition:(NSInteger)condition;
+-&nbsp;(void)unlockWithCondition:(NSInteger)condition;
+-&nbsp;(BOOL)lockBeforeDate:(NSDate&nbsp;*)limit;
+-&nbsp;(BOOL)lockWhenCondition:(NSInteger)condition&nbsp;beforeDate:(NSDate&nbsp;*)limit;</pre><p>很简单，方法很清晰，基本同上。</p><h2>信号量</h2><p><strong>dispatch_semaphore:</strong><br/>dispatch_semaphore在YYKit中的<a href="https://github.com/ibireme/YYKit/blob/3869686e0e560db0b27a7140188fad771e271508/YYKit/Utility/YYThreadSafeArray.m" target="_blank" rel="nofollow">YYThreadSafeArray.m</a>有所应用，YY大神有这样一句注释：</p><pre class="line-numbers  language-cpp">@discussion&nbsp;Generally,&nbsp;access&nbsp;performance&nbsp;is&nbsp;lower&nbsp;than&nbsp;NSMutableArray,&nbsp;
+&nbsp;but&nbsp;higher&nbsp;than&nbsp;using&nbsp;@synchronized,&nbsp;NSLock,&nbsp;or&nbsp;pthread_mutex_t.</pre><pre class="line-numbers  language-cpp">#define&nbsp;LOCK(...)&nbsp;
+dispatch_semaphore_wait(_lock,&nbsp;DISPATCH_TIME_FOREVER);
+
+dispatch_semaphore_signal(_lock);</pre><p>更多信号量的介绍见下节</p><h2>总结：</h2><p>其实本文写的都是一些再基础不过的内容，在平时阅读一些开源项目的时候经常会遇到一些保持线程同步的方式，因为场景不同可能选型不同，这篇就做一下简单的记录吧~我相信读完这篇你应该能根据不同场景选择合适的锁了吧、能够道出<code>自旋锁</code>和<code>互斥锁</code>的区别了吧。</p><p><br/>作者：SuperMario_Nil<br/>链接：https://www.jianshu.com/p/b1edc6b0937a<br/>来源：简书<br/>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = 'C5C1C965';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>红黑树-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>红黑树-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p><strong>为什么要有红黑树这种数据结构？&nbsp;&nbsp;</strong></p><p>学过二叉查找树的同学都知道，普通的二叉查找树在极端情况下可退化成链表，此时的增删查O(n)效率都会比较低下。为了避免这种情况，就出现了一些自平衡的查找树，比如 AVL。</p><p>ALV树是一种严格按照定义来实现的平衡二叉查找树，所以它查找的效率非常稳定，为O(log n),由于其严格按照左右子树高度差不大于1的规则，插入和删除操作中需要大量且复杂的操作来保持ALV树的平衡（左旋和右旋），因此ALV树适用于大量查询，少量插入和删除的场景中。</p><p>现在假设有这样一种场景：大量查询，插入和删除，使用ALV树就不太合适了，因为ALV树大量的插入和删除会非常耗时间，那么我们是否可以降低ALV树对平衡性的要求从而达到快速的插入和删除呢？</p><p>答案肯定是有的，红黑树这种数据结构就应运而生了（因为ALV树是高度平衡的，所以查找起来肯定比红黑树快，但是红黑树在插入和删除方面的性能就远远不是ALV树所能比的了）。</p><p><strong>红黑树的性质</strong></p><p>红黑树通过如下的性质定义实现自平衡：</p><p>1.节点是红色或黑色。<br/>2.根是黑色。<br/>3.所有叶子都是黑色（叶子是NIL节点）。<br/>4.每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）<br/>5.从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点（简称黑高）。<br/></p><p>有了上面的几个性质作为限制，即可避免二叉查找树退化成单链表的情况。但是，仅仅避免这种情况还不够，这里还要考虑某个节点到其每个叶子节点路径长度的问题。如果某些路径长度过长，那么，在对这些路径上的及诶单进行增删查操作时，效率也会大大降低。这个时候性质4和性质5用途就凸显了，有了这两个性质作为约束，即可保证任意节点到其每个叶子节点路径最长不会超过最短路径的2倍。</p><p>当某条路径最短时，这条路径必然都是由黑色节点构成。当某条路径长度最长时，这条路径必然是由红色和黑色节点相间构成（性质4限定了不能出现两个连续的红色节点）。而性质5又限定了从任一节点到其每个叶子节点的所有路径必须包含相同数量的黑色节点。此时，在路径最长的情况下，路径上红色节点数量 = 黑色节点数量。该路径长度为两倍黑色节点数量，也就是最短路径长度的2倍。举例说明一下，请看下图：</p><p style="text-align:center"><img src="/upload/image/20191024/152346488304.png" width="711" height="225" style="width: 711px; height: 225px;"/></p><p><strong>红黑树的基本操作之旋转</strong></p><p>&nbsp;旋转操作分为左旋和右旋，左旋是将某个节点旋转为其右孩子的左孩子，而右旋是节点旋转为其左孩子的右孩子。这话听起来有点绕，所以还是请看下图：</p><p><br/></p><p>上图包含了左旋和右旋的示意图，这里以右旋为例进行说明，右旋节点 M 的步骤如下：</p><p>将节点 M 的左孩子引用指向节点 E 的右孩子</p><p>将节点 E 的右孩子引用指向节点 M，完成旋转</p><p style="text-align: center;"><img src="/upload/image/20191024/152513146281.png"/></p><p>上图包含了左旋和右旋的示意图，这里以右旋为例进行说明，右旋节点 M 的步骤如下：</p><p>将节点 M 的左孩子引用指向节点 E 的右孩子</p><p>将节点 E 的右孩子引用指向节点 M，完成旋转</p><p><strong>红黑树的基本操作之添加元素</strong></p><p>&nbsp;　红黑树的插入过程和二叉查找树插入过程基本类似，不同的地方在于，红黑树插入新节点后，需要进行调整，以满足红黑树的性质。性质1规定红黑树节点的颜色要么是红色要么是黑色，那么在插入新节点时，这个节点应该是红色还是黑色呢？答案是红色，原因也不难理解。如果插入的节点是黑色，那么这个节点所在路径比其他路径多出一个黑色节点，这个调整起来会比较麻烦（参考红黑树的删除操作，就知道为啥多一个或少一个黑色节点时，调整起来这么麻烦了）。如果插入的节点是红色，此时所有路径上的黑色节点数量不变，仅可能会出现两个连续的红色节点的情况。这种情况下，通过变色和旋转进行调整即可，比之前的简单多了。</p><p>　现在我们来分析一下新增的节点（红色）插入之后可能面临的几种情况，以及他们的处理措施：</p><p>1.插入的节点为根节点</p><p>　新插入的红色节点变成黑色节点，满足根节点为黑色节点的要求</p><p>2.父亲节点为黑色节点</p><p>　这个时候不需要进行任何调整操作，此时的树仍然是一颗标准的红黑树</p><p>3.父亲节点为红色节点的情况下，叔叔节点为红色节点（不用考虑左右）</p><p>　解决方案：将叔叔和父亲节点改为黑色，爷爷节点改为红色，然后又将爷爷节点当作插入节点看待，一直进行上面的操作，直到当前节点为根节点，然后将根节点变成黑色</p><p style="text-align: center;"><img src="/upload/image/20191024/152608795851.png" width="725" height="225" style="width: 725px; height: 225px;"/></p><p>4）父亲节点为爷爷节点的右孩子，新插入节点为父节点的左孩子（右左）</p><p>　解决方案：对父亲节点进行一次右旋，然后就变成了情况2，按照情况2再进行处理</p><p style="text-align: center;"><span style="color: rgb(255, 102, 0);"><span style="color: rgb(0, 0, 0);"><img src="/upload/image/20191024/152732868113.png" alt="" style="border: 0px; max-width: 800px; height: auto;"/></span></span></p><p><strong>红黑树的基本操作之删除元素</strong></p><hr style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 13px; white-space: normal; background-color: rgb(40, 85, 126);"/><p>&nbsp;　相较于插入操作，红黑树的删除操作则要更为复杂一些。删除操作首先要确定待删除节点有几个孩子，如果有两个孩子，不能直接删除该节点。而是要先找到该节点的前驱（该节点左子树中最大的节点）或者后继（该节点右子树中最小的节点），然后将前驱或者后继的值复制到要删除的节点中，最后再将前驱或后继删除。由于前驱和后继至多只有一个孩子节点，这样我们就把原来要删除的节点有两个孩子的问题转化为只有一个孩子节点的问题，问题被简化了一些。</p><p>删除一个节点有以下四种情况：</p><p>　1.删除的节点没有孩子</p><p>　2.删除的节点只有左子树</p><p>&nbsp; &nbsp;3.删除的节点只有右子树</p><p>&nbsp; &nbsp;*4.删除的节点拥有左子树和右子树</p><p>　其实只有上面前三种情况，对于第四种情况，可以找到待删除节点的直接后继节点，用这个节点的值替代待删除节点，接着情况转变为删除这个直接后继节点，情况也变为前三种之一。</p><p>&nbsp;</p><p>1.删除的节点只有左子树或只有右子树</p><p><img src="/upload/image/20191024/154217991960.png" width="248" height="167" style="width: 248px; height: 167px;"/>或者<img src="/upload/image/20191024/154332914238.png" width="281" height="169" style="width: 281px; height: 169px;"/></p><p>只有上面两种情况会存在于红黑树中，直接用DL/DR的元素值代替D的元素，再把DL/DR直接删去就好。</p><p>2.删除的节点没有孩子</p><p>1）待删除节点是红色的，直接删去这个节点。</p><p>2）父节点P是红色节点</p><p>　解决方案：把P节点染成黑色，兄弟节点染成红色，删除节点D。</p><p><img src="/upload/image/20191024/154416535884.png" width="723" height="156" style="width: 723px; height: 156px;"/></p><p><br/></p><p>3）兄弟节点S是红色节点</p><p><img src="/upload/image/20191024/154446818886.png"/>或者<img src="/upload/image/20191024/154525785248.png"/></p><p>解决方案：把P染成红色，S染成黑色，然后以P为轴做相应的旋转操作（D为P的左子树则左旋，否则右旋），变成了情况2（父节点为红色），按照情况2进行操作。</p><p><img src="/upload/image/20191024/154534181055.png" width="725" height="165" style="width: 725px; height: 165px;"/></p><p>4）节点D的远亲侄子为红色节点的情况（父节点P可红可黑）</p><p><img src="/upload/image/20191024/154608712967.png"/></p><p>解决方案：交换P和S的颜色，然后把远亲侄子节点SR/SL设置为黑色，再已P为轴做相应的旋转操作（D为P的左子树则左旋，否则右旋），删除节点D。</p><p><img src="/upload/image/20191024/154625922979.png" width="722" height="141" style="width: 722px; height: 141px;"/></p><p>5）节点D的近亲侄子为红色节点的情况（父节点P可红可黑）</p><p><img src="/upload/image/20191024/154701554252.png" width="592" height="168" style="width: 592px; height: 168px;"/></p><p>解决方案：把S染成红色，把近亲侄子节点SR/SL染成黑色，然后以节点S为轴做相应的旋转操作（D为P的左子树则右旋，否则左旋），变成了情况4，按照情况4进行操作。</p><p><img src="/upload/image/20191024/154727165071.png" width="730" height="158" style="width: 730px; height: 158px;"/></p><p>6）节点D，P，S均为黑色节点</p><p><img src="/upload/image/20191024/154804455685.png"/></p><p>解决方案：把D删去，然后把节点S染成红色。</p><p>　　①从节点P往上依然是全黑的情况</p><p><img src="/upload/image/20191024/154822890097.png" width="725" height="119" style="width: 725px; height: 119px;"/></p><p>②从节点P往上是其他情况</p><p><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 13px; background-color: rgb(40, 85, 126);"><img src="/upload/image/2019113/174734881319.png" width="734" height="132" style="width: 734px; height: 132px;"/></span></p><p><a href="https://www.cnblogs.com/panda28/p/11132462.html" target="_blank">原文地址</a>:<a href="https://www.cnblogs.com/panda28/p/11132462.html">https://www.cnblogs.com/panda28/p/11132462.html</a></p><p><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'b1926855';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

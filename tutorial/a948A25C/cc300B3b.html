@@ -1,0 +1,243 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>GCD经典面试题-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>GCD经典面试题-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p><strong><span style="font-size: 18px;">下面这段代码会输出什么？</span></strong></p></li></ol><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45); background-color: rgb(31, 32, 41); white-space: normal;">/**</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);">&nbsp;</span>队列死锁的例子</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);">&nbsp;</span>向当前串行队列添加同步任务会造成死锁</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp;</span>*/</p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(65, 161, 192); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">-(</span><span class="s3" style="color: rgb(215, 0, 143);">void</span><span class="s2" style="color: rgb(225, 226, 231);">)</span>deadLock2<span class="s2" style="color: rgb(225, 226, 231);">{</span></p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(211, 35, 46); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span><span class="s4" style="color: rgb(37, 144, 141);">NSLog</span><span class="s2" style="color: rgb(225, 226, 231);">(</span>@&quot;执行任务1&quot;<span class="s2" style="color: rgb(225, 226, 231);">);</span></p><p class="p5" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(37, 144, 141); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>dispatch_sync<span class="s2" style="color: rgb(225, 226, 231);">(</span>dispatch_get_main_queue<span class="s2" style="color: rgb(225, 226, 231);">(), ^{</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s4" style="color: rgb(37, 144, 141);">NSLog</span>(<span class="s5" style="color: rgb(211, 35, 46);">@&quot;执行任务2&quot;</span>);</p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>});</p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(211, 35, 46); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span><span class="s4" style="color: rgb(37, 144, 141);">NSLog</span><span class="s2" style="color: rgb(225, 226, 231);">(</span>@&quot;执行任务3&quot;<span class="s2" style="color: rgb(225, 226, 231);">);</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p>答案:</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: Menlo; color: rgb(150, 147, 170); background-color: rgb(31, 32, 41); white-space: normal;"><strong>2020-06-03 16:28:06.189907+0800 CCTutorial[2278:135329] 执行任务1</strong></p><p><span style="font-family: &quot;andale mono&quot;;"><br/></span></p><p><span style="font-family: &quot;andale mono&quot;;">因为执行到 dispatch_sync 的时候发生了死锁</span></p><p><span style="font-family: &quot;andale mono&quot;;">同理，下面这段代码也会发生死锁，你知道是为什么吗？</span></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45); background-color: rgb(31, 32, 41); white-space: normal;">/**</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);">&nbsp;</span>队列死锁的例子</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);">&nbsp;</span>向当前串行队列添加同步任务会造成死锁</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp;</span>*/</p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(65, 161, 192); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">-(</span><span class="s3" style="color: rgb(215, 0, 143);">void</span><span class="s2" style="color: rgb(225, 226, 231);">)</span>deadLock1<span class="s2" style="color: rgb(225, 226, 231);">{</span></p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(37, 144, 141); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>dispatch_queue_t<span class="s2" style="color: rgb(225, 226, 231);"> queue = </span>dispatch_queue_create<span class="s2" style="color: rgb(225, 226, 231);">(</span><span class="s4" style="color: rgb(211, 35, 46);">&quot;queue1&quot;</span><span class="s2" style="color: rgb(225, 226, 231);">, </span><span class="s5" style="color: rgb(175, 93, 56);">DISPATCH_QUEUE_SERIAL</span><span class="s2" style="color: rgb(225, 226, 231);">);</span></p><p class="p5" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(211, 35, 46); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">NSLog</span><span class="s2" style="color: rgb(225, 226, 231);">(</span>@&quot;执行任务1&quot;<span class="s2" style="color: rgb(225, 226, 231);">);</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">dispatch_async</span>(queue, ^{</p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">NSLog</span>(<span class="s4" style="color: rgb(211, 35, 46);">@&quot;执行任务2&quot;</span>);</p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">dispatch_sync</span>(queue, ^{<span class="s7" style="color: rgb(69, 187, 62);">//这里发生死锁</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">NSLog</span>(<span class="s4" style="color: rgb(211, 35, 46);">@&quot;执行任务3&quot;</span>);<span class="s7" style="color: rgb(69, 187, 62);">//这个任务会无法执行</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>});</p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">NSLog</span>(<span class="s4" style="color: rgb(211, 35, 46);">@&quot;执行任务4&quot;</span>);</p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>});</p><p class="p5" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(211, 35, 46); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span><span class="s6" style="color: rgb(37, 144, 141);">NSLog</span><span class="s2" style="color: rgb(225, 226, 231);">(</span>@&quot;执行任务5&quot;<span class="s2" style="color: rgb(225, 226, 231);">);</span></p><p class="p6" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = 'cc300B3b';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

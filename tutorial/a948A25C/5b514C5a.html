@@ -1,0 +1,365 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>方法交换-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>方法交换-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2>1. 原理与用法</h2><h4>原理</h4><p>Method Swizzing是发生在运行时的，主要用于在运行时将两个Method进行交换，我们可以将Method Swizzling代码写到任何地方，但是只有在这段Method Swilzzling代码执行完毕之后互换才起作用。</p><p><img src="/upload/image/20191125/134633444041.png" width="735" height="406" style="width: 735px; height: 406px;"/></p><h4>用法</h4><p>先给要替换的方法的类添加一个Category，然后在Category中的<code>+(void)load</code>方法中添加Method Swizzling方法，我们用来替换的方法也写在这个Category中。</p><p>由于load类方法是程序运行时这个类被加载到内存中就调用的一个方法，执行比较早，并且不需要我们手动调用。</p><h4>注意要点</h4><ul class=" list-paddingleft-2"><li><p>Swizzling应该总在+load中执行</p></li><li><p>Swizzling应该总是在dispatch_once中执行</p></li><li><p>Swizzling在+load中执行时，不要调用[super load]。如果多次调用了[super load]，可能会出现“Swizzle无效”的假象。</p></li><li><p>为了避免Swizzling的代码被重复执行，我们可以通过GCD的dispatch_once函数来解决，利用dispatch_once函数内代码只会执行一次的特性。</p></li></ul><h2>2. Method Swizzling相关的API</h2><ul class=" list-paddingleft-2"><li><p>方案1</p></li></ul><pre class="line-numbers  language-php">class_getInstanceMethod(Class&nbsp;_Nullable&nbsp;cls,&nbsp;SEL&nbsp;_Nonnull&nbsp;name)</pre><pre class="line-numbers  language-undefined">method_getImplementation(Method&nbsp;_Nonnull&nbsp;m)</pre><pre class="line-numbers  language-cpp">class_addMethod(Class&nbsp;_Nullable&nbsp;cls,&nbsp;SEL&nbsp;_Nonnull&nbsp;name,&nbsp;IMP&nbsp;_Nonnull&nbsp;imp,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;char&nbsp;*&nbsp;_Nullable&nbsp;types)</pre><pre class="line-numbers  language-cpp">class_replaceMethod(Class&nbsp;_Nullable&nbsp;cls,&nbsp;SEL&nbsp;_Nonnull&nbsp;name,&nbsp;IMP&nbsp;_Nonnull&nbsp;imp,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;char&nbsp;*&nbsp;_Nullable&nbsp;types)</pre><ul class=" list-paddingleft-2"><li><p>方案2</p></li></ul><pre class="line-numbers  language-undefined">method_exchangeImplementations(Method&nbsp;_Nonnull&nbsp;m1,&nbsp;Method&nbsp;_Nonnull&nbsp;m2)</pre><h2>3. 应用场景与实践</h2><h4>3.1 统计VC加载次数并打印</h4><ul class=" list-paddingleft-2"><li><p>UIViewController+Logging.m</p></li></ul><pre class="line-numbers  language-kotlin">#import&nbsp;&quot;UIViewController+Logging.h&quot;
+#import&nbsp;&lt;objc/runtime.h&gt;
+
+@implementation&nbsp;UIViewController&nbsp;(Logging)
+
++&nbsp;(void)load
+{
+&nbsp;&nbsp;&nbsp;&nbsp;swizzleMethod([self&nbsp;class],&nbsp;@selector(viewDidAppear:),&nbsp;@selector(swizzled_viewDidAppear:));
+}
+
+-&nbsp;(void)swizzled_viewDidAppear:(BOOL)animated
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;call&nbsp;original&nbsp;implementation
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;swizzled_viewDidAppear:animated];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Logging
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;NSStringFromClass([self&nbsp;class]));
+}
+
+void&nbsp;swizzleMethod(Class&nbsp;class,&nbsp;SEL&nbsp;originalSelector,&nbsp;SEL&nbsp;swizzledSelector){
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;method&nbsp;might&nbsp;not&nbsp;exist&nbsp;in&nbsp;the&nbsp;class,&nbsp;but&nbsp;in&nbsp;its&nbsp;superclass
+
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;originalMethod&nbsp;=&nbsp;class_getInstanceMethod(class,&nbsp;originalSelector);
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;swizzledMethod&nbsp;=&nbsp;class_getInstanceMethod(class,&nbsp;swizzledSelector);
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;class_addMethod&nbsp;will&nbsp;fail&nbsp;if&nbsp;original&nbsp;method&nbsp;already&nbsp;exists
+&nbsp;&nbsp;&nbsp;&nbsp;BOOL&nbsp;didAddMethod&nbsp;=&nbsp;class_addMethod(class,&nbsp;originalSelector,&nbsp;method_getImplementation(swizzledMethod),&nbsp;method_getTypeEncoding(swizzledMethod));
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;method&nbsp;doesn’t&nbsp;exist&nbsp;and&nbsp;we&nbsp;just&nbsp;added&nbsp;one
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(didAddMethod)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_replaceMethod(class,&nbsp;swizzledSelector,&nbsp;method_getImplementation(originalMethod),&nbsp;method_getTypeEncoding(originalMethod));
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method_exchangeImplementations(originalMethod,&nbsp;swizzledMethod);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+}</pre><h4>3.2 防止UI控件短时间多次激活事件</h4><blockquote><p>需求</p></blockquote><p>当前项目写好的按钮，还没有全局地控制他们短时间内不可连续点击（也许有过零星地在某些网络请求接口之前做过一些控制）。现在来了新需求：本APP所有的按钮1秒内不可连续点击。你怎么做？一个个改？这种低效率低维护度肯定是不妥的。</p><blockquote><p>方案</p></blockquote><p>给按钮添加分类，并添加一个点击事件间隔的属性，执行点击事件的时候判断一下是否时间到了，如果时间不到，那么拦截点击事件。</p><p>怎么拦截点击事件呢？其实点击事件在runtime里面是发送消息，我们可以把要发送的消息的SEL 和自己写的SEL交换一下，然后在自己写的SEL里面判断是否执行点击事件。</p><blockquote><p>实践</p></blockquote><p>UIButton是UIControl的子类，因而根据UIControl新建一个分类即可</p><ul class=" list-paddingleft-2"><li><p>UIControl+Limit.m</p></li></ul><pre class="line-numbers  language-objectivec">#import&nbsp;&quot;UIControl+Limit.h&quot;
+#import&nbsp;&lt;objc/runtime.h&gt;
+static&nbsp;const&nbsp;char&nbsp;*UIControl_acceptEventInterval=&quot;UIControl_acceptEventInterval&quot;;
+static&nbsp;const&nbsp;char&nbsp;*UIControl_ignoreEvent=&quot;UIControl_ignoreEvent&quot;;
+@implementation&nbsp;UIControl&nbsp;(Limit)
+#pragma&nbsp;mark&nbsp;-&nbsp;acceptEventInterval
+-&nbsp;(void)setAcceptEventInterval:(NSTimeInterval)acceptEventInterval
+{
+&nbsp;&nbsp;&nbsp;&nbsp;objc_setAssociatedObject(self,UIControl_acceptEventInterval,&nbsp;@(acceptEventInterval),&nbsp;OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+-(NSTimeInterval)acceptEventInterval&nbsp;
+{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[objc_getAssociatedObject(self,UIControl_acceptEventInterval)&nbsp;doubleValue];
+}
+#pragma&nbsp;mark&nbsp;-&nbsp;ignoreEvent
+-(void)setIgnoreEvent:(BOOL)ignoreEvent{
+&nbsp;&nbsp;&nbsp;&nbsp;objc_setAssociatedObject(self,UIControl_ignoreEvent,&nbsp;@(ignoreEvent),&nbsp;OBJC_ASSOCIATION_ASSIGN);
+}
+-(BOOL)ignoreEvent{
+&nbsp;&nbsp;return&nbsp;[objc_getAssociatedObject(self,UIControl_ignoreEvent)&nbsp;boolValue];
+}
+#pragma&nbsp;mark&nbsp;-&nbsp;Swizzling
++(void)load&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;a&nbsp;=&nbsp;class_getInstanceMethod(self,@selector(sendAction:to:forEvent:));
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;b&nbsp;=&nbsp;class_getInstanceMethod(self,@selector(swizzled_sendAction:to:forEvent:));
+&nbsp;&nbsp;&nbsp;&nbsp;method_exchangeImplementations(a,&nbsp;b);//交换方法
+}
+-&nbsp;(void)swizzled_sendAction:(SEL)action&nbsp;to:(id)target&nbsp;forEvent:(UIEvent*)event{
+&nbsp;&nbsp;&nbsp;&nbsp;if(self.ignoreEvent){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;btnAction&nbsp;is&nbsp;intercepted&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;}
+&nbsp;&nbsp;&nbsp;&nbsp;if(self.acceptEventInterval&gt;0){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.ignoreEvent=YES;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;performSelector:@selector(setIgnoreEventWithNo)&nbsp;&nbsp;withObject:nil&nbsp;afterDelay:self.acceptEventInterval];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;swizzled_sendAction:action&nbsp;to:target&nbsp;forEvent:event];}-(void)setIgnoreEventWithNo{
+&nbsp;&nbsp;&nbsp;&nbsp;self.ignoreEvent=NO;
+}
+@end</pre><ul class=" list-paddingleft-2"><li><p>ViewController.m</p></li></ul><pre class="brush:cpp;toolbar:false;">-(void)setupSubViews{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;UIButton&nbsp;*btn&nbsp;=&nbsp;[UIButton&nbsp;new];
+&nbsp;&nbsp;&nbsp;&nbsp;btn&nbsp;=[[UIButton&nbsp;alloc]initWithFrame:CGRectMake(100,100,100,40)];
+&nbsp;&nbsp;&nbsp;&nbsp;[btn&nbsp;setTitle:@&quot;btnTest&quot;forState:UIControlStateNormal];
+&nbsp;&nbsp;&nbsp;&nbsp;[btn&nbsp;setTitleColor:[UIColor&nbsp;redColor]forState:UIControlStateNormal];
+&nbsp;&nbsp;&nbsp;&nbsp;btn.acceptEventInterval&nbsp;=&nbsp;3;
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:btn];
+&nbsp;&nbsp;&nbsp;&nbsp;[btn&nbsp;addTarget:self&nbsp;action:@selector(btnAction)forControlEvents:UIControlEventTouchUpInside];
+&nbsp;}
+-&nbsp;(void)btnAction{
+&nbsp;&nbsp;NSLog(@&quot;btnAction&nbsp;is&nbsp;executed&quot;);
+}</pre><h4>3.3 防奔溃处理：数组越界问题</h4><blockquote><p>需求：</p></blockquote><p>在实际工程中，可能在一些地方（比如取出网络响应数据）进行了数组NSArray取数据的操作，而且以前的小哥们也没有进行防越界处理。测试方一不小心也没有测出数组越界情况下奔溃（因为返回的数据是动态的），结果以为没有问题了，其实还隐藏的生产事故的风险。</p><p>这时APP负责人说了，即使APP即使不能工作也不能Crash，这是最低的底线。那么这对数组越界的情况下的奔溃，你有没有办法拦截？</p><p>思路：对NSArray的<code>objectAtIndex:</code>方法进行Swizzling，替换一个有处理逻辑的方法。但是，这时候还是有个问题，就是类簇的Swizzling没有那么简单。</p><blockquote><p>类簇：</p></blockquote><p>在iOS中NSNumber、NSArray、NSDictionary等这些类都是类簇(Class Clusters)，一个NSArray的实现可能由多个类组成。所以如果想对NSArray进行Swizzling，必须获取到其<strong>“真身”</strong>进行Swizzling，直接对NSArray进行操作是无效的。这是因为Method Swizzling对NSArray这些的类簇是不起作用的。</p><p>因为这些类簇类，其实是一种抽象工厂的设计模式。抽象工厂内部有很多其它继承自当前类的子类，抽象工厂类会根据不同情况，创建不同的抽象对象来进行使用。例如我们调用NSArray的<code>objectAtIndex:</code>方法，这个类会在方法内部判断，内部创建不同抽象类进行操作。</p><p>所以如果我们对NSArray类进行Swizzling操作其实只是对<strong>父类</strong>进行了操作，在NSArray内部会创建其他子类来执行操作，真正执行Swizzling操作的并不是NSArray自身，所以我们应该对其“真身”进行操作。</p><p>下面列举了NSArray和NSDictionary本类的类名，可以通过Runtime函数取出本类：</p><table><thead><tr class="firstRow"><th>类名</th><th>真身</th></tr></thead><tbody><tr><td>NSArray</td><td>__NSArrayI</td></tr><tr><td>NSMutableArray</td><td>__NSArrayM</td></tr><tr><td>NSDictionary</td><td>__NSDictionaryI</td></tr><tr><td>NSMutableDictionary</td><td>__NSDictionaryM</td></tr></tbody></table><blockquote><p>实践</p></blockquote><p>好啦，新建一个分类，直接用代码实现，看看怎么取出真身的：</p><ul class=" list-paddingleft-2"><li><p>NSArray+CrashHandle.m</p></li></ul><pre class="line-numbers  language-objectivec">@implementation&nbsp;NSArray&nbsp;(CrashHandle)
+//&nbsp;Swizzling核心代码
+//&nbsp;需要注意的是，好多同学反馈下面代码不起作用，造成这个问题的原因大多都是其调用了super&nbsp;load方法。在下面的load方法中，不应该调用父类的load方法。
++&nbsp;(void)load&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;fromMethod&nbsp;=&nbsp;class_getInstanceMethod(objc_getClass(&quot;__NSArrayI&quot;),&nbsp;@selector(objectAtIndex:));
+&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;toMethod&nbsp;=&nbsp;class_getInstanceMethod(objc_getClass(&quot;__NSArrayI&quot;),&nbsp;@selector(cm_objectAtIndex:));
+&nbsp;&nbsp;&nbsp;&nbsp;method_exchangeImplementations(fromMethod,&nbsp;toMethod);
+}
+//&nbsp;为了避免和系统的方法冲突，我一般都会在swizzling方法前面加前缀
+-&nbsp;(id)cm_objectAtIndex:(NSUInteger)index&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;判断下标是否越界，如果越界就进入异常拦截
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.count-1&nbsp;&lt;&nbsp;index)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@try&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[self&nbsp;cm_objectAtIndex:index];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@catch&nbsp;(NSException&nbsp;*exception)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;在崩溃后会打印崩溃信息。如果是线上，可以在这里将崩溃信息发送到服务器
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;----------&nbsp;%s&nbsp;Crash&nbsp;Because&nbsp;Method&nbsp;%s&nbsp;&nbsp;----------\n&quot;,&nbsp;class_getName(self.class),&nbsp;__func__);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;[exception&nbsp;callStackSymbols]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@finally&nbsp;{}
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;//&nbsp;如果没有问题，则正常进行方法调用
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[self&nbsp;cm_objectAtIndex:index];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p>这里面可能有个误会，<code>- (id)cm_objectAtIndex:(NSUInteger)index {</code>里面调用了自身？这是递归吗？其实不是。这个时候方法替换已经有效了，<code>cm_objectAtIndex</code>这个SEL指向的其实是原来系统的<code>objectAtIndex:</code>的IMP。因而不是递归。</p><ul class=" list-paddingleft-2"><li><p>ViewController.m</p></li></ul><pre class="line-numbers  language-ruby">-&nbsp;(void)viewDidLoad&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;测试代码&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*array&nbsp;=&nbsp;@[@0,&nbsp;@1,&nbsp;@2,&nbsp;@3];
+&nbsp;&nbsp;&nbsp;&nbsp;[array&nbsp;objectAtIndex:3];
+&nbsp;&nbsp;&nbsp;&nbsp;//本来要奔溃的&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[array&nbsp;objectAtIndex:4];
+}</pre><p>运行之后，发现没有崩溃，并打印了相关信息，如下所示。</p><p><br/><br/><br/>原文链接：https://www.jianshu.com/p/6bcff1f9feee<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '5b514C5a';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

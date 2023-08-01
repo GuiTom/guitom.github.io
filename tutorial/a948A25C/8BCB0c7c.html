@@ -1,0 +1,425 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>视频播放-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>视频播放-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p><br/></p><h1><strong>一、MPMoviePlayerController</strong></h1><h3>1.播放视频</h3><p>MPMoviewPlayerController继承于NSObject，使用它播放视频需要将其自带的视频View添加到视图控制器的View上才能显示视频，使用步骤如下：</p><pre class="line-numbers  language-css">第一步:引用MediaPlayer框架，声明视图控制器属性PlayerController
+#import&nbsp;&lt;mediaplayer&nbsp;mediaplayer.h&gt;
+@property(nonatomic,strong)MPMoviePlayerController&nbsp;*playerController;</pre><pre class="line-numbers  language-objectivec">//第二步：获取视频路径，创建播放器//本地视频路径
+NSString*&nbsp;localFilePath=[[NSBundle&nbsp;mainBundle]pathForResource:@&quot;不能说的秘密&quot;&nbsp;ofType:@&quot;mp4&quot;];NSURL&nbsp;*localVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:localFilePath];//网络视频路径NSString&nbsp;*webVideoPath&nbsp;=&nbsp;@&quot;http://api.junqingguanchashi.net/yunpan/bd/c.php?vid=/junqing/1115.mp4&quot;;NSURL&nbsp;*webVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:webVideoPath];self.playerController&nbsp;=[[MPMoviePlayerController&nbsp;alloc]initWithContentURL:webVideoUrl];</pre><pre class="line-numbers  language-objectivec">//第三步：设置Frame将播放器View添加到视图控制器View上
+self.playerController.view.frame&nbsp;=&nbsp;CGRectMake(0,&nbsp;10,&nbsp;kDeviceWidth,&nbsp;300);[self.view&nbsp;addSubview:&nbsp;self.playerController.view];</pre><pre class="line-numbers  language-objectivec">//第四步：设置播放器属性//设置控制面板风格:无，嵌入，全屏，默认
+self.playerController.controlStyle&nbsp;=&nbsp;MPMovieControlStyleDefault;//设置是否自动播放(默认为YES）self.playerController.shouldAutoplay&nbsp;=&nbsp;NO;//设置播放器显示模式，类似于图片的处理，设置Fill有可能造成部分区域被裁剪self.playerController.scalingMode&nbsp;=&nbsp;MPMovieScalingModeAspectFit;//设置重复模式self.playerController.repeatMode&nbsp;=&nbsp;MPMovieRepeatModeOne;</pre><pre class="line-numbers  language-csharp">//第五步：播放视频//播放前的准备，会中断当前正在活跃的音频会话
+[self.playerController&nbsp;&nbsp;prepareToPlay];//播放视频，设置了自动播放之后可以不调用此方法//[&nbsp;self.playerController&nbsp;&nbsp;play];</pre><pre class="line-numbers  language-objectivec">//第六步：在退出界面的时候，关闭播放器，移除通知
+-&nbsp;(void)dealloc{
+//当前视图控制器pop之后并不会关闭播放，需要手动关闭
+[self.playerController&nbsp;stop];
+self.playerController&nbsp;=&nbsp;nil;
+//移除播放器相关的通知
+[[NSNotificationCenter&nbsp;defaultCenter]&nbsp;removeObserver:self];
+}</pre><h3>2.视频播放相关的通知</h3><p>MPMoviePlayerController有关视频播放的很多状态控制都是通过通知完成的，尤其是播放在线视频的时候，我们不仅监控视频加载是否成功，也会监控是视频缓存进度等。这里演示一些常用的通知如下：</p><pre class="line-numbers  language-objectivec">//关于通知的使用(还有很多通知可以监听，可查看SDK)
+NSNotificationCenter&nbsp;*notificaionCenter&nbsp;=&nbsp;[NSNotificationCenter&nbsp;defaultCenter];//监听播放器状态的变化[notificaionCenter&nbsp;addObserver:self
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selector:@selector(playerStateChanged:)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:MPMoviePlayerPlaybackStateDidChangeNotification
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object:nil];
+//监听播放完成[notificaionCenter&nbsp;addObserver:self
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selector:@selector(playerFinished)&nbsp;name:MPMoviePlayerPlaybackDidFinishNotification
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object:nil];
+&nbsp;//监听切换到全屏
+[notificaionCenter&nbsp;addObserver:self
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selector:@selector(palyerChangeFullScreen)&nbsp;name:MPMoviePlayerDidEnterFullscreenNotification
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object:nil];
+//监听截屏操作完成
+[notificaionCenter&nbsp;addObserver:self
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selector:@selector(playerCaptureFinished:)&nbsp;name:MPMoviePlayerThumbnailImageRequestDidFinishNotification
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object:nil];</pre><pre class="line-numbers  language-objectivec">#pragma&nbsp;mark&nbsp;-&nbsp;监听通知的响应方法//播放状态变化，注意播放完成时的状态是暂停
+-&nbsp;(void)playerStateChanged:(NSNotification&nbsp;*)notificaion{
+&nbsp;&nbsp;&nbsp;&nbsp;switch&nbsp;(self.playerController.playbackState)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStateStopped:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放停止&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStatePlaying:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器正在播放&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStatePaused:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器暂停&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStateInterrupted:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器中断&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStateSeekingForward:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器快进&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;MPMoviePlaybackStateSeekingBackward:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;播放器快退&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+}
+}
+&nbsp;&nbsp;&nbsp;&nbsp;//视频播放结束
+-&nbsp;(void)playerFinished{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;playerFinished：播放结束&quot;);}//播放器切换到了全屏-&nbsp;(void)palyerChangeFullScreen{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;palyerChangeFullScreen：播放器进入全屏&quot;);}//播放器截屏结束-&nbsp;(void)playerCaptureFinished:(NSNotification&nbsp;*)notification{
+&nbsp;&nbsp;&nbsp;&nbsp;//获取并显示截图
+&nbsp;&nbsp;&nbsp;&nbsp;UIImage&nbsp;*image=notification.userInfo[MPMoviePlayerThumbnailImageKey];
+&nbsp;&nbsp;&nbsp;&nbsp;self.captureImgView.image&nbsp;=&nbsp;image;
+&nbsp;}</pre><h3>3.实现截屏</h3><pre class="line-numbers  language-objectivec">//添加一个按钮，点击开始截屏_captureBtn&nbsp;=&nbsp;[[UIButton&nbsp;alloc]&nbsp;initWithFrame:CGRectMake(30,&nbsp;CGRectGetMaxY(self.playerController.view.frame)&nbsp;+&nbsp;30,&nbsp;kDeviceWidth&nbsp;-&nbsp;30&nbsp;*&nbsp;2,&nbsp;50)];_captureBtn.backgroundColor&nbsp;=&nbsp;[UIColor&nbsp;purpleColor];[_captureBtn&nbsp;setTitle:@&quot;截图当前屏幕&quot;&nbsp;forState:&nbsp;UIControlStateNormal];[_captureBtn&nbsp;addTarget:self&nbsp;action:@selector(captureCurrentScreenImg)&nbsp;forControlEvents:UIControlEventTouchUpInside];[self.view&nbsp;addSubview:_captureBtn];//添加一个ImgView&nbsp;显示截屏后的图片_captureImgView&nbsp;=&nbsp;[[UIImageView&nbsp;alloc]&nbsp;initWithFrame:CGRectMake((kDeviceWidth&nbsp;-&nbsp;150)/2,&nbsp;CGRectGetMaxY(_captureBtn.frame)&nbsp;+&nbsp;20,&nbsp;150,&nbsp;150)];
+&nbsp;_captureImgView.contentMode&nbsp;=&nbsp;UIViewContentModeScaleAspectFit;_captureImgView.backgroundColor&nbsp;=&nbsp;[UIColor&nbsp;grayColor];[self.view&nbsp;addSubview:_captureImgView];</pre><pre class="line-numbers  language-objectivec">//截取当前屏幕-&nbsp;(void)captureCurrentScreenImg{
+&nbsp;&nbsp;&nbsp;&nbsp;[self.playerController&nbsp;requestThumbnailImagesAtTimes:@[@(self.playerController.currentPlaybackTime)]&nbsp;timeOption:MPMovieTimeOptionNearestKeyFrame];
+}</pre><pre class="line-numbers  language-objectivec">//监听通知：播放器截屏结束，得到图片并显示截图
+-&nbsp;(void)playerCaptureFinished:(NSNotification&nbsp;*)notification{
+&nbsp;&nbsp;&nbsp;&nbsp;UIImage&nbsp;*image=notification.userInfo[MPMoviePlayerThumbnailImageKey];
+&nbsp;&nbsp;&nbsp;&nbsp;self.captureImgView.image&nbsp;=&nbsp;image;
+&nbsp;}</pre><h1>二、MPMoviePlayerViewController</h1><p>MPMovicePlayerViewControlle只能全屏幕播放视频，它是一个包含了MPMoviePlayerController类型属性的特殊视图控制器，因此它是通过模态视图弹出的方式显示视频的。理解了这个，我们就可以知道在使用MPMovicePlayerViewController的时候我们可以通过它的MPMoviePlayerController属性设置很多播放器的属性了，具体用法和MPMoviePlayerController相同，就不过多的解释了,播放视频的代码示例如下；</p><pre class="line-numbers  language-objectivec">//第一步:获取视频路径//本地视频
+NSString*&nbsp;localFilePath=[[NSBundle&nbsp;mainBundle]&nbsp;pathForResource:@&quot;不能说的秘密&quot;&nbsp;ofType:@&quot;mp4&quot;];NSURL&nbsp;*localVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:localFilePath];
+//在线视频
+NSString&nbsp;*webVideoPath&nbsp;=&nbsp;@&quot;&nbsp;
+//NSURL&nbsp;*webVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:webVideoPath];
+//第二步:创建视频播放器MPMoviePlayerViewController&nbsp;*playerViewController&nbsp;=&nbsp;[[MPMoviePlayerViewController&nbsp;alloc]&nbsp;initWithContentURL:localVideoUrl];
+//第三步:设置播放器属性//通过moviePlayer属性设置播放器属性(与MPMoviePlayerController类似)playerViewController.moviePlayer.scalingMode&nbsp;=&nbsp;MPMovieScalingModeFill;
+//第四步:跳转视频播放界面[self&nbsp;presentViewController:playerViewController&nbsp;animated:YES&nbsp;completion:nil];</pre><h1>三、AVPlayer</h1><p>AVPlayer相比上述两种方式，播放视频功能更加强大，使用也十分灵活，因为它更加接近底层。但是AVPlayer本身是不能直接显示视频的，必须创建一个播放层AVPlayerLayer并将其添加到其他的视图Layer上才能显示。</p><h3>1. &nbsp;使用AVPlayer需要了解的常用类</h3><ul class=" list-paddingleft-2"><li><p>AVAsset：一个用于获取多媒体信息的抽象类，但不能直接使用</p></li><li><p>AVURLAsset：AVAsset的子类，可以根据一个URL路径创建一个包含媒体信息的AVURLAsset对象</p></li><li><p>AVPlayerItem：一个媒体资源管理对象，用于管理视频的基本信息和状态，一个AVPlayerItem对应一个视频资源</p></li><li><p>AVPlayer：负责视频播放、暂停、时间控制等操作</p></li><li><p>AVPlayerLayer：负责显示视频的图层，如果不设置此属性，视频就只有声音没有图像</p></li></ul><h3>2. AVPlayer的使用步骤</h3><pre class="line-numbers  language-objectivec">//第一步:引用AVFoundation框架，添加播放器属性#import&nbsp;&lt;AVFoundation/AVFoundation.h&gt;@property&nbsp;(nonatomic,strong)AVPlayer&nbsp;*player;//播放器对象@property&nbsp;(nonatomic,strong)AVPlayerItem&nbsp;*currentPlayerItem;</pre><pre class="line-numbers  language-objectivec">//第二步:获取播放地址URL//本地视频路径NSString*&nbsp;localFilePath=[[NSBundle&nbsp;mainBundle]pathForResource:@&quot;不能说的秘密&quot;&nbsp;ofType:@&quot;mp4&quot;];NSURL&nbsp;*localVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:localFilePath];//网络视频路径NSString&nbsp;*webVideoPath&nbsp;=&nbsp;@&quot;http://api.junqingguanchashi.net/yunpan/bd/c.php?vid=/junqing/1129.mp4&quot;;NSURL&nbsp;*webVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:webVideoPath];</pre><pre class="line-numbers  language-objectivec">//第三步:创建播放器(四种方法)//如果使用URL创建的方式会默认为AVPlayer创建一个AVPlayerItem//self.player&nbsp;=&nbsp;[AVPlayer&nbsp;playerWithURL:localVideoUrl];//self.player&nbsp;=&nbsp;[[AVPlayer&nbsp;alloc]&nbsp;initWithURL:localVideoUrl];//self.player&nbsp;=&nbsp;[AVPlayer&nbsp;playerWithPlayerItem:playerItem];AVPlayerItem&nbsp;*playerItem&nbsp;=&nbsp;[[AVPlayerItem&nbsp;alloc]&nbsp;initWithURL:webVideoUrl];self.currentPlayerItem&nbsp;=&nbsp;playerItem;self.player&nbsp;=&nbsp;[[AVPlayer&nbsp;alloc]&nbsp;initWithPlayerItem:playerItem];</pre><pre class="line-numbers  language-objectivec">//第四步:创建显示视频的AVPlayerLayer,设置视频显示属性，并添加视频图层//contentView是一个普通View,用于放置视频视图/*
+&nbsp;&nbsp;AVLayerVideoGravityResizeAspectFill等比例铺满，宽或高有可能出屏幕
+&nbsp;&nbsp;AVLayerVideoGravityResizeAspect&nbsp;等比例&nbsp;&nbsp;默认
+&nbsp;&nbsp;AVLayerVideoGravityResize&nbsp;完全适应宽高
+*/AVPlayerLayer&nbsp;*avLayer&nbsp;=&nbsp;[AVPlayerLayer&nbsp;playerLayerWithPlayer:self.player];avLayer.videoGravity&nbsp;=&nbsp;AVLayerVideoGravityResizeAspect;avLayer.frame&nbsp;=&nbsp;_containerView.bounds;[_containerView.layer&nbsp;addSublayer:avLayer];</pre><pre class="line-numbers  language-csharp">//第六步：执行play方法，开始播放//本地视频可以直接播放//网络视频需要监测AVPlayerItem的status属性为AVPlayerStatusReadyToPlay时方法才会生效[self.player&nbsp;play];</pre><h3>3. 添加属性观察</h3><p>一个AVPlayerItem对象对应着一个视频，我们需要通过AVPlayerItem来获取视频属性。但是AVPlayerItem必须是在视频资源加载到可以播放的时候才能使用，这是受限于网络的原因。解决这一问题，我们需要使用KVO监测AVPlayerItem的status属性，当其为AVPlayerItemStatusReadyToPlay的时候我们才能获取视频相关属性。相关的代码示例如下：</p><pre class="line-numbers  language-objectivec">//1.注册观察者，监测播放器属性//观察Status属性，可以在加载成功之后得到视频的长度[self.player.currentItem&nbsp;addObserver:self&nbsp;forKeyPath:@&quot;status&quot;&nbsp;options:NSKeyValueObservingOptionNew&nbsp;context:nil];//观察loadedTimeRanges，可以获取缓存进度，实现缓冲进度条[self.player.currentItem&nbsp;addObserver:self&nbsp;forKeyPath:@&quot;loadedTimeRanges&quot;&nbsp;options:NSKeyValueObservingOptionNew&nbsp;context:nil];</pre><pre class="line-numbers  language-objectivec">//2.添加属性观察
+-&nbsp;(void)observeValueForKeyPath:(NSString&nbsp;*)keyPath
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ofObject:(id)object
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;change:(NSDictionary&nbsp;*)change
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context:(void&nbsp;*)context&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;AVPlayerItem&nbsp;*playerItem&nbsp;=&nbsp;(AVPlayerItem&nbsp;*)object;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([keyPath&nbsp;isEqualToString:@&quot;status&quot;])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//获取playerItem的status属性最新的状态
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AVPlayerStatus&nbsp;status&nbsp;=&nbsp;[[change&nbsp;objectForKey:@&quot;new&quot;]&nbsp;intValue];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch&nbsp;(status)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;AVPlayerStatusReadyToPlay:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//获取视频长度
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTime&nbsp;duration&nbsp;=&nbsp;playerItem.duration;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//更新显示:视频总时长(自定义方法显示时间的格式)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.totalNeedPlayTimeLabel.text&nbsp;=&nbsp;[self&nbsp;formatTimeWithTimeInterVal:CMTimeGetSeconds(duration)];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//开启滑块的滑动功能
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.sliderView.enabled&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//关闭加载Loading提示
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;showaAtivityInDicatorView:NO];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//开始播放视频
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.player&nbsp;play];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;AVPlayerStatusFailed:{//视频加载失败，点击重新加载
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;showaAtivityInDicatorView:NO];//关闭Loading视图
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.playerInfoButton.hidden&nbsp;=&nbsp;NO;&nbsp;//显示错误提示按钮，点击后重新加载视频
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.playerInfoButton&nbsp;setTitle:@&quot;资源加载失败，点击继续尝试加载&quot;&nbsp;forState:&nbsp;UIControlStateNormal];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;AVPlayerStatusUnknown:{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;加载遇到未知问题:AVPlayerStatusUnknown&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;([keyPath&nbsp;isEqualToString:@&quot;loadedTimeRanges&quot;])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//获取视频缓冲进度数组，这些缓冲的数组可能不是连续的
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*loadedTimeRanges&nbsp;=&nbsp;playerItem.loadedTimeRanges;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//获取最新的缓冲区间
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTimeRange&nbsp;timeRange&nbsp;=&nbsp;[loadedTimeRanges.firstObject&nbsp;CMTimeRangeValue];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//缓冲区间的开始的时间
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;loadStartSeconds&nbsp;=&nbsp;CMTimeGetSeconds(timeRange.start);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//缓冲区间的时长
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;loadDurationSeconds&nbsp;=&nbsp;CMTimeGetSeconds(timeRange.duration);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//当前视频缓冲时间总长度
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;currentLoadTotalTime&nbsp;=&nbsp;loadStartSeconds&nbsp;+&nbsp;loadDurationSeconds;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//NSLog(@&quot;开始缓冲:%f,缓冲时长:%f,总时间:%f&quot;,&nbsp;loadStartSeconds,&nbsp;loadDurationSeconds,&nbsp;currentLoadTotalTime);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//更新显示：当前缓冲总时长
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_currentLoadTimeLabel.text&nbsp;=&nbsp;[self&nbsp;formatTimeWithTimeInterVal:currentLoadTotalTime];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//更新显示：视频的总时长
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_totalNeedLoadTimeLabel.text&nbsp;=&nbsp;[self&nbsp;formatTimeWithTimeInterVal:CMTimeGetSeconds(self.player.currentItem.duration)];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//更新显示：缓冲进度条的值
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_progressView.progress&nbsp;=&nbsp;currentLoadTotalTime/CMTimeGetSeconds(self.player.currentItem.duration);
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><pre class="line-numbers  language-objectivec">//转换时间格式的方法-&nbsp;(NSString&nbsp;*)formatTimeWithTimeInterVal:(NSTimeInterval)timeInterVal{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;minute&nbsp;=&nbsp;0,&nbsp;hour&nbsp;=&nbsp;0,&nbsp;secend&nbsp;=&nbsp;timeInterVal;
+&nbsp;&nbsp;&nbsp;&nbsp;minute&nbsp;=&nbsp;(secend&nbsp;%&nbsp;3600)/60;
+&nbsp;&nbsp;&nbsp;&nbsp;hour&nbsp;=&nbsp;secend&nbsp;/&nbsp;3600;
+&nbsp;&nbsp;&nbsp;&nbsp;secend&nbsp;=&nbsp;secend&nbsp;%&nbsp;60;
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[NSString&nbsp;stringWithFormat:@&quot;%02d:%02d:%02d&quot;,&nbsp;hour,&nbsp;minute,&nbsp;secend];}</pre><h3>4. 获取当前播放时间与总时间</h3><p>在此之前我们需要首先了解一个数据类型，也就是上述操作中的CMTime, 在AVPlayer的使用中我们会经常用到它，其实CMTime是一个结构体如下：</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;typedef&nbsp;struct{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTimeValue&nbsp;&nbsp;&nbsp;&nbsp;value;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;帧数
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTimeScale&nbsp;&nbsp;&nbsp;&nbsp;timescale;&nbsp;&nbsp;//&nbsp;帧率（影片每秒有几帧）
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTimeFlags&nbsp;&nbsp;&nbsp;&nbsp;flags;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTimeEpoch&nbsp;&nbsp;&nbsp;&nbsp;epoch;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;CMTi</pre><p>在上面的操作中我们看到AVPlayerItem的Duration属性就是一个CMTime类型的数据。所以获取视频的总时长(秒)需要duration.value/duration.timeScale。当然系统也为我们提供了CMTimeGetSeconds函数更加方便计算:</p><pre class="line-numbers  language-csharp">总时长:&nbsp;duration.value&nbsp;==&nbsp;CMTimeGetSeconds(duration)&nbsp;。</pre><p>在快进视频到某一个位置的时候我们也需要创建CMTime作为参数，那么CMTime的创建方法有两种:</p><pre class="line-numbers  language-cpp">//方法1：CMTimeMakeWithSeconds(Flout64&nbsp;seconds,&nbsp;int32_t&nbsp;scale)
+//方法2：CMTimeMake(int64_t&nbsp;value,&nbsp;int32_t&nbsp;scale)//注：两者的区别在于方法一的第一个参数可以是float</pre><p>至于获取视频的总时间在上述代码中已有体现，是在检测播放状态变为AVPlayerStatusReadyToPlay的时候获取的</p><pre class="line-numbers  language-objectivec">//视频总时长，在AVPlayerItem状态为AVPlayerStatusReadyToPlay时获取
+CMTime&nbsp;duration&nbsp;=&nbsp;self.player.currentItem.duration;
+CGFloat&nbsp;totalTime&nbsp;=&nbsp;CMTimeGetSeconds(duration);
+//当前AVPlayer的播放时长CMTime&nbsp;cmTime&nbsp;=&nbsp;self.player.currentTime;CGFloat&nbsp;currentTime&nbsp;&nbsp;=&nbsp;CMTimeGetSeconds(cmTime);</pre><h3>5. 播放进度与状态的刷新</h3><p>实时更新当前播放时间，这时候我们不必使用定时器，因为AVPlayer已经提供了方法：<br/>addPeriodicTimeObserverForInterval: queue: usingBlock。当播放进度改变的时候方法中的回调会被执行。我们可以在这里做刷新时间的操作，代码示例如下：</p><pre class="line-numbers  language-objectivec">__weak&nbsp;__typeof(self)&nbsp;weakSelf&nbsp;=&nbsp;self;self.timeObserver&nbsp;=&nbsp;[self.player&nbsp;addPeriodicTimeObserverForInterval:CMTimeMake(1,&nbsp;1)&nbsp;queue:dispatch_get_main_queue()&nbsp;usingBlock:^(CMTime&nbsp;time)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//当前播放的时间
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;currentTime&nbsp;=&nbsp;CMTimeGetSeconds(time);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//视频的总时间
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;totalTime&nbsp;=&nbsp;CMTimeGetSeconds(weakSelf.player.currentItem.duration);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//设置滑块的当前进度
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weakSelf.sliderView.value&nbsp;=&nbsp;currentTime/totalTime;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//设置显示的时间：以00:00:00的格式
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weakSelf.currentTimeLabel.text&nbsp;=&nbsp;[weakSelf&nbsp;formatTimeWithTimeInterVal:currentTime];
+&nbsp;&nbsp;&nbsp;&nbsp;}];//移除时，调用removeTimeObserver//&nbsp;[self.player&nbsp;removeTimeObserver:self.timeObserver];</pre><p><strong>注意</strong>：使用addPeriodicTimeObserverForInterval必须持有返回对象，且在不需要播放器的时候移除此对象；<br/>否则将会导致undefined behavior，这一点可以从文档是这样说明的：<br/>You must retain this returned value as long as you want the time observer to be invoked by the player.<br/>Pass this object to -removeTimeObserver: to cancel time observation.<br/>Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior</p><h3>6. 滑块拖拽修改视频播放进度</h3><pre class="line-numbers  language-objectivec">//UISlider的响应方法:拖动滑块，改变播放进度-&nbsp;(IBAction)sliderViewChange:(id)sender&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;if(self.player.status&nbsp;==&nbsp;AVPlayerStatusReadyToPlay){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSTimeInterval&nbsp;playTime&nbsp;=&nbsp;self.sliderView.value&nbsp;*&nbsp;CMTimeGetSeconds(self.player.currentItem.duration);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMTime&nbsp;seekTime&nbsp;=&nbsp;CMTimeMake(playTime,&nbsp;1);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.player&nbsp;seekToTime:seekTime&nbsp;completionHandler:^(BOOL&nbsp;finished)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><h1>四、AVPlayerViewController</h1><p>AVPlayerViewController是iOS8新增视频框架AVKit中的一个播放器类。由于iOS9弃用前两种播放器类的原因，AVPlayerViewController也将变得更加常用。AVPlayerViewController适合开发播放界面要求不是很高的应用。其相比AVPlayer的使用更加方便，但是原理上还是AVPlayerViewController包含了一个AVPlayer对象。<br/>AVPlayerViewController有两种播放视频的方式：</p><h3>第一种:直接弹出模态视图控制器播放</h3><pre class="line-numbers  language-objectivec">//步骤1：获取视频路径NSString&nbsp;*webVideoPath&nbsp;=&nbsp;@&quot;&nbsp;
+NSURL&nbsp;*webVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:webVideoPath];
+//步骤2：创建AVPlayerAVPlayer&nbsp;*avPlayer&nbsp;=&nbsp;[[AVPlayer&nbsp;alloc]&nbsp;initWithURL:webVideoUrl];
+//步骤3：使用AVPlayer创建AVPlayerViewController，并跳转播放界面
+AVPlayerViewController&nbsp;*avPlayerVC&nbsp;=[[AVPlayerViewController&nbsp;alloc]&nbsp;init];
+avPlayerVC.player&nbsp;=&nbsp;avPlayer;[self&nbsp;presentViewController:avPlayerVC&nbsp;animated:YES&nbsp;completion:nil];</pre><h3>第二种：添加AVPlayerViewController的View到父视图上播放。</h3><p>使用这种方式播放的优点在于可以指定播放界面的原始尺寸大小，但是值得注意的是AVPlayerViewController必须被当前视图控制器所持有，以防止被当做局部变量被释放。为了满足这一条件，我们可以将AVPlayerViewController作为属性，也可以使用addChildViewController方法将其作为当前视图控制器的子视图控制器，示例代码如下：</p><pre class="line-numbers  language-objectivec">//步骤1：获取视频路径
+NSString&nbsp;*webVideoPath&nbsp;=&nbsp;@&quot;http://api.junqingguanchashi.net/yunpan/bd/c.php?vid=/junqing/1213.mp4&quot;;NSURL&nbsp;*webVideoUrl&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:webVideoPath];
+//步骤2：创建AVPlayer
+AVPlayer&nbsp;*avPlayer&nbsp;=&nbsp;[[AVPlayer&nbsp;alloc]&nbsp;initWithURL:webVideoUrl];//步骤3：使用AVPlayer创建AVPlayerViewController，并跳转播放界面AVPlayerViewController&nbsp;*avPlayerVC&nbsp;=[[AVPlayerViewController&nbsp;alloc]&nbsp;init];avPlayerVC.player&nbsp;=&nbsp;avPlayer;
+//步骤4：设置播放器视图大小
+avPlayerVC.view.frame&nbsp;=&nbsp;CGRectMake(25,&nbsp;0,&nbsp;320,&nbsp;300);
+//特别注意:AVPlayerViewController不能作为局部变量被释放，否则无法播放成功
+//解决1.AVPlayerViewController作为属性
+//解决2:使用addChildViewController，AVPlayerViewController作为子视图控制器
+[self&nbsp;addChildViewController:avPlayerVC];
+[self.view&nbsp;addSubview:avPlayerVC.view];</pre><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FDreamcoffeeZS%2FZSPlayerDemo" target="_blank" style="white-space: normal;">本文Demo</a><br/><br/>链接：https://www.jianshu.com/p/b304694af77a<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '8BCB0c7c';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

@@ -1,0 +1,400 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>关联对象-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>关联对象-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">iOS 通过 runtime 的 API 可以给分类添加属性,关联属性总共有下边3个 API</p><pre class="brush:as3;toolbar:false">///获取某个对象的关联属性
+id&nbsp;objc_getAssociatedObject(id&nbsp;object,&nbsp;const&nbsp;void&nbsp;*key)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_object_get_associative_reference(object,&nbsp;(void&nbsp;*)key);
+}
+///给某个对象添加关联属性
+void&nbsp;objc_setAssociatedObject(id&nbsp;object,&nbsp;const&nbsp;void&nbsp;*key,&nbsp;id&nbsp;value,&nbsp;objc_AssociationPolicy&nbsp;policy)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;_object_set_associative_reference(object,&nbsp;(void&nbsp;*)key,&nbsp;value,&nbsp;policy);
+}
+///移除对象所有的关联属性
+void&nbsp;objc_removeAssociatedObjects(id&nbsp;object)复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">通过 runtime 的源码可以看出关联属性并没有添加到 category_t(分类)里边,运行时也不会合并到元类对象里边,而是存储在一个全局的AssociationsManager 里边,下边是这个 AssociationsManager 包含的层级关系.</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255); text-align: center;"><img src="/upload/image/20191117/150404208412.png" title="1529567338125285.png" alt="1.png" data-isloading="1" data-bd-imgshare-binded="1" style="box-sizing: border-box; border: 0px; vertical-align: middle; max-width: 100%; display: block; margin: 0px auto;"/></p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255); text-align: center;"><span style="box-sizing: border-box; font-size: 12px; color: rgb(127, 127, 127);">image.png</span></p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">所有的关联属性 和 获取关联属性 移除关联属性都是通过一个 AssociationsManager来操作,类似于 OC 中 NSFileManager 的角色,通过传递进来的对象作为地址 取出这个对象所对应的关联列表,然后通过key 取出这个关联列表的关联属性 ObjcAssociation, ObjcAssociation 包含了关联策略 和 关联值.</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">下边我会通过解读源码 来分析AssociationsManager是如何要关联的值和对象建立联系的.</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">AssociationsManager 是一个 C++的类 用来进行对关联对象的属性添加 和 查找 移除等操作</p><pre class="brush:as3;toolbar:false">class&nbsp;AssociationsManager&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;spinlock_t&nbsp;_lock;
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;AssociationsHashMap&nbsp;*_map;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;associative&nbsp;references:&nbsp;&nbsp;object&nbsp;pointer&nbsp;-&gt;&nbsp;PtrPtrHashMap.&nbsp;这个_&nbsp;map&nbsp;里边存储的有关联列表
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;AssociationsManager()&nbsp;&nbsp;&nbsp;{&nbsp;_lock.lock();&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;~AssociationsManager()&nbsp;&nbsp;{&nbsp;_lock.unlock();&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap&nbsp;&amp;associations()&nbsp;{&nbsp;//可以看成是只初始化一次&nbsp;类似与单例
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_map&nbsp;==&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_map&nbsp;=&nbsp;new&nbsp;AssociationsHashMap();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;*_map;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+};复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">关联列表是一个 hashMap 类似于 OC 的 NSDictionary ,其中用 disguised_ptr_t 作为 key , ObjectAssociationMap * 作为一个 value</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">disguised_ptr_t 是 uintptr_t 的类型</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">intptr_t 和uintptr_t 类型用来存放指针地址。它们提供了一种可移植且安全的方法声明指针，而且和系统中使用的指针长度相同，对于把指针转化成整数形式来说很有用。</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">可以把disguised_ptr_t理解为一个指针类型的变量</p><pre class="brush:as3;toolbar:false">&nbsp;&nbsp;&nbsp;class&nbsp;AssociationsHashMap&nbsp;:&nbsp;public&nbsp;unordered_map&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;public:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;*operator&nbsp;new(size_t&nbsp;n)&nbsp;{&nbsp;return&nbsp;::malloc(n);&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;operator&nbsp;delete(void&nbsp;*ptr)&nbsp;{&nbsp;::free(ptr);&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;};复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">ObjectAssociationMap 也是一个 HashMap 存放的是 一个 void * key 就是关联属性时传进来的 key , ObjcAssociation 存放的关联属性策略和值的信息</p><pre class="brush:as3;toolbar:false">&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;ObjectAssociationMap&nbsp;:&nbsp;public&nbsp;std::map&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;public:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;*operator&nbsp;new(size_t&nbsp;n)&nbsp;{&nbsp;return&nbsp;::malloc(n);&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;operator&nbsp;delete(void&nbsp;*ptr)&nbsp;{&nbsp;::free(ptr);&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;};复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">ObjcAssociation 关联属性信息类 存放了关联策略 和 传递进来关联的值 id 类型</p><pre class="brush:as3;toolbar:false">class&nbsp;ObjcAssociation&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uintptr_t&nbsp;_policy;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;_value;
+&nbsp;&nbsp;&nbsp;&nbsp;public:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjcAssociation(uintptr_t&nbsp;policy,&nbsp;id&nbsp;value)&nbsp;:&nbsp;_policy(policy),&nbsp;_value(value)&nbsp;{}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjcAssociation()&nbsp;:&nbsp;_policy(0),&nbsp;_value(nil)&nbsp;{}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uintptr_t&nbsp;policy()&nbsp;const&nbsp;{&nbsp;return&nbsp;_policy;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;value()&nbsp;const&nbsp;{&nbsp;return&nbsp;_value;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;hasValue()&nbsp;{&nbsp;return&nbsp;_value&nbsp;!=&nbsp;nil;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;};复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">下边是对 objc_getAssociatedObject , objc_setAssociatedObject , objc_removeAssociatedObjects 具体实现的分析</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">objc_setAssociatedObject 添加关联属性的 API</p><pre class="brush:as3;toolbar:false">void&nbsp;_object_set_associative_reference(id&nbsp;object,&nbsp;void&nbsp;*key,&nbsp;id&nbsp;value,&nbsp;uintptr_t&nbsp;policy)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;retain&nbsp;the&nbsp;new&nbsp;value&nbsp;(if&nbsp;any)&nbsp;outside&nbsp;the&nbsp;lock.
+&nbsp;&nbsp;&nbsp;///&nbsp;旧的关联对象&nbsp;因为关联属性时如果传&nbsp;nil&nbsp;可能会替换旧的关联属性&nbsp;,这就是移除某个关联属性时传&nbsp;nil&nbsp;的原因
+&nbsp;&nbsp;&nbsp;&nbsp;ObjcAssociation&nbsp;old_association(0,&nbsp;nil);
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;new_value&nbsp;=&nbsp;value&nbsp;?&nbsp;acquireValue(value,&nbsp;policy)&nbsp;:&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsManager&nbsp;manager;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///获取关联属性列表&nbsp;,取出来的列表是以对象为单位的&nbsp;,即某个对象的关联列表&nbsp;,这样就可以单独的关联某个对象的关联属性&nbsp;而不与其他对象隔离开
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap&nbsp;&amp;associations(manager.associations());&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;将要添加关联属性的对象产生一个内存地址&nbsp;做&nbsp;key&nbsp;存储&nbsp;它的关联属性
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disguised_ptr_t&nbsp;disguised_object&nbsp;=&nbsp;DISGUISE(object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;如果要关联的值不为空&nbsp;,不为空时&nbsp;就需要判断这个属性和&nbsp;key&nbsp;是不是第一天添加&nbsp;,即&nbsp;&nbsp;void&nbsp;*key,&nbsp;id&nbsp;value&nbsp;都是第一次传递进来&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(new_value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap::iterator&nbsp;i&nbsp;=&nbsp;associations.find(disguised_object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///&nbsp;根据这个对象取出的这个对象关联列表存在&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(i&nbsp;!=&nbsp;associations.end())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///取出这个对象关联所有的属性列表&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap&nbsp;*refs&nbsp;=&nbsp;i-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///根据&nbsp;可以&nbsp;取出某个属性的关联字典&nbsp;如果为空&nbsp;就添加到关联字典里边&nbsp;,不为空就对旧值就行替换操作
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap::iterator&nbsp;j&nbsp;=&nbsp;refs-&gt;find(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(j&nbsp;!=&nbsp;refs-&gt;end())&nbsp;{&nbsp;///取出来的字典不为空&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_association&nbsp;=&nbsp;j-&gt;second;&nbsp;//取出旧值&nbsp;后边对这个旧值进行&nbsp;release&nbsp;操作
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///将新值存放到&nbsp;key&nbsp;对应的字典中去&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j-&gt;second&nbsp;=&nbsp;ObjcAssociation(policy,&nbsp;new_value);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{&nbsp;///没有旧值直接将新值添加到字典里
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(*refs)[key]&nbsp;=&nbsp;ObjcAssociation(policy,&nbsp;new_value);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果&nbsp;key&nbsp;对象的字典不存在&nbsp;就创建一个字典&nbsp;(hashMap&nbsp;类似于字典的功能,本文为了方便理解将它称为字典)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap&nbsp;*refs&nbsp;=&nbsp;new&nbsp;ObjectAssociationMap;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;associations[disguised_object]&nbsp;=&nbsp;refs;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///将要关联属性和策略封装到一个ObjcAssociation类里边&nbsp;并根据&nbsp;key&nbsp;添加到这个字典里
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(*refs)[key]&nbsp;=&nbsp;ObjcAssociation(policy,&nbsp;new_value);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-&gt;setHasAssociatedObjects();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///如果添加关联的属性为空时&nbsp;就需要取出之前关联的值&nbsp;并把它擦除掉&nbsp;相当于removeObjectForKey&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///还是根据对象内存地址找到它的关联属性列表&nbsp;,然后通过&nbsp;key&nbsp;找到它关联属性的实体(ObjcAssociation这个类)&nbsp;最后擦除掉&nbsp;相当于&nbsp;free&nbsp;从内存中移除
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap::iterator&nbsp;i&nbsp;=&nbsp;associations.find(disguised_object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(i&nbsp;!=&nbsp;&nbsp;associations.end())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap&nbsp;*refs&nbsp;=&nbsp;i-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap::iterator&nbsp;j&nbsp;=&nbsp;refs-&gt;find(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(j&nbsp;!=&nbsp;refs-&gt;end())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;old_association&nbsp;=&nbsp;j-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refs-&gt;erase(j);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;release&nbsp;the&nbsp;old&nbsp;value&nbsp;(outside&nbsp;of&nbsp;the&nbsp;lock).
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(old_association.hasValue())&nbsp;ReleaseValue()(old_association);
+}复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">objc_getAssociatedObject 关联对象取值的操作</p><pre class="brush:as3;toolbar:false">id&nbsp;_object_get_associative_reference(id&nbsp;object,&nbsp;void&nbsp;*key)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;value&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;uintptr_t&nbsp;policy&nbsp;=&nbsp;OBJC_ASSOCIATION_ASSIGN;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///还是通过&nbsp;AssociationsManager&nbsp;找到所有关联对象类别&nbsp;,然后通过传入&nbsp;object&nbsp;找到某个对象的关联列表&nbsp;,然后通过&nbsp;key&nbsp;找到这个对象关联属性列表的某个实体(ObjcAssociation)&nbsp;最后根据关联策略返回这个属性的值&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsManager&nbsp;manager;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap&nbsp;&amp;associations(manager.associations());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disguised_ptr_t&nbsp;disguised_object&nbsp;=&nbsp;DISGUISE(object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap::iterator&nbsp;i&nbsp;=&nbsp;associations.find(disguised_object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(i&nbsp;!=&nbsp;associations.end())&nbsp;{&nbsp;///如果这个对象的关联列表存在
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap&nbsp;*refs&nbsp;=&nbsp;i-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap::iterator&nbsp;j&nbsp;=&nbsp;refs-&gt;find(key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(j&nbsp;!=&nbsp;refs-&gt;end())&nbsp;{&nbsp;///如果对象关联列表的属性存在
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjcAssociation&nbsp;&amp;entry&nbsp;=&nbsp;j-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;=&nbsp;entry.value();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;policy&nbsp;=&nbsp;entry.policy();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///取出关联值和策略&nbsp;发送消息&nbsp;类似与&nbsp;[obj&nbsp;retain]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(policy&nbsp;&amp;&nbsp;OBJC_ASSOCIATION_GETTER_RETAIN)&nbsp;((id(*)(id,&nbsp;SEL))objc_msgSend)(value,&nbsp;SEL_retain);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;///&nbsp;如果这个对象是延时释放的类型&nbsp;类似与&nbsp;OC&nbsp;Array&nbsp;String&nbsp;这些不是&nbsp;alloc&nbsp;来的对象&nbsp;都要执行&nbsp;[obj&nbsp;autorelease]来释放&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(value&nbsp;&amp;&amp;&nbsp;(policy&nbsp;&amp;&nbsp;OBJC_ASSOCIATION_GETTER_AUTORELEASE))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((id(*)(id,&nbsp;SEL))objc_msgSend)(value,&nbsp;SEL_autorelease);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;value;
+}复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">objc_removeAssociatedObjects 移除该对象所有的关联属性列表</p><pre class="brush:as3;toolbar:false">void&nbsp;_object_remove_assocations(id&nbsp;object)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;vector&lt;&nbsp;ObjcAssociation,ObjcAllocator&nbsp;&gt;&nbsp;elements;
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsManager&nbsp;manager;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap&nbsp;&amp;associations(manager.associations());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(associations.size()&nbsp;==&nbsp;0)&nbsp;return;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disguised_ptr_t&nbsp;disguised_object&nbsp;=&nbsp;DISGUISE(object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AssociationsHashMap::iterator&nbsp;i&nbsp;=&nbsp;associations.find(disguised_object);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///如果这个对象有关联的属性列表&nbsp;那么久便利它关联的属性列表&nbsp;然后通过便利将这些关联内容&nbsp;一个个从字典里边擦除&nbsp;&nbsp;先擦除对象列表关联的属性列表&nbsp;然后将这个对象关联属性的&nbsp;hashMap&nbsp;擦除掉&nbsp;相当于&nbsp;[dict&nbsp;removeAllObjects]&nbsp;然后再从全局&nbsp;AssociationsManager&nbsp;移除&nbsp;这个对象关联的字典&nbsp;,&nbsp;又相当于&nbsp;从一个全局大字典里&nbsp;把&nbsp;dict这个对象的小字典&nbsp;给移除了&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(i&nbsp;!=&nbsp;associations.end())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;copy&nbsp;all&nbsp;of&nbsp;the&nbsp;associations&nbsp;that&nbsp;need&nbsp;to&nbsp;be&nbsp;removed.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectAssociationMap&nbsp;*refs&nbsp;=&nbsp;i-&gt;second;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(ObjectAssociationMap::iterator&nbsp;j&nbsp;=&nbsp;refs-&gt;begin(),&nbsp;end&nbsp;=&nbsp;refs-&gt;end();&nbsp;j&nbsp;!=&nbsp;end;&nbsp;++j)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.push_back(j-&gt;second);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;remove&nbsp;the&nbsp;secondary&nbsp;table.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;refs;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;associations.erase(i);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;calls&nbsp;to&nbsp;releaseValue()&nbsp;happen&nbsp;outside&nbsp;of&nbsp;the&nbsp;lock.
+&nbsp;&nbsp;&nbsp;&nbsp;for_each(elements.begin(),&nbsp;elements.end(),&nbsp;ReleaseValue());
+}复制代码</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">以上代码看起来并不难 除了一些 C++ 语法难以理解外 也并不需要完全知道每行代码怎么实现 ,大概思路就是 通过全局大字典 ,找到某个对象相关的小字典 ,然后这个小字典里存放了 一个key 对应一个属性值,最后取出这个管理属性的策略和值</p><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">写到最后 AssociationsManager 这个类不是一个单例类</p><pre class="brush:cpp;toolbar:false">class&nbsp;AssociationsManager&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;spinlock_t&nbsp;_lock;
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;AssociationsHashMap&nbsp;*_map;&nbsp;
+//&nbsp;associative&nbsp;references:&nbsp;object&nbsp;pointer&nbsp;-&gt;PtrPtrHashMap.
+public:
+AssociationsManager()&nbsp;
+{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_lock.lock();&nbsp;
+}&nbsp;//默认无参构造函数&nbsp;对象创建时自动调用&nbsp;执行加锁&nbsp;这样多个线程访问&nbsp;_map&nbsp;时不会出现问题
+~AssociationsManager()
+{
+&nbsp;_lock.unlock();
+&nbsp;}&nbsp;
+//析构函数&nbsp;对象是否时候进行解锁的操作
+///可以看做单例对象&nbsp;在&nbsp;AssociationsManager&nbsp;创建时候&nbsp;加锁&nbsp;当&nbsp;AssociationsManager&nbsp;释放时候&nbsp;解锁&nbsp;,防止多线程访问时候&nbsp;对同一个&nbsp;_map&nbsp;多次创建&nbsp;是一种懒汉模式单例
+AssociationsHashMap&nbsp;&amp;associations()&nbsp;{
+if&nbsp;(_map&nbsp;==&nbsp;NULL)&nbsp;_map&nbsp;=&nbsp;new&nbsp;AssociationsHashMap();
+return&nbsp;*_map;
+}
+};</pre><p style="box-sizing: border-box; margin-top: 15px; margin-bottom: 15px; padding: 0px; border: 0px; outline: 0px; list-style: none; font-family: PingFangSC-Regular, sans-serif; color: rgb(42, 42, 42); line-height: 30px; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">它里边有个 spinlock_t锁 对 _map 这个全局唯一的实例 进行加锁和解锁 ,由于懒汉模式的单例 需要在多个线程访问 _map 时候进行加锁保护</p><p>原文链接:<a href="http://www.cocoachina.com/cms/wap.php?action=article&id=23892">http://www.cocoachina.com/cms/wap.php?action=article&amp;id=23892</a></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '8A546ac3';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

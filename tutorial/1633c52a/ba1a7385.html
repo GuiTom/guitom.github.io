@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>查找-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>查找-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p><br/></p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">查找算法时间复杂度</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><table cellpadding="0" width="961" style="width: 716px;align:center"><tbody style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border: 0px; overflow-wrap: break-word;"><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); overflow-wrap: break-word;" class="firstRow"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">查找</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">平均时间复杂度&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">查找条件</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">算法描述</span></p></td></tr><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); background-color: rgb(247, 247, 247); overflow-wrap: break-word;"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">顺序查找</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">O(n)</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">无序或有序队列</span></p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">按顺序比较每个元素，直到找到关键字为止</span></p></td></tr><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); overflow-wrap: break-word;"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">二分查找（折半查找）</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">O(logn)</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">有序数组</span></p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">查找过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜素过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。　如果在某一步骤数组为空，则代表找不到。</span></p></td></tr><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); background-color: rgb(247, 247, 247); overflow-wrap: break-word;"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">二叉排序树查找</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">O(logn)</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">二叉排序树</span></p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">在二叉查找树b</span>中查找x的过程为：</p><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">1.&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">若b</span>是空树，则搜索失败</p><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">2.&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">若x</span>等于b的根节点的数据域之值，则查找成功；</p><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">3.&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">若x</span>小于b的根节点的数据域之值，则搜索左子树</p><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">4.&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">查找右子树。</span></p></td></tr><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); overflow-wrap: break-word;"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">哈希表法（散列表）</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">O(1)</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">先创建哈希表（散列表）</span></p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">根据键值方式(Key value)</span>进行查找，通过散列函数，定位数据元素。</p></td></tr><tr style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(221, 221, 221); background-color: rgb(247, 247, 247); overflow-wrap: break-word;"><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">分块查找</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;">O(logn)</p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">无序或有序队列</span></p></td><td style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 8px; overflow-wrap: break-word; color: rgb(79, 79, 79); line-height: 22px;"><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">将n</span>个数据元素&quot;按块有序&quot;划分为m块（m ≤ n）。</p><p style="box-sizing: border-box; outline: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 22px; overflow-x: auto; overflow-wrap: break-word;"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(85, 85, 85);">每一块中的结点不必有序，但块与块之间必须&quot;</span>按块有序&quot;；即第1块中任一元素的关键字都必须小于第2块中任一元素的关键字；而第2块中任一元素又都必须小于第3块中的任一元素，……。然后使用二分查找及顺序查找。</p></td></tr></tbody></table><p><a href="https://www.onlinegdb.com/" target="_blank">在线编译器</a>:<a href="https://www.onlinegdb.com/">https://www.onlinegdb.com/</a></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'ba1a7385';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

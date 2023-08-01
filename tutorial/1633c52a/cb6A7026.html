@@ -1,0 +1,276 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>拓扑排序-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>拓扑排序-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>一、什么是拓扑排序</p><p>在图论中，拓扑排序（Topological Sorting）是一个有向无环图（DAG, Directed Acyclic Graph）的所有顶点的线性序列。且该序列必须满足下面两个条件：</p><p><br/></p><p>每个顶点出现且只出现一次。</p><p>若存在一条从顶点 A 到顶点 B 的路径，那么在序列中顶点 A 出现在顶点 B 的前面。</p><p>有向无环图（DAG）才有拓扑排序，非DAG图没有拓扑排序一说。</p><p><br/></p><p>例如，下面这个图：</p><p style="text-align:center"><img src="/upload/image/20191115/102015428068.png"/></p><p>它是一个 DAG 图，那么如何写出它的拓扑排序呢？这里说一种比较常用的方法：</p><p><br/></p><p>1.从 DAG 图中选择一个 没有前驱（即入度为0）的顶点并输出。</p><p>2.从图中删除该顶点和所有以它为起点的有向边。</p><p>重复 1 和 2 直到当前的 DAG 图为空或当前图中不存在无前驱的顶点为止。后一种情况说明有向图中必然存在环。</p><p style="text-align:center"><img src="/upload/image/20191115/102124639948.png"/></p><p>于是，得到拓扑排序后的结果是 { 1, 2, 4, 3, 5 }。</p><p><br/></p><p>通常，一个有向无环图可以有一个或多个拓扑排序序列。</p><p><br/></p><p><br/></p><p><br/></p><p>二、拓扑排序的应用</p><p>拓扑排序通常用来“排序”具有依赖关系的任务。</p><p>比如，如果用一个DAG图来表示一个工程，其中每个顶点表示工程中的一个任务，用有向边&lt;A,B&gt;&lt;A,B&gt;表示在做任务 B 之前必须先完成任务 A。故在这个工程中，任意两个任务要么具有确定的先后关系，要么是没有关系，绝对不存在互相矛盾的关系（即环路）。</p><p><br/></p><p>三、拓扑排序的实现</p><p>根据上面讲的方法，我们关键是要维护一个入度为0的顶点的集合。</p><p><br/></p><p>图的存储方式有两种：邻接矩阵和邻接表。这里我们采用邻接表来存储图，C++代码如下：</p><p><br/></p><pre class="brush:cpp;toolbar:false">#include&lt;iostream&gt;
+#include&nbsp;&lt;list&gt;
+#include&nbsp;&lt;queue&gt;
+using&nbsp;namespace&nbsp;std;
+/************************类声明************************/
+class&nbsp;Graph
+{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;V;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;顶点个数
+&nbsp;&nbsp;&nbsp;&nbsp;list&lt;int&gt;&nbsp;*adj;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;邻接表
+&nbsp;&nbsp;&nbsp;&nbsp;queue&lt;int&gt;&nbsp;q;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;维护一个入度为0的顶点的集合
+&nbsp;&nbsp;&nbsp;&nbsp;int*&nbsp;indegree;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;记录每个顶点的入度
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;Graph(int&nbsp;V);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;构造函数
+&nbsp;&nbsp;&nbsp;&nbsp;~Graph();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;析构函数
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;addEdge(int&nbsp;v,&nbsp;int&nbsp;w);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;添加边
+&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;topological_sort();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;拓扑排序
+};
+/************************类定义************************/
+Graph::Graph(int&nbsp;V)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;this-&gt;V&nbsp;=&nbsp;V;
+&nbsp;&nbsp;&nbsp;&nbsp;adj&nbsp;=&nbsp;new&nbsp;list&lt;int&gt;[V];
+&nbsp;&nbsp;&nbsp;&nbsp;indegree&nbsp;=&nbsp;new&nbsp;int[V];&nbsp;&nbsp;//&nbsp;入度全部初始化为0
+&nbsp;&nbsp;&nbsp;&nbsp;for(int&nbsp;i=0;&nbsp;i&lt;V;&nbsp;++i)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indegree[i]&nbsp;=&nbsp;0;
+}
+Graph::~Graph()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;[]&nbsp;adj;
+&nbsp;&nbsp;&nbsp;&nbsp;delete&nbsp;[]&nbsp;indegree;
+}
+void&nbsp;Graph::addEdge(int&nbsp;v,&nbsp;int&nbsp;w)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;adj[v].push_back(w);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;++indegree[w];
+}
+bool&nbsp;Graph::topological_sort()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;for(int&nbsp;i=0;&nbsp;i&lt;V;&nbsp;++i)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(indegree[i]&nbsp;==&nbsp;0)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push(i);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;将所有入度为0的顶点入队
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;count&nbsp;=&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;计数，记录当前已经输出的顶点数&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;while(!q.empty())
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;v&nbsp;=&nbsp;q.front();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;从队列中取出一个顶点
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.pop();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;v&nbsp;&lt;&lt;&nbsp;&quot;&nbsp;&quot;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;输出该顶点
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++count;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;将所有v指向的顶点的入度减1，并将入度减为0的顶点入栈
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&lt;int&gt;::iterator&nbsp;beg&nbsp;=&nbsp;adj[v].begin();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(&nbsp;;&nbsp;beg!=adj[v].end();&nbsp;++beg)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!(--indegree[*beg]))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q.push(*beg);&nbsp;&nbsp;&nbsp;//&nbsp;若入度为0，则入栈
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if(count&nbsp;&lt;&nbsp;V)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;没有输出全部顶点，有向图中有回路
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;拓扑排序成功
+}
+测试如下DAG图：
+int&nbsp;main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;Graph&nbsp;g(6);&nbsp;&nbsp;&nbsp;//&nbsp;创建图
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(5,&nbsp;2);
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(5,&nbsp;0);
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(4,&nbsp;0);
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(4,&nbsp;1);
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(2,&nbsp;3);
+&nbsp;&nbsp;&nbsp;&nbsp;g.addEdge(3,&nbsp;1);
+&nbsp;&nbsp;&nbsp;&nbsp;g.topological_sort();
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0;
+}
+输出结果是&nbsp;4,&nbsp;5,&nbsp;2,&nbsp;0,&nbsp;3,&nbsp;1。这是该图的拓扑排序序列之一。</pre><p><br/></p><p>每次在入度为0的集合中取顶点，并没有特殊的取出规则，随机取出也行，这里使用的queue。取顶点的顺序不同会得到不同的拓扑排序序列，当然前提是该图存在多个拓扑排序序列。</p><p><br/></p><p>由于输出每个顶点的同时还要删除以它为起点的边，故上述拓扑排序的时间复杂度为O(V+E)O(V+E)。</p><p><br/></p><p>原文链接：https://blog.csdn.net/lisonglisonglisong/article/details/45543451</p><p><iframe src="//player.bilibili.com/player.html?aid=36886991&cid=64788084&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="600px"> </iframe></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'cb6A7026';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

@@ -1,0 +1,1 @@
+define("html5-erji:widget/wangzhi/fenlei/fenlei",function(){!function(){var e=$(".fenlei b"),i="fl_zk";0!==e.size()&&e.on("click",function(){var e=$(this),n=e.parent(".fl_show").next(".fl_hide");e.hasClass(i)?(n.hide(),e.removeClass(i)):(n.show(),e.addClass(i))})}()});

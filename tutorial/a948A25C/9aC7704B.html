@@ -1,0 +1,426 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>coreData-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>coreData-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <blockquote><p><br/></p></blockquote><p style="text-align:center"><img src="/upload/image/20191118/115626412697.png"/></p><p><span style="color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">增删改查.gif</span></p><h3>1、首先创建一个coreData 模型文件：系统创建或者自己创建</h3><p><img src="/upload/image/20191118/115652603987.png"/></p><p>系统创建模型文件.png</p><p><img src="/upload/image/20191118/115703314916.png"/></p><p>自己创建模型文件.png</p><h3>2、在data Model 中创建项目中需要用到的实体（Entities），例如，创建一个Student 实体（第一字母必须是大写），以及添加一些name、age、sex 等属性，如下图</h3><p><img src="/upload/image/20191118/115717886104.png" width="740" height="364" style="width: 740px; height: 364px;"/></p><p>创建实体.png</p><h3>3、生成对应实体的实体类，在此之前要注意下图两个设置部分，否则会引起崩溃现象</h3><p><br/></p><p>注意1.png</p><p><img data-original-src="//upload-images.jianshu.io/upload_images/1708447-2c04aae2fc5321f8.png" data-original-width="957" data-original-height="470" data-original-format="" data-original-filesize="183200" class="" data-image-index="5" style="cursor: zoom-in; width: 738px; height: 382px;" src="//upload-images.jianshu.io/upload_images/1708447-2c04aae2fc5321f8.png?imageMogr2/auto-orient/strip|imageView2/2/w/957/format/webp" width="738" height="382"/></p><p>注意2.png</p><p><img src="/upload/image/20191118/115829393425.png" width="740" height="387" style="width: 740px; height: 387px;"/></p><p>创建实体类.png</p><p><img src="/upload/image/20191118/115839496589.png" width="736" height="515" style="width: 736px; height: 515px;"/></p><p>创建实体类.gif</p><p><img src="/upload/image/20191118/115903287030.png" width="736" height="410" style="width: 736px; height: 410px;"/></p><p>实体类的四个文件.png</p><h3>4、生成上下文 关联数据库</h3><ul class=" list-paddingleft-2"><li><p>NSManagedObjectContext 管理对象，上下文，持久性存储模型对象，处理数据与应用的交互</p></li><li><p>NSManagedObjectModel 被管理的数据模型，数据结构</p></li><li><p>NSPersistentStoreCoordinator 添加数据库，设置数据存储的名字，位置，存储方式</p></li><li><p>NSManagedObject 被管理的数据记录</p></li><li><p>NSFetchRequest 数据请求</p></li><li><p>NSEntityDescription 表格实体结构</p></li></ul><h6>①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库</h6><pre class="line-numbers  language-objectivec">//创建数据库-&nbsp;(void)createSqlite{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//1、创建模型对象
+&nbsp;&nbsp;&nbsp;&nbsp;//获取模型路径
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*modelURL&nbsp;=&nbsp;[[NSBundle&nbsp;mainBundle]&nbsp;URLForResource:@&quot;Model&quot;&nbsp;withExtension:@&quot;momd&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//根据模型文件创建模型对象
+&nbsp;&nbsp;&nbsp;&nbsp;NSManagedObjectModel&nbsp;*model&nbsp;=&nbsp;[[NSManagedObjectModel&nbsp;alloc]&nbsp;initWithContentsOfURL:modelURL];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2、创建持久化存储助理：数据库
+&nbsp;&nbsp;&nbsp;&nbsp;//利用模型对象创建助理对象
+&nbsp;&nbsp;&nbsp;&nbsp;NSPersistentStoreCoordinator&nbsp;*store&nbsp;=&nbsp;[[NSPersistentStoreCoordinator&nbsp;alloc]&nbsp;initWithManagedObjectModel:model];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//数据库的名称和路径
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*docStr&nbsp;=&nbsp;[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,&nbsp;NSUserDomainMask,&nbsp;YES)&nbsp;lastObject];
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*sqlPath&nbsp;=&nbsp;[docStr&nbsp;stringByAppendingPathComponent:@&quot;coreData.sqlite&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;数据库&nbsp;path&nbsp;=&nbsp;%@&quot;,&nbsp;sqlPath);
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*sqlUrl&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:sqlPath];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;//设置数据库相关信息&nbsp;添加一个持久化存储库并设置类型和路径，NSSQLiteStoreType：SQLite作为存储库
+&nbsp;&nbsp;&nbsp;&nbsp;[store&nbsp;addPersistentStoreWithType:NSSQLiteStoreType&nbsp;configuration:nil&nbsp;URL:sqlUrl&nbsp;options:nil&nbsp;error:&amp;error];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;添加数据库失败:%@&quot;,error);
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;添加数据库成功&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//3、创建上下文&nbsp;保存信息&nbsp;对数据库进行操作
+&nbsp;&nbsp;&nbsp;&nbsp;NSManagedObjectContext&nbsp;*context&nbsp;=&nbsp;[[NSManagedObjectContext&nbsp;alloc]&nbsp;initWithConcurrencyType:NSMainQueueConcurrencyType];
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//关联持久化助理
+&nbsp;&nbsp;&nbsp;&nbsp;context.persistentStoreCoordinator&nbsp;=&nbsp;store;
+&nbsp;&nbsp;&nbsp;&nbsp;_context&nbsp;=&nbsp;context;}</pre><h6>②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。</h6><blockquote><p>NSPersistentContainer是一个容器,封装了应用程序中的CoreData Stack（核心数据栈堆），简化了创建和管理的核心堆栈的数据处理创建NSManagedObjectModel，NSPersistentStoreCoordinator,NSManagedObjectContext。详情可以看看这篇文章：<a href="http://blog.csdn.net/u013263917/article/details/53277708" target="_blank" rel="nofollow">http://blog.csdn.net/u013263917/article/details/53277708</a></p></blockquote><p><img src="/upload/image/20191118/115933777316.png" width="740" height="475" style="width: 740px; height: 475px;"/></p><p>iOS10以下系统创建模型文件时自动生成关联数据库的代码(转摘).jpeg</p><p><img src="/upload/image/20191118/115941907667.png" width="736" height="808" style="width: 736px; height: 808px;"/></p><p>iOS10之后系统自动生成的广联数据库的代码.png</p><p><img src="/upload/image/20191118/120005637412.png" width="720" height="566" style="width: 720px; height: 566px;"/></p><p>NSPersistentContainer.png</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;AppDelegate&nbsp;*&nbsp;appDelegate&nbsp;=&nbsp;(AppDelegate&nbsp;*)[UIApplication&nbsp;sharedApplication].delegate;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSPersistentContainer&nbsp;*&nbsp;container&nbsp;=&nbsp;appDelegate.persistentContainer;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//返回沙盒中存储数据库的文件夹URL路径，这是一个静态方法，表示数据库的文件路径是唯一的
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*&nbsp;url&nbsp;=&nbsp;[NSPersistentContainer&nbsp;defaultDirectoryURL];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSManagedObjectContext&nbsp;*viewContext&nbsp;=&nbsp;container.viewContext;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSManagedObjectModel&nbsp;*managedObjectModel&nbsp;=&nbsp;container.managedObjectModel;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSPersistentStoreCoordinator&nbsp;*persistentStoreCoordinator&nbsp;=&nbsp;container.persistentStoreCoordinator;
+
+&nbsp;&nbsp;&nbsp;&nbsp;//使用存储调度器快速在多线程中操作数据库，效率非常高(比主线程操作块50倍！！！)
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;(void)performBackgroundTask:(void&nbsp;(^)(NSManagedObjectContext&nbsp;*))block;</pre><h3>5.增删改查排</h3><ul class=" list-paddingleft-2"><li><p>写入数据</p></li></ul><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;//&nbsp;1.根据Entity名称和NSManagedObjectContext获取一个新的继承于NSManagedObject的子类Student
+&nbsp;&nbsp;&nbsp;&nbsp;Student&nbsp;*&nbsp;student&nbsp;=&nbsp;[NSEntityDescription&nbsp;&nbsp;insertNewObjectForEntityForName:@&quot;Student&quot;&nbsp;&nbsp;inManagedObjectContext:_context];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.根据表Student中的键值，给NSManagedObject对象赋值
+&nbsp;&nbsp;&nbsp;&nbsp;student.name&nbsp;=&nbsp;[NSString&nbsp;stringWithFormat:@&quot;Mr-%d&quot;,arc4random()%100];
+&nbsp;&nbsp;&nbsp;&nbsp;student.age&nbsp;=&nbsp;arc4random()%20;
+&nbsp;&nbsp;&nbsp;&nbsp;student.sex&nbsp;=&nbsp;arc4random()%2&nbsp;==&nbsp;0&nbsp;?&nbsp;&nbsp;@&quot;美女&quot;&nbsp;:&nbsp;@&quot;帅哥&quot;&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;student.height&nbsp;=&nbsp;arc4random()%180;
+&nbsp;&nbsp;&nbsp;&nbsp;student.number&nbsp;=&nbsp;arc4random()%100
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;3.保存插入的数据
+&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([_context&nbsp;save:&amp;error])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:@&quot;数据插入到数据库成功&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:[NSString&nbsp;stringWithFormat:@&quot;数据插入到数据库失败,&nbsp;%@&quot;,error]];
+&nbsp;&nbsp;&nbsp;&nbsp;}</pre><ul class=" list-paddingleft-2"><li><p>删除数据</p></li></ul><pre class="line-numbers  language-objectivec">-&nbsp;(void)deleteData{
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//创建删除请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSFetchRequest&nbsp;*deleRequest&nbsp;=&nbsp;[NSFetchRequest&nbsp;fetchRequestWithEntityName:@&quot;Student&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//删除条件
+&nbsp;&nbsp;&nbsp;&nbsp;NSPredicate&nbsp;*pre&nbsp;=&nbsp;[NSPredicate&nbsp;predicateWithFormat:@&quot;age&nbsp;&lt;&nbsp;%d&quot;,&nbsp;10];
+&nbsp;&nbsp;&nbsp;&nbsp;deleRequest.predicate&nbsp;=&nbsp;pre;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//返回需要删除的对象数组
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*deleArray&nbsp;=&nbsp;[_context&nbsp;executeFetchRequest:deleRequest&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//从数据库中删除
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(Student&nbsp;*stu&nbsp;in&nbsp;deleArray)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[_context&nbsp;deleteObject:stu];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;//保存--记住保存
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([_context&nbsp;save:&amp;error])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:@&quot;删除&nbsp;age&nbsp;&lt;&nbsp;10&nbsp;的数据&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;删除数据失败,&nbsp;%@&quot;,&nbsp;error);
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><ul class=" list-paddingleft-2"><li><p>更新修改</p></li></ul><pre class="line-numbers  language-objectivec">//更新，修改-&nbsp;(void)updateData{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//创建查询请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSFetchRequest&nbsp;*request&nbsp;=&nbsp;[NSFetchRequest&nbsp;fetchRequestWithEntityName:@&quot;Student&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;NSPredicate&nbsp;*pre&nbsp;=&nbsp;[NSPredicate&nbsp;predicateWithFormat:@&quot;sex&nbsp;=&nbsp;%@&quot;,&nbsp;@&quot;帅哥&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;request.predicate&nbsp;=&nbsp;pre;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//发送请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*resArray&nbsp;=&nbsp;[_context&nbsp;executeFetchRequest:request&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//修改
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(Student&nbsp;*stu&nbsp;in&nbsp;resArray)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stu.name&nbsp;=&nbsp;@&quot;且行且珍惜_iOS&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//保存
+&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([_context&nbsp;save:&amp;error])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:@&quot;更新所有帅哥的的名字为“且行且珍惜_iOS”&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;更新数据失败,&nbsp;%@&quot;,&nbsp;error);
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;}</pre><ul class=" list-paddingleft-2"><li><p>读取查询</p></li></ul><pre class="line-numbers  language-bash">//读取查询
+-&nbsp;(void)readData{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;谓词的条件指令
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.比较运算符&nbsp;&gt;&nbsp;、&lt;&nbsp;、==&nbsp;、&gt;=&nbsp;、&lt;=&nbsp;、!=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：@&quot;number&nbsp;&gt;=&nbsp;99&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.范围运算符：IN&nbsp;、BETWEEN
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：@&quot;number&nbsp;BETWEEN&nbsp;{1,5}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;address&nbsp;IN&nbsp;{&#39;shanghai&#39;,&#39;nanjing&#39;}&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.字符串本身:SELF
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：@&quot;SELF&nbsp;==&nbsp;&#39;APPLE&#39;&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.字符串相关：BEGINSWITH、ENDSWITH、CONTAINS
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：&nbsp;&nbsp;@&quot;name&nbsp;CONTAIN[cd]&nbsp;&#39;ang&#39;&quot;&nbsp;&nbsp;//包含某个字符串
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;name&nbsp;BEGINSWITH[c]&nbsp;&#39;sh&#39;&quot;&nbsp;&nbsp;&nbsp;&nbsp;//以某个字符串开头
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;name&nbsp;ENDSWITH[d]&nbsp;&#39;ang&#39;&quot;&nbsp;&nbsp;&nbsp;&nbsp;//以某个字符串结束
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.通配符：LIKE
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：@&quot;name&nbsp;LIKE[cd]&nbsp;&#39;*er*&#39;&quot;&nbsp;&nbsp;&nbsp;//*代表通配符,Like也接受[cd].
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;name&nbsp;LIKE[cd]&nbsp;&#39;???er*&#39;&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*注*:&nbsp;星号&nbsp;&quot;*&quot;&nbsp;:&nbsp;代表0个或多个字符
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问号&nbsp;&quot;?&quot;&nbsp;:&nbsp;代表一个字符
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.正则表达式：MATCHES
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例：NSString&nbsp;*regex&nbsp;=&nbsp;@&quot;^A.+e$&quot;;&nbsp;//以A开头，e结尾
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;name&nbsp;MATCHES&nbsp;%@&quot;,regex
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:[c]*不区分大小写&nbsp;,&nbsp;[d]不区分发音符号即没有重音符号,&nbsp;[cd]既不区分大小写，也不区分发音符号。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.&nbsp;合计操作
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ANY，SOME：指定下列表达式中的任意元素。比如，ANY&nbsp;children.age&nbsp;&lt;&nbsp;18。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALL：指定下列表达式中的所有元素。比如，ALL&nbsp;children.age&nbsp;&lt;&nbsp;18。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NONE：指定下列表达式中没有的元素。比如，NONE&nbsp;children.age&nbsp;&lt;&nbsp;18。它在逻辑上等于NOT&nbsp;(ANY&nbsp;...)。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN：等于SQL的IN操作，左边的表达必须出现在右边指定的集合中。比如，name&nbsp;IN&nbsp;{&nbsp;&#39;Ben&#39;,&nbsp;&#39;Melissa&#39;,&nbsp;&#39;Nick&#39;&nbsp;}。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提示:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;谓词中的匹配指令关键字通常使用大写字母
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;谓词中可以使用格式字符串
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;如果通过对象的key
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path指定匹配条件，需要使用%K
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//创建查询请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSFetchRequest&nbsp;*request&nbsp;=&nbsp;[NSFetchRequest&nbsp;fetchRequestWithEntityName:@&quot;Student&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//查询条件
+&nbsp;&nbsp;&nbsp;&nbsp;NSPredicate&nbsp;*pre&nbsp;=&nbsp;[NSPredicate&nbsp;predicateWithFormat:@&quot;sex&nbsp;=&nbsp;%@&quot;,&nbsp;@&quot;美女&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;request.predicate&nbsp;=&nbsp;pre;
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;从第几页开始显示
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;通过这个属性实现分页
+&nbsp;&nbsp;&nbsp;&nbsp;//request.fetchOffset&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;每页显示多少条数据
+&nbsp;&nbsp;&nbsp;&nbsp;//request.fetchLimit&nbsp;=&nbsp;6;
+
+&nbsp;&nbsp;&nbsp;&nbsp;//发送查询请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*resArray&nbsp;=&nbsp;[_context&nbsp;executeFetchRequest:request&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:@&quot;查询所有的美女&quot;];&nbsp;&nbsp;
+}</pre><ul class=" list-paddingleft-2"><li><p>排序</p></li></ul><pre class="line-numbers  language-objectivec">//排序-&nbsp;(void)sort{
+&nbsp;&nbsp;&nbsp;&nbsp;//创建排序请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSFetchRequest&nbsp;*request&nbsp;=&nbsp;[NSFetchRequest&nbsp;fetchRequestWithEntityName:@&quot;Student&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//实例化排序对象
+&nbsp;&nbsp;&nbsp;&nbsp;NSSortDescriptor&nbsp;*ageSort&nbsp;=&nbsp;[NSSortDescriptor&nbsp;sortDescriptorWithKey:@&quot;age&quot;ascending:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;NSSortDescriptor&nbsp;*numberSort&nbsp;=&nbsp;[NSSortDescriptor&nbsp;sortDescriptorWithKey:@&quot;number&quot;ascending:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;request.sortDescriptors&nbsp;=&nbsp;@[ageSort,numberSort];
+&nbsp;&nbsp;&nbsp;&nbsp;//发送请求
+&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*resArray&nbsp;=&nbsp;[_context&nbsp;executeFetchRequest:request&nbsp;error:&amp;error];
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(error&nbsp;==&nbsp;nil)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;alertViewWithMessage:@&quot;按照age和number排序&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;排序失败,&nbsp;%@&quot;,&nbsp;error);
+&nbsp;&nbsp;&nbsp;&nbsp;}}</pre><h5>CoreData调试:</h5><p>打开Product，选择Edit Scheme.<br/>选择Arguments，在下面的ArgumentsPassed On Launch中添加下面两个选项，如图：<br/>(1)-com.apple.CoreData.SQLDebug<br/>(2)1</p><p><img src="/upload/image/20191119/214537385416.png" width="739" height="523" style="width: 739px; height: 523px;"/></p><p><br/></p><p>示例Demo：<a href="https://github.com/wslcmk/CoreDataLearn.git" target="_blank" rel="nofollow">CoreDataLearn</a></p><p><br/><br/><br/>原文链接：https://www.jianshu.com/p/332cba029b95<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '9aC7704B';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

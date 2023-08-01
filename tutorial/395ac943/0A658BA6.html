@@ -1,0 +1,289 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="抖音数据分析服务">
+ 	<meta name="keywords" content="抖音排行榜,抖音数据,抖音营销-抖商助手 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>数据类型-python3教程</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #e2e2e2;
+        font-weight: bold;
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 1em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>数据类型-python3教程</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="2c6Ba358" class="item chapter normal">python3简介</div><div id="bA0332c7" class="item course normal">Windows下安装</div><div id="C12838cA" class="item course normal">Linux下安装</div><div id="8b320BA6" class="item course normal">Mac下安装</div><div id="8a70482B" class="item chapter normal">基本语法</div><div id="0A658BA6" class="item course normal">数据类型</div><div id="9303CBc7" class="item course normal">Number</div><div id="c9349ABa" class="item course normal">字符串</div><div id="3AC2c6BA" class="item course normal">正则匹配</div><div id="a2469092" class="item course normal">列表 list</div><div id="0117b3c7" class="item course normal">元组</div><div id="aBC84A59" class="item course normal">字典</div><div id="4b8ccBC2" class="item course normal">集合</div><div id="507B4c4C" class="item chapter normal">运算符</div><div id="982A21c1" class="item course normal">算术运算符</div><div id="8484b5B0" class="item course normal">关系运算符</div><div id="c476Cc31" class="item course normal">赋值运算符</div><div id="0Ab81b19" class="item course normal">位运算符</div><div id="C6AabA97" class="item course normal">成员运算符</div><div id="0768cA9a" class="item course normal">逻辑运算符</div><div id="A4218806" class="item course normal">身份运算符</div><div id="B14746ba" class="item chapter normal">流程控制</div><div id="8b1b5118" class="item course normal">条件控制</div><div id="B8C881B2" class="item course normal">循环语句</div><div id="304c96C5" class="item course normal">迭代器与生成器</div><div id="7728974A" class="item course normal">函数</div><div id="94a9b784" class="item course normal">模块</div><div id="925AbB6C" class="item course normal">输入输出</div><div id="8aBaC7b4" class="item course normal">文件操作</div><div id="469915Aa" class="item course normal">错误和异常</div><div id="2a78B0c1" class="item chapter normal">面向对象</div><div id="4a2c2bBA" class="item chapter normal">命名空间和作用域</div><div id="12CCc4A0" class="item chapter normal">标准库概览</div><div id="2142868c" class="item chapter normal">Python操作数据库</div><div id="50300125" class="item course normal">操作redis</div><div id="AcA970B3" class="item course normal">操作mysql</div><div id="1a7CC121" class="item course normal">操作Elastic Search</div><div id="9AaCbb30" class="item course normal selected">操作mongodb</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-8" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row ontent">
+             <div class="col-sm-12">
+                 <p>变量类型</p><p>Python 中的变量不需要声明。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p><p>在 Python 中，变量就是变量，不需要在在编译的时候指定类型，我们所说的&quot;类型&quot;是变量所指的内存中对象的类型。</p><p>等号（=）用来给变量赋值。</p><p>等号（=）运算符左边是一个变量名,等号（=）运算符右边是存储在变量中的值。例如</p><pre class="brush:js;toolbar:false">#!/usr/bin/python3
+a&nbsp;=&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;整型变量
+b&nbsp;&nbsp;&nbsp;=&nbsp;1000.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;浮点型变量
+c&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&quot;qtxjc&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;字符串
+print&nbsp;(a)
+print&nbsp;(b)
+print&nbsp;(c)</pre><p><strong>多个变量赋值</strong></p><p>Python允许你同时为多个变量赋值。例如：</p><pre class="brush:java;toolbar:false">a=b=c=1
+print(a,b,c)</pre><p>标准数据类型</p><p>Python3 中有六个标准的数据类型：</p><p>Number（数字）</p><p>String（字符串）</p><p>List（列表）</p><p>Tuple（元组）</p><p>Set（集合）</p><p>Dictionary（字典）</p><p>Python3 的六个标准数据类型中：</p><p><span style="color: rgb(84, 141, 212);">不可变长度（3 个）：Number（数字）、String（字符串）、Tuple（元组）；</span></p><p><span style="color: rgb(84, 141, 212);">可变长度（3 个）：List（列表）、Dictionary（字典）、Set（集合）。</span></p><p style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Number（数字）</p><p>Python3 支持&nbsp;<span style="color: rgb(84, 141, 212);">int、float、bool、complex</span>（复数）。</p><p>在Python 3里，只有一种整数类型 int，表示为长整型，没有 python2 中的 Long。</p><p>像大多数语言一样，数值类型的赋值和计算都是很直观的。</p><p>内置的 type() 函数可以用来查询变量所指的对象类型,isinstance可以用来判断是否指定的类型</p><p>sys.getsizeof()函数用来查询所指对象占据的内存大小</p><pre class="brush:java;toolbar:false">import&nbsp;sys
+a=1
+b=(1,2)
+c=[1,2,3]
+print(type(a),type(b),type(c))
+print(sys.getsizeof(a),sys.getsizeof(b),sys.getsizeof(c))
+print(isinstance(a,int))</pre><p><span style="color: rgb(84, 141, 212);"></span></p><p>output：</p><p><span style="background-color: rgb(198, 217, 240);"></span></p><p><span style="color: rgb(84, 141, 212); background-color: rgb(198, 217, 240);">&lt;class&nbsp;&#39;int&#39;&gt;&nbsp;&lt;class&nbsp;&#39;tuple&#39;&gt;&nbsp;&lt;class&nbsp;&#39;list&#39;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p><p><span style="color: rgb(84, 141, 212); background-color: rgb(198, 217, 240);">28&nbsp;64&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p><p><span style="color: rgb(84, 141, 212); background-color: rgb(198, 217, 240);">True</span></p><p>您也可以使用del语句删除一些对象引用。</p><p>del语句的语法是：</p><p>del var</p><p>您可以通过使用del语句删除单个或多个对象。例如</p><pre class="brush:groovy;toolbar:false">del&nbsp;a,b,c</pre><p>数值运算</p><p><span style="border: 0px; margin: 0px; padding: 0px; font-family: Menlo, Monaco, Consolas, &quot;Andale Mono&quot;, &quot;lucida console&quot;, &quot;Courier New&quot;, monospace; font-size: 13.2px; color: maroon;"></span></p><pre class="brush:groovy;toolbar:false">5+1&nbsp;&nbsp;#&nbsp;加法&nbsp;结果5
+4.5-2&nbsp;#&nbsp;减法&nbsp;结果2.5
+3*7&nbsp;&nbsp;#&nbsp;乘法&nbsp;结果21
+2/4&nbsp;#&nbsp;除法，得到一个浮点数0.5
+3//6&nbsp;#&nbsp;除法，得到一个整数1
+5%3&nbsp;#&nbsp;取余&nbsp;结果2
+2**6&nbsp;#&nbsp;乘方&nbsp;结果64</pre><p>注意:</p><p>1、Python可以同时为多个变量赋值，如a, b = 1, 2</p><p>2、一个变量可以通过赋值指向不同类型的对象。</p><p>3、数值的除法包含两个运算符：/&nbsp;返回一个浮点数，//&nbsp;返回一个整数。</p><p>4、Python还支持<span style="background-color: rgb(198, 217, 240);">复数</span>，复数由实数部分和虚数部分构成，可以用a + bj,或者complex(a,b)表示， 复数的实部a和虚部b都是浮点型</p><p style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">String（字符串）</p><p>Python中的字符串用单引号&nbsp;&#39;&nbsp;或双引号&nbsp;&quot;&nbsp;括起来，同时使用反斜杠&nbsp;\&nbsp;转义特殊字符。</p><p>字符串的截取的语法格式如下：</p><p style="text-align: left;"><span style="background-color: rgb(251, 251, 251); white-space: pre-wrap; color: rgb(84, 141, 212);">字符串变量[起始下班:结束元素的后一个元素的下标]</span></p>索引值以 0 为开始值，-1 为从末尾的开始位置<p style="text-align: left;"><span style="background-color: rgb(251, 251, 251); white-space: pre-wrap; color: rgb(84, 141, 212);"></span></p><pre class="brush:delphi;toolbar:false">a=&#39;abcd&#39;
+print(a,a[0:2])</pre><p style="text-align: left;"><span style="background-color: rgb(251, 251, 251); white-space: pre-wrap; color: rgb(84, 141, 212);"></span></p><p>output:&nbsp;</p><p><span style="background-color: rgb(198, 217, 240);">abcd&nbsp;b&nbsp; &nbsp;</span></p>加号&nbsp;+&nbsp;是字符串的连接符， 星号&nbsp;*&nbsp;表示复制当前字符串，紧跟的数字为复制的次数。实例如下<pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+str&nbsp;=&nbsp;&#39;qtxjc&#39;
+print&nbsp;(str)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出字符串&nbsp;qtxjc
+print&nbsp;(str[0:-1])&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出第一个到倒数第二个的所有字符&nbsp;qtxj
+print&nbsp;(str[0])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出字符串第一个字符&nbsp;q
+print&nbsp;(str[2:4])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出从第三个开始到第4个的字符&nbsp;xj
+print&nbsp;(str[2:])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出从第三个开始的后的所有字符&nbsp;xjc
+print&nbsp;(str&nbsp;*&nbsp;2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出字符串两次&nbsp;qtxjcqtxjc
+print&nbsp;(str&nbsp;+&nbsp;&quot;abc&quot;)&nbsp;#&nbsp;连接字符串&nbsp;qtxjcabc</pre>Python 使用反斜杠(\)转义特殊字符，如果你不想让反斜杠发生转义，可以在字符串前面添加一个 r，表示原始字符串：<pre class="brush:cpp;toolbar:false">print(&#39;qt\njc&#39;)&nbsp;
+print(r&#39;qt\njc&#39;)</pre><p>output:<br/></p><pre class="brush:css;toolbar:false">qt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+qt\njc</pre><p>注意，反斜杠(\)也可以作为续行符，表示下一行是上一行的延续。也可以使用&nbsp;&quot;&quot;&quot;...&quot;&quot;&quot;&nbsp;或者&nbsp;&#39;&#39;&#39;...&#39;&#39;&#39;&nbsp;跨越多行。</p><p>与 C 字符串不同的是，Python 字符串不能被改变。向一个索引位置赋值，比如str[0] = &#39;x&#39;会导致错误。</p><p style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">List（列表）</p><p>List（列表） 是 Python 中使用最频繁的数据类型。</p><p>列表可以完成大多数集合类的数据结构实现。列表中元素的类型可以不相同，它支持数字，字符串甚至可以包含列表（所谓嵌套）。</p><p>列表是写在方括号&nbsp;[]&nbsp;之间、用逗号分隔开的元素列表。</p><p>和字符串一样，列表同样可以被索引和截取，列表被截取后返回一个包含所需元素的新列表。</p><p>列表的截取、拼接、和重复操作都一样</p><p>列表截取的语法格式如下：</p><p><span style="color: rgb(84, 141, 212); white-space: pre-wrap; background-color: rgb(251, 251, 251);">列表变量[起始下班:结束元素的后一个元素的下标]</span></p><p>索引值以 0 为开始值，-1 为从末尾的开始位置</p>list1+list2 #拼接两个列表<br/><p>list1*2 #重复列表</p><p><br/></p><pre class="brush:cpp;toolbar:false">list1&nbsp;=&nbsp;[1,2,3]
+
+print(list1[1:2],list1[0],list1[1:],list1[-1])#output:[2]&nbsp;1&nbsp;[2,&nbsp;3]&nbsp;3
+
+list2&nbsp;=&nbsp;[4,5,6]
+
+list3&nbsp;=&nbsp;list1+list2
+
+print(list3)#output:[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6]&nbsp;
+
+list3&nbsp;=&nbsp;list1*2
+
+print(list3)#output:[1,&nbsp;2,&nbsp;3,&nbsp;1,&nbsp;2,&nbsp;3]</pre><p><span style="color: rgb(255, 255, 255); font-family: courier-new, courier, monospace; font-size: 14px; background-color: rgb(0, 0, 0);"></span>List中的元素是可以改变的,可以动态添加元素</p><p style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Tuple（元组）</p><p>元组（tuple）与列表类似，不同之处在于元组的元素不能修改。元组写在小括号&nbsp;()&nbsp;里，元素之间用逗号隔开。</p><p>元组的截取、拼接、和重复语法和 String、List 也是一样的。<br/></p><pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+tuple&nbsp;=&nbsp;(&nbsp;&#39;xabc&#39;,&nbsp;xjc&nbsp;,&nbsp;2.11,&nbsp;&#39;runoob&#39;,&nbsp;11.2)
+btuple&nbsp;=&nbsp;(123,&nbsp;&#39;runoob&#39;)
+print&nbsp;(tuple)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出完整元组
+print&nbsp;(tuple[0])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出元组的第一个元素
+print&nbsp;(tuple[1:4])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出从第二个元素开始到第四个元素
+print&nbsp;(tuple[3:])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出从第四个元素开始的所有元素
+print&nbsp;(btuple&nbsp;*&nbsp;2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出两次元组
+print&nbsp;(tuple&nbsp;+&nbsp;btuple)&nbsp;#&nbsp;拼接元组</pre><p style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Set（集合）</p><p>集合（set）是由一个或数个形态各异的大小整体组成的，构成集合的事物或对象称作元素或是成员。</p><p>基本功能是进行成员关系测试和删除重复元素。</p><p>可以使用大括号&nbsp;{ }&nbsp;或者&nbsp;set()&nbsp;函数创建集合，注意：创建一个空集合必须用&nbsp;set()&nbsp;而不是&nbsp;{ }，因为&nbsp;{ }&nbsp;是用来创建一个空字典。</p><pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+#创建a集合
+s&nbsp;=&nbsp;{&#39;Tom&#39;,&nbsp;&#39;Jim&#39;,&nbsp;&#39;Mary&#39;,&nbsp;&#39;Tom&#39;,&nbsp;&#39;Jack&#39;,&nbsp;&#39;Abc&#39;}
+
+print(s)&nbsp;&nbsp;&nbsp;#&nbsp;输出集合，重复的元素被自动去掉
+#&nbsp;成员测试
+if&nbsp;&#39;abc&#39;&nbsp;in&nbsp;s&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;print(&#39;abc&nbsp;在集合中&#39;)
+else&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;print(&#39;abc&nbsp;不在集合中&#39;)
+#&nbsp;set可以进行集合运算
+a&nbsp;=&nbsp;set(&#39;abcdeef&#39;)
+b&nbsp;=&nbsp;set(&#39;cdef&#39;)
+print(a)
+print(a&nbsp;-&nbsp;b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;a&nbsp;和&nbsp;b&nbsp;的差集
+print(a&nbsp;|&nbsp;b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;a&nbsp;和&nbsp;b&nbsp;的并集
+print(a&nbsp;&amp;&nbsp;b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;a&nbsp;和&nbsp;b&nbsp;的交集
+print(a&nbsp;^&nbsp;b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;a&nbsp;和&nbsp;b&nbsp;中不同时存在的元素</pre><h2 style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Dictionary（字典）</h2><p>字典（dictionary）是Python中另一个非常有用的内置数据类型。</p><p>列表是有序的对象集合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。</p><p>字典是一种映射类型，字典用&nbsp;{ }&nbsp;标识，它是一个无序的&nbsp;键(key) : 值(value)&nbsp;的集合。</p><p>键(key)必须使用不可变类型。</p><p>在同一个字典中，键(key)必须是唯一的。</p><pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+dict&nbsp;=&nbsp;{}
+dict[&#39;one&#39;]&nbsp;=&nbsp;&quot;1&nbsp;-&nbsp;菜鸟教程&quot;
+dict[2]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&quot;2&nbsp;-&nbsp;菜鸟工具&quot;
+tinydict&nbsp;=&nbsp;{&#39;name&#39;:&nbsp;&#39;runoob&#39;,&#39;code&#39;:1,&nbsp;&#39;site&#39;:&nbsp;&#39;www.runoob.com&#39;}
+print&nbsp;(dict[&#39;one&#39;])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出键为&nbsp;&#39;one&#39;&nbsp;的值
+print&nbsp;(dict[2])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出键为&nbsp;2&nbsp;的值
+print&nbsp;(tinydict)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;输出完整的字典
+print&nbsp;(tinydict.keys())&nbsp;&nbsp;&nbsp;#&nbsp;输出所有键
+print&nbsp;(tinydict.values())&nbsp;#&nbsp;输出所有值</pre><p>构造函数 dict() 可以直接从键值对序列中构建字典如下</p><pre class="brush:cpp;toolbar:false">#!/usr/bin/python3
+
+dic_a&nbsp;=&nbsp;dict([(&#39;qtxjc&#39;,&nbsp;1),&nbsp;(&#39;BAT&#39;,&nbsp;2),&nbsp;(&#39;TMD&#39;,&nbsp;3)])
+
+dic_b&nbsp;=&nbsp;{x:&nbsp;x*2&nbsp;for&nbsp;x&nbsp;in&nbsp;(&#39;abc&#39;,&nbsp;&#39;cde&#39;,&nbsp;&#39;fgh&#39;)}#lambda&nbsp;表达式
+
+dic_c&nbsp;=&nbsp;dict(qtxjc=1,&nbsp;BAT=2,&nbsp;TMD=3)
+
+print(dic_a)&nbsp;#output:{&#39;qtxjc&#39;:&nbsp;1,&nbsp;&#39;TMD&#39;:&nbsp;3,&nbsp;&#39;BAT&#39;:&nbsp;2}
+
+print(dic_b)&nbsp;#output:{&#39;cde&#39;:&nbsp;&#39;cdecde&#39;,&nbsp;&#39;abc&#39;:&nbsp;&#39;abcabc&#39;,&nbsp;&#39;fgh&#39;:&nbsp;&#39;fghfgh&#39;}&nbsp;
+
+print(dic_c)&nbsp;#output:{&#39;qtxjc&#39;:&nbsp;1,&nbsp;&#39;TMD&#39;:&nbsp;3,&nbsp;&#39;BAT&#39;:&nbsp;2}</pre><h2 style="border: 0px; margin: 2px 0px; padding: 0px; font-size: 1.8em; line-height: 1.8em; color: rgb(51, 51, 51); font-family: &quot;Helvetica Neue&quot;, Helvetica, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">数据类型转换</h2><p>有时候，我们需要对数据内置的类型进行转换，数据类型的转换，你只需要将数据类型作为函数名即可。</p><p>以下几个内置的函数可以执行数据类型之间的转换。这些函数返回一个新的对象，表示转换的值。</p><table class="reference" width="833" style="width: 716px;"><tbody style="border: 0px; margin: 0px; padding: 0px;"><tr style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);" class="firstRow"><th style="border-color: rgb(85, 85, 85); margin: 0px; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(85, 85, 85); vertical-align: top; text-align: left;">函数</th><th style="border-color: rgb(85, 85, 85); margin: 0px; padding: 3px; color: rgb(255, 255, 255); background-color: rgb(85, 85, 85); vertical-align: top; text-align: left;">描述</th></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-int.html" target="_blank" rel="noopener noreferrer">int(x [,base])</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将x转换为一个整数</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-float.html" target="_blank" rel="noopener noreferrer">float(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将x转换到一个浮点数</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-complex.html" target="_blank" rel="noopener noreferrer">complex(real [,imag])</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>创建一个复数</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-str.html" target="_blank" rel="noopener noreferrer">str(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将对象 x 转换为字符串</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-repr.html" target="_blank" rel="noopener noreferrer">repr(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将对象 x 转换为表达式字符串</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-eval.html" target="_blank" rel="noopener noreferrer">eval(str)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>用来计算在字符串中的有效Python表达式,并返回一个对象</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python3-func-tuple.html" target="_blank" rel="noopener noreferrer">tuple(s)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将序列 s 转换为一个元组</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python3-att-list-list.html" target="_blank" rel="noopener noreferrer">list(s)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将序列 s 转换为一个列表</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-set.html" target="_blank" rel="noopener noreferrer">set(s)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>转换为可变集合</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-dict.html" target="_blank" rel="noopener noreferrer">dict(d)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>创建一个字典。d 必须是一个 (key, value)元组序列。</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-frozenset.html" target="_blank" rel="noopener noreferrer">frozenset(s)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>转换为不可变集合</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-chr.html" target="_blank" rel="noopener noreferrer">chr(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将一个整数转换为一个字符</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-ord.html" target="_blank" rel="noopener noreferrer">ord(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将一个字符转换为它的整数值</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px; background-color: rgb(246, 244, 240);"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-hex.html" target="_blank" rel="noopener noreferrer">hex(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将一个整数转换为一个十六进制字符串</p></td></tr><tr valign="top" style="border: 0px; margin: 0px; padding: 0px;"><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; min-width: 24px; line-height: 2em; vertical-align: top;"><p><a href="https://www.runoob.com/python3/python-func-oct.html" target="_blank" rel="noopener noreferrer">oct(x)</a></p></td><td style="border-color: rgb(212, 212, 212); margin: 0px; padding: 7px 5px; font-size: 13px; line-height: 2em; min-width: 24px; vertical-align: top;"><p>将一个整数转换为一个八进制字符串</p></td></tr></tbody></table><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线调试工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '395ac943';
+var article_id = '0A658BA6';
+</script>
+
+	
+		<div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备17006386号-5</div>
+	
+</body>

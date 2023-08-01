@@ -1,0 +1,289 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>图文混排-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>图文混排-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">开头</strong><br style="box-sizing: border-box;"/>本文是技术集中的第一篇技术性文章，所以就记录一点简单且浅显易懂的东西。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">现在即时通讯和朋友圈这两块功能基本上属于app的标配功能了吧。图文混排在这两块中使用最为常见，我已经做好了demo:图文混排demo<a href="https://github.com/Joker-King/TextUtil" rel="nofollow noreferrer" target="_blank" style="box-sizing: border-box; background: transparent; color: rgb(0, 154, 97); text-decoration-line: none; outline: 0px; border-bottom: 1px solid rgba(0, 154, 97, 0.25); padding-bottom: 1px;">https://github.com/Joker-King...</a>。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">文中会讲述几点小技巧：<strong style="box-sizing: border-box;">图文混排</strong>、<strong style="box-sizing: border-box;">动态计算文字长度</strong>、<strong style="box-sizing: border-box;">图片拉伸方法</strong>。</p><hr style="box-sizing: content-box; height: 0px; margin: 1.5em auto; border-width: 2px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: dotted; border-top-color: rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"/><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">以前的做法</strong></p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">在以前做图文混排的时候，经常使用OHAttributedLabel,后来苹果吸取了一些第三方的优点，对NSString做了扩展，作者也不再更新，推荐用系统的方法来实现图文混排。具体请自行百度或者google关键字OHAttributedLabel。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">现在的做法</strong><br style="box-sizing: border-box;"/>苹果在iOS7中推出了一个新的类NSTextAttachment，它是做图文混排的利器，本文就是用这个类，只用50行代码实现文字与表情混排，当然也可以实现段落中的图文混排，与CoreText比起来实在是简单了太多，下面讲述两个案例。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">案例一</strong><br style="box-sizing: border-box;"/><span class="img-wrap" style="box-sizing: border-box; display: block; text-align: center;"><img referrerpolicy="no-referrer" data-src="/img/bVs9C3" src="/upload/image/20191114/174239925605.png" alt="图片描述" title="图片描述" style="box-sizing: border-box; border: none; vertical-align: middle; max-width: 100%; position: static !important; padding: 3px; cursor: pointer; display: inline;"/></span></p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">先上效果图，聊天界面中的图文混排：</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">要实现这样的效果，code4app上似乎有很多种做法，还有一些奇葩的一个字符一个label，但是今天要讲述的做法，是目前为止我看到的最简单的做法了，只用一个UILabel,需要用到UILabel的attributedText属性。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">首先，需要组装一个表情和文字对应的plist文件，plist中的键值对如下：<br style="box-sizing: border-box;"/><span class="img-wrap" style="box-sizing: border-box; display: block; text-align: center;"><img referrerpolicy="no-referrer" data-src="/img/bVs9FR" src="/upload/image/20191114/174239525262.png" alt="图片描述" title="图片描述" style="box-sizing: border-box; border: none; vertical-align: middle; max-width: 100%; position: static !important; padding: 3px; cursor: pointer; display: inline;"/></span></p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">本文用一个工具类来实现一个转换的方法，你也可以给NSString添加一个类别来实现。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">第一步，解析plist文件，转化为数组。</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSString*filePath&nbsp;=&nbsp;[[NSBundlemainBundle]pathForResource:@&quot;emoticons&quot;ofType:@&quot;plist&quot;];
+NSArray*face&nbsp;=&nbsp;[NSArrayarrayWithContentsOfFile:filePath];</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">第二步，将字符串转换为可变属性字符串，并通过正则表达式匹配出所有的要替换的字符。<br style="box-sizing: border-box;"/>//1、创建一个可变的属性字符串</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSMutableAttributedString*attributeString&nbsp;=&nbsp;[[NSMutableAttributedString&nbsp;alloc]&nbsp;initWithString:text];</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">//2、通过正则表达式来匹配字符串</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSString*regex_emoji&nbsp;=@&quot;\\[[a-zA-Z0-9\\/\\u4e00-\\u9fa5]+\\]&quot;;
+//匹配表情NSError*error&nbsp;=nil;NSRegularExpression*re&nbsp;=&nbsp;[NSRegularExpressionregularExpressionWithPattern:regex_emojioptions:NSRegularExpressionCaseInsensitiveerror:&amp;error];
+if(!re)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;[errorlocalizedDescription]);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;attributeString;
+}
+NSArray*resultArray&nbsp;=&nbsp;[re&nbsp;matchesInString:textoptions:0range:NSMakeRange(0,&nbsp;text.length)];</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">数组中都是NSTextCheckingResult对象，它包含了特殊字符在整个字符串中的位置等信息。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">第三步，将特殊字符与对应表情关联</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSMutableArray*imageArray&nbsp;=&nbsp;[NSMutableArrayarrayWithCapacity:resultArray.count];//根据匹配范围来用图片进行相应的替换for(NSTextCheckingResult*matchinresultArray)&nbsp;{//获取数组元素中得到rangeNSRangerange&nbsp;=&nbsp;[matchrange];//获取原字符串中对应的值NSString*subStr&nbsp;=&nbsp;[textsubstringWithRange:range];for(inti&nbsp;=0;&nbsp;i&nbsp;&lt;&nbsp;face.count;&nbsp;i&nbsp;++)&nbsp;{if([face[i][@&quot;cht&quot;]isEqualToString:subStr])&nbsp;{//face[i][@&quot;png&quot;]就是我们要加载的图片//新建文字附件来存放我们的图片,iOS7才新加的对象NSTextAttachment*textAttachment&nbsp;=&nbsp;[[NSTextAttachmentalloc]init];//给附件添加图片textAttachment.image=&nbsp;[UIImageimageNamed:face[i][@&quot;png&quot;]];//调整一下图片的位置,如果你的图片偏上或者偏下，调整一下bounds的y值即可textAttachment.bounds=CGRectMake(0,&nbsp;-8,&nbsp;textAttachment.image.size.width,&nbsp;textAttachment.image.size.height);//把附件转换成可变字符串，用于替换掉源字符串中的表情文字NSAttributedString*imageStr&nbsp;=&nbsp;[NSAttributedStringattributedStringWithAttachment:textAttachment];//把图片和图片对应的位置存入字典中NSMutableDictionary*imageDic&nbsp;=&nbsp;[NSMutableDictionarydictionaryWithCapacity:2];
+
+[imageDicsetObject:imageStrforKey:@&quot;image&quot;];
+
+[imageDicsetObject:[NSValuevalueWithRange:range]forKey:@&quot;range&quot;];//把字典存入数组中[imageArrayaddObject:imageDic];
+
+}
+
+}
+
+}</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">第四步，将特殊字符替换成图片</p><pre class="hljs markdown" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">//4、从后往前替换，否则会引起位置问题
+
+for(inti&nbsp;=&nbsp;(int)imageArray.count-1;&nbsp;i&nbsp;&gt;=0;&nbsp;i--)&nbsp;{
+
+NSRangerange;
+
+[imageArray[i][@&quot;range&quot;]getValue:&amp;range];
+
+//进行替换
+
+[attributeStringreplaceCharactersInRange:rangewithAttributedString:imageArray[i][@&quot;image&quot;]];
+
+}</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">用法：</p><pre class="hljs markdown" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSString*content&nbsp;=@&quot;文字加上表情[得意][酷][呲牙]&quot;;
+
+NSMutableAttributedString&nbsp;*attrStr&nbsp;=&nbsp;[Utility&nbsp;emotionStrWithString:content];
+
+_contentLabel.attributedText=&nbsp;attrStr;</pre><hr style="box-sizing: content-box; height: 0px; margin: 1.5em auto; border-width: 2px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: dotted; border-top-color: rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"/><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">案例二：</strong><br style="box-sizing: border-box;"/>需要实现的效果：<br style="box-sizing: border-box;"/><span class="img-wrap" style="box-sizing: border-box; display: block; text-align: center;"><img referrerpolicy="no-referrer" data-src="/img/bVs9Gd" src="/upload/image/20191114/174240496009.png" alt="图片描述" title="图片描述" style="box-sizing: border-box; border: none; vertical-align: middle; max-width: 100%; position: static !important; padding: 3px; cursor: pointer; display: inline;"/></span></p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">有了上面的方法，这个效果更容易实现，只需要将某些图片给它设置一个固定的字符对应即可。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">与以上方法主要不同点在于正则表达式：</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">//2、匹配字符串
+NSError*error&nbsp;=nil;
+NSRegularExpression*re&nbsp;=&nbsp;[NSRegularExpressionregularExpressionWithPattern:stringoptions:NSRegularExpressionCaseInsensitiveerror:&amp;error];
+\if(!re)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;[errorlocalizedDescription]
+);
+return&nbsp;attributeString;
+}</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">用法：</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSString*praiseStr&nbsp;=@&quot;路人甲、路人乙&quot;;
+NSString*praiseInfo&nbsp;=&nbsp;[NSStringstringWithFormat:@&quot;&lt;点赞&gt;&nbsp;%@&quot;,praiseStr];
+NSDictionary*attributesForAll&nbsp;=@{NSFontAttributeName:[UIFontsystemFontOfSize:14.0],NSForegroundColorAttributeName:[UIColorgrayColor]};NSMutableAttributedString*attrStr&nbsp;=&nbsp;[UtilityexchangeString:@&quot;&lt;点赞&gt;&quot;withText:praiseInfoimageName:@&quot;dynamic_love_blue&quot;];</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="box-sizing: border-box;">彩蛋</strong><br style="box-sizing: border-box;"/>1、计算动态文字的长度</p><pre class="hljs objectivec" style="box-sizing: border-box; overflow: auto; font-family: &quot;Source Code Pro&quot;, Consolas, Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 0.93em; padding: 1em; margin-bottom: 1.5em; line-height: 1.45; word-break: break-all; overflow-wrap: break-word; color: rgb(51, 51, 51); background: url(&quot;../img/blueprint.png&quot;) 0% 0% / 30px, 0% 0% / 30px rgb(246, 246, 246); border: none; border-radius: 4px; max-height: 35em; position: relative; margin-top: 0px !important;">NSMutableAttributedString*content&nbsp;=&nbsp;[UtilityemotionStrWithString:_dynamic.text];
+
+[contentaddAttribute:NSFontAttributeNamevalue:kContentFontrange:NSMakeRange(0,&nbsp;content.length)];
+CGSize&nbsp;maxSize&nbsp;=CGSizeMake(kDynamicWidth,MAXFLOAT);
+CGSize&nbsp;attrStrSize&nbsp;=&nbsp;[content&nbsp;boundingRectWithSize:maxSizeoptions:NSStringDrawingUsesLineFragmentOrigincontext:nil].size;</pre><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">其中NSMutableAttributedString类型的字符串可以添加多种属性，并且在计算的时候必须设置字符大小等属性。</p><p style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);">2、图片拉伸</p><ul style="box-sizing: border-box; margin-top: 1.5em; margin-bottom: 1.5em; margin-left: 3em; padding-left: 0px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;Source Han Sans SC&quot;, &quot;Noto Sans CJK SC&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 15px; white-space: normal; background-color: rgb(255, 255, 255);" class=" list-paddingleft-2"><li><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0px;">在iOS5之前可以用stretchableImageWithLeftCapWidth: topCapHeight:</p></li><li><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0px;">iOS5之中用resizableImageWithCapInsets:</p></li><li><p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0px;">iOS6开始多了一个参数resizableImageWithCapInsets:resizingMode:</p></li></ul><p>原文连接:<a href="https://segmentfault.com/a/1190000004526417?utm_source=tag-newest">https://segmentfault.com/a/1190000004526417?utm_source=tag-newest</a></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '95c35B5c';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

@@ -1,0 +1,224 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>B+树-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>B+树-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h1 style="box-sizing: border-box; margin: 0px 0px 16px; color: rgb(64, 64, 64); text-rendering: optimizelegibility; font-size: 26px; font-family: -apple-system, BlinkMacSystemFont, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Segoe UI&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">1.前言</h1><p>B树是为磁盘或其他直接存取的辅助存储设备而设计的一种平衡搜索树。B树类似于红黑树，但它们在降低磁盘I/O操作数方面要更好一些。现在许多数据库系统使用B树或者B树的变种(B+树和B*树)来存储信息。B树用的比较普遍，许多书籍、博客都有详细的介绍，对于B树的严格定义也相对统一，在这里就不予赘述。</p><p>B+树是B树的一种变形，它把所有的卫星数据都存储在叶节点中，内部节点只存放<strong>关键字和孩子指针</strong>，因此最大化了内部节点的分支因子，所以B+树的遍历也更加高效(B树需要以中序的方式遍历节点，而B+树只需把所有叶子节点串成链表就可以从头到尾遍历)。</p><p>以下先放一张我所依据的B+树的图示(这张图有所简化，下面讲完定义后会贴一张更加详细的图，两图本质并无差异)：</p><p><br/></p><p><img src="/upload/image/2019113/125055841298.png"/></p><h1>2.定义</h1><p>B+树的定义我没有找到官方的定义(如果有找到的人望告知我)，有些定义在论坛还有争议，但是这些并没有多大影响，只是一点小小的差异，下面的定义中有涉及争议的部分我会提及。</p><p><strong>B+树的定义如下：</strong></p><p><strong>1，每个节点node有下面的属性： </strong></p><blockquote><p>1，n个关键字key[1],key[2], … ,key[n]，以非降序存放，使得key[1]≤key[2]≤…≤key[n]；</p><p>2，isRoot，一个布尔值，如果node是根节点，则为TRUE；否则为FALSE；</p><p>3，isLeaf，一个布尔值，如果node是叶子节点，则为TRUE；否则为FALSE；</p><p>4，Node*类型的parent指针，指向该节点的父节点</p></blockquote><p>2， 每个内部节点还包含n个指向其孩子children[0],children[1], … , children[n]，叶子节点没有孩子。（<strong>注：此处有争议，B+树到底是与B 树n-1个关键字有n棵子树保持一致，还是B+树n个关键字的结点中含有n棵子树；两种定义都可以，只要自己实现的时候统一用一种就行。如无特殊说明，以下的都是后者：即n个关键字对应n棵子树</strong>）；</p><p>3，内部节点的关键字对存储在各子树中的关键字范围加以分割：如果key[i]为任意一个存储在内部节点中的关键字，childNum[i]为该节点的对应下标的子树指针指向的节点的任意一个关键字，那么</p><blockquote><p>key[1] ≤ childNum[1] &lt; key[2] ≤ childNum[2] &lt; key[3] ≤ childNum[3] &lt; … &lt; key[n] ≤ childNum[n]</p></blockquote><p>4，内部节点并不存储真正的信息，而是保存其叶子节点的最小值作为索引。比如下图，标注1和标注2都是内部节点，里面保存的并不是真正的信息，而是标注3所示的节点中的最小值。(<strong>注：此处有争议以最大值作为索引，同样也是不影响的争议</strong>)</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/14822154-ccadba9845654a8e.jpg" data-original-width="610" data-original-height="377" data-original-format="image/jpeg" data-original-filesize="65877" class="" data-image-index="1" src="/upload/image/2019113/125103259330.png" style="white-space: normal; cursor: zoom-in;"/></p><p>5，任何和关键字相联系的<strong>“卫星数据(satellite information)” </strong>将与关键字一样存放在叶子节点中，一般地，可能只是为每个关键字对应的”卫星数据”存放一个指针，指针指向存放实际数据的磁盘页，匹配了某个叶子节点的关键字即可通过该指针找到其他对应数据。</p><p>6，每个叶子节点还有指向下一个节点的指针next，方便遍历整棵B+树。</p><p>7，每个叶子节点具有相同的深度，即树的高度h。</p><p>8，每个节点所包含的关键字个数有上界和下界，用一个被B+树的最小度数(minmum degree)的固定整数t≥2来表示这些界：</p><blockquote><p>1，除了根节点以外的每个节点必须至少有t个关键字。因此，除了根节点以外的每个内部节点至少有t个孩子</p><p>2，每个节点至多有2t个关键字，因此，一个内部节点至多可有2t个孩子。当一个节点恰好有2t个关键字时，称该节点是满的。</p></blockquote><p>结合以上的具体定义，下面这张图更加详细的描述了一棵具体的B+树</p><h1>3.注意点</h1><p>在B+树的学习与实现过程中，也遇到不少的疑惑之处，现记录如下，持续更新：</p><p>内部节点并不存储真正的信息，而是保存其叶子节点的最小值作为索引。每次插入删除都进行更新(此时用到parent指针)，保持最新状态。</p><p>关于所有叶子节点都处于同一深度是如何实现的？这与B+树具体的插入和删除算法有关。简单解释一下插入时的情况，根据插入值的大小，逐步向下直到对应的叶子节点。如果叶子节点关键字个数小于2t，则直接插入值或者更新卫星数据；如果插入之前叶子节点已经满了，则分裂该叶子节点成两半，并把中间值提上到父节点的关键字中，如果这导致父节点满了的话，则把该父节点分裂，如此递归向上。所以树高是一层层的增加的，叶子节点永远都在同一深度。下面是我实现的B+树中的插入代码的片段：</p><blockquote><pre class="brush:cpp;toolbar:false">/**&nbsp;插入关键字key&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;insert(Comparable&nbsp;key,&nbsp;Object&nbsp;obj,&nbsp;BPlusTree&nbsp;tree)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;叶子节点则插入
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isLeaf)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;不需要分裂直接插入
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(containsKeyword(key)&nbsp;||&nbsp;keywords.size()&nbsp;&lt;&nbsp;tree.getDegree())&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insertInNotFull(key,&nbsp;obj);&nbsp;//&nbsp;直接插入
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(parent&nbsp;!=&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent.updateAfterInsert(tree);&nbsp;//&nbsp;更新父节点的信息(将最小的值存到父节点的关键字中作为索引)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;需要分裂成左右两个节点
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;splitNode(key,&nbsp;obj,&nbsp;tree);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;如果不是叶子节点则继续往下搜索
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node&nbsp;leafNode&nbsp;=&nbsp;downToLeaf(key);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;逐步向下到对应的叶子节点
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;leafNode.insert(key,&nbsp;obj,&nbsp;tree);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+}</pre><p dir="ltr" style="text-indent: 0em;"><br/></p></blockquote><h1>4.结语</h1><p>B+树还有一个最大的好处，方便扫库，B树必须用中序遍历的方法按序扫库，而B+树直接从叶子结点挨个扫一遍就完了，B+树支持range-query非常方便，而B树不支持。这是数据库选用B+树的最主要原因。 –梁斌</p><p>原文链接链接：<a href="https://www.jianshu.com/p/2dd90b541694">https://www.jianshu.com/p/2dd90b541694</a><br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = '8CB3C5B5';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

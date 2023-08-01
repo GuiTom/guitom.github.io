@@ -1,0 +1,52 @@
+<style type="text/css">
+	.panel-heading{
+		padding-top: 5px;
+		padding-right: 5px;
+	}
+	.panel-body {
+    	padding: 10px;
+	}
+	.panel-body div {
+    	padding-left: 20px;
+	}
+
+	.menu-container{
+		border-width: 2px;
+		border-radius: 5px;
+		border-color: green;
+		border:5px solid #f6f4f0;
+	
+	}
+	.menu-container div{
+		padding-right: 10px;
+		padding-left: 10px;
+		line-height: 30px;
+	}
+	.chapter{
+		background-color: #e2e2e2;
+		font-weight: bold;
+	}
+	.course{
+		background-color: #e2e2e2;
+		text-indent: 1em;
+	}
+	.normal{
+		color: black;
+	}
+	.selected{
+		background-color: #1196EE;
+		color: white;
+	}
+	.preview{
+		background-color: green;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	body{
+		background-color: #dfdfdf;
+	}
+	td {
+        border: 1px solid #ddd
+    }
+</style>

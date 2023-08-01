@@ -1,0 +1,278 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>二叉树排序-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>二叉树排序-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h3>1 前言</h3><p>数据结构中，线性表分为无序线性表和有序线性表。<br/><strong>无序线性表</strong>的数据是杂乱无序的，所以在插入和删除时，没有什么必须遵守的规则，可以插入在数据尾部或者删除在数据尾部。但是在查找的时候，需要遍历整个数据表，导致无序线性表的查找效率低。<br/><strong>有序线性表</strong>的数据则相反，查找数据时的时候因为数据是有序的，可以用<a href="https://www.jianshu.com/p/662417d60702" target="_blank">二分法、插值法、斐波那契查找法</a>来实现。但是，当进行插入和删除操作时，需要维护表中数据的有序性，会耗费大量的时间。<br/>那么，我们希望找到一种数据结构，既可以有较高的插入和删除效率，并且具备较高的查找效率，因此，二叉排序树应运而生。</p><h3>2 二叉排序树</h3><h4>2.1 定义</h4><p>二叉排序树（Binary Sort Tree），又称二叉查找树（Binary Search Tree），也称二叉搜索树。二叉排序树或者是一棵空树，或者是具有下列性质的二叉树：</p><blockquote><p>（1）若左子树不空，则左子树上所有结点的值均小于或等于它的根结点的值；<br/>（2）若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值；<br/>（3）左、右子树也分别为二叉排序树；</p></blockquote><h4>2.2 构造一棵二叉排序树</h4><p>现有序列：61 87 59 47 35 73 51 98 37 93</p><p>构造过程如下：<br/>1）索引 i = 0，A[i] = 61，结点61作为根结点，如图2.1：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-f3d31bf2edacc0ad.png" data-original-width="281" data-original-height="119" data-original-format="image/png" data-original-filesize="3341" class="" data-image-index="0" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-f3d31bf2edacc0ad.png?imageMogr2/auto-orient/strip|imageView2/2/w/281/format/webp"/></p><p>图2.1</p><p>2）索引 i = 1，A[1] = 87, 87 &gt; 61，且结点61右孩子为空，故81为61结点的右孩子，如图2.2：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-84d78cb67f18d37e.png" data-original-width="472" data-original-height="153" data-original-format="image/png" data-original-filesize="7019" class="" data-image-index="1" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-84d78cb67f18d37e.png?imageMogr2/auto-orient/strip|imageView2/2/w/472/format/webp"/></p><p>图2.2</p><p>3）索引 i = 2，A[i] = 59，59 &lt;<br/>61，且结点61左孩子为空，故59为61结点的左孩子，如图2.3：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-3cc63990a00aaa74.png" data-original-width="436" data-original-height="160" data-original-format="image/png" data-original-filesize="8412" class="" data-image-index="2" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-3cc63990a00aaa74.png?imageMogr2/auto-orient/strip|imageView2/2/w/436/format/webp"/></p><p>图2.3</p><p>4）索引 i = 3，A[3] = 47，47 &lt; 59，且结点59左孩子为空，故47为59结点的左孩子，如图2.4：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-a70ee01ceda66a5e.png" data-original-width="461" data-original-height="225" data-original-format="image/png" data-original-filesize="12116" class="" data-image-index="3" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-a70ee01ceda66a5e.png?imageMogr2/auto-orient/strip|imageView2/2/w/461/format/webp"/></p><p>图2.4</p><p>5）索引 i = 4，A[4] = 35，35 &lt; 47，且结点47左孩子为空，故35为47结点的左孩子，如图2.5：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-d33a340a1c55b29d.png" data-original-width="535" data-original-height="292" data-original-format="image/png" data-original-filesize="16606" class="" data-image-index="4" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-d33a340a1c55b29d.png?imageMogr2/auto-orient/strip|imageView2/2/w/535/format/webp"/></p><p>图2.5</p><p>采用同样规则遍历整个数组得到如图2.6所示的一棵排序二叉树。</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-cf52647dceaa4a08.png" data-original-width="442" data-original-height="301" data-original-format="image/png" data-original-filesize="19609" class="" data-image-index="5" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-cf52647dceaa4a08.png?imageMogr2/auto-orient/strip|imageView2/2/w/442/format/webp"/></p><p>图2.6</p><h4>2.3 二叉排序树查找</h4><p>由二叉树的递归定义性质，二叉排序树的查找同样可以使用如下递归算法查找。</p><blockquote><p>如果树是空的，则查找结束，无匹配。<br/>如果被查找的值和根结点的值相等，查找成功。否则就在子树中继续查找。如果被查找的值小于根结点的值就选择左子树，大于根结点的值就选择右子树。</p></blockquote><p>在理想情况下，每次比较过后，树会被砍掉一半，近乎折半查找。<br/>遍历打印可以使用中序遍历，打印出来的结果是从小到大的有序数组。<br/>查找代码：</p><pre class="line-numbers  language-cpp">typedef&nbsp;int&nbsp;Status;&nbsp;/*&nbsp;Status是函数的类型,其值是函数结果状态代码，如OK等&nbsp;*/&nbsp;/*&nbsp;二叉树的二叉链表结点结构定义&nbsp;*/typedef&nbsp;&nbsp;struct&nbsp;BiTNode&nbsp;/*&nbsp;结点结构&nbsp;*/{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;data;&nbsp;&nbsp;&nbsp;/*&nbsp;结点数据&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;BiTNode&nbsp;*lchild,&nbsp;*rchild;&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;左右孩子指针&nbsp;*/}&nbsp;BiTNode,&nbsp;*BiTree;/*&nbsp;递归查找二叉排序树T中是否存在key,&nbsp;*//*&nbsp;指针f指向T的双亲，其初始调用值为NULL&nbsp;*//*&nbsp;若查找成功，则指针p指向该数据元素结点，并返回TRUE&nbsp;*//*&nbsp;否则指针p指向查找路径上访问的最后一个结点并返回FALSE&nbsp;*/Status&nbsp;SearchBST(BiTree&nbsp;t,&nbsp;int&nbsp;key,&nbsp;BiTree&nbsp;f,&nbsp;BiTree&nbsp;*p)&nbsp;{&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!t)&nbsp;/*&nbsp;&nbsp;查找不成功&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p&nbsp;=&nbsp;f;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;FALSE;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(key&nbsp;==&nbsp;t-&gt;data)&nbsp;/*&nbsp;&nbsp;查找成功&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*p&nbsp;=&nbsp;t;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;TRUE;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(key&nbsp;&lt;&nbsp;t-&gt;data)&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;SearchBST(t-&gt;lchild,&nbsp;key,&nbsp;t,&nbsp;p);&nbsp;&nbsp;/*&nbsp;&nbsp;在左子树中继续查找&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;SearchBST(t-&gt;rchild,&nbsp;key,&nbsp;t,&nbsp;p);&nbsp;&nbsp;/*&nbsp;&nbsp;在右子树中继续查找&nbsp;*/}</pre><p>对于图2.6所示的二叉排序树，若查找结点key为47则可以查找成功，若查找结点key为75，树中不存在key为75的结点，故查找失败，则查找指针p指向查找路径的最后一个结点，即结点73。</p><h4>2.4 二叉排序树插入</h4><p>二叉排序的插入是建立在二叉排序的查找之上的，插入一个结点，就是通过查找发现该结点合适插入位置，把结点直接放进去。 其实在2.2节中一步步构造二叉排序树的过程中就是结点插入过程。由此可以得出二叉排序树插入规则如下：</p><blockquote><p>若查找的key已经有在树中，则p指向该数据结点。<br/>若查找的key没有在树中，则p指向查找路径上最后一个结点。</p></blockquote><p>例如：若在图2.6展示的二叉排序树中插入结点数据为60的结点。<br/>首先查找结点数据为60的结点，二叉排序树中不存在结点为60的结点，因此查找失败。此时查找指针p指向查找路径最后一个结点即指向59结点。由于60&gt;59且59结点右子树为空，故将60结点作为59结点的右孩子，插入完成。插入后的二叉排序树如图2.8所示。</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-179528afa8dd5626.png" data-original-width="453" data-original-height="300" data-original-format="image/png" data-original-filesize="21384" class="" data-image-index="6" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-179528afa8dd5626.png?imageMogr2/auto-orient/strip|imageView2/2/w/453/format/webp"/></p><p>图2.8</p><p>插入代码：</p><pre class="line-numbers  language-cpp">struct&nbsp;BiTree&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;data;
+&nbsp;&nbsp;&nbsp;&nbsp;BiTree&nbsp;*lchild;
+&nbsp;&nbsp;&nbsp;&nbsp;BiTree&nbsp;*rchild;};
+&nbsp;//在二叉排序树中插入查找关键字keyBiTree*&nbsp;InsertBST(BiTree&nbsp;*t,int&nbsp;key){
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(t&nbsp;==&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t&nbsp;=&nbsp;new&nbsp;BiTree();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t-&gt;lchild&nbsp;=&nbsp;t-&gt;rchild&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t-&gt;data&nbsp;=&nbsp;key;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;t;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(key&nbsp;&lt;&nbsp;t-&gt;data)&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t-&gt;lchild&nbsp;=&nbsp;InsertBST(t-&gt;lchild,&nbsp;key);
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t-&gt;rchild&nbsp;=&nbsp;InsertBST(t-&gt;rchild,&nbsp;key);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;t;}
+&nbsp;//n个数据在数组d中，tree为二叉排序树根BiTree*&nbsp;CreateBiTree(BiTree&nbsp;*tree,&nbsp;int&nbsp;d[],&nbsp;int&nbsp;n){
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;n;&nbsp;i++)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tree&nbsp;=&nbsp;InsertBST(tree,&nbsp;d[i]);}</pre><h4>2.5 二叉排序树删除</h4><p>二叉树的删除可不再像二叉树的插入那么容易了，以为删除某个结点以后，会影响到树的其它部分的结构。<br/>删除的时候需要考虑以下几种情况：</p><blockquote><p>1）删除结点为叶子结点；<br/>2）删除的结点只有左子树；<br/>3）删除的结点只有右子树<br/>4）删除的结点既有左子树又有右子树。</p></blockquote><p>考虑前三种情况，处理方式比较简单。<br/>例如：若要删除图2.8中的结点93，则直接删除该结点即可。删除后二叉排序树如图2.9所示：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-a09623746d63a661.png" data-original-width="446" data-original-height="305" data-original-format="image/png" data-original-filesize="20357" class="" data-image-index="7" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-a09623746d63a661.png?imageMogr2/auto-orient/strip|imageView2/2/w/446/format/webp"/></p><p>图2.9</p><p>若要删除的结点为结点35，结点35只有右子树，只需删除结点35，将右子树37结点替代结点35即可。删除后的二叉排序树如图2.10所示：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-3e81f147abbeba94.png" data-original-width="434" data-original-height="250" data-original-format="image/png" data-original-filesize="18528" class="" data-image-index="8" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-3e81f147abbeba94.png?imageMogr2/auto-orient/strip|imageView2/2/w/434/format/webp"/></p><p>图2.10</p><p>删除只有左子树的结点与此情况类似。</p><p>情况4相对比较复杂，对于待删除结点既有左子树又有右子树的情形，最佳办法是在剩余的序列中找到最为接近的结点来代替删除结点。这种代替并不会影响到树的整体结构。那么最为接近的结点如何获取呢？<br/>可以采用中序遍历的方式来得到删除结点的前驱和后继结点。选取前驱结点或者后继结点代替删除结点即可。<br/>例如：待删除的结点为47，图2.8中二叉排序树的中序遍历序列为35 37 47 51 59 60 61 73 87 93 98。则结点47的前驱结点为37，则直接将37结点替代47结点即可。替换后的二叉排序树如图2.11所示：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/7043118-abad5a0dd74ffcd0.png" data-original-width="484" data-original-height="245" data-original-format="image/png" data-original-filesize="18956" class="" data-image-index="9" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/7043118-abad5a0dd74ffcd0.png?imageMogr2/auto-orient/strip|imageView2/2/w/484/format/webp"/></p><p>图2.11</p><p>删除代码：</p><pre class="line-numbers  language-php">/*&nbsp;若二叉排序树T中存在关键字等于key的数据元素时，则删除该数据元素结点,&nbsp;*//*&nbsp;并返回TRUE；否则返回FALSE。&nbsp;*/Status&nbsp;DeleteBST(BiTree&nbsp;*T,int&nbsp;key){&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if(!*T)&nbsp;/*&nbsp;不存在关键字等于key的数据元素&nbsp;*/&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;FALSE;
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(key==(*T)-&gt;data)&nbsp;/*&nbsp;找到关键字等于key的数据元素&nbsp;*/&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Delete(T);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(key&lt;(*T)-&gt;data)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;DeleteBST(&amp;(*T)-&gt;lchild,key);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;DeleteBST(&amp;(*T)-&gt;rchild,key);
+
+&nbsp;&nbsp;&nbsp;&nbsp;}}/*&nbsp;从二叉排序树中删除结点p，并重接它的左或右子树。&nbsp;*/Status&nbsp;Delete(BiTree&nbsp;*p){
+&nbsp;&nbsp;&nbsp;&nbsp;BiTree&nbsp;q,s;
+&nbsp;&nbsp;&nbsp;&nbsp;if((*p)-&gt;rchild==NULL)&nbsp;/*&nbsp;右子树空则只需重接它的左子树（待删结点是叶子也走此分支)&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q=*p;&nbsp;*p=(*p)-&gt;lchild;&nbsp;free(q);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if((*p)-&gt;lchild==NULL)&nbsp;/*&nbsp;只需重接它的右子树&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q=*p;&nbsp;*p=(*p)-&gt;rchild;&nbsp;free(q);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;/*&nbsp;左右子树均不空&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q=*p;&nbsp;s=(*p)-&gt;lchild;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(s-&gt;rchild)&nbsp;/*&nbsp;转左，然后向右到尽头（找待删结点的前驱）&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q=s;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s=s-&gt;rchild;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(*p)-&gt;data=s-&gt;data;&nbsp;/*&nbsp;&nbsp;s指向被删结点的直接前驱（将被删结点前驱的值取代被删结点的值）&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(q!=*p)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;rchild=s-&gt;lchild;&nbsp;/*&nbsp;&nbsp;重接q的右子树&nbsp;*/&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;lchild=s-&gt;lchild;&nbsp;/*&nbsp;&nbsp;重接q的左子树&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free(s);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;TRUE;}</pre><h3>3 结语</h3><p>二叉排序树是一种查找与插入效率均较为高效的数据结构，同时，二叉排序树也是二叉树学习中的重点与难点。希望通过本篇的学习能够掌握二叉排序树的查找、插入与删除等基本操作，也希望读者给出指导意见。</p><p><br/><br/>作者：MrHorse1992<br/>链接：<a href="https://www.jianshu.com/p/bbe133625c73">https://www.jianshu.com/p/bbe133625c73</a><br/>来源：简书<br/>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = 'C7b5AcBB';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

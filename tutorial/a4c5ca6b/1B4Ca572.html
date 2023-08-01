@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>小测验-OpenGL 教程</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>小测验-OpenGL 教程</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="99c2cB99" class="item course normal selected">渲染管线</div><div id="1B4Ca572" class="item course normal">小测验</div><div id="a4A48AC0" class="item course normal">vao\vbo\ibo异同</div><div id="4C521751" class="item course normal">旋转矩阵</div><div id="38a7B824" class="item course normal">投影矩阵</div><div id="96aC5a03" class="item course normal">法线矩阵</div><div id="417c0bcC" class="item course normal">坐标分类</div><div id="2934a1Bc" class="item course normal preview"> 光照</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p>opengl 渲染管线中，光栅化发生在以下什么位置?</p><p>A.顶点着色器后，坐标归一化之前 B.坐标归一化之后 C.片段着色以后 D.视口变换以后，着色器以前</p><p>正确答案:D</p><p>光栅化指的是将几何意义上的点对应到屏幕上真实显示的像素小方格。着色器的作用是计算每一个小方格上面的颜色，如果没有光栅化，不知道如何将点对应到像素，该如何确定每个像素小方格的颜色呢？</p><p>以上几个选项的步骤正确的应该是:</p><p>B-&gt;坐标归一化,opengl 在顶点被转换到裁剪坐标之后，自动将每一个 点的x,y,z 值除以 w(归一化坐标),从而将顶点映射到设备归一化坐标空间(-1&lt;=x&lt;=1,-1&lt;=y&lt;=1),而z值留到后面做深度测试用。</p></li></ol><p>&nbsp; &nbsp; &nbsp; A-&gt;顶点着色器接收坐标(gl_postion 接受的是齐次坐标,而 gl_fragCord 是默认存储设备窗口相关坐标。</p><p>&nbsp; &nbsp; &nbsp; C-&gt; 视口变换(注意与视图变换的区别),将设备空间的坐标变换到屏幕坐标空间，例如全屏显示情况下 iphone6s的(750x1334)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 长宽的坐标系内。</p><p>&nbsp; &nbsp; &nbsp; D.视口变化后顶点就映射到像素了，这时由片段着色器来处理像素的显示内容。&nbsp;</p><p>2.深度测试和混合是在片段着色器之前还是之后？</p><p style="text-align: left; text-indent: 2em;">混合和测试是在片段着色器之后(片段着色器的一个变量gl_FragCoord含有深度值)，因此可以说即使是一个经过片段着色器计算的像素，也可能不会显示在屏幕上面(后续的深度测试中被遮住从而忽略)</p><p style="text-align: left; text-indent: 2em;">至于为什么不在之前？目前没有想到反驳的理由。</p><p style="text-align: left; text-indent: 2em;">一点疑问:假如渲染一个球，那么岂不是球的背面像素的颜色也要经过片段着色器，这样是不是有点浪费计算资源？</p><p style="text-align: left; text-indent: 2em;">下面是一些看法:</p><p style="text-align: left; text-indent: 2em;">现代 GPU 可能开启了在片段着色器之前做深度测试的功能</p><p style="text-align: left; text-indent: 2em;">ref:https://www.zhihu.com/question/40576087/answer/775033162</p><p style="text-align: left; text-indent: 2em;">opengl 4.2 以上默认是在片段着色器之前做深度测试的</p><p style="text-align: left; text-indent: 2em;">ref:https://www.khronos.org/opengl/wiki/Early_Fragment_Test<br/></p><p style="text-align: left; text-indent: 2em;">那么 opengles es 有没有这个提前做深度测试的功能呢？这份资料里面说的是 opengles 3.2 可以通过</p><p>&nbsp; &nbsp; &nbsp; ARB_shader_image_load_store来开启提前深度测试</p><p>&nbsp; &nbsp; &nbsp; ref:https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_load_store.txt</p><p><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a4c5ca6b';
+var article_id = '1B4Ca572';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

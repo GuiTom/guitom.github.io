@@ -1,0 +1,493 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>ReactiveCocoa-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>ReactiveCocoa-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>1、首先使用Masonry搭建一个简单的登录界面，在viewDidLoad方法中添加如下代码：</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;UITextField&nbsp;*userNameTextField&nbsp;=&nbsp;[[UITextField&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;userNameTextField.borderStyle&nbsp;=&nbsp;UITextBorderStyleRoundedRect;
+&nbsp;&nbsp;&nbsp;&nbsp;userNameTextField.placeholder&nbsp;=&nbsp;@&quot;请输入用户名…&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:userNameTextField];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;UITextField&nbsp;*passwordTextField&nbsp;=&nbsp;[[UITextField&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;passwordTextField.borderStyle&nbsp;=&nbsp;UITextBorderStyleRoundedRect;
+&nbsp;&nbsp;&nbsp;&nbsp;passwordTextField.placeholder&nbsp;=&nbsp;@&quot;请输入密码…&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;passwordTextField.secureTextEntry&nbsp;=&nbsp;&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:passwordTextField];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;UIButton&nbsp;*loginButton&nbsp;=&nbsp;[UIButton&nbsp;buttonWithType:UIButtonTypeSystem];
+&nbsp;&nbsp;&nbsp;&nbsp;[loginButton&nbsp;setTitle:@&quot;登录&quot;&nbsp;forState:UIControlStateNormal];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:loginButton];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;[passwordTextField&nbsp;mas_makeConstraints:^(MASConstraintMaker&nbsp;*make)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.left.equalTo(self.view.mas_left).offset(10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.centerY.equalTo(self.view.mas_centerY);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.right.equalTo(self.view.mas_right).offset(-10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.height.equalTo(@30);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;[userNameTextField&nbsp;mas_makeConstraints:^(MASConstraintMaker&nbsp;*make)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.left.equalTo(self.view.mas_left).offset(10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.bottom.equalTo(passwordTextField.mas_top).offset(-10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.right.equalTo(self.view.mas_right).offset(-10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.height.equalTo(@(30));
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;[loginButton&nbsp;mas_makeConstraints:^(MASConstraintMaker&nbsp;*make)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.left.equalTo(passwordTextField.mas_left).offset(44);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.top.equalTo(passwordTextField.mas_bottom).offset(10);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.right.equalTo(passwordTextField.mas_right).offset(-44);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.height.equalTo(@(30));
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>运行效果如下图：</p><p><br/></p><p style="text-align:center"><img src="/upload/image/20191118/162540435446.png" width="359" height="662" style="width: 359px; height: 662px;"/></p><p>Simulator Screen Shot - iPhone 8 - 2018-01-12 at 10.03.51.png</p><p>2、接着在viewDidLoad方法中添加如下代码：</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;[userNameTextField.rac_textSignal&nbsp;subscribeNext:^(NSString&nbsp;*&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;x);
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>运行效果如下图：</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/3238517-6a6f559c6af208ef.png" data-original-width="1036" data-original-height="432" data-original-format="image/png" data-original-filesize="214648" class="" data-image-index="2" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/3238517-6a6f559c6af208ef.png?imageMogr2/auto-orient/strip|imageView2/2/w/1036/format/webp"/></p><p>屏幕快照 2018-01-12 上午10.16.02.png</p><p>可以看到，每次在text field中输入时，都会执行block中的代码。没有target-action，没有代理，只有信号与block。ReactiveCocoa信号发送一个事件流到它们的订阅者中。我们需要知道三种类型的事件：next, error和completed。一个信号可能由于error事件或completed事件而终止，在此之前它会发送很多个next事件。RACSignal有许多方法用于订阅这些不同的事件类型。每个方法会有一个或多个block，每个block执行不同的逻辑处理。subscribeNext:方法提供了一个响应next事件的block。ReactiveCocoa框架通过类别来为大部分标准UIKit控件添加信号，以便这些控件可以添加其相应事件的订阅。</p><p>3、RACSignal的几个操作</p><ul class=" list-paddingleft-2"><li><p>map：使用提供的block来转换事件数据。</p></li><li><p>filter：使用提供的block来觉得事件是否往下传递。</p></li><li><p>combineLatest:reduce:：组合源信号数组中的信号，并生成一个新的信号。每次源信号数组中的一个输出新值时，reduce块都会被执行，而返回的值会作为组合信号的下一个值。</p></li><li><p>RAC宏：将信号的输入值指派给对象的属性。它带有两个参数，第一个参数是对象，第二个参数是对象的属性名。每次信号发送下一个事件时，其输出值都会指派给给定的属性。</p></li><li><p>rac_signalForControlEvents：从按钮的参数事件中创建一个信号。</p><p>注意：上面的操作输出仍然是一个RACSignal对象，所以不需要使用变量就可以构建一个管道。</p></li><li><p>doNext：附加操作，并不返回一个值。</p></li></ul><h1>ReactiveCocoa 简用实例</h1><p>1、为登录功能增加一些需求：</p><ul class=" list-paddingleft-2"><li><p>账号和密码都是6-16位，由数字、字母和下划线组成。</p></li><li><p>账号和密码输入框在输入符合规则的时候高亮、否则置灰。</p></li><li><p>账号和密码都符合规则的时候登录按钮才可用，否则置灰不可点击。</p></li><li><p>登录时登录按钮不可用，并提示登录信息。</p></li></ul><p>2、添加一个判断账号或密码输入有效的方法</p><pre class="line-numbers  language-objectivec">-&nbsp;(BOOL)isValid:(NSString&nbsp;*)str&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给密码定一个规则：由字母、数字和_组成的6-16位字符串
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*regularStr&nbsp;=&nbsp;@&quot;[a-zA-Z0-9_]{6,16}&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;NSPredicate&nbsp;*predicate&nbsp;=&nbsp;[NSPredicate&nbsp;predicateWithFormat:@&quot;SELF&nbsp;matches&nbsp;%@&quot;,&nbsp;regularStr];
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[predicate&nbsp;evaluateWithObject:str];}</pre><p>3、创建有效的账号和密码信号</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*validUserNameSignal&nbsp;=&nbsp;[userNameTextField.rac_textSignal&nbsp;map:^id&nbsp;_Nullable(NSString&nbsp;*&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;@([self&nbsp;isValid:value]);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*validPasswordSignal&nbsp;=&nbsp;[passwordTextField.rac_textSignal&nbsp;map:^id&nbsp;_Nullable(NSString&nbsp;*&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;@([self&nbsp;isValid:value]);
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>4、将信号的输出值赋值给文本输入框的backgroundColor属性</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;RAC(userNameTextField,&nbsp;backgroundColor)&nbsp;=&nbsp;[validUserNameSignal&nbsp;map:^id&nbsp;_Nullable(id&nbsp;&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[value&nbsp;boolValue]&nbsp;?&nbsp;[UIColor&nbsp;clearColor]&nbsp;:&nbsp;[UIColor&nbsp;groupTableViewBackgroundColor];
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;RAC(passwordTextField,&nbsp;backgroundColor)&nbsp;=&nbsp;[validPasswordSignal&nbsp;map:^id&nbsp;_Nullable(id&nbsp;&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[value&nbsp;boolValue]&nbsp;?&nbsp;[UIColor&nbsp;clearColor]&nbsp;:&nbsp;[UIColor&nbsp;groupTableViewBackgroundColor];
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>5、组合信号并设置登录按钮是否可用</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;[[RACSignal&nbsp;combineLatest:@[validUserNameSignal,&nbsp;validPasswordSignal]&nbsp;reduce:^id&nbsp;_Nonnull(id&nbsp;first,&nbsp;id&nbsp;second){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;@([first&nbsp;boolValue]&nbsp;&amp;&amp;&nbsp;[second&nbsp;boolValue]);
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;subscribeNext:^(id&nbsp;&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loginButton.enabled&nbsp;=&nbsp;[x&nbsp;boolValue];
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>6、模拟一个登录请求</p><pre class="line-numbers  language-objectivec">-&nbsp;(void)loginWithUserName:(NSString&nbsp;*)userName&nbsp;password:(NSString&nbsp;*)password&nbsp;comletion:(void&nbsp;(^)(bool&nbsp;success,&nbsp;NSDictionary&nbsp;*responseDic))comletion&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch_after(dispatch_time(DISPATCH_TIME_NOW,&nbsp;(int64_t)(4&nbsp;*&nbsp;NSEC_PER_SEC)),&nbsp;dispatch_get_main_queue(),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([userName&nbsp;isEqualToString:@&quot;Jiuchabaikaishui&quot;])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([password&nbsp;isEqualToString:@&quot;123456&quot;])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comletion(YES,&nbsp;@{@&quot;userName&quot;:&nbsp;userName,&nbsp;@&quot;password&quot;:&nbsp;password,&nbsp;@&quot;code&quot;:&nbsp;@(0),&nbsp;@&quot;message&quot;:&nbsp;@&quot;登录成功&quot;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comletion(YES,&nbsp;@{@&quot;userName&quot;:&nbsp;userName,&nbsp;@&quot;password&quot;:&nbsp;password,&nbsp;@&quot;code&quot;:&nbsp;@(1),&nbsp;@&quot;message&quot;:&nbsp;@&quot;密码错误&quot;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([userName&nbsp;isEqualToString:@&quot;Jiuchabaikaishu&quot;])&nbsp;{//用账号Jiuchabaikaishu模拟网络请求失败
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comletion(NO,&nbsp;nil);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comletion(YES,&nbsp;@{@&quot;userName&quot;:&nbsp;userName,&nbsp;@&quot;password&quot;:&nbsp;password,&nbsp;@&quot;code&quot;:&nbsp;@(2),&nbsp;@&quot;message&quot;:&nbsp;@&quot;账号不存在&quot;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;});}</pre><p>7、创建一个登录信号</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*loginSignal&nbsp;=&nbsp;[RACSignal&nbsp;createSignal:^RACDisposable&nbsp;*&nbsp;_Nullable(id&lt;RACSubscriber&gt;&nbsp;&nbsp;_Nonnull&nbsp;subscriber)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;loginWithUserName:userNameTextField.text&nbsp;password:passwordTextField.text&nbsp;comletion:^(bool&nbsp;success,&nbsp;NSDictionary&nbsp;*responseDic)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(success)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;responseDic[@&quot;message&quot;]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([responseDic[@&quot;code&quot;]&nbsp;integerValue]&nbsp;==&nbsp;0)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:@{@&quot;success&quot;:&nbsp;@(YES),&nbsp;@&quot;message&quot;:&nbsp;responseDic[@&quot;message&quot;]}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:@{@&quot;success&quot;:&nbsp;@(NO),&nbsp;@&quot;message&quot;:&nbsp;responseDic[@&quot;message&quot;]}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*message&nbsp;=&nbsp;@&quot;请求失败&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,&nbsp;message);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:@{@&quot;success&quot;:&nbsp;@(NO),&nbsp;@&quot;message&quot;:&nbsp;message}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendCompleted];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>说明：createSignal:方法用于创建一个信号。描述信号的block是一个信号参数，当信号有一个订阅者时，block中的代码会被执行。block传递一个实现RACSubscriber协议的subscriber(订阅者)，这个订阅者包含我们调用的用于发送事件的方法；我们也可以发送多个next事件，这些事件由一个error事件或complete事件结束。在上面这种情况下，它发送一个next事件来表示登录是否成功，后续是一个complete事件。这个block的返回类型是一个RACDisposable对象，它允许我们执行一些清理任务，这些操作可能发生在订阅取消或丢弃时。上面这个这个信号没有任何清理需求，所以返回nil。</p><p>8、响应按钮点击事件，登录成功进入主页</p><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;[[[[loginButton&nbsp;rac_signalForControlEvents:UIControlEventTouchUpInside]&nbsp;doNext:^(__kindof&nbsp;UIControl&nbsp;*&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MBProgressHUD&nbsp;showHUDAddedTo:self.view&nbsp;animated:NO];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;endEditing:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loginButton.enabled&nbsp;=&nbsp;NO;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;flattenMap:^id&nbsp;_Nullable(__kindof&nbsp;UIControl&nbsp;*&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;loginSignal;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;subscribeNext:^(id&nbsp;&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MBProgressHUD&nbsp;hideHUDForView:self.view&nbsp;animated:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loginButton.enabled&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([x[@&quot;success&quot;]&nbsp;boolValue])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppDelegate&nbsp;*delegate&nbsp;=&nbsp;(AppDelegate&nbsp;*)[UIApplication&nbsp;sharedApplication].delegate;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[delegate&nbsp;gotoMainViewController];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MBProgressHUD&nbsp;*hud&nbsp;=&nbsp;[MBProgressHUD&nbsp;showHUDAddedTo:self.view&nbsp;animated:NO];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hud.mode&nbsp;=&nbsp;MBProgressHUDModeText;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hud.label.text&nbsp;=&nbsp;x[@&quot;message&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hud.label.numberOfLines&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[hud&nbsp;hideAnimated:YES&nbsp;afterDelay:3];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;error:^(NSError&nbsp;*&nbsp;_Nullable&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MBProgressHUD&nbsp;hideHUDForView:self.view&nbsp;animated:YES];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loginButton.enabled&nbsp;=&nbsp;YES;
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>说明：</p><ul class=" list-paddingleft-2"><li><p>为什么要创建一个登录信号，而不是直接使用登录方法？因为登录方法是一个异步操作。</p></li><li><p>为什么使用flattenMap来替换map？因为当点击按钮时rac_signalForControlEvents发出了一个next事件。flattenMap这一步创建并返回一个登录信号，意味着接下来的管理接收一个RACSignal，这是我们在subscribeNext:中观察到的对象——信号的信号(signal of signals)，换句话说，就是一个外部信号包含一个内部信号。flattenMap可以在输出信号的subscribeNext:块中订阅内部信号。map在这会引起嵌套的麻烦。</p></li></ul><h1>内存管理</h1><ul class=" list-paddingleft-2"><li><p>ReactiveCocoa维护了一个全局的信号集合。如果信号有一个或多个订阅者，它就是可用的。如果所有订阅者都被移除了，信号就被释放了。</p></li><li><p>如何取消对信号的订阅？在一个completed事件或error事件后，一个订阅者会自动将自己移除。手动移除可能通过RACDisposable来完成。RACSignal的所有订阅方法都返回一个RACDisposable实例，我们可以调用它的dispose方法来手动移除订阅者。</p></li><li><p>注意：如果我们创建了一个管道，但不去订阅它，则管道永远不会执行，包括任何如doNext:块这样的附加操作。</p></li><li><p>宏<code>@weakify</code>与<code>@strongify</code>在<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fjspahrsummers%2Flibextobjc" target="_blank" rel="nofollow">Extendedobjc</a>库中引用，它们包含在<code>ReactiveCocoa</code>框架中。<code>@weakify</code>允许我们创建一些影子变量，它是都是弱引用(可以同时创建多个)，<code>@strongify</code>允许创建变量的强引用，这些变量是先前传递给<code>@weakify</code>的。当在block中使用实例变量时，block同样会捕获self的一个强引用。</p></li></ul><pre class="line-numbers  language-css">&nbsp;&nbsp;&nbsp;&nbsp;@weakify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*validUserNameSignal&nbsp;=&nbsp;[userNameTextField.rac_textSignal&nbsp;map:^id&nbsp;_Nullable(NSString&nbsp;*&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@strongify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;@([self&nbsp;isValid:value]);
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><h1>搭建主页界面</h1><p>这是一个好友的显示界面，有一个搜索和退出功能。</p><pre class="line-numbers  language-objectivec">//设置UI
+&nbsp;&nbsp;&nbsp;&nbsp;self.title&nbsp;=&nbsp;@&quot;首页&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;UIButton&nbsp;*leftButton&nbsp;=&nbsp;[UIButton&nbsp;buttonWithType:UIButtonTypeSystem];
+&nbsp;&nbsp;&nbsp;&nbsp;[leftButton&nbsp;setTitle:@&quot;退出&quot;&nbsp;forState:UIControlStateNormal];
+&nbsp;&nbsp;&nbsp;&nbsp;[[leftButton&nbsp;rac_signalForControlEvents:UIControlEventTouchUpInside]&nbsp;subscribeNext:^(__kindof&nbsp;UIControl&nbsp;*&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([self.delegate&nbsp;respondsToSelector:@selector(logout:message:)])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.delegate&nbsp;logout:YES&nbsp;message:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;UIBarButtonItem&nbsp;*leftItem&nbsp;=&nbsp;[[UIBarButtonItem&nbsp;alloc]&nbsp;initWithCustomView:leftButton];
+&nbsp;&nbsp;&nbsp;&nbsp;self.navigationItem.leftBarButtonItem&nbsp;=&nbsp;leftItem;
+&nbsp;&nbsp;&nbsp;&nbsp;UITextField&nbsp;*textField&nbsp;=&nbsp;[[UITextField&nbsp;alloc]&nbsp;init];
+&nbsp;&nbsp;&nbsp;&nbsp;[textField&nbsp;setBorderStyle:UITextBorderStyleRoundedRect];
+&nbsp;&nbsp;&nbsp;&nbsp;textField.placeholder&nbsp;=&nbsp;@&quot;搜索好友&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;self.navigationItem.titleView&nbsp;=&nbsp;textField;
+&nbsp;&nbsp;&nbsp;&nbsp;[textField&nbsp;mas_makeConstraints:^(MASConstraintMaker&nbsp;*make)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.left.equalTo(@(0));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.top.equalTo(@(0));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.width.equalTo(@([UIScreen&nbsp;mainScreen].bounds.size.width&nbsp;-&nbsp;60));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.height.equalTo(@(30));
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;UITableView&nbsp;*tableView&nbsp;=&nbsp;[[UITableView&nbsp;alloc]&nbsp;initWithFrame:[UIScreen&nbsp;mainScreen].bounds&nbsp;style:UITableViewStylePlain];
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.delegate&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.dataSource&nbsp;=&nbsp;self;
+&nbsp;&nbsp;&nbsp;&nbsp;tableView.tableFooterView&nbsp;=&nbsp;[[UIView&nbsp;alloc]&nbsp;initWithFrame:CGRectZero];
+&nbsp;&nbsp;&nbsp;&nbsp;[self.view&nbsp;addSubview:tableView];
+&nbsp;&nbsp;&nbsp;&nbsp;self.tableView&nbsp;=&nbsp;tableView;</pre><h1>获取数据</h1><ul class=" list-paddingleft-2"><li><p>模拟一个取数据和一个搜索数据的接口</p></li></ul><pre class="line-numbers  language-objectivec">-&nbsp;(void)gettingData:(void&nbsp;(^)(BOOL&nbsp;success,&nbsp;NSArray&nbsp;*friends))completion&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,&nbsp;0),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSData&nbsp;*data&nbsp;=&nbsp;[NSData&nbsp;dataWithContentsOfFile:[[NSBundle&nbsp;mainBundle]&nbsp;pathForResource:@&quot;data&quot;&nbsp;ofType:@&quot;json&quot;]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSError&nbsp;*error&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*arr&nbsp;=&nbsp;[NSJSONSerialization&nbsp;JSONObjectWithData:data&nbsp;options:NSJSONReadingMutableLeaves&nbsp;error:&amp;error];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NSThread&nbsp;sleepForTimeInterval:3];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_main_queue(),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(completion)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;completion(NO,&nbsp;nil);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(completion)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSMutableArray&nbsp;*mArr&nbsp;=&nbsp;[NSMutableArray&nbsp;arrayWithCapacity:1];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(NSDictionary&nbsp;*dic&nbsp;in&nbsp;arr)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[mArr&nbsp;addObject:[FriendModel&nbsp;friendModelWithInfo:dic]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;completion(YES,&nbsp;mArr);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;});}-&nbsp;(void)searchFriends:(NSString&nbsp;*)content&nbsp;completion:(void&nbsp;(^)(BOOL&nbsp;success,&nbsp;NSArray&nbsp;*friends))&nbsp;completion&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,&nbsp;0),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_main_queue(),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(self.allFriends)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(completion)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSPredicate&nbsp;*predicate&nbsp;=&nbsp;[NSPredicate&nbsp;predicateWithFormat:[NSString&nbsp;stringWithFormat:@&quot;name&nbsp;like&nbsp;&#39;*%@*&#39;&nbsp;or&nbsp;uin&nbsp;like&nbsp;&#39;*%@*&#39;&quot;,&nbsp;content,&nbsp;content]];//name&nbsp;beginswith[c]&nbsp;%@
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;completion(YES,&nbsp;[self.allFriends&nbsp;filteredArrayUsingPredicate:predicate]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(completion)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;completion(NO,&nbsp;nil);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;});}</pre><ul class=" list-paddingleft-2"><li><p>创建获取数据与搜索数据的信号</p></li></ul><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;@weakify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*dataSignal&nbsp;=&nbsp;[RACSignal&nbsp;createSignal:^RACDisposable&nbsp;*&nbsp;_Nullable(id&lt;RACSubscriber&gt;&nbsp;&nbsp;_Nonnull&nbsp;subscriber)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@strongify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MBProgressHUD&nbsp;showHUDAddedTo:self.view&nbsp;animated:NO];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;gettingData:^(BOOL&nbsp;success,&nbsp;NSArray&nbsp;*friends)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MBProgressHUD&nbsp;hideHUDForView:self.view&nbsp;animated:NO];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(success)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.allFriends&nbsp;=&nbsp;[NSArray&nbsp;arrayWithArray:friends];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.friends&nbsp;=&nbsp;self.allFriends;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[textField&nbsp;becomeFirstResponder];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:friends];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendCompleted];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendError:[NSError&nbsp;errorWithDomain:@&quot;NetError&quot;&nbsp;code:1&nbsp;userInfo:@{@&quot;message&quot;:&nbsp;@&quot;网络请求失败&quot;}]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;RACSignal&nbsp;*searchSignal&nbsp;=&nbsp;[RACSignal&nbsp;createSignal:^RACDisposable&nbsp;*&nbsp;_Nullable(id&lt;RACSubscriber&gt;&nbsp;&nbsp;_Nonnull&nbsp;subscriber)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@strongify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;searchFriends:textField.text&nbsp;completion:^(BOOL&nbsp;success,&nbsp;NSArray&nbsp;*friends)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSArray&nbsp;*arr;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(success)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr&nbsp;=&nbsp;friends;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr&nbsp;=&nbsp;self.allFriends;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:arr];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendCompleted];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><ul class=" list-paddingleft-2"><li><p>连接信号</p></li></ul><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;[[[[[[dataSignal&nbsp;then:^RACSignal&nbsp;*&nbsp;_Nonnull{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;textField.rac_textSignal;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;filter:^BOOL(id&nbsp;&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@strongify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*text&nbsp;=&nbsp;(NSString&nbsp;*)value;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(text.length&nbsp;==&nbsp;0)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(![self.friends&nbsp;isEqual:self.allFriends])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.friends&nbsp;=&nbsp;self.allFriends;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;text.length&nbsp;&gt;&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;throttle:0.5]&nbsp;flattenMap:^__kindof&nbsp;RACSignal&nbsp;*&nbsp;_Nullable(id&nbsp;&nbsp;_Nullable&nbsp;value)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;searchSignal;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;deliverOn:[RACScheduler&nbsp;mainThreadScheduler]]&nbsp;subscribeNext:^(id&nbsp;&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@strongify(self)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.friends&nbsp;=&nbsp;(NSArray&nbsp;*)x;
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><p>说明：<br/>1、一旦用户获取了所有的好友数据，程序需要继续监听文本框的输入，以搜索好友。<br/>2、then方法会等到completed事件发出后调用，然后订阅由block参数返回的信号。这有效地将控制从一个信号传递给下一个信号。<br/>3、添加一个filter操作到管道，以移除无效的搜索操作。<br/>4、使用flattenMap来将每个next事件映射到一个新的被订阅的信号。<br/>5、deliverOn:线程操作，确保接下来的UI处理会在主线程上。<br/>6、一个更好的方案是如果搜索文本在一个较短时间内没有改变时我们再去执行搜索操作，throttle操作只有在两次next事件间隔指定的时间时才会发送第二个next事件。</p><h1>展示数据</h1><ul class=" list-paddingleft-2"><li><p>完成UITableView的代理方法</p></li></ul><pre class="line-numbers  language-objectivec">-&nbsp;(NSInteger)numberOfSectionsInTableView:(UITableView&nbsp;*)tableView&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.friends&nbsp;?&nbsp;1&nbsp;:&nbsp;0;}-&nbsp;(NSInteger)tableView:(UITableView&nbsp;*)tableView&nbsp;numberOfRowsInSection:(NSInteger)section&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.friends.count;}-&nbsp;(UITableViewCell&nbsp;*)tableView:(UITableView&nbsp;*)tableView&nbsp;cellForRowAtIndexPath:(NSIndexPath&nbsp;*)indexPath&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;NSString&nbsp;*identifier&nbsp;=&nbsp;@&quot;cell&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;UITableViewCell&nbsp;*cell&nbsp;=&nbsp;[tableView&nbsp;dequeueReusableCellWithIdentifier:identifier];
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(cell&nbsp;==&nbsp;nil)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cell&nbsp;=&nbsp;[[UITableViewCell&nbsp;alloc]&nbsp;initWithStyle:UITableViewCellStyleSubtitle&nbsp;reuseIdentifier:identifier];
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;FriendModel&nbsp;*model&nbsp;=&nbsp;[self.friends&nbsp;objectAtIndex:indexPath.row];
+&nbsp;&nbsp;&nbsp;&nbsp;cell.textLabel.text&nbsp;=&nbsp;model.name;
+&nbsp;&nbsp;&nbsp;&nbsp;cell.detailTextLabel.text&nbsp;=&nbsp;model.uin;
+&nbsp;&nbsp;&nbsp;&nbsp;cell.imageView.image&nbsp;=&nbsp;[UIImage&nbsp;imageNamed:@&quot;50&quot;];
+
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cell;}</pre><ul class=" list-paddingleft-2"><li><p>异步加载图片</p></li></ul><pre class="line-numbers  language-objectivec">&nbsp;&nbsp;&nbsp;&nbsp;//异步加载图片
+&nbsp;&nbsp;&nbsp;&nbsp;[[[RACSignal&nbsp;createSignal:^RACDisposable&nbsp;*&nbsp;_Nullable(id&lt;RACSubscriber&gt;&nbsp;&nbsp;_Nonnull&nbsp;subscriber)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,&nbsp;0),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSData&nbsp;*data&nbsp;=&nbsp;[NSData&nbsp;dataWithContentsOfURL:[NSURL&nbsp;URLWithString:model.img]];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_async(dispatch_get_main_queue(),&nbsp;^{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[subscriber&nbsp;sendNext:data];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;}]&nbsp;deliverOn:[RACScheduler&nbsp;mainThreadScheduler]]&nbsp;subscribeNext:^(id&nbsp;&nbsp;_Nullable&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[cell.imageView&nbsp;setImage:[UIImage&nbsp;imageWithData:x]];
+&nbsp;&nbsp;&nbsp;&nbsp;}];</pre><h1>效果展示和代码下载</h1><p style="text-align:center"><img src="/upload/image/20191121/101616468508.png" width="232" height="416" style="width: 232px; height: 416px;"/></p><p><a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fjiuchabaikaishui%2FMVVMReactive" target="_blank" rel="nofollow">下载代码请猛戳</a></p><p>原文链接：https://www.jianshu.com/p/763278ee047f<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '2c7C0120';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

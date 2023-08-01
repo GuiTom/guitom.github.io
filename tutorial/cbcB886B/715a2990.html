@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>UDP协议-网络协议</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>UDP协议-网络协议</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="1B43Aa37" class="item chapter normal selected">TCP/IP 分层模型</div><div id="5aA204BB" class="item chapter normal">TCP协议</div><div id="b2621B44" class="item course normal">TCP滑动窗口</div><div id="715a2990" class="item chapter normal">UDP协议</div><div id="aA37CAbb" class="item chapter normal">HTTP协议</div><div id="048130c2" class="item course normal">HTTPS</div><div id="ACCACac3" class="item chapter normal">DNS</div><div id="B967abc3" class="item course normal preview">练一练</div><div id="ba7c3684" class="item course normal preview">test</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);"></span></p><p>Internet 协议集支持一个无连接的传输协议，该协议称为用户数据报协议（UDP，User Datagram Protocol）。UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据包的方法。RFC 768<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_30509"></a>&nbsp;&nbsp;描述了 UDP。</p><p>Internet 的传输层有两个主要协议，互为补充。无连接的是 UDP，它除了给应用程序发送数据包功能并允许它们在所需的层次上架构自己的协议之外，几乎没有做什么特别的事情。面向连接的是&nbsp;<a target="_blank" href="https://baike.baidu.com/item/TCP/33012" data-lemmaid="33012" style="color: rgb(19, 110, 194); text-decoration-line: none;">TCP</a>，该协议几乎做了所有的事情。<span class="sup--normal" data-sup="2" data-ctrmap=":2," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[2]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[2]_30509"></a>&nbsp;</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="协议简介"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">协议简介</h2><p><a class="edit-icon j-edit-link" data-edit-dl="1" style="color: rgb(136, 136, 136); display: block; float: right; height: 22px; line-height: 22px; padding-left: 24px; font-size: 12px; font-family: SimSun; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma" style="font-family: baikeFont_layout; -webkit-font-smoothing: antialiased; speak: none; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 1; outline: 0px; margin: 0px 3px 0px 0px; vertical-align: text-bottom; color: rgb(170, 170, 170);"></span>编辑</a></p><p>UDP 是User Datagram Protocol的简称， 中文名是用户数据报协议，是<a target="_blank" href="https://baike.baidu.com/item/OSI" style="color: rgb(19, 110, 194); text-decoration-line: none;">OSI</a>（Open System Interconnection，<a target="_blank" href="https://baike.baidu.com/item/%E5%BC%80%E6%94%BE%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BA%92%E8%81%94/562749" data-lemmaid="562749" style="color: rgb(19, 110, 194); text-decoration-line: none;">开放式系统互联</a>） 参考模型中一种无连接的<a target="_blank" href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82" style="color: rgb(19, 110, 194); text-decoration-line: none;">传输层</a>协议，提供面向事务的简单不可靠信息传送服务，IETF RFC 768<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_30509"></a>&nbsp;&nbsp;是UDP的正式规范。UDP在IP报文的协议号是17。</p><p>UDP协议与<a target="_blank" href="https://baike.baidu.com/item/TCP" style="color: rgb(19, 110, 194); text-decoration-line: none;">TCP</a>协议一样用于处理数据包，在<a target="_blank" href="https://baike.baidu.com/item/OSI" style="color: rgb(19, 110, 194); text-decoration-line: none;">OSI</a>模型中，两者都位于<a target="_blank" href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82/4329536" data-lemmaid="4329536" style="color: rgb(19, 110, 194); text-decoration-line: none;">传输层</a>，处于IP协议的上一层。UDP有不提供数据包分组、组装和不能对数据包进行排序的缺点，也就是说，当报文发送之后，是无法得知其是否安全完整到达的。UDP用来支持那些需要在<a target="_blank" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA/140338" data-lemmaid="140338" style="color: rgb(19, 110, 194); text-decoration-line: none;">计算机</a>之间传输数据的网络应用。包括<a target="_blank" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">网络视频会议</a>系统在内的众多的客户/服务器模式的网络应用都需要使用UDP协议。UDP协议从问世至今已经被使用了很多年，虽然其最初的光彩已经被一些类似协议所掩盖，但即使在今天UDP仍然不失为一项非常实用和可行的网络传输层协议。</p><p>许多应用只支持UDP，如：多媒体数据流，不产生任何额外的数据，即使知道有破坏的包也不进行重发。当强调传输性能而不是传输的完整性时，如：音频和多媒体应用，UDP是最好的选择。在数据传输时间很短，以至于此前的连接过程成为整个流量主体的情况下，UDP也是一个好的选择。<span class="sup--normal" data-sup="3" data-ctrmap=":3," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[3]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[3]_30509"></a>&nbsp;</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="1_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_1_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="内容"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="1-1"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">内容</h3><p>UDP是<a target="_blank" href="https://baike.baidu.com/item/OSI" style="color: rgb(19, 110, 194); text-decoration-line: none;">OSI</a>参考模型中一种无连接的传输层协议，它主要用于不要求分组顺序到达的传输中，分组传输顺序的检查与排序由应用层完成<span class="sup--normal" data-sup="4" data-ctrmap=":4," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[4]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[4]_30509"></a>&nbsp;&nbsp;，提供面向事务的简单不可靠信息传送服务。UDP 协议基本上是<a target="_blank" href="https://baike.baidu.com/item/IP%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">IP协议</a>与上层协议的接口。UDP协议适用<a target="_blank" href="https://baike.baidu.com/item/%E7%AB%AF%E5%8F%A3" style="color: rgb(19, 110, 194); text-decoration-line: none;">端口</a>分别运行在同一台设备上的多个<a target="_blank" href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F" style="color: rgb(19, 110, 194); text-decoration-line: none;">应用程序</a>。</p><p>UDP提供了无连接通信，且不对传送数据包进行可靠性保证，适合于一次传输少量数据，UDP传输的可靠性由应用层负责。常用的UDP端口号有：53（DNS）、69（TFTP）、161（SNMP），使用UDP协议包括：<a target="_blank" href="https://baike.baidu.com/item/TFTP" style="color: rgb(19, 110, 194); text-decoration-line: none;">TFTP</a>、<a target="_blank" href="https://baike.baidu.com/item/SNMP" style="color: rgb(19, 110, 194); text-decoration-line: none;">SNMP</a>、NFS、DNS、BOOTP。</p><p>UDP报文没有可靠性保证、顺序保证和流量控制字段等，可靠性较差。但是正因为UDP协议的控制选项较少，在数据传输过程中延迟小、数据传输效率高，适合对可靠性要求不高的应用程序，或者可以保障可靠性的应用程序，如DNS、TFTP、SNMP等。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="1_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_1_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="功能"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="1-2"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">功能</h3><p>为了在给定的主机上能识别多个目的地址，同时允许多个应用程序在同一台主机上工作并能独立地进行数据包的发送和接收，设计<a target="_blank" href="https://baike.baidu.com/item/%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">用户数据报协议</a>UDP。<br/>　　UDP使用底层的互联网协议来传送报文，同IP一样提供不可靠的无连接数据包传输服务。它不提供报文到达确认、排序、及流量控制等功能。</p><p>UDP Helper可以实现对指定UDP端口广播报文的中继转发，即将指定UDP端口的广播报文转换为单播报文发送给指定的服务器，起到中继的作用。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="报文格式"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">报文格式</h2><p><a class="edit-icon j-edit-link" data-edit-dl="2" style="color: rgb(136, 136, 136); display: block; float: right; height: 22px; line-height: 22px; padding-left: 24px; font-size: 12px; font-family: SimSun; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma" style="font-family: baikeFont_layout; -webkit-font-smoothing: antialiased; speak: none; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 1; outline: 0px; margin: 0px 3px 0px 0px; vertical-align: text-bottom; color: rgb(170, 170, 170);"></span>编辑</a></p><p>在UDP协议层次模型中，UDP位于IP层之上。应用程序访问UDP层然后使用IP层传送数据报。IP数据包的数据部分即为UDP数据报。IP层的报头指明了源主机和目的主机地址，而UDP层的报头指明了主机上的源端口和目的端口。UDP传输的段（segment）有8个字节的报头和有效载荷字段构成。</p><p>UDP报头由4个域组成，其中每个域各占用2个字节，具体包括源端口号、目标端口号、数据报长度、校验值。</p><p>以下将对UDP数据报格式进行简要介绍，具体内容请参照RFC 768<span class="sup--normal" data-sup="1" data-ctrmap=":1," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[1]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[1]_30509"></a>&nbsp;&nbsp;。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_2_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="端口号"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2-1"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">端口号</h3><p>UDP协议使用端口号为不同的应用保留其各自的数据传输通道。UDP</p><p><a class="image-link" nslog-type="9317" href="https://baike.baidu.com/pic/UDP/571511/0/78310a55b319ebc4c57a3f358c26cffc1e17161f?fr=lemma&ct=single" target="_blank" title="" style="color: rgb(19, 110, 194); text-decoration-line: none; display: block; width: 250px; height: 117px;"><img class="" src="https://bkimg.cdn.bcebos.com/pic/78310a55b319ebc4c57a3f358c26cffc1e17161f?x-bce-process=image/resize,m_lfit,w_250,h_250,limit_1" alt="" style="border: 0px; display: block; margin: 0px auto; width: 250px; height: 117px;"/></a></p><p>和<a target="_blank" href="https://baike.baidu.com/item/TCP%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">TCP协议</a>正是采用这一机制实现对同一时刻内多项应用同时发送和接收数据的支持。数据发送一方（可以是客户端或服务器端）将UDP数据包通过源端口发送出去，而数据接收一方则通过目标端口接收数据。有的网络应用只能使用预先为其预留或注册的静态端口；而另外一些网络应用则可以使用未被注册的动态端口。因为UDP报头使用两个字节存放端口号，所以端口号的有效范围是从0到65535。一般来说，大于49151的端口号都代表动态端口。UDP端口号指定有两种方式：由管理机构指定端口和动态绑定的方式。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_2_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="长度"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2-2"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">长度</h3><p>数据报的长度是指包括报头和数据部分在内的总字节数。因为报头的长度是固定的，所以该域主要被用来计算可变长度的数据部分（又称为数据负载）。数据报的最大长度根据操作环境的不同而各异。从理论上说，包含报头在内的数据报的最大长度为65535字节。不过，一些实际应用往往会限制数据报的大小，有时会降低到8192字节。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2_3"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_2_3"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="校验值"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="2-3"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">校验值</h3><p>UDP协议使用报头中的校验值来保证数据的安全。校验值首先在数据发送方通过特殊的算法计算得出，在传递到接收方之后，还需要再重新计算。如果某个数据报在传输过程中被第三方篡改或者由于线路噪音等原因受到损坏，发送和接收方的校验计算值将不会相符，由此UDP协议可以检测是否出错。这与TCP协议是不同的，后者要求必须具有校验值。<span class="sup--normal" data-sup="5" data-ctrmap=":5," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[5]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[5]_30509"></a>&nbsp;</p><p>许多链路层协议都提供错误检查，包括流行的<a target="_blank" href="https://baike.baidu.com/item/%E4%BB%A5%E5%A4%AA%E7%BD%91" style="color: rgb(19, 110, 194); text-decoration-line: none;">以太网</a>协议，也许你想知道为什么UDP也要提供检查和校验。其原因是链路层以下的协议在源端和<a target="_blank" href="https://baike.baidu.com/item/%E7%BB%88%E7%AB%AF" style="color: rgb(19, 110, 194); text-decoration-line: none;">终端</a>之间的某些通道可能不提供错误检测。虽然UDP提供有错误检测，但检测到错误时，UDP不做错误校正，只是简单地把损坏的消息段扔掉，或者给应用程序提供警告信息。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="3"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_3"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="主要特点"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">主要特点</h2><p><a class="edit-icon j-edit-link" data-edit-dl="3" style="color: rgb(136, 136, 136); display: block; float: right; height: 22px; line-height: 22px; padding-left: 24px; font-size: 12px; font-family: SimSun; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma" style="font-family: baikeFont_layout; -webkit-font-smoothing: antialiased; speak: none; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 1; outline: 0px; margin: 0px 3px 0px 0px; vertical-align: text-bottom; color: rgb(170, 170, 170);"></span>编辑</a></p><p>UDP是一个<a target="_blank" href="https://baike.baidu.com/item/%E6%97%A0%E8%BF%9E%E6%8E%A5%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">无连接协议</a>，传输数据之前源端和终端不建立连接，当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。在发送端，UDP传送数据的速度仅仅是受应用程序生成数据的速度、计算机的能力和传输带宽的限制；在接收端，UDP把每个消息段放在队列中，应用程序每次从队列中读一个消息段。</p><p>由于传输数据不建立连接，因此也就不需要维护连接状态，包括收发状态等，因此一台服务机可同时向多个客户机传输相同的消息。</p><p>UDP信息包的标题很短，只有8个字节，相对于TCP的20个字节信息包而言UDP的额外开销很小。</p><p>吞吐量不受拥挤控制算法的调节，只受<a target="_blank" href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6" style="color: rgb(19, 110, 194); text-decoration-line: none;">应用软件</a>生成数据的速率、传输带宽、源端和终端主机性能的限制。</p><p>UDP是面向报文的。发送方的UDP对应用程序交下来的报文，在添加首部后就向下交付给IP层。既不拆分，也不合并，而是保留这些报文的边界，因此，应用程序需要选择合适的报文大小。</p><p>虽然UDP是一个不可靠的协议，但它是分发信息的一个理想协议。例如，在屏幕上报告股票市场、显示航空信息等等。UDP也用在<a target="_blank" href="https://baike.baidu.com/item/%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">路由信息协议</a>RIP（Routing Information Protocol）中修改路由表。在这些应用场合下，如果有一个消息丢失，在几秒之后另一个新的消息就会替换它。UDP广泛用在多媒体应用中。</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="4"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_4"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="协议对比"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">协议对比</h2><p><a class="edit-icon j-edit-link" data-edit-dl="4" style="color: rgb(136, 136, 136); display: block; float: right; height: 22px; line-height: 22px; padding-left: 24px; font-size: 12px; font-family: SimSun; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma" style="font-family: baikeFont_layout; -webkit-font-smoothing: antialiased; speak: none; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 1; outline: 0px; margin: 0px 3px 0px 0px; vertical-align: text-bottom; color: rgb(170, 170, 170);"></span>编辑</a></p><p>UDP和TCP协议的主要区别是两者在如何实现信息的可靠传递方面不同。TCP协议中包含了专门的传递保证机制，当数据接收方收到发送方传来的信息时，会自动向发送方发出确认消息；发送方只有在接收到该确认消息之后才继续传送其它信息，否则将一直等待直到收到确认信息为止。与TCP不同，UDP协议并不提供数据传送的保证机制。如果在从发送方到接收方的传递过程中出现数据包的丢失，协议本身并不能做出任何检测或提示。因此，通常人们把UDP协议称为不可靠的<a target="_blank" href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" style="color: rgb(19, 110, 194); text-decoration-line: none;">传输协议</a>。</p><p>TCP 是面向连接的传输控制协议，而UDP 提供了无连接的数据报服务；TCP 具有高可靠性，确保传输数据的正确性，不出现丢失或乱序；UDP 在传输数据前不建立连接，不对数据报进行检查与修改，无须等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序需要负责传输可靠性方面的所有工作；UDP 具有较好的实时性，工作效率较 TCP 协议高；UDP 段结构比 TCP 的段结构简单，因此网络开销也小。TCP 协议可以保证接收端毫无差错地接收到发送端发出的字节流，为应用程序提供可靠的通信服务。对可靠性要求高的通信系统往往使用 TCP 传输数据。<span class="sup--normal" data-sup="6" data-ctrmap=":6," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[6]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[6]_30509"></a>&nbsp;</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="5"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_5"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="主要应用"></a></p><h2 class="title-text" style="margin: 0px; padding: 0px 8px 0px 18px; font-size: 22px; color: rgb(0, 0, 0); float: left; line-height: 24px; font-weight: 400; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">主要应用</h2><p><a class="edit-icon j-edit-link" data-edit-dl="5" style="color: rgb(136, 136, 136); display: block; float: right; height: 22px; line-height: 22px; padding-left: 24px; font-size: 12px; font-family: SimSun; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span class="cmn-icon wiki-lemma-icons wiki-lemma-icons_edit-lemma" style="font-family: baikeFont_layout; -webkit-font-smoothing: antialiased; speak: none; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 1; outline: 0px; margin: 0px 3px 0px 0px; vertical-align: text-bottom; color: rgb(170, 170, 170);"></span>编辑</a></p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="5_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_5_1"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="适用场合"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="5-1"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">适用场合</h3><p>在选择UDP作为传输协议时必须要谨慎。在<a target="_blank" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C" style="color: rgb(19, 110, 194); text-decoration-line: none;">网络</a>质量令人十分不满意的环境下，UDP协议数据包丢失会比较严重。但是由于UDP的特性：它不属于连接型协议，因而具有资源消耗小，处理速度快的优点，所以通常音频、视频和普通数据在传送时使用UDP较多，因为它们即使偶尔丢失一两个数据包，也不会对接收结果产生太大影响。比如我们聊天用的ICQ和<a target="_blank" href="https://baike.baidu.com/item/QQ" style="color: rgb(19, 110, 194); text-decoration-line: none;">QQ</a>就是使用的UDP协议。<span class="sup--normal" data-sup="7" data-ctrmap=":7," style="font-size: 12px; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; margin-left: 2px; color: rgb(51, 102, 204); cursor: pointer; padding: 0px 2px;">&nbsp;[7]</span><a style="color: rgb(19, 110, 194); position: relative; top: -50px; font-size: 0px; line-height: 0;" name="ref_[7]_30509"></a>&nbsp;</p><p><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="5_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="sub30509_5_2"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="实际应用"></a><a style="color: rgb(19, 110, 194); position: absolute; top: -50px;" name="5-2"></a></p><h3 class="title-text" style="margin: 0px; padding: 0px; font-size: 18px; font-weight: 400;">实际应用</h3><p>在现场测控领域，面向的是分布化的控制器、监测器等，其应用场合环境比较恶劣，这样就对待传输数据提出了不同的要求，如实时、抗干扰性、安全性等。基于此，现场通信中，若某一应用要将一组数据传送给网络中的另一个节点，可由UDP进程将数据加上报头后传送给IP进程，UDP协议省去了建立连接和拆除连接的过程!取消了重发检验机制，能够达到较高的通信速率</p><p><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);"><br/></span><br/></p><p><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);">基于UDP的应用层协议：DNS、TFTP（简单文件传输协议）、RIP（路由选择协议）、DHCP、BOOTP（是DHCP的前身）、IGMP（Internet组管理协议）</span></p><p><span style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);"><br/></span></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'cbcB886B';
+var article_id = '715a2990';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

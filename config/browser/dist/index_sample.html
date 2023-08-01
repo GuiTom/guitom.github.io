@@ -1,0 +1,12 @@
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<img src="https://via.placeholder.com/350x150" data-href="https://www.baidu.com/img/bd_logo1.png?qua=high" />
+<img src="https://via.placeholder.com/350x150" data-href="https://www.baidu.com/img/bd_logo1.png?qua=high" />
+<img src="https://via.placeholder.com/350x150" data-href="https://www.baidu.com/img/bd_logo1.png?qua=high" />
+<script type="text/javascript">
+$('img').on('load', function() {
+  var that = $(this)
+  setTimeout(function() {
+    that.attr('src', that.data('href'))
+  }, 500)
+})
+</script>

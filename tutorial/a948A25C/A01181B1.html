@@ -1,0 +1,252 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>属性关键字-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>属性关键字-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h1>@property的作用</h1><p>当我们写下@property NSObject *foo时，编译器帮我们做了以下几件事:</p><ul class=" list-paddingleft-2"><li><p>创建实例变量_foo</p></li><li><p>声明foo属性的setter、getter方法</p></li><li><p>实现foo属性的setter、getter方法</p></li></ul><p><strong>@property 的本质是什么？</strong></p><blockquote><p>@property = ivar + getter + setter;</p><p>实例变量+get方法+set方法,也就是说使用@property 系统会自动生成setter和getter方法;</p></blockquote><hr/><h1>@property的属性关键字详解</h1><h2>atomic和nonatomic</h2><ol class=" list-paddingleft-2"><li><p>atomic和nonatomic用来决定编译器生成的getter和setter是否为原子操作。</p></li><li><p>atomic：系统生成的 getter/setter 会保证 get、set 操作的完整性，不受其他线程影响。getter 还是能得到一个完好无损的对象（可以保证数据的完整性），但这个对象在多线程的情况下是不能确定的。</p><blockquote><p>如果线程 A 调了 getter，与此同时线程 B 、线程 C 都调了 setter——那最后线程 A get 到的值，有3种 &nbsp; &nbsp; 可能：可能是 B、C set 之前原始的值，也可能是 B set 的值，也可能是 C set 的值。同时，最终这个属性 &nbsp; &nbsp; 的值，可能是 B set 的值，也有可能是 C set 的值。所以atomic可并不能保证对象的线程安全。</p></blockquote></li><ul class=" list-paddingleft-2"><li><p>也就是说：如果有多个线程同时调用setter的话，不会出现某一个线程执行完setter全部语句之前，另一个线程开始执行setter情况，相当于函数头尾加了锁一样，每次只能有一个线程调用对象的setter方法，所以可以保证数据的完整性。</p></li><li><p>atomic所说的线程安全只是保证了getter和setter存取方法的线程安全，并不能保证整个对象是线程安全的。</p></li></ul><ul class=" list-paddingleft-2"><li><p>举个🌰</p></li></ul><li><p>nonatomic：就没有这个保证了，nonatomic返回你的对象可能就不是完整的value。因此，在多线程的环境下原子操作是非常必要的，否则有可能会引起错误的结果。但仅仅使用atomic并不会使得对象线程安全，我们还要为对象线程添加lock来确保线程的安全。</p></li><li><p>nonatomic的速度要比atomic的快。atomic是Objc使用的一种线程保护技术，这种机制是耗费系统资源的，所以在iPhone这种小型设备上，我们基本上都是使用nonatomic，而对象的线程安全问题则由程序员代码控制。</p></li><li><p>atomic与nonatomic的本质区别其实也就是在setter方法上的操作不同</p></li></ol><p><strong>nonatomic对象、atomic对象setter和getter方法的实现:</strong></p><p><br/></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45);">///</span><span class="s2" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);"> </span>nonatomic对象</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">- (<span class="s3" style="color: rgb(215, 0, 143);">void</span>)<span class="s4" style="color: rgb(65, 161, 192);">setCurrentImage</span>:(UIImage *)currentImage{</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s3" style="color: rgb(215, 0, 143);">if</span> (_currentImage != currentImage) {</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>[_currentImage <span class="s5" style="color: rgb(37, 144, 141);">release</span>];</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>_currentImage = [currentImage <span class="s5" style="color: rgb(37, 144, 141);">retain</span>];</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">- (UIImage *)<span class="s4" style="color: rgb(65, 161, 192);">currentImage</span>{</p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); min-height: 14px; white-space: normal;"><br/></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s3" style="color: rgb(215, 0, 143);">return</span> _currentImage;</p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); min-height: 14px; white-space: normal;"><span class="Apple-converted-space">&nbsp;&nbsp; &nbsp;</span></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45);">///</span><span class="s2" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231);"> </span>atomic对象</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">- (<span class="s3" style="color: rgb(215, 0, 143);">void</span>)<span class="s4" style="color: rgb(65, 161, 192);">setCurrentImage</span>:(UIImage *)currentImage{</p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s6" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>@synchronized<span class="s6" style="color: rgb(225, 226, 231);">(</span>self<span class="s6" style="color: rgb(225, 226, 231);">) {</span></p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); min-height: 14px; white-space: normal;"><span class="Apple-converted-space">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</span></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s3" style="color: rgb(215, 0, 143);">if</span> (_currentImage != currentImage) {</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>[_currentImage release];</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>_currentImage = [currentImage retain];</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">- (UIImage *)<span class="s4" style="color: rgb(65, 161, 192);">currentImage</span>{</p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s6" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>@synchronized<span class="s6" style="color: rgb(225, 226, 231);">(</span>self<span class="s6" style="color: rgb(225, 226, 231);">) {</span></p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); min-height: 14px; white-space: normal;"><span class="Apple-converted-space">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</span></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s3" style="color: rgb(215, 0, 143);">return</span> _currentImage;</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><hr/><h2>assign</h2><p>1.这个修饰词是直接赋值的意思 , 整型/浮点型等数据类型都用这个词修饰 .<br/>2.如果没有使用 weak strong retain copy 修饰 , 那么默认就是使用 assign 了.<br/>3.当然其实对象也可以用 assign 修饰 , 只是对象的计数器不会+1 . ( 与 strong 的区别 )<br/>4.如果用来修饰对象属性 , 那么当对象被销毁后指针是不会指向 nil 的 . 所以会出现野指针错误 . ( 与weak的区别 )</p><hr/><pre class="line-numbers  language-objectivec">1.在&nbsp;ARC&nbsp;中,在有可能出现循环引用的时候,往往要通过让其中一端使用&nbsp;weak&nbsp;来解决,比如:&nbsp;delegate&nbsp;代理属性。2.自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用&nbsp;weak,自定义&nbsp;IBOutlet&nbsp;控件属性一般也使用&nbsp;weak；当然，也可以使用strong。
+
+IBOutlet连出来的视图属性为什么可以被设置成weak?因为父控件的subViews数组已经对它有一个强引用。
+
+不同点：
+
+assign&nbsp;可以用非&nbsp;OC&nbsp;对象，而&nbsp;weak&nbsp;必须用于&nbsp;OC&nbsp;对象。
+
+weak&nbsp;表明该属性定义了一种“非拥有关系”。在属性所指的对象销毁时，属性值会自动清空&nbsp;nil。</pre><h2>weak</h2><p>weak是弱引用，用weak描述修饰或者所引用对象的计数器不会加一，并且会在引用的对象被释放的时候自动被设置为nil，大大避免了野指针访问坏内存引起崩溃的情况，另外weak还可以用于解决循环引用。</p><h4>weak原理概括</h4><p>weak表其实是一个hash（哈希）表，Key是所指对象的地址，Value是weak指针的地址数组。weak的底层实现的原理是什么？</p><p>Runtime维护了一个weak表，用于存储指向某个对象的所有weak指针。weak表其实是一个hash表，Key是所指对象的地址，value是weak指针的地址（这个地址的值是所指对象指针的地址）数组。</p><p>为什么value是数组？因为一个对象可能被多个弱引用指针指向</p><h4>weak原理实现步骤</h4><p><strong>1. 初始化时</strong></p><p>runtime会调用objc_initWeak函数，objc_initWeak函数会初始化一个新的weak指针指向对象的地址。</p><p>示例代码：</p><pre class="line-numbers  language-objectivec">NSObject&nbsp;*obj&nbsp;=&nbsp;[[NSObject&nbsp;alloc]&nbsp;init];
+&nbsp;id&nbsp;__weak&nbsp;obj1&nbsp;=&nbsp;obj;</pre><p>当我们初始化一个weak变量时，runtime会调用 NSObject.mm 中的objc_initWeak函数。</p><p>这个函数在Clang中的声明如下：</p><blockquote><p>id objc_initWeak(id *object, id value);</p></blockquote><p>而对于 objc_initWeak() 方法的实现如下：</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(69, 187, 62); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="color: rgb(215, 0, 143);"><br/></span></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(69, 187, 62); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="color: rgb(215, 0, 143);">id</span><span class="s2" style="color: rgb(225, 226, 231);"> </span><span class="s3" style="color: rgb(65, 161, 192);">objc_initWeak</span><span class="s2" style="color: rgb(225, 226, 231);">(</span><span class="s1" style="color: rgb(215, 0, 143);">id</span><span class="s2" style="color: rgb(225, 226, 231);"> *location, </span><span class="s1" style="color: rgb(215, 0, 143);">id</span><span class="s2" style="color: rgb(225, 226, 231);"> newObj) {</span>// 查看对象实例是否有效,无效对象直接导致指针释放</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s1" style="color: rgb(215, 0, 143);">if</span> (!newObj) {</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span>*location = <span class="s1" style="color: rgb(215, 0, 143);">nil</span>;</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="s1" style="color: rgb(215, 0, 143);">return</span> <span class="s1" style="color: rgb(215, 0, 143);">nil</span>;</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span>}</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(69, 187, 62); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>// 这里传递了三个 bool 数值</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(69, 187, 62); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s2" style="color: rgb(225, 226, 231);">&nbsp; &nbsp; </span>// 使用 template 进行常量参数传递是为了优化性能</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="Apple-converted-space">&nbsp; &nbsp; </span><span class="s1" style="color: rgb(215, 0, 143);">return</span> storeWeakfalse&lt;<span class="s4" style="color: rgb(69, 187, 62);">/*old*/</span>, <span class="s1" style="color: rgb(215, 0, 143);">true</span><span class="s4" style="color: rgb(69, 187, 62);">/*new*/</span>, <span class="s1" style="color: rgb(215, 0, 143);">true</span><span class="s4" style="color: rgb(69, 187, 62);">/*crash*/</span>&gt;(location, (objc_object*)newObj);</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">}</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><br/></p><p>这个函数仅仅是一个深层函数的调用入口，而一般的入口函数中，都会做一些简单的判断（例如 objc_msgSend 中的缓存判断），这里判断了其指针指向的类对象是否有效，无效直接释放，不再往深层调用函数。否则，object将被注册为一个指向value的__weak对象。而这事应该是objc_storeWeak函数干的。</p><p><strong><em>注意：objc_initWeak函数有一个前提条件：就是object必须是一个没有被注册为__weak对象的有效指针。而value则可以是null，或者指向一个有效的对象。</em></strong></p><p><strong>2. 添加引用时：</strong></p><p>objc_initWeak函数会调用 objc_storeWeak() 函数， objc_storeWeak() 的作用是更新指针指向，创建对应的弱引用表。</p><p>objc_storeWeak的函数声明如下：</p><blockquote><p>id objc_storeWeak(id *location, id value);</p></blockquote><p>objc_storeWeak() 的具体实现,请参考<a href="!http://ios.jobbole.com/89012/" target="_blank" rel="nofollow">weak弱引用实现的方式</a></p><p><strong>3. 释放时：</strong></p><p>调用clearDeallocating函数。clearDeallocating函数首先根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。</p><p>当weak引用指向的对象被释放时，又是如何去处理weak指针的呢？当释放对象时，其基本流程如下：</p><ol class=" list-paddingleft-2"><li><p>调用objc_release</p></li><li><p>因为对象的引用计数为0，所以执行dealloc</p></li><li><p>在dealloc中，调用了 _ objc _ rootDealloc函数</p></li><li><p>在 _ objc _ rootDealloc 中，调用了object _ dispose函数</p></li><li><p>调用objc_destructInstance</p></li><li><p>最后调用objc _ clear _ deallocating</p></li></ol><p>objc _ clear _ deallocating该函数的动作如下：</p><ol class=" list-paddingleft-2"><li><p>从weak表中获取废弃对象的地址为键值的记录</p></li><li><p>将包含在记录中的所有附有 weak修饰符变量的地址，赋值为nil</p></li><li><p>将weak表中该记录删除</p></li><li><p>从引用计数表中删除废弃对象的地址为键值的记录</p></li></ol><hr/><h3>strong</h3><p>在ARC环境下，只要某一对象被一个strong指针指向，该对象就不会被销毁。如果对象没有被任何strong指针指向，那么就会被销毁。在默认情况下，所有的实例变量和局部变量都是strong类型的。可以说strong类型的指针在行为上跟非ARC下的retain是比较相似的</p><hr/><h3>copy</h3><h4>预备知识</h4><ul class=" list-paddingleft-2"><li><p>浅拷贝</p></li><ul class=" list-paddingleft-2" style="list-style-type: square;"><li><p>只是将对象内存地址多了一个引用，也就是说，拷贝结束之后，两个对象的值不仅相同，而且对象所指的内存地址都是一样的。</p></li></ul><li><p>深拷贝</p></li><ul class=" list-paddingleft-2" style="list-style-type: square;"><li><p>拷贝一个对象的具体内容，拷贝结束之后，两个对象的值虽然是相同的，但是指向的内存地址是不同的。两个对象之间也互不影响，互不干扰。</p></li></ul></ul><h4>copy的作用</h4><ul class=" list-paddingleft-2"><li><p>在非集合类对象中，对不可变对象进行copy操作，只仅仅是指针复制——浅复制，进行mutableCopy操作，是内容复制——深复制。</p></li><li><p>对于不可变的集合类对象进行copy操作，只是改变了指针，其内存地址并没有发生变化；进行mutableCopy操作，内存地址发生了变化，但是其中的元素内存地址并没有发生变化。</p></li><li><p>对于可变集合类对象，不管是进行copy操作还是mutableCopy操作，其内存地址都发生了变化，但是其中的元素内存地址都没有发生变化，属于单层深拷贝。</p></li></ul><blockquote><p>使用注意：</p><ol class=" list-paddingleft-2"><li><p>当将一个可变对象分别赋值给两个使用不同修饰词的属性后，改变可变对象的内容，使用strong修饰的会跟随着改变，但使用copy修饰的没有改变内容。</p></li></ol></blockquote><p>那么，是不是NSMutableString等这些可变对象是不是也需要copy来修饰呢？答案是千万不要这么干，我们可以测试一下：</p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;"><br/></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;">@interface<span class="s1" style="color: rgb(225, 226, 231);"> </span><span class="s2" style="color: rgb(65, 161, 192);">test</span><span class="s1" style="color: rgb(225, 226, 231);">()</span></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="color: rgb(225, 226, 231);"><br/></span></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s3" style="color: rgb(215, 0, 143);">@property</span> (nonatomic, copy) <span class="s2" style="color: rgb(65, 161, 192);">NSMutableString</span> *<span class="s2" style="color: rgb(65, 161, 192);">strCopy</span>;</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><br/></p><p class="p1" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(215, 0, 143); background-color: rgb(31, 32, 41); white-space: normal;">@end</p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s4" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45);"><br/></span></p><p class="p3" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(34, 160, 85); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s4" style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; line-height: normal; font-family: Menlo; color: rgba(34, 160, 85, 0.45);">/**</span>******************* test.m **********************/</p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(37, 144, 141); background-color: rgb(31, 32, 41); white-space: normal;">NSMutableString<span class="s1" style="color: rgb(225, 226, 231);"> *</span><span class="s2" style="color: rgb(65, 161, 192);">string</span><span class="s1" style="color: rgb(225, 226, 231);"> = [</span>NSMutableString<span class="s1" style="color: rgb(225, 226, 231);"> </span>stringWithFormat<span class="s1" style="color: rgb(225, 226, 231);">:</span><span class="s5" style="color: rgb(211, 35, 46);">@&quot;abc&quot;</span><span class="s1" style="color: rgb(225, 226, 231);">];</span></p><p class="p4" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(37, 144, 141); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s1" style="color: rgb(225, 226, 231);"><br/></span></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><span class="s3" style="color: rgb(215, 0, 143);">self</span>.<span class="s2" style="color: rgb(65, 161, 192);">strCopy</span> = string;</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><br/></p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;">[<span class="s3" style="color: rgb(215, 0, 143);">self</span>.strCopy appendString:<span class="s5" style="color: rgb(211, 35, 46);">@&quot;def&quot;</span>];</p><p class="p2" style="margin-top: 0px; margin-bottom: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Menlo; color: rgb(225, 226, 231); background-color: rgb(31, 32, 41); white-space: normal;"><br/></p><p>因为copy是复制出一个不可变的对象，在不可变对象上运行可变对象的方法，就会找不到执行方法</p><p><br/><br/><br/>原文链接：https://www.jianshu.com/p/3709cf8f8937<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = 'A01181B1';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

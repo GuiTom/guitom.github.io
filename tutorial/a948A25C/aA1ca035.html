@@ -1,0 +1,199 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="抖音数据分析服务">
+ 	<meta name="keywords" content="抖音排行榜,抖音数据,抖音营销-抖商助手 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>音视频播放、录制-iOS开发</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #e2e2e2;
+        font-weight: bold;
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 1em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>音视频播放、录制-iOS开发</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="2A662A6A" class="item chapter normal">UI</div><div id="4b1Aa8ba" class="item course normal">按钮</div><div id="1bbA5C37" class="item course normal">图片</div><div id="C1AB418B" class="item course normal">文字</div><div id="12B75430" class="item course normal">界面跳转</div><div id="0B5acc5C" class="item course normal">顶部导航栏</div><div id="A78Ac107" class="item course normal">底部导航栏</div><div id="acb91bb3" class="item course normal">滚动视图</div><div id="60b7AC6B" class="item course normal">表格视图</div><div id="2B2C4061" class="item course normal">瀑布流视图</div><div id="95c35B5c" class="item course normal">图文混排</div><div id="7b80Cc94" class="item course normal">UI显示原理</div><div id="6c569Ac9" class="item course normal">异步绘制</div><div id="b7c32238" class="item chapter normal">动画</div><div id="60a56a16" class="item course normal">隐式动画</div><div id="5c4b5c67" class="item course normal">BasicAnimation</div><div id="A34C7b56" class="item course normal">KeyPathAnimtaion</div><div id="b6cc508a" class="item course normal">动画组</div><div id="39CAB62c" class="item course normal">UIView封装动画</div><div id="CCCA2C0C" class="item chapter normal">事件流</div><div id="614952Ca" class="item course normal">事件的产生和传递</div><div id="83950b8a" class="item course normal">按钮外响应</div><div id="9A66833B" class="item course normal">手势</div><div id="2390a334" class="item chapter normal">数据持久化</div><div id="c958AB2b" class="item course normal">plist</div><div id="160023B3" class="item course normal">NSUserDefaults</div><div id="AC840C06" class="item course normal">sqlite/FMDB</div><div id="9aC7704B" class="item course normal">coreData</div><div id="134bC9bb" class="item course normal">模型转换</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="3a61B9a4" class="item course normal">GCD</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="53870C1a" class="item course normal">NSThread</div><div id="C5C1C965" class="item course normal">锁</div><div id="B529829C" class="item course normal">信号量</div><div id="9ccab66A" class="item course normal">NSrunLoop</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="06024caB" class="item chapter normal">runtime</div><div id="4c1aC067" class="item course normal">runtime应用场景</div><div id="5b514C5a" class="item course normal">方法交换</div><div id="67C92673" class="item course normal">动态添加方法</div><div id="8A546ac3" class="item course normal">关联对象</div><div id="Ac365388" class="item chapter normal">音视频</div><div id="8BCB0c7c" class="item course normal">视频播放</div><div id="16Bcb7bC" class="item course normal selected">视频录制</div><div id="6496bB16" class="item course normal">音频播放</div><div id="9Ca49BC9" class="item course normal preview">音频录制</div><div id="aA1ca035" class="item course normal preview">音视频播放、录制</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-8" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row ontent">
+             <div class="col-sm-12">
+                 
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线调试工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = 'aA1ca035';
+</script>
+
+	
+		<div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备17006386号-5</div>
+	
+</body>

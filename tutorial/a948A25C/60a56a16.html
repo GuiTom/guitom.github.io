@@ -1,0 +1,246 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>隐式动画-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>隐式动画-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h2>问题：</h2><p>1.什么是隐式动画，为什么CALayer设置可动画属性时会触发隐式动画？<br/>2.UIView设置属性，为什么没有隐式动画？<br/>3.UIView的block动画，原理又是怎样的？</p><h2>结论</h2><p>动画要分两部分考虑：怎么动？动多久？ &nbsp;即动画行为和动画时间两部分。CoreAnimation中表示行为的有CAAction协议，表示时间的有CAMediaTiming协议，当然CAAnimation都实现了这两个协议。</p><p>怎么动： 默认情况下，CALayer的可动画属性都关联到一个行为对象（实现了CAAction）,即当直接修改CALayer的可动画属性时，会执行对应的行为对象。</p><p>动多久：CALayer也实现了CAMediaTiming协议，自身可以控制行为时间。在每一次Runloop中，都会创建隐式的事务(CATransaction)，所有CALayer的属性修改都会包含到这个事务中去，而事务中CALayer的行为时间被默认设置为0.25s。 所以修改CALayer属性所触发的行为都会执行0.25s。</p><h2>动画事务--CATransaction</h2><p>CATransaction 是核心动画类,它负责成批的把多个图层树的修改作为一个原子更新到渲染树。图层的每个改变都是事务的一部分。</p><h4>隐式事务：</h4><p>当图层树被没有获得事务的线程修改的时候将会自动创建隐式事务,当线程的运行循环(run-loop)执行下次迭代的时候将会自动提交事务。比如：</p><pre class="line-numbers  language-objectivec">theLayer.opacity=0.0;theLayer.zPosition=-200;thelayer.position=CGPointMake(0.0,0.0);</pre><p>图层的 opacity,zPosition 和 position 属性修改,依赖隐式事务来确保动画同时一起发生。</p><h4>显示事务：</h4><p>在你修改图层树之前,可以通过给 CATransaction 类发送一个 begin 消息来创建一个显式事务,修改完成之后发送 commit 消息。显式事务在同时设置多个图层的属性的时候，比如暂时的禁用图层的行为,或者暂时修改动画的时间的时候非常有用。<br/>你可以在修改图层属性值的时候通过设置事务的 kCATransactionDisableActions值为 YES 来暂时禁用图层的行为。在事务范围所作的任何更改也不会因此而发生的动画。下面显示了一个示例,当把 aLayer 从可视化图层树移除的时候禁用淡出动画。</p><pre class="line-numbers  language-csharp">[CATransaction&nbsp;begin];[CATransaction&nbsp;setValue:(id)kCFBooleanTrue&nbsp;forKey:kCATransactionDisableActions];[aLayer&nbsp;removeFromSuperlayer];[CATransaction&nbsp;commit];</pre><h2>图层行为--CAAction</h2><p>Core Animation使用动作对象为图层实现了隐式动画行为。动作对象服从CAAction协议并定义了一些运行于图层的相关行为。所有CAAnimation对象都实现了这个协议。无论何时，如果一个图层对象的属性发生变化，则这些动作对象将被分派执行。</p><p>可动画属性是其中一种动作类型，你可以定义几乎任何你想要的动作。然而你需要定义你的动作对象并关联到你的图层对象。</p><p>一个行为对象是一个通过CAAction协议响应行为标识符的对象。图层负责把行为标识符映射到特定的行为对象。当一个特定标识符的行为对象被确定的时候，它会发送一个CAAction协议定义的消息来执行行为对象。</p><p>CALayer类提供了默认的CAAnimation的行为对象实例，即默认的隐式动画效果。</p><p>CALayer行为流程：触发图层行为--&gt;行为标示符--&gt;根据标示符查找行为对象--&gt;执行行为对象</p><h4>行为触发器和行为标示符</h4><p>当你定义了一个动作对象，你必须决定动作以何种方式被触发。动作的触发器定义了你用于注册动作的键（行为标示符）。动作对象可在下面的情况下被触发：</p><ol class=" list-paddingleft-2"><li><p>图层的某一个属性值被改变。这可以是图层的任何一个属性，不仅仅是可动画的属性（你也可以给添加到图层的自定义属性关联动作）。 识别动作的键是属性名。</p></li><li><p>图层变成可视或被加入到图层层次中。则识别动作的键为kCAOnOrderIn。</p></li><li><p>图层从图层层次中被移除。则识别动作的键为kCAOnOrderOut。</p></li><li><p>图层是即将包含一个变换动画。则识别动作的键为kCATransition。</p></li></ol><p>对于结构体属性比如transform(CATransform3D),也可以通过键路径指定特定的变换行为,比如，为了指定一个围绕图层z轴的旋转因子，你可以指定一个transform.rotation.z的键路径。</p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4312211-0873394610c2ad23.png" data-original-width="538" data-original-height="787" data-original-format="image/png" data-original-filesize="52492" class="" data-image-index="0" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/4312211-0873394610c2ad23.png?imageMogr2/auto-orient/strip|imageView2/2/w/538/format/webp"/></p><h4>CAAction协议</h4><p>CAAction协议定义了行为对象如何被调用。实现CAAction协议的类包含一个方法runActionForKey:object:arguments:。<br/>当行为对象收到一个runActionForKey:object:arguments:的消息时，行为标识符、行为发生所在的图层、额外的参数字典会被作为参数传递给方法。</p><p>通常行为对象是CAAnimation的子类实例，它实现了CAAction协议。然而你也可以返回任何实现了CAAction协议的类对象。当实例收runActionForKey:object:arguments:的消息时，它需要执行相应的行为。<br/>当CAAnimation实例受到消息runActionForKey:object:arguments:的时候，它把自己添加到图层的动力里面，触发动画的执行:</p><pre class="line-numbers  language-objectivec">-&nbsp;(void)runActionForKey:(NSString&nbsp;*)key
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object:(id)anObject
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments:(NSDictionary&nbsp;*)dict{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[(CALayer&nbsp;*)anObject&nbsp;addAnimation:self&nbsp;forKey:key];}</pre><h4>动作对象查找顺序</h4><p>Core Animation以下面的顺序搜索动作对象：</p><ol class=" list-paddingleft-2"><li><p>如果图层有一个代理，并且代理实现了actionForLayer：forKey：方法，图层调用该方法。代理必须完成下面所述操作之一：<br/>. 返回给定的键指定的动作对象<br/>. 如果代理不处理动作则返回nil，而搜索操作将继续。<br/>. 返回NSNull对象，这将引起搜索操作立即结束。</p></li><li><p>图层在图层的action字典内搜索给定的键</p></li><li><p>图层在style字典中查询一个包含键的动作字典。（换句话说，style字典包含一个actions键，它的值也是字典。图层在第二个字典中搜索给定的键。）</p></li><li><p>图层调用它的defaultActionForKey：类方法。</p></li><li><p>图层执行由Core Animation定义的隐式动作（如果有）。</p></li></ol><p>如果你在任何一个适当的搜索点提供了一个动作对象，图层将停止它的搜索并执行返回的动作对象。当它找到了一个动作对象，图层调用对象的runActionForKey：object：arguments：方法执行动作。如果你为一个给定的键定义的动作是一个CAAnimation类实例，你可以使用默认的方法实现执行动画。如果你自己定义了服从CAAction协议的对象，你必须使用你的对象的方法实现做任何适当的动作。</p><p>设置动作对象的位置依赖于你打算如何更改图层。</p><p>对于只应用在指定环境的动作，或对于已经使用代理对象的图层，提供一个代理和实现它的actionForLayer：forKey：方法。</p><p>对于不使用代理的图层对象，添加动作到图层的actions字典。</p><p>与定义在图层对象上的自定义属性相关的动作，包括动作在图层的style字典。</p><p>对于那些是图层行为基础的动作，子类化图层并覆盖defaultActionForKey：方法。</p><h2>CALayer可动画属性</h2><p>如果一个属性被标记为Animatable，那么它具有以下两个特点：</p><ol class=" list-paddingleft-2"><li><p>直接对它赋值可能产生隐式动画；</p></li><li><p>我们的CAAnimation的keyPath可以设置为这个属性的名字。</p></li></ol><p>当我们直接对可动画属性赋值的时候，由于有隐式动画存在的可能，CALayer首先会判断此时有没有隐式动画被触发。它会让它的delegate（没错CALayer拥有一个属性叫做delegate）调用actionForLayer:forKey:来获取一个返回值，这个返回值在声明的时候是一个id对象，当然在运行时它可能是任何对象。这时CALayer拿到返回值，将进行判断：如果返回的对象是一个nil，则进行默认的隐式动画；如果返回的对象是一个[NSNull null] ，则CALayer不会做任何动画；如果是一个正确的实现了CAAction协议的对象，则CALayer用这个对象来生成一个CAAnimation，并加到自己身上进行动画。</p><p>表B-1 列出了你可能考虑动画的CALayer类的属性。表中也列出了每一个属性的默认动画对象类型，默认的动画对象被创建以执行一个隐式动画。</p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4312211-6e5b6a129df9f10a.png" data-original-width="544" data-original-height="701" data-original-format="image/png" data-original-filesize="52942" class="" data-image-index="1" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/4312211-6e5b6a129df9f10a.png?imageMogr2/auto-orient/strip|imageView2/2/w/544/format/webp"/></p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4312211-fbea291543620464.png" data-original-width="542" data-original-height="810" data-original-format="image/png" data-original-filesize="61998" class="" data-image-index="2" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/4312211-fbea291543620464.png?imageMogr2/auto-orient/strip|imageView2/2/w/542/format/webp"/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4312211-d99f12a714b5ba91.png" data-original-width="544" data-original-height="152" data-original-format="image/png" data-original-filesize="6768" class="" data-image-index="3" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/4312211-d99f12a714b5ba91.png?imageMogr2/auto-orient/strip|imageView2/2/w/544/format/webp"/></p><p>默认隐式的基本动画</p><p><br/></p><p><img data-original-src="//upload-images.jianshu.io/upload_images/4312211-52c9c71f31505b67.png" data-original-width="544" data-original-height="226" data-original-format="image/png" data-original-filesize="8459" class="" data-image-index="4" style="cursor: zoom-in;" src="//upload-images.jianshu.io/upload_images/4312211-52c9c71f31505b67.png?imageMogr2/auto-orient/strip|imageView2/2/w/544/format/webp"/></p><p>默认隐式的过渡动画</p><p><br/>链接：https://www.jianshu.com/p/90415eb764bf<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '60a56a16';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

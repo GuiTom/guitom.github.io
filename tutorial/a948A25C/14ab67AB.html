@@ -1,0 +1,524 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>AFNetWorking-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>AFNetWorking-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>GET 请求</p><pre class="brush:cpp;toolbar:false">-(void)get
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//1.创建会话管理者
+&nbsp;&nbsp;&nbsp;&nbsp;AFHTTPSessionManager&nbsp;*manager&nbsp;=&nbsp;[AFHTTPSessionManager&nbsp;manager];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//http://120.25.226.186:32812/login?username=123&amp;pwd=122&amp;type=JSON
+&nbsp;&nbsp;&nbsp;&nbsp;//
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSDictionary&nbsp;*paramDict&nbsp;=&nbsp;@{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;username&quot;:@&quot;520it&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;pwd&quot;:@&quot;520it&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;type&quot;:@&quot;JSON&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+&nbsp;&nbsp;&nbsp;&nbsp;//2.发送GET请求
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数:请求路径(不包含参数).NSString
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数:字典(发送给服务器的数据~参数)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三个参数:progress&nbsp;进度回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四个参数:success&nbsp;成功回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task:请求任务
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;responseObject:响应体信息(JSON---&gt;OC对象)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五个参数:failure&nbsp;失败回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error:错误信息
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;响应头:task.response
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[manager&nbsp;GET:@&quot;http://120.25.226.186:32812/login&quot;&nbsp;parameters:paramDict&nbsp;progress:nil&nbsp;success:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nonnull&nbsp;task,&nbsp;id&nbsp;&nbsp;_Nullable&nbsp;responseObject)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@---%@&quot;,[responseObject&nbsp;class],responseObject);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;failure:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nullable&nbsp;task,&nbsp;NSError&nbsp;*&nbsp;_Nonnull&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;请求失败--%@&quot;,error);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+}</pre><p>POST 请求</p><pre class="brush:cpp;toolbar:false">-(void)post
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//1.创建会话管理者
+&nbsp;&nbsp;&nbsp;&nbsp;AFHTTPSessionManager&nbsp;*manager&nbsp;=&nbsp;[AFHTTPSessionManager&nbsp;manager];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSDictionary&nbsp;*paramDict&nbsp;=&nbsp;@{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;username&quot;:@&quot;520it&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;pwd&quot;:@&quot;520&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&quot;type&quot;:@&quot;JSON&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+&nbsp;&nbsp;&nbsp;&nbsp;//2.发送GET请求
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数:请求路径(不包含参数).NSString
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数:字典(发送给服务器的数据~参数)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三个参数:progress&nbsp;进度回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四个参数:success&nbsp;成功回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task:请求任务
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;responseObject:响应体信息(JSON---&gt;OC对象)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五个参数:failure&nbsp;失败回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error:错误信息
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;响应头:task.response
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[manager&nbsp;POST:@&quot;http://120.25.226.186:32812/login&quot;&nbsp;parameters:paramDict&nbsp;progress:nil&nbsp;success:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nonnull&nbsp;task,&nbsp;id&nbsp;&nbsp;_Nullable&nbsp;responseObject)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@---%@&quot;,[responseObject&nbsp;class],responseObject);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;failure:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nullable&nbsp;task,&nbsp;NSError&nbsp;*&nbsp;_Nonnull&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;请求失败--%@&quot;,error);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+}
+@end</pre><p>大文件下载：<br/></p><pre class="brush:cpp;toolbar:false">//
+//&nbsp;&nbsp;ViewController.m
+//&nbsp;&nbsp;02-掌握-AFN实现文件下载
+//
+//&nbsp;&nbsp;Created&nbsp;by&nbsp;xiaomage&nbsp;on&nbsp;16/2/27.
+//&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2016年&nbsp;小码哥.&nbsp;All&nbsp;rights&nbsp;reserved.
+//
+&nbsp;
+#import&nbsp;&quot;ViewController.h&quot;
+#import&nbsp;&quot;AFNetworking.h&quot;
+&nbsp;
+@interface&nbsp;ViewController&nbsp;()
+&nbsp;
+@end
+&nbsp;
+@implementation&nbsp;ViewController
+&nbsp;
+-(void)touchesBegan:(NSSet&lt;UITouch&nbsp;*&gt;&nbsp;*)touches&nbsp;withEvent:(UIEvent&nbsp;*)event
+{
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;download];
+}
+&nbsp;
+-(void)download
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//1.创建会话管理者
+&nbsp;&nbsp;&nbsp;&nbsp;AFHTTPSessionManager&nbsp;*manager&nbsp;=[AFHTTPSessionManager&nbsp;manager];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*url&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:@&quot;http://120.25.226.186:32812/resources/videos/minion_01.mp4&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;NSURLRequest&nbsp;*request&nbsp;=&nbsp;[NSURLRequest&nbsp;requestWithURL:url];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.下载文件
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数:请求对象
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数:progress&nbsp;进度回调&nbsp;downloadProgress
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三个参数:destination&nbsp;回调(目标位置)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有返回值
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;targetPath:临时文件路径
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response:响应头信息
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四个参数:completionHandler&nbsp;下载完成之后的回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filePath:最终的文件路径
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;NSURLSessionDownloadTask&nbsp;*download&nbsp;=&nbsp;[manager&nbsp;downloadTaskWithRequest:request&nbsp;progress:^(NSProgress&nbsp;*&nbsp;_Nonnull&nbsp;downloadProgress)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//监听下载进度
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//completedUnitCount&nbsp;已经下载的数据大小
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//totalUnitCount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件数据的中大小
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%f&quot;,1.0&nbsp;*downloadProgress.completedUnitCount&nbsp;/&nbsp;downloadProgress.totalUnitCount);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;destination:^NSURL&nbsp;*&nbsp;_Nonnull(NSURL&nbsp;*&nbsp;_Nonnull&nbsp;targetPath,&nbsp;NSURLResponse&nbsp;*&nbsp;_Nonnull&nbsp;response)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*fullPath&nbsp;=&nbsp;[[NSSearchPathForDirectoriesInDomains(NSCachesDirectory,&nbsp;NSUserDomainMask,&nbsp;YES)&nbsp;lastObject]&nbsp;stringByAppendingPathComponent:response.suggestedFilename];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;targetPath:%@&quot;,targetPath);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;fullPath:%@&quot;,fullPath);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[NSURL&nbsp;fileURLWithPath:fullPath];
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;completionHandler:^(NSURLResponse&nbsp;*&nbsp;_Nonnull&nbsp;response,&nbsp;NSURL&nbsp;*&nbsp;_Nullable&nbsp;filePath,&nbsp;NSError&nbsp;*&nbsp;_Nullable&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,filePath);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//3.执行Task
+&nbsp;&nbsp;&nbsp;&nbsp;[download&nbsp;resume];
+}
+@end</pre><p>文件上传:</p><pre class="brush:cpp;toolbar:false">//
+//&nbsp;&nbsp;ViewController.m
+//&nbsp;&nbsp;03-掌握-AFN实现文件上传
+//
+//&nbsp;&nbsp;Created&nbsp;by&nbsp;xiaomage&nbsp;on&nbsp;16/2/27.
+//&nbsp;&nbsp;Copyright&nbsp;©&nbsp;2016年&nbsp;小码哥.&nbsp;All&nbsp;rights&nbsp;reserved.
+//
+&nbsp;
+#import&nbsp;&quot;ViewController.h&quot;
+#import&nbsp;&quot;AFNetworking.h&quot;
+&nbsp;
+&nbsp;
+#define&nbsp;Kboundary&nbsp;@&quot;----WebKitFormBoundaryjv0UfA04ED44AhWx&quot;
+&nbsp;
+#define&nbsp;KNewLine&nbsp;[@&quot;\r\n&quot;&nbsp;dataUsingEncoding:NSUTF8StringEncoding]
+&nbsp;
+@interface&nbsp;ViewController&nbsp;()
+&nbsp;
+@end
+&nbsp;
+@implementation&nbsp;ViewController
+&nbsp;
+-(void)touchesBegan:(NSSet&lt;UITouch&nbsp;*&gt;&nbsp;*)touches&nbsp;withEvent:(UIEvent&nbsp;*)event
+{
+&nbsp;&nbsp;&nbsp;&nbsp;[self&nbsp;upload2];
+}
+&nbsp;
+//不推荐
+-(void)upload
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//1.创建会话管理者
+&nbsp;&nbsp;&nbsp;&nbsp;AFHTTPSessionManager&nbsp;*manager&nbsp;=&nbsp;[AFHTTPSessionManager&nbsp;manager];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.1url
+&nbsp;&nbsp;&nbsp;&nbsp;NSURL&nbsp;*url&nbsp;=&nbsp;[NSURL&nbsp;URLWithString:@&quot;http://120.25.226.186:32812/upload&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.2创建请求对象
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableURLRequest&nbsp;*request&nbsp;=&nbsp;[NSMutableURLRequest&nbsp;requestWithURL:url];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.3&nbsp;设置请求方法
+&nbsp;&nbsp;&nbsp;&nbsp;request.HTTPMethod&nbsp;=&nbsp;@&quot;POST&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//2.4&nbsp;设请求头信息
+&nbsp;&nbsp;&nbsp;&nbsp;[request&nbsp;setValue:[NSString&nbsp;stringWithFormat:@&quot;multipart/form-data;&nbsp;boundary=%@&quot;,Kboundary]&nbsp;forHTTPHeaderField:@&quot;Content-Type&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//3.发送请求上传文件
+&nbsp;&nbsp;&nbsp;&nbsp;NSURLSessionUploadTask&nbsp;*uploadTask&nbsp;=&nbsp;[manager&nbsp;uploadTaskWithRequest:request&nbsp;fromData:[self&nbsp;getBodyData]&nbsp;progress:^(NSProgress&nbsp;*&nbsp;_Nonnull&nbsp;uploadProgress)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%f&quot;,1.0&nbsp;*&nbsp;uploadProgress.completedUnitCount/&nbsp;uploadProgress.totalUnitCount);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;completionHandler:^(NSURLResponse&nbsp;*&nbsp;_Nonnull&nbsp;response,&nbsp;id&nbsp;&nbsp;_Nullable&nbsp;responseObject,&nbsp;NSError&nbsp;*&nbsp;_Nullable&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%@&quot;,responseObject);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//4.执行task
+&nbsp;&nbsp;&nbsp;&nbsp;[uploadTask&nbsp;resume];
+}
+&nbsp;
+-(void)upload2
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//1.创建会话管理者
+&nbsp;&nbsp;&nbsp;&nbsp;AFHTTPSessionManager&nbsp;*manager&nbsp;=&nbsp;[AFHTTPSessionManager&nbsp;manager];
+&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;NSDictionary&nbsp;*dictM&nbsp;=&nbsp;@{}
+&nbsp;&nbsp;&nbsp;&nbsp;//2.发送post请求上传文件
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数:请求路径
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数:字典(非文件参数)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三个参数:constructingBodyWithBlock&nbsp;处理要上传的文件数据
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四个参数:进度回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五个参数:成功回调&nbsp;responseObject:响应体信息
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六个参数:失败回调
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[manager&nbsp;POST:@&quot;http://120.25.226.186:32812/upload&quot;&nbsp;parameters:nil&nbsp;constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt;&nbsp;&nbsp;_Nonnull&nbsp;formData)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIImage&nbsp;*image&nbsp;=&nbsp;[UIImage&nbsp;imageNamed:@&quot;Snip20160227_128&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSData&nbsp;*imageData&nbsp;=&nbsp;UIImagePNGRepresentation(image);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//使用formData来拼接数据
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数:二进制数据&nbsp;要上传的文件参数
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二个参数:服务器规定的
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三个参数:该文件上传到服务器以什么名称保存
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//[formData&nbsp;appendPartWithFileData:imageData&nbsp;name:@&quot;file&quot;&nbsp;fileName:@&quot;xxxx.png&quot;&nbsp;mimeType:@&quot;image/png&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//[formData&nbsp;appendPartWithFileURL:[NSURL&nbsp;fileURLWithPath:@&quot;/Users/xiaomage/Desktop/Snip20160227_128.png&quot;]&nbsp;name:@&quot;file&quot;&nbsp;fileName:@&quot;123.png&quot;&nbsp;mimeType:@&quot;image/png&quot;&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[formData&nbsp;appendPartWithFileURL:[NSURL&nbsp;fileURLWithPath:@&quot;/Users/xiaomage/Desktop/Snip20160227_128.png&quot;]&nbsp;name:@&quot;file&quot;&nbsp;error:nil];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;progress:^(NSProgress&nbsp;*&nbsp;_Nonnull&nbsp;uploadProgress)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;%f&quot;,1.0&nbsp;*&nbsp;uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;success:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nonnull&nbsp;task,&nbsp;id&nbsp;&nbsp;_Nullable&nbsp;responseObject)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;上传成功---%@&quot;,responseObject);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;failure:^(NSURLSessionDataTask&nbsp;*&nbsp;_Nullable&nbsp;task,&nbsp;NSError&nbsp;*&nbsp;_Nonnull&nbsp;error)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;上传失败---%@&quot;,error);
+&nbsp;&nbsp;&nbsp;&nbsp;}];
+&nbsp;&nbsp;&nbsp;&nbsp;
+}
+-(NSData&nbsp;*)getBodyData
+{
+&nbsp;&nbsp;&nbsp;&nbsp;NSMutableData&nbsp;*fileData&nbsp;=&nbsp;[NSMutableData&nbsp;data];
+&nbsp;&nbsp;&nbsp;&nbsp;//5.1&nbsp;文件参数
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--分隔符
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Content-Disposition:&nbsp;form-data;&nbsp;name=&quot;file&quot;;&nbsp;filename=&quot;Snip20160225_341.png&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Content-Type:&nbsp;image/png(MIMEType:大类型/小类型)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空行
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件参数
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[[NSString&nbsp;stringWithFormat:@&quot;--%@&quot;,Kboundary]&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//name:file&nbsp;服务器规定的参数
+&nbsp;&nbsp;&nbsp;&nbsp;//filename:Snip20160225_341.png&nbsp;文件保存到服务器上面的名称
+&nbsp;&nbsp;&nbsp;&nbsp;//Content-Type:文件的类型
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[@&quot;Content-Disposition:&nbsp;form-data;&nbsp;name=\&quot;file\&quot;;&nbsp;filename=\&quot;Sss.png\&quot;&quot;&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[@&quot;Content-Type:&nbsp;image/png&quot;&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;UIImage&nbsp;*image&nbsp;=&nbsp;[UIImage&nbsp;imageNamed:@&quot;Snip20160227_128&quot;];
+&nbsp;&nbsp;&nbsp;&nbsp;//UIImage&nbsp;---&gt;NSData
+&nbsp;&nbsp;&nbsp;&nbsp;NSData&nbsp;*imageData&nbsp;=&nbsp;UIImagePNGRepresentation(image);
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:imageData];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//5.2&nbsp;非文件参数
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--分隔符
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Content-Disposition:&nbsp;form-data;&nbsp;name=&quot;username&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空行
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;123456
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[[NSString&nbsp;stringWithFormat:@&quot;--%@&quot;,Kboundary]&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[@&quot;Content-Disposition:&nbsp;form-data;&nbsp;name=\&quot;username\&quot;&quot;&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[@&quot;123456&quot;&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:KNewLine];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//5.3&nbsp;结尾标识
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--分隔符--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;[fileData&nbsp;appendData:[[NSString&nbsp;stringWithFormat:@&quot;--%@--&quot;,Kboundary]&nbsp;dataUsingEncoding:NSUTF8StringEncoding]];
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;fileData;
+}
+&nbsp;
+@end</pre><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '14ab67AB';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

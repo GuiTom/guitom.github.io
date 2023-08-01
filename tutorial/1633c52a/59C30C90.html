@@ -1,0 +1,225 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>链表的查找-计算机算法基础</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>链表的查找-计算机算法基础</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="ba1a7385" class="item chapter normal selected">查找</div><div id="bC91cAA3" class="item course normal">顺序表的查找</div><div id="59C30C90" class="item course normal">链表的查找</div><div id="b2A8C43b" class="item course normal">哈希表查找</div><div id="1B446667" class="item course normal">二叉树查找</div><div id="7186a499" class="item chapter normal">图</div><div id="89242a37" class="item course normal">邻接矩阵存储</div><div id="aB06c8b5" class="item course normal">邻接表(无向)</div><div id="23747CCA" class="item course normal">邻接表(有向)</div><div id="2B53B4Bc" class="item course normal">十字链表(有向图)</div><div id="A75B8C5A" class="item course normal">无向多重表</div><div id="79918209" class="item course normal">最小生成树(MST)</div><div id="724518A8" class="item course normal">MST性质</div><div id="68607210" class="item course normal">MST-Prim算法</div><div id="c5Ba3bB6" class="item course normal">MST-Kruskal算法</div><div id="CC7CBcB6" class="item course normal">最短路径-Dijkstra</div><div id="1aB39452" class="item course normal">最短路径-Floyd</div><div id="cb6A7026" class="item course normal">拓扑排序</div><div id="B37a3Aac" class="item course normal">关键路径-AOE网</div><div id="26516c04" class="item course normal">A星寻路算法</div><div id="B7583489" class="item chapter normal">字符串匹配</div><div id="0a54A6aa" class="item course normal">BF算法</div><div id="66ba80A3" class="item course normal">KMP算法</div><div id="AB7bABBa" class="item course normal">BM算法</div><div id="c738Cc8A" class="item course normal">Sunday算法</div><div id="C637c842" class="item chapter normal">排序</div><div id="10Cc3938" class="item course normal">插入排序</div><div id="BaCbB45A" class="item course normal">希尔排序</div><div id="b6001cca" class="item course normal">冒泡排序</div><div id="b6bC0C9a" class="item course normal">快速排序</div><div id="B3c8B431" class="item course normal">选择排序</div><div id="A007c6c1" class="item course normal">堆排序</div><div id="130932B3" class="item course normal">归并排序</div><div id="1857C7A4" class="item course normal">计数排序</div><div id="a494106a" class="item course normal">基数排序</div><div id="C7b5AcBB" class="item course normal">二叉树排序</div><div id="B8CBb284" class="item course normal">AVL树</div><div id="4124Bc76" class="item course normal">B树</div><div id="8CB3C5B5" class="item course normal">B+树</div><div id="b1926855" class="item course normal">红黑树</div><div id="2137C76A" class="item chapter normal">动态规划</div><div id="ac1c04B0" class="item course normal">最长公共子序列</div><div id="4c592cB8" class="item course normal">最优二叉搜索树</div><div id="b95C7914" class="item chapter normal">fft算法</div><div id="542c658b" class="item chapter normal">最长回文子字符串</div><div id="398a5C44" class="item chapter normal">算法思想分类</div><div id="1aC31776" class="item chapter normal">其它资料</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;">1.单链表的查找运算</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;">&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(128, 0, 128);"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(0, 0, 255);">（1）按序号查找</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(255, 0, 0);"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;">① 链表不是随机存取结构</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp; 　在链表中，即使知道被访问结点的序号i，也不能像顺序表中那样直接按序号i访问结点，而只能从链表的头指针出发，顺链域next逐个结点往下搜索，直至搜索到第i个结点为止。因此，链表不是随机存取结构。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;">② 查找的思想方法</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp; 　计数器j置为0后，扫描指针p指针从链表的头结点开始顺着链扫描。当p扫描下一个结点时，计数器j相应地加1。当j=i时，指针p所指的结点就是要找的第i个结点。而当p指针指为null且j≠i时，则表示找不到第i个结点。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(255, 0, 0);">注意：</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp; 　头结点可看做是第0个结点。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>③具体算法实现</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;">&nbsp;</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;<span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"></span></p><pre class="brush:cpp;toolbar:false">ListNode*&nbsp;GetNode(LinkList&nbsp;head,int&nbsp;i)
+{//在带头结点的单链表head中查找第i个结点，若找到（0≤i≤n），
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//则返回该结点的存储位置，否则返回NULL。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;j;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ListNode&nbsp;*p;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p=head;j=0;//从头结点开始扫描
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(p-&gt;next&amp;&amp;j&lt;i){//顺指针向后扫描，直到p-&gt;next为NULL或i=j为止
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p=p-&gt;next;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j++;
+}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(i==j)&nbsp;return&nbsp;p;//找到了第i个结点
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;return&nbsp;NULL;//当i&lt;0或i&gt;0时，找不到第i个结点
+}</pre><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"></span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>④算法分析</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp; 　算法中，while语句的终止条件是搜索到表尾或者满足j≥i，其频度最多为i，它和被寻找的位置有关。在等概率假设下，平均时间复杂度为：<br/></p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(0, 0, 255);">（2） 按值查找</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;">①思想方法</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;">&nbsp;</span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(0, 0, 255);"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp;<span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;">&nbsp;</span></span><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; color: rgb(0, 0, 255);">　</span>从开始结点出发，顺着链逐个将结点的值和给定值key作比较，若有结点的值与key相等，则返回首次找到的其值为key的结点的存储位置；否则返回NULL。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>②具体算法实现</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;"></span></p><pre class="brush:cpp;toolbar:false">ListNode*&nbsp;LocateNode&nbsp;(LinkList&nbsp;head,DataType&nbsp;key)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;//在带头结点的单链表head中查找其值为key的结点
+&nbsp;&nbsp;&nbsp;&nbsp;ListNode&nbsp;*p=head-&gt;next;//从开始结点比较。表非空，p初始值指向开始结点
+&nbsp;&nbsp;&nbsp;&nbsp;while(p&amp;&amp;p-&gt;data!=key)//直到p为NULL或p-&gt;data为key为止
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p=p-&gt;next;//扫描下一结点
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;p;//若p=NULL，则查找失败，否则p指向值为key的结点
+}</pre><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><span style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word; font-weight: 700;">③算法分析</span><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>&nbsp;&nbsp;&nbsp; 　该算法的执行时间亦与输入实例中key的取值相关，其平均时间复杂度分析类似于按序号查找，为O(n)。<br/></p><p><a href="https://blog.csdn.net/sunming0129/article/details/79904402" target="_blank">原文链接:</a><a href="https://blog.csdn.net/sunming0129/article/details/79904402">https://blog.csdn.net/sunming0129/article/details/79904402</a></p><p>相关考点:</p><ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p><a href="https://blog.csdn.net/qq_39436605/article/details/80899619" target="_blank">链表如何翻转?</a></p><p>a、用一个数组拷贝链表指针，然后将反向链接链表。空间复杂度高</p><p>b、指针相邻依次向后移动</p><p>c、需要两个指针。从第二个节点到最后一个节点，依次插入到第一个节点的后面。</p><p><br/></p></li><li><p>如何找到链表中的环路.</p><p>设置两个指针一次指向第一个和第二个节点，分别以步长一和二向后移动，如果有环，则两指针一定相遇与环内某一个节点。</p></li></ol>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = '1633c52a';
+var article_id = '59C30C90';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

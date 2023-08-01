@@ -1,0 +1,496 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>手势-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>手势-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <pre class="brush:cpp;toolbar:false">#import&nbsp;&quot;ViewController.h&quot;
+&nbsp;
+@interface&nbsp;ViewController&nbsp;()
+&nbsp;
+@property&nbsp;(nonatomic,retain)UIImageView&nbsp;*imageView;
+@property&nbsp;(nonatomic,assign)NSInteger&nbsp;index;//下标
+@property&nbsp;(nonatomic,retain)NSMutableArray&nbsp;*images;//图片名&nbsp;&nbsp;&nbsp;&nbsp;字数组
+&nbsp;
+@end
+&nbsp;
+@implementation&nbsp;ViewController
+#加载视图
+&nbsp;
+-(void)viewDidLoad
+{
+&nbsp;
+[super&nbsp;viewDidLoad];
+//布局imageView
+[self&nbsp;layoutImageView];
+//1.创建轻拍手势
+[self&nbsp;tapGestureRecognizer];
+//2.创建清扫手势
+[self&nbsp;swipeGestureRecognizer];
+//3.创建长安手势
+[self&nbsp;longPressGestureRecognizer];
+//4.创建平移手势
+[self&nbsp;panGestureTecognizer];
+//5.创建捏合手势
+[self&nbsp;pinchGestureRecognizer];
+//6.创建&nbsp;旋转手势
+[self&nbsp;rotationGestureRecognizer]
+//7.创建边缘手势
+[self&nbsp;screenEdgePanGestureRecognizer];
+}
+##布局ImageView
+&nbsp;
+-(void)layoutImageView
+{
+&nbsp;
+//创建对象
+UIImageView&nbsp;*imageView&nbsp;=[[UIImageView&nbsp;alloc]initWithFrame:CGRectMake(0,&nbsp;0,&nbsp;375,&nbsp;667)];
+//配置属性
+imageView.backgroundColor&nbsp;=[UIColor&nbsp;purpleColor];
+//设置图片
+imageView.image&nbsp;=[UIImage&nbsp;imageNamed:@&quot;car1.jpg&quot;];
+//添加父视图
+[self.view&nbsp;addSubview:imageView];
+//将创建的图片视图对象&nbsp;给属性赋值
+self.imageView&nbsp;=imageView；
+//打开用户交互
+self.imageView.userInteractionEnabled&nbsp;=YES;
+self.images&nbsp;=[NSMutableArray&nbsp;array];
+for&nbsp;(int&nbsp;i&nbsp;=&nbsp;1;&nbsp;i&lt;9;&nbsp;i++)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSString&nbsp;*&nbsp;imageName&nbsp;=[NSString&nbsp;stringWithFormat:@&quot;car%d.jpg&quot;,i];
+&nbsp;&nbsp;&nbsp;&nbsp;[_images&nbsp;addObject:imageName];
+}
+//&nbsp;_index&nbsp;=1;
+&nbsp;
+}
+&nbsp;
+&nbsp;
+#pragma&nbsp;轻怕手势
+//创建轻拍手势
+-(void)tapGestureRecognizer
+{
+&nbsp;
+//创建手势对象
+UITapGestureRecognizer&nbsp;*tap&nbsp;=[[UITapGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action:@selector(tapAction:)];
+//配置属性
+//轻拍次数
+tap.numberOfTapsRequired&nbsp;=1;
+//轻拍手指个数
+tap.numberOfTouchesRequired&nbsp;=1;
+//讲手势添加到指定的视图上
+[_imageView&nbsp;addGestureRecognizer:tap];
+&nbsp;
+}
+&nbsp;
+//轻拍事件
+&nbsp;
+-(void)tapAction:(UITapGestureRecognizer&nbsp;*)tap
+{
+&nbsp;
+//图片切换
+NSLog(@&quot;拍一下&quot;);
+_index&nbsp;++;
+if&nbsp;(_index&nbsp;==&nbsp;8)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;_index&nbsp;=&nbsp;1;
+}
+self.imageView.image&nbsp;=[UIImage&nbsp;imageNamed:_images[_index]];
+&nbsp;
+}
+#pragma&nbsp;清扫手势
+&nbsp;
+//清扫手势
+-(void)swipeGestureRecognizer
+{
+&nbsp;
+UISwipeGestureRecognizer&nbsp;*swipe&nbsp;=[[UISwipeGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(swipeAction:)];
+//配置属性
+//一个清扫手势&nbsp;&nbsp;只能有两个方向(上和下)&nbsp;或者&nbsp;(左或右)
+//如果想支持上下左右清扫&nbsp;&nbsp;那么一个手势不能实现&nbsp;&nbsp;需要创建两个手势
+swipe.direction&nbsp;=UISwipeGestureRecognizerDirectionLeft;
+//添加到指定视图
+[_imageView&nbsp;addGestureRecognizer:swipe];
+UISwipeGestureRecognizer&nbsp;*swipe2&nbsp;=[[UISwipeGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(swipeAction:)];
+swipe2.direction&nbsp;=UISwipeGestureRecognizerDirectionRight;
+[_imageView&nbsp;addGestureRecognizer:swipe2];
+&nbsp;
+}
+//清扫事件
+-(void)swipeAction:(UISwipeGestureRecognizer&nbsp;*)swipe
+{
+&nbsp;
+NSLog(@&quot;扫一下&quot;);
+if&nbsp;(swipe.direction&nbsp;==UISwipeGestureRecognizerDirectionRight)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;右清扫&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;_index&nbsp;--;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_index&nbsp;&lt;&nbsp;1)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_index&nbsp;=7;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;_imageView.image&nbsp;=[UIImage&nbsp;imageNamed:_images[_index]];
+}else&nbsp;if(swipe.direction&nbsp;==&nbsp;UISwipeGestureRecognizerDirectionLeft){
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;左扫一下&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;_index&nbsp;++;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_index&nbsp;==&nbsp;8)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_index=1;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;_imageView.image&nbsp;=[UIImage&nbsp;imageNamed:_images[_index]];
+}
+&nbsp;
+}
+#pragma&nbsp;长按手势
+//创建长按手势
+-(void)longPressGestureRecognizer
+{
+&nbsp;
+UILongPressGestureRecognizer&nbsp;*longPress&nbsp;=[[UILongPressGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(longPressAction:)];
+//最短长按时间
+longPress.minimumPressDuration&nbsp;=2;
+//允许移动最大距离
+longPress.allowableMovement&nbsp;=1;
+//添加到指定视图
+[_imageView&nbsp;addGestureRecognizer:longPress];
+&nbsp;
+}
+//长按事件
+-(void)longPressAction:(UILongPressGestureRecognizer&nbsp;*)longPress
+{
+&nbsp;
+//NSLog(@&quot;长按&quot;);
+//对于长安有开始和&nbsp;结束状态
+if&nbsp;(longPress.state&nbsp;==&nbsp;UIGestureRecognizerStateBegan)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;长按开始&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;//将图片保存到相册
+&nbsp;&nbsp;&nbsp;&nbsp;UIImage&nbsp;*image&nbsp;=[UIImage&nbsp;imageNamed:_images[_index]];
+&nbsp;&nbsp;&nbsp;&nbsp;UIImageWriteToSavedPhotosAlbum(image,&nbsp;nil,&nbsp;nil,&nbsp;nil);
+}else&nbsp;if&nbsp;(longPress.state&nbsp;==&nbsp;UIGestureRecognizerStateEnded)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@&quot;长按结束&quot;);
+}
+&nbsp;
+}
+&nbsp;
+#pragma&nbsp;平移手势
+//创建平移手势
+-(void)panGestureTecognizer
+{
+&nbsp;
+UIPanGestureRecognizer&nbsp;*pan&nbsp;=[[UIPanGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(panAction:)];
+//添加到指定视图
+[_imageView&nbsp;addGestureRecognizer:pan];
+&nbsp;
+}
+//创建平移事件
+-(void)panAction:(UIPanGestureRecognizer&nbsp;*)pan
+{
+&nbsp;
+//获取手势的位置
+CGPoint&nbsp;position&nbsp;=[pan&nbsp;translationInView:_imageView];
+&nbsp;
+//通过stransform&nbsp;进行平移交换
+_imageView.transform&nbsp;=&nbsp;CGAffineTransformTranslate(_imageView.transform,&nbsp;position.x,&nbsp;position.y);
+//将增量置为零
+[pan&nbsp;setTranslation:CGPointZero&nbsp;inView:_imageView];
+&nbsp;
+}
+&nbsp;
+#pragma&nbsp;捏合手势
+-(void)pinchGestureRecognizer
+{
+&nbsp;
+UIPinchGestureRecognizer&nbsp;*pinch&nbsp;=[[UIPinchGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(pinchAction:)];
+//添加到指定视图
+[_imageView&nbsp;addGestureRecognizer:pinch];
+&nbsp;
+}
+//添加捏合事件
+-(void)pinchAction:(UIPinchGestureRecognizer&nbsp;*)pinch
+{
+&nbsp;
+//通过&nbsp;transform(改变)&nbsp;进行视图的视图的捏合
+_imageView.transform&nbsp;=CGAffineTransformScale(_imageView.transform,&nbsp;pinch.scale,&nbsp;pinch.scale);
+//设置比例&nbsp;为&nbsp;1
+pinch.scale&nbsp;=&nbsp;1;
+&nbsp;
+}
+#pragma&nbsp;旋转手势
+&nbsp;
+//创建旋转手势
+-(void)rotationGestureRecognizer
+{
+&nbsp;
+UIRotationGestureRecognizer&nbsp;*rotation&nbsp;=[[UIRotationGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(rotationAction:)];
+//添加到指定的视图
+[_imageView&nbsp;addGestureRecognizer:rotation];
+&nbsp;
+}
+//旋转事件
+&nbsp;
+-(void)rotationAction:(UIRotationGestureRecognizer&nbsp;*)rote
+{
+&nbsp;
+//通过transform&nbsp;进行旋转变换
+_imageView.transform&nbsp;=&nbsp;CGAffineTransformRotate(_imageView.transform,&nbsp;rote.rotation);
+//将旋转角度&nbsp;置为&nbsp;0
+rote.rotation&nbsp;=&nbsp;0;
+&nbsp;
+}
+#pragma&nbsp;边缘手势
+&nbsp;
+//创建边缘手势
+-(void)screenEdgePanGestureRecognizer
+{
+&nbsp;
+UIScreenEdgePanGestureRecognizer&nbsp;*screenPan&nbsp;=&nbsp;[[UIScreenEdgePanGestureRecognizer&nbsp;alloc]initWithTarget:self&nbsp;action:@selector(screenPanAction:)];
+[_imageView&nbsp;addGestureRecognizer:screenPan];
+&nbsp;
+}
+//创建边缘事件
+-(void)screenPanAction:(UIScreenEdgePanGestureRecognizer&nbsp;*)screenPan
+{
+&nbsp;
+NSLog(@&quot;边缘&quot;);
+&nbsp;
+}
+&nbsp;
+&nbsp;
+-&nbsp;(void)didReceiveMemoryWarning&nbsp;{
+[super&nbsp;didReceiveMemoryWarning];
+//&nbsp;Dispose&nbsp;of&nbsp;any&nbsp;resources&nbsp;that&nbsp;can&nbsp;be&nbsp;recreated.
+}
+&nbsp;
+@end</pre><p><br/></p><p>原文链接：https://blog.csdn.net/catstarxcode/article/details/79451691</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '9A66833B';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

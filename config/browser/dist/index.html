@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>
+			百度搜索 </title>
+		<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link href="css/index.css?3ff80db04781ef7de25e" rel="stylesheet"></head>
+
+<body>
+		<main class="main swiper-container">
+			<div class="swiper-wrapper" id="myswiper">
+				<div class="swiper-slide">
+					<section class="weather-box">
+						<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" id="weatherIframe"></iframe>
+					</section>
+					<form action="http://m.baidu.com/s?word=" class="input-form">
+						<img src="https://m.baidu.com/static/index/plus/plus_logo.png" class="logo" alt="Baidu" align="bottom" border="0">
+						<section class="input-group">
+							<input name=tn type='hidden' value='baidu'>
+							<input type="text" name="word" size="30" baiduSug="1|2" class="input-text" placeholder="请输入关键字" id="searchBar" autocomplete="off" disableautocomplete>
+							<!-- <datalist id="searchList" onclick="console.log(1)"></datalist>  -->
+							<ul class="input-list" id="searchList">
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+								<li>百度一下，你就知道</li>
+							</ul>
+							<button type="submit" class="input-btn" id="searchSub">百度一下</button>
+						</section>
+					</form>
+					<article class="content">
+						<ul class="links-view" id="links_view">
+							
+<!-- 							<li class="links-cell">
+								<section id="addIcon">
+									<img src="img/add.svg" width="60%" style="margin: auto;">
+									<p>添加</p>
+								</section>
+							</li> -->
+						</ul>
+					</article>
+				</div>
+				<div class="swiper-slide">
+					<section class="page2 content">
+						<!-- <iframe src="./iframe.html" id="myiframe" width="100%" height="100%" frameborder="0"></iframe> -->
+						<ul class="links-view">
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://m.toutiao.com/?W2atIF=1&amp;utm_source=2345&amp;utm_medium=cpt&amp;utm_campaign=mz">
+									<img src="https://m.2345.com/pic/logo/308f82e52e9456d4d24516cf7d93ba5620170228180531.png" alt="">
+									<p>今日头条</p>
+								</a>
+							</li>
+							<li class="links-cell">
+							
+								<a href="JavaScript:void(0)" data-href="https://toutiao.eastday.com/?qid=2345yuki">
+									<img src="https://m.2345.com/pic/logo/6a9ea81eaa8d6670affd62c64dabda3a20180514115339.png" alt="">
+									<p>头条</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://m.ctrip.com/html5/?allianceid=9087&amp;sid=543246&amp;ouid=m&amp;sourceid=4682&amp;sepopup=4&amp;autoawaken=close">
+									<img src="https://m.2345.com/pic/logo/20160519172933.png" alt="">
+									<p>携程</p>
+								</a>
+							</li>
+							<li class="links-cell">
+							
+								<a href="JavaScript:void(0)" data-href="http://jump.luna.58.com/s?spm=b-31580022738699-me-f-814&amp;ch=2345_mz">
+									<img src="https://m.2345.com/pic/logo/20160519172937.png" alt="">
+									<p>58同城</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="https://m.baidu.com/s?from=1018225t">
+									<img src="https://m.2345.com/pic/logo/20160519172942.png" alt="">
+									<p>百度搜索</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://wapzhushou.2345.com/?q=09">
+									<img src="https://m.2345.com/pic/logo/13bbf06bf50b79461c2be368e58f638320171009183646.png" alt="">
+									<p>软件游戏</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="https://www.ttdailynews.com/?cid=021445">
+									<img src="https://m.2345.com/pic/logo/mz_logo_krd.png" alt="">
+									<p>看热点</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://touch.qunar.com/?bd_source=2345icon">
+									<img src="https://m.2345.com/pic/logo/qne.png" alt="">
+									<p>去哪儿</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://m.weibo.cn/p/index?containerid=102803&amp;client=h5&amp;featurecode=H5tuiguang0623&amp;need_head_cards=1&amp;wm=90090_90001">
+									<img src="https://m.2345.com/pic/logo/086fb52ff55ae96b0d5254bf3dad36d820170714163539.png" alt="">
+									<p>微博</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" href="http://msports.eastday.com/theme/worldcup.html?qid=qid10467">
+									<img src="https://m.2345.com/pic/logo/mz_logo_msports.png" alt="">
+									<p>世界杯</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://union-click.jd.com/jdc?d=vNdrwC">
+									<img src="https://m.2345.com/pic/logo/4037dba6086149898a3df05f4f3b2f4420180104150332.png" alt="">
+									<p>京东</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://m.autohome.com.cn/?pvareaid=1001269&amp;origin=2345.com">
+									<img src="https://m.2345.com/pic/logo/e33ab81a3db3f84d13d2d7903375537c20180203122720.png" alt="">
+									<p>汽车之家</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://ai.m.taobao.com/?pid=mm_32204973_6488643_31208542">
+									<img src="https://m.2345.com/pic/logo/03038e191628d79c4968cc647a91c3a020170704110241.png" alt="">
+									<p>爱淘宝</p>
+								</a>
+							</li>
+							<li class="links-cell">
+								
+								<a href="JavaScript:void(0)" data-href="http://ys.km.com/?jsm000050">
+									<img src="https://m.2345.com/pic/logo/ee093b2bbb42a180d5d281cb881a54c320170331114538.png" alt="">
+									<p>影视大全</p>
+								</a>
+							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</main>
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdn.bootcss.com/Swiper/4.3.0/js/swiper.js"></script>
+<script>
+	"use strict";
+	var host = 'http://mmai.vip:82';
+	// swipe 左右滑动
+	var PAGES = new Swiper('.swiper-container', {
+	  pagination: {
+	    el: '.swiper-pagination',
+	  },
+	})
+
+	// 页面带 hash值的 js可忽略
+
+	// 存储
+	var SALT = '__ADMIN__',
+	  STORAGE = {
+	    local: {
+	      get: function(key) {
+	        let strValue = localStorage.getItem(SALT + key)
+	        strValue = decodeURIComponent(strValue)
+	        return JSON.parse(strValue)
+	      },
+	      set: function(key, jsonValue) {
+	        let strValue = JSON.stringify(jsonValue)
+	        strValue = encodeURIComponent(strValue)
+	        localStorage.setItem(SALT + key, strValue)
+	      },
+	      remove: function(key) {
+	        localStorage.removeItem(SALT + key)
+	      },
+	      removeAll: function() {
+	        localStorage.clear()
+	      }
+	    },
+	    session: {
+	      get: function(key) {
+	        let strValue = sessionStorage.getItem(SALT + key)
+	        strValue = decodeURIComponent(strValue)
+	        return JSON.parse(strValue)
+	      },
+	      set: function(key, jsonValue) {
+	        let strValue = JSON.stringify(jsonValue)
+	        strValue = encodeURIComponent(strValue)
+	        sessionStorage.setItem(SALT + key, strValue)
+	      },
+	      remove: function(key) {
+	        sessionStorage.removeItem(SALT + key)
+	      },
+	      removeAll: function() {
+	        sessionStorage.clear()
+	      }
+	    },
+	    cookie: {
+	      get: function(key) {
+	        let getCookie = document.cookie.replace(/[ ]/g, ""),
+	          arrCookie = getCookie.split(";"),
+	          tips
+	        for (let i = 0; i < arrCookie.length; i++) {
+	          let arr = arrCookie[i].split("=")
+	          if (key == arr[0]) {
+	            tips = arr[1]
+	            break
+	          }
+	        }
+	        return tips
+	      },
+	      set: function(key, val) {
+	        let date = new Date(),
+	          expiresHours = 9
+	        date.setTime(date.getTime() + expiresHours * 3600)
+	        // console.log(date.toGMTString())
+	        document.cookie = key + "=" + val + ";expires=" + date.toGMTString() + ";path=/"
+	      },
+	      remove: function(name) {
+	        var exp = new Date()
+	        exp.setTime(exp.getTime() - 60 * 60 * 1000)
+	        var cval = getCookie(name)
+	        if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + ";path=/"
+	      }
+	    }
+	  }
+	  function deleteIcon(iconId){
+	  	
+	  	var url  = host+'/deleteIcon?userId='+userId+'&iconId='+iconId;
+		
+			var requestStr = 'iconDeleted__'+url+'__GBK';
+								
+			var u = navigator.userAgent;
+			
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+			if(isAndroid){
+				window.android_api.actionFromJsWithParam(requestStr);	
+				}else
+				 {				
+				window.webkit.messageHandlers.iOS_api.postMessage(requestStr);
+			}
+	  }
+	  $(function() {
+	  // 隐藏天气 iframe详细字段
+	  $('#link_more').css({display: 'none'})
+
+	  // 长按显示关闭按钮
+	  var timeout
+	  $('#links_view').on('touchstart', 'li', function(e) {
+	    timeout = setTimeout(function() {
+	      $('.rm').show().addClass('tada infinite')
+	    }, 800)
+	  }).on('touchend', 'li', function(e) {
+	    clearTimeout(timeout)
+	  }).on('click','a',function(e){
+	   
+	  	var value = $(this).prev('.rm');
+	  
+	  	if(value.attr('class').indexOf('tada infinite')!=-1){
+	  		
+	  		var iconId = $(this).parent('li').data('iconid');
+
+	  		deleteIcon(iconId);
+	  		e.stopPropagation()
+	  		e.preventDefault()
+	  		return;
+	  	}
+	  	
+	  	window.location.href = $(this).data('href')
+	  })
+
+
+	 //点击空白处关闭删除按钮
+	  $('body').on('click', function(e) {
+
+	  	e.stopPropagation()
+	  	e.preventDefault()
+	    $('#searchList').slideUp()
+		var target = $(e.target)
+
+		if (target.closest(".rm").length == 0) {
+
+			$(".rm").removeClass('tada infinite').hide()
+		}
+	  })
+
+
+	  // 自动补全
+		  var autoComplete = function() {
+
+			$.ajax({
+			  type: 'get',
+			  // url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?json=1&p=3&sid=1452_21123_20927&req=2&csor=1&cb=jQuery1101&_=15&wd=' + value + '',
+			  url: 'http://suggestion.baidu.com/su?wd='+ $(this).val() +'',
+			  // url: 'http://m.baidu.com/s?word=' + $(this).val() + '',
+			  dataType: "jsonp"
+			})	  	
+		  }
+	  	document.getElementById('searchBar').addEventListener('input', autoComplete)
+		$('#searchBar').keyup(autoComplete)
+		var goPage = function(uri) {
+
+			window.open('http://m.baidu.com/s?word=' + uri)
+		}
+		$('#searchList').on('click', 'li', function(){
+			$('#searchList').slideUp()		
+			goPage($(this).html())	
+		})
+		$('#searchSub').click(function(){
+			goPage($('#searchBar').val())
+		})
+	})
+	
+	var baidu = {}
+	window.baidu.sug = function jQuery1101(res) {
+		var str = ''
+		for(var i of res['s']) {
+			str += '<li>' + i + '</li>'
+		}
+		$('#searchList').html(str)
+		$('#searchList').slideDown()
+	}
+
+	// 点击收藏
+	// $('#addIcon').click(function(){
+		
+	
+		
+	// 	var requestStr = 'addIcon__x';
+			
+	// 	var u = navigator.userAgent;
+	// 		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+	// if(isAndroid){
+	// 	window.android_api.actionFromJsWithParam(requestStr);	
+	// }else {				
+	// 	window.webkit.messageHandlers.iOS_api.postMessage(requestStr);
+	
+	// }
+		// var icon = {
+		// 	url: 'http://ys.km.com/?jsm000050',
+		// 	iconUrl: 'http://houtai.2345.com/pic/logo/6f6d47af42ef7a8252452e015f7cfbc920161213151655.png',
+		// 	name: '网易'
+		// };
+		// var	ICONS = STORAGE['local'].get('ICONS')
+		// if(ICONS==null){
+		// 	ICONS = [];
+		// }
+		// ICONS.push(icon);
+		// STORAGE['local'].set('ICONS',ICONS);
+		// showIcons([icon],true)
+	// })
+	function onImgLoad(img){
+		img.parentNode.previousSibling.style.opacity= 0;
+		// img.parent('.icon_img_div').prev('.icon_img_bg').style.display = 'none';
+	}
+	function imgError(img){
+		img.parentNode.style.opacity = 0;
+	}
+	function showIcons(data,flag) {
+
+		var LINKS_VIEW = $('#links_view')
+
+		for(var item of data) {
+		
+			var node = $('<li class="links-cell" data-iconid="'+item.id+'"><span class="rm animated">&nbsp;</span><a href="javascript:void(0)" data-href="'+ item.url +'"><div class="icon_bg_div">		<img class="icon_img_bg" src="img/site_default_icon.png" alt=""><div class="icon_img_div" style="position: absolute;top: 0px;">    <img style="border-radius:40%;" onload="onImgLoad(this)" onerror="imgError(this)" src="'+item.iconUrl+'" alt=""></div></div><p>' + item.name + '</p></a></li>')
+			if(flag) {
+				
+				LINKS_VIEW.append(node);
+			} else {
+				LINKS_VIEW.prepend(node);
+			}
+		}
+	}
+
+	// $('img.icon_image').on('load',function(){
+	// 	alert(1);
+	// 	return;
+	// 	$(this).parent('.icon_img_div').prev('.icon_img_bg').style.display = 'none';
+	// })
+	function clearIcons(data,flag){
+		
+
+		$('#links_view').html('');
+		
+	}
+	var ICONS = STORAGE['local'].get('ICONS');
+	if(ICONS!=null){
+		showIcons(ICONS);
+	}
+	// $('img.self_img').on('load', function() {
+		
+	// 	this.setAttribute('src',this.getAttribute("data-href"))
+	  
+	// })
+
+
+//fetch UserInfo
+
+$(document).ready(function(){
+   			
+			var requestStr = '1001__x';
+			
+			var u = navigator.userAgent;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+			
+			if(isAndroid){
+			
+				window.android_api.actionFromJsWithParam(requestStr);
+				
+				
+			}else {
+				
+				window.webkit.messageHandlers.iOS_api.postMessage(requestStr);
+			}
+});
+function databack_1001(info){
+
+	var userInfoObj = JSON.parse(info);
+	userId = userInfoObj.userId;
+	
+	getUserIconList(userInfoObj.userId)
+}
+function databack_iconDeleted(){
+	alert("图标已删除!")
+   getUserIconList(userId);
+}
+function databack_iconAdded(){
+   getUserIconList(userId);
+}
+var userId = '';
+function getUserIconList(userId){
+   
+	var url  = host+'/getIconList?userId='+userId
+	
+	var requestStr = 'getUserIconList__'+url+'__GBK';
+	
+	var u = navigator.userAgent;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+	if(isAndroid){
+		window.android_api.actionFromJsWithParam(requestStr);	
+	}else {				
+		window.webkit.messageHandlers.iOS_api.postMessage(requestStr);
+	}
+}
+
+function databack_getUserIconList(data){
+  
+    var obj = JSON.parse(data);
+    
+    clearIcons();
+    STORAGE['local'].set('ICONS',obj.data);
+    showIcons(obj.data,true);
+}
+
+
+function outputObj(obj) {
+	var description = "";
+	for (var i in obj) {
+		description += i + " -----> " + obj[i] + "\n";
+	}
+	alert(description);
+}
+</script>
+<script type="text/javascript" src="js/index.8fe5277b8364a0d00f8b.js?3ff80db04781ef7de25e"></script></body>
+
+</html>

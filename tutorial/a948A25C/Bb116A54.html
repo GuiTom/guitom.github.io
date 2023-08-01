@@ -1,0 +1,243 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>3.0与2.0的区别-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>3.0与2.0的区别-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>一、相同点</p><p>相比于 OpenGL ES 1.x 系列的固定功能管线，OpenGL ES 2.0 和 OpenGL ES 3.0 都是可编程图形管线。开发者可以自己编写图形管线中的 顶点着色器 和 片段着色器 两个阶段的代码。</p><p><br/></p><p>二、不同点</p><p>1. 兼容性</p><p>OpenGL ES 3.0 是向后兼容 OpenGL ES 2.0 的。也就是说使用 2.0 编写的应用程序是可以在 3.0 中继续使用的。</p><p><br/></p><p>2. 新特性</p><p>采用阴影贴图、体渲染（volume rendering）、基于 GPU 的粒子动画、几何形状实例化、纹理压缩和伽马校正等技术的重要功能在 2.0 中都不具备。3.0 将这些功能引入，同时继续适应嵌入系统的局限性。这一部分在下一章详细介绍。</p><p><br/></p><p>3. 渲染管线</p><p>3.0 中移除了 Alpha 测试 和 逻辑操作（LogicOp） 两部分，这两部分存在于 OpenGL ES 2.0 和 OpenGL ES 1.x 中。</p><p>移除 Alpha 测试 是因为片段着色器可能抛弃片段，因此 Alpha 测试可以在片段着色器中进行。</p><p>移除 逻辑操作（LogicOp） 是因为它很少被使用。</p><p><br/></p><p>4. 着色器脚本编写</p><p>着色器脚本的编写发生了比较大的变化，其中几点为：</p><p><br/></p><p>版本声明</p><p>必须在着色器脚本中使用 #version 300 es 声明为指定使用 OpenGL ES 3.0 版本。例如：</p><p><br/></p><p>#version 300 es</p><p><br/></p><p>layout(location = 0) in vec4 vPosition;</p><p><br/></p><p>void main() {</p><p>&nbsp; &nbsp; gl_Position = vPosition;</p><p>}</p><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>而不添加版本声明或者使用 #version 100 es 声明版本则指定使用 OpenGL ES 2.0。</p><p><br/></p><p>备注： 以往 2.0 刚刚出来可编程的图形管线，所以版本声明为 #version 100 es ，后来为了使版本号相匹配，OpenGL ES 3.0 的 shader 版本直接从1.0 跳到了 3.0 。</p><p><br/></p><p>输入输出</p><p>3.0 中新增了 in，out，inout 关键字，用来取代 attribute 和 varying 关键字。同时 gl_FragColor 和 gl_FragData 也删除了，片段着色器可以使用 out 声明字段输出。</p><p><br/></p><p>变量赋值</p><p>3.0 中可以直接使用 layout 对指定位置的变量赋值。例如：</p><p><br/></p><p># shader脚本中</p><p>layout (location = 1) uniform float a;</p><p>1</p><p>2</p><p>代码中，直接写上对应的 layout 的值就可以赋值</p><p><br/></p><p>GLES30.glUniform1f(1, 1f);</p><p>1</p><p>而 2.0 中必须使用如下形式赋值：</p><p><br/></p><p>GLES20.glUniform1f(GLES20.glGetAttribLocation(program, &quot;a&quot;), 1f)</p><p>1</p><p>三、新功能</p><p>OpenGL ES 3.0 加入了许多新的功能和特性，使得我们的开发更加灵活和便捷，下面是 3.0 的一些新功能。这部分摘自《OpenGL ES 3.0 编程指南》一书：</p><p><br/></p><p>1. 纹理</p><p>sRGB纹理和帧缓冲区——允许应用程序执行伽马校正渲染。纹理可以保存在经过伽马校正的sRGB空间，在着色器中读取时反校正到线性空间，然后在输出到帧缓冲区时转换回sRGB伽马校正空间。通过在线性空间中正确地进行照明和其它计算，可能得到更高的视觉保真度。</p><p>2D纹理数组——保存一组2D纹理的纹理目标。例如这些数组可以用于执行纹理动画。在2D纹理数组出现之前，这种动画一般通过在单个2D纹理中平铺动画帧并修改纹理坐标改变动画帧来实现。有了2D纹理数组，动画的每个帧可以在数组的一个2D切片中指定。</p><p>3D纹理。一些OpenGL ES 2.0实现通过扩展支持3D纹理，而OpenGL ES3.0将此作为强制的功能。</p><p>深度纹理和阴影比较——启用存储在纹理中的深度缓冲区。深度纹理的最常见用途是渲染阴影，这时深度缓冲区从光源的角度渲染，然后用于在渲染场景时比较，以确定片段是否在阴影中。除了深度纹理外，OpenGL ES 3.0可以在读取时比较深度纹理，从而在深度纹理上完成双线性过滤。</p><p>无缝立方图。以往立方图渲染可能在立方图各面之间的边界产生伪像。在OpenGL ES 3.0中，立方图可以进行采样如过滤来使用相邻面的数据并删除接缝处的伪像。</p><p>浮点纹理。OpenGL ES 3.0扩展了支持的纹理格式。支持并可以过滤半浮点纹理（16位），也支持全浮点纹理（32位），但不能过滤。</p><p>ETC2/EAC纹理压缩。OpenGL ES 3.0中强制支持ETC2/EAC。ETC2/EAC的格式为RGB888，RGBA8888和单通道及双通道有符号/无符号纹理数据。纹理压缩的好处包括更好的性能以及减少GPU内存占用。</p><p>整数纹理。OpenGL ES 3.0引入了渲染和读取保存为未规范化有符号或无符号8位、16位和32位整数纹理的能力。</p><p>其它纹理格式。OpenGL ES 3.0还包含了对11-11-10 RGB浮点纹理、共享指数RGB 9-9-9-5纹理、10-10-10-2整数纹理以及8位分量有符号规范化纹理的支持。</p><p>非2幂次纹理（NPOT）。纹理现在可以指定为不为2的幂次尺寸。</p><p>纹理细节级别（LOD）。现在可以强制使用用于确定读取哪个Mipmap的LOD参数。此外，可以强制基本和最大Mipmap级别。这两个功能组合起来，可以流化Mipmap。在更大的Mipmap级别可用时，可以提高基本级别，LOD值可以平滑地增加，以提供平滑的流化纹理。这一功能非常有用，例如用于通过网络连接下载纹理Mipmap。</p><p>纹理调配。引入新的纹理对象状态，允许独立控制纹理数据每个通道（R、G、B、A）在着色器中的映射。</p><p>不可变纹理。为应用程序提供在加载数据之前指定纹理格式和大小的机制。在这样做的时候，纹理格式不可变，OpenGL ES驱动程序可以预先执行所有一致性和内存检查。通过允许驱动程序在绘制的时候跳过一致性检查，可以改善性能。</p><p>最小尺寸增大。OpenGL ES 3.0支持远大于OpenGL ES 2.0的纹理资源。</p><p>2. 着色器</p><p>二进制程序文件。在OpenGL ES 2.0中可以二进制格式存储着色器，但是仍需要在运行时链接到程序。在OpenGL ES 3.0中，完全链接过的二进制程序文件可以保存为离线二进制格式，运行时不需要链接步骤。这有助于减少应用程序的加载时间。</p><p>强制的在线编译器。在OpenGL ES 2.0可以选择驱动程序是否支持着色器的在线编译，意图是降低驱动程序的内存需求，但是这一功能代价很大，开发人员不得不依靠供应商专用工具来生成着色器。在OpenGL ES 3.0中，所有实现都有在线着色器编译器。</p><p>非方矩阵。支持方阵之外的新矩阵类型，并在API中增加了相关的统一调用，以支持这些矩阵的加载。非方矩阵可以减少执行变换所需的指令。例如执行仿射变换时，可以使用43矩阵代替最后一行为(0, 0, 0, 1)的44矩阵，从而减少执行变换所需的指令。</p><p>全整数支持。支持整数（以及无符号整数）标量和向量类型以及全整数操作。有各种内建函数可以实现从整数到浮点数、从浮点数到整数的转换以及从纹理中读取整数值和向整数颜色缓冲区中输出整数值的功能。</p><p>质心采样。为了避免在多重采样时产生伪像，可以用质心采样声明顶点着色器和片段着色器的输出变量</p><p>平面/平滑插值程序。在OpenGL ES 2.0中所有插值程序均隐含地在图元之间采用线性插值。在OpenGL ES 3.0中插值程序可以显式声明为平面或者平滑着色。</p><p>统一变量块。统一变量值可以组合为统一变量块。统一变量块可以更高效地加载，也可在多个着色器程序间共享。</p><p>布局限定符。顶点着色器输入可以用布局限定符声明，以显式绑定着色器源代码中的位置，而不需要调用API。布局限定符也可以用于片段着色器的输出，在渲染到多个渲染目标时将输出绑定到各个目标。而且，布局限定符可以用于控制统一变量块的内存布局。</p><p>实例和顶点ID。顶点索引现在可以在顶点着色器中访问，如果使用实例渲染，还可以访问实例ID。</p><p>片段深度。片段着色器可以显式控制当前片段的深度值，而不是依赖深度值的插值。</p><p>新的内建函数。引入了许多新的内建函数，以支持新的纹理功能、片段导数、半浮点数据转换和矩阵及数学运算。</p><p>宽松的限制。大大放松了对着色器的限制。着色器不再限于指令长度，完全支持变量为基础的循环和分支，并支持数组索引。</p><p>3. 几何形状</p><p>变换反馈。可以在缓冲区对象中捕捉顶点着色器的输出。这对许多在GPU上执行动画而不需要CPU干预的技术很实用，例如，粒子动画或者使用“渲染到顶点缓冲区”的物理学模拟。</p><p>布尔遮挡查询。应用程序可以查询一个（或者一组）绘制调用的任何像素是否通过深度测试。这个功能可以在各种技术中使用，例如镜头眩光效果的可见性确定，以及避免在边界被遮挡的对象上进行几何形状处理的优化。</p><p>实例渲染。有效地渲染包含类似几何形状但是属性（例如变化矩阵、颜色或者大小）不同的对象。这一功能在渲染大量类似对象时很有用，例如人群的渲染。</p><p>图元重启。在OpenGL ES 2.0中为新图元使用三角形条带时，应用程序必须在索引缓冲区中插入索引，以表示退化的三角形。在OpenGL ES 3.0中，可以还是要特殊的索引值表示新图元的开始。这就消除了使用三角形条带时生成退化三角形的需求。</p><p>新顶点格式。支持包括10-10-10-2有符号和无符号规范化顶点属性；8位、16位和32位整数属性；以及16位半浮点。</p><p>4. 缓冲区对象</p><p>引入了许多新的缓冲区对象，以提高为图形管线各部分指定数据的效率和灵活性。</p><p><br/></p><p>统一变量缓冲区对象。为存储/绑定大的统一变量块提供高效的方法。统一变量缓冲区对象可以减少将统一变量值绑定带着色器的性能代价，这是OpenGL ES 2.0应用程序中的常见瓶颈。</p><p>顶点数组对象。提供绑定和在顶点数组状态之间切换的高效方法。顶点数组对象实际上是顶点数组状态的容器对象。使用它们，应用程序可以在一次API调用中切换顶点数组状态，而不是发出多个调用。</p><p>采样器对象。将采样器状态（纹理循环模式和过滤）与纹理对象分离。这为在纹理中共享采样器状态提供了更高效的方法。</p><p>同步对象。为应用程序提供检查一组操作是否在GPU上完成执行的机制。相关的新功能是栅栏（Fence），它为应用程序提供了通知GPU应该等待一组操作结束才能接受更多操作进入执行队列的方法。</p><p>像素缓冲对象。使应用程序能够执行对像素操作和纹理传输操作的异步数据传输。这种优化主要是为了在CPU和GPU之间提供更快的数据传输，在传输操作期间，应用程序可以继续工作。</p><p>缓冲区子界映射。使应用程序能够映射缓冲区的一个子区域，供CPU访问。这可以提供比传统缓冲区映射更好的性能，在传统缓冲区映射中，必须使整个缓冲区可用于客户。</p><p>缓冲区对象间拷贝。提供了高效地从一个缓冲区对象向另一个缓冲区对象传输数据的机制，不需要CPU干预。</p><p>5. 帧缓冲区</p><p>增添了许多与屏幕外渲染带帧缓冲区对象相关的新功能</p><p><br/></p><p>多重渲染目标（MRT）。允许应用程序同时渲染到多个颜色缓冲区。利用MRT技术，片段着色器输出多个颜色，每个用于一个相连的颜色缓冲区。MRT用于许多高级的渲染算法，例如延迟着色。</p><p>多重采样渲染缓冲区。使应用程序能够渲染到具备多重采样抗锯齿功能的屏幕外帧缓冲区。多重采样帧缓冲区不能直接绑定到纹理，但是可以用新引入的帧缓冲区块移动解析为单采样纹理。</p><p>帧缓冲区失效提示。OpenGL ES 3.0的许多实现使用基于块状渲染（TBR）的GPU。TBR常常在必须为了进一步渲染到帧缓冲区而毫无必要地恢复图块内容时导致很高的性能代价。帧缓冲区失效为应用程序提供了通知驱动程序不再需要帧缓冲区内容的机制。这使驱动程序能够采取优化步骤，跳过不必要的图块恢复操作。这一功能对于在许多应用程序中实现峰值性能很重要，特别是那些进行大量屏外渲染的程序。</p><p>新的混合方程式。OpenGL ES 3.0支持最大值/最小值函数作为混合方程式。</p><p>————————————————</p><p>版权声明：本文为CSDN博主「阿飞__」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。</p><p><a href="https://blog.csdn.net/afei__/article/details/88859449" target="_blank">原文链接</a>：https://blog.csdn.net/afei__/article/details/88859449</p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = 'Bb116A54';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

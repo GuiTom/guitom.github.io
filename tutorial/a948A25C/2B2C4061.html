@@ -1,0 +1,293 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>瀑布流视图-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>瀑布流视图-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <h3>什么是UICollectionView？</h3><p><code>UICollectionView</code>是一种新的数据展示方式，简单来说可以把他理解成多列的<code>UITableView</code>。它有许多与<code>UITableView</code>相同的地方，例如：数据源、代理等接口等。既然，<code>UITableView</code>有这么多的相似之处，为什么还要学习<code>CollectionView</code>呢？作为一个独立的控件，<code>CollectionView</code>有着自己独特的布局特性，这一点拉开了两个控件的差距，所以学习<code>UIcollectionView</code>还是非常有必要的。</p><h2>UICollectionView 组成</h2><p style="text-align:center"><img src="/upload/image/20191119/202152664189.png"/></p><p>image.png.jpeg</p><p>如图：你看到的就是一个最简单的UICollectionView，它包含：Cells、Supplementary Views、Decoration Views。</p><p>1.Cells ：用于展示内容的主体，cell的尺寸和内容可以各不相同。这个下面会详细介绍。<br/>2.Supplementary Views ： 追加视图，类似于UITableView每个Seciton的Header View 或者Footer View，用来标记Section的View<br/>3.Decoration Views ：装饰视图，完全跟数据没有关系的视图，负责给cell 或者supplementary Views添加辅助视图用的，灵活性较强。<br/>不管多么复杂的UIcollectionView都是由着三个部件组成的。</p><h2>实现一个简单的UICollectionView</h2><p>相信如果你对UITableView有所了解的话，实现一个UICollectionView，其实和UITableView没有多大的区别，它们同样是由dataSource和delegate模式设计的：dataSource为View提供数据源，告诉View要显示什么样的数据，delegate提供一些样式的小细节以及用户交互的响应。但是值得一提的是要想初始化一个UICollectionView，一定要为它提供一个布局，即：UICollectionViewLayout对象，改对象定义了CollectionView的一些独特的布局，后面会详细的介绍。</p><h3>UICollectionViewDataSource</h3><ul class=" list-paddingleft-2"><li><p>section数量 ：<code>numberOfSectionsInCollectionView:</code><br/>某个section中多少个item：<code>collectionView:numberOfItemsInSection:</code></p></li><li><p>对于某个位置的显示什么样的cell：<code>collectionView:cellForItemAtIndexPath:</code></p></li><li><p>对于某个section显示什么样的supplementary View：<code>collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code><br/>对于Decoration Views，提供的方法并不在UICollectionViewDataSource中，而是在UICollectionViewLayout中（因为它仅仅跟视图相关，而与数据无关）。</p></li></ul><h3>UICollectionView子视图重用</h3><p>与UITableView一样，避免不断的生成和销毁对象，UICollectionView对于view的重用是必须的。但是我们发现在UIcollectionview中不仅仅是cell的重用，Supplementary View和Decoration View也是可以并且应当被重用的，细心的朋友可以发现，UIcollectionViewCell继承自<code>UICollectionReusableView</code>,而在collectionView:viewForSupplementaryElementOfKind:atIndexPath:这个方法的返回类型是：UICollectionReusableView，其实苹果给UIcollectionview中的所有视图都来自一个可重用的基类，就是UICollectionReusableView，所以自定义Supplementary View和Decoration View也是继承者个类为基础，来构建自己的视图。</p><ul class=" list-paddingleft-2"><li><p>注册自定义视图</p></li><li><p>registerClass:forCellWithReuseIdentifier:</p></li><li><p>registerNib:forCellWithReuseIdentifier:</p></li><li><p>registerClass:forSupplementaryViewOfKind:withReuseIdentifier:</p></li><li><p>registerNib:forSupplementaryViewOfKind:withReuseIdentifier:<br/>得到对应的视图</p></li><li><p>dequeueReusableCellWithReuseIdentifier:forIndexPath:</p></li><li><p>dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:<br/>其中SupplementaryViewOfKind:参数的类型是一个字符串常量，<code>UICollectionElementKindSectionHeader</code>/<code>UICollectionElementKindSectionFooter</code>该常量的定义UICollectionViewDelegateFlowLayout类中。</p></li></ul><h3>UICollectionViewDelegate</h3><p>和数据无关的view的外形,用户的交互什么的，都是UICollectionViewDelegate来负责</p><ul class=" list-paddingleft-2"><li><p>cell的高亮</p></li><li><p>cell的选中状态</p></li><li><p>可以支持长安后的菜单</p></li><li><p>在用户交互上UIcollectionview做了很多细节的处理，每个cell有独立的高亮、选中事件的delegate，开发者可以监听到的事件变得多起来，当用户点击一个cell的时候，会按以下的流程delegate询问（这是UIcollectionViewDelegate API中给出的）：</p></li></ul><p>(when the touch begins)</p><ul class=" list-paddingleft-2"><li><p>1、-collectionView:shouldHighlightItemAtIndexPath:是否应该高亮？</p></li><li><p>2、-collectionView:didHighlightItemAtIndexPath:如果1返回YES,执行，否则不执行<br/>(when the touch lifts)</p></li><li><p>3、-collectionView:shouldSelectItemAtIndexPath: or -collectionView:shouldDeselectItemAtIndexPath:如果1返回NO这里不再询问询问是否选中，</p></li><li><p>4、-collectionView:didSelectItemAtIndexPath: or -collectionView:didDeselectItemAtIndexPath:如果3中返回选中，调用选中</p></li><li><p>5、-collectionView:didUnhighlightItemAtIndexPath:如果1返回YES，那么会调用取消高亮<br/>在UIcollectionview中分别有selected和highlighted属性控制状态。</p></li></ul><h3>UICollectionViewCell</h3><p>相对于UItableViewCell而言，UIcollectionViewCell没有那么多样式。UIcollectionViewCell不存在所谓的style，也没有titleLabel和内置的imageView属性，UIcollectionViewCell的结构上相对比较简单，由下至上：</p><ul class=" list-paddingleft-2"><li><p><code>cell</code> ：本身作为的View，这里应该就是UICollectionReusableView</p></li><li><p><code>backgroundView</code> ：用作cell背景的视图，设置背景图片等。</p></li><li><p><code>selectedBackgroundView</code> ：cell被选中的背景视图</p></li><li><p><code>contentView</code> ：内容视图，自定义的cell时应该将内容放在这个View上</p></li></ul><p>UIcollectionView有一个小细节：被选中的cell的自动变化，所有的cell中的子View，也包括contentView中的子View，当cell被选中是，会自动去查找view是否有被选中状态下的改变，如果在contentView中有一个imageView的selected和normal状态下的图片是不同的，那么选中cell这张图片也会从normal变成selected，不需要添加代码。</p><h3>UICollectionView 布局 UICollectionViewLayout</h3><p>UICollectionViewLayout是UICollectionView特有的，是UICollectionView的精髓所在，它负责将每个cell、supplementary view、decoration view进行组合，为它们设置各自的属性，包括：位置、大小、透明度、层级关系、形状等。UICollectionViewLayout决定了，UICollectionView是如何显示在界面上，从UICollectionView初始化必须要一个UICollectionViewLayout也可以看得出来，Layout对于UICollectionView的最要性。</p><h3>UICollectionViewFlowLayout 流水布局</h3><p>苹果为我们设计了一套非常灵活、通用的Layout，就是UICollectionViewFlowLayout流水布局,也叫线性布局。UICollectionViewFlowLayout属性：</p><ul class=" list-paddingleft-2"><li><p><code>CGSize itemSize</code>：它定义了每一个item的大小，通过itemSize可以快捷给每一个cell设置一样的大小，如果你想到不同的尺寸，-collectionView:layout:sizeForItemAtIndexPath:来给每一个item指定不同的尺寸。</p></li><li><p><code>CGFloat minimumLineSpacing</code>：最小行间隔，同样你也可以通过-* collectionView:minimumLineSpacingForSectionAtIndex:方法来个没一行设置不同的行间距</p></li><li><p><code>CGFloat minimumInteritemSpacing：</code>最小cell之间的距离，同上都是可以通过-collectionView:minimumInteritemSpacingForSectionAtIndex:特定的方法，顶底到具体的行和item之间的间距的，非常的灵活。</p></li><li><p><code>UIEdgeInsets sectionInset：</code>组内边距，设置UIcollectionView整体的组内边距，同上有特定方法-collectionView:insetForSectionAtIndex:设置具体的边距</p></li><li><p><code>CGSize headerReferenceSize：</code>设置supplementary header View的大小-collectionView:referenceSizeForHeaderInSection:</p></li><li><p><code>CGSize footerReferenceSize：</code>设置supplementary header View的大小-collectionView:referenceSizeForFooterInSection:</p></li><li><p><code>UICollectionViewScrollDirection scrollDirection：</code>设置UIcollectionView的滚动方向</p></li></ul><p>UICollectionViewFlowLayout方法：</p><pre class="line-numbers  language-objectivec">//&nbsp;1、准备布局，布局初始化一般在这里进行-&nbsp;(void)prepareLayout;//&nbsp;每当collectionView边界改变时便调用这个方法询问&nbsp;是否&nbsp;重新初始化布局&nbsp;是则调用prepareLayout准备布局-&nbsp;(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds;//&nbsp;2、初始化布局时调用，返回在一定区域内，每个cell和Supplementary和Decoration的布局属性-&nbsp;(NSArray&lt;UICollectionViewLayoutAttributes&nbsp;*&gt;&nbsp;*)layoutAttributesForElementsInRect:&nbsp;(CGRect)rect;//&nbsp;当滚动停止时，会调用该方法确定collectionView滚动到的位置-&nbsp;(CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset&nbsp;&nbsp;&nbsp;withScrollingVelocity:(CGPoint)velocity;在使用UICollectionViewFlowLayout布局的时候，有时会有特别的需求，比如：当一个cell滑动到屏幕中点的时候放大，并且当我停止滑动时，能够将离屏幕最近的cell居中。这四个方法就能轻松的完成这样的事。</pre><h3>UICollectionViewLayoutAttributes 布局属性</h3><p>在了解这个类之前，我们得先疏通一下，UIcollectionView的布局方式，首先我们之前一直提，UIcollectionView的初始化必须有一个UICollectionViewLayout，也就是我们说的，必须要有一个布局格式样式，那么一个UIcollectionView有那么多的cell、supplementary View、decoration View，UIcollectionViewLayout是如何进行布局显示的呢？原来从UIcollectionViewLayout开始加载内容的时候，便默默的做了很多事：首先是去调用 1 准备布局，然后根据当前屏幕所处位置的合适rect，得到每一个视图的UICollectionViewLayoutAttributes属性，然后在把视图按UICollectionViewLayoutAttributes中的属性描述设置视图具体的center、size等等，期间也会去调用其他方法去确定一些间距。所以UICollectionViewLayoutAttributes是每个视图决定性的布局的属性。</p><ul class=" list-paddingleft-2"><li><p>CGRect frame 布局视图的frame简单明了</p></li><li><p>CGPoint center 视图中心点</p></li><li><p>CGSize size 视图尺寸</p></li><li><p>CATransform3D transform3D 这个属性可以用来做酷炫的3D动画</p></li><li><p>CGAffineTransform transform 转场属性</p></li><li><p>CGFloat alpha 透明度</p></li><li><p>NSInteger zIndex 层级，数字越大，层级越高（最上面）。</p></li><li><p>NSIndexPath *indexPath 如果是cell有对应的indexPath</p></li><li><p>UICollectionElementCategory representedElementCategory 视图标记，是cell还是supplementary View或者decoration View</p></li><li><p>registerClass:forDecorationViewOfKind: 注册decoration View</p></li><li><p>registerNib:forDecorationViewOfKind:</p></li><li><p>+(instancetype)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind withIndexPath:(NSIndexPath *)indexPath 这个类方法是decoration View布局的来源</p></li><li><p>-(nullable UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath 与上一个方法结合得到decoration View布局</p></li></ul><h3>UICollectionViewLayout 自定义布局</h3><p>由于系统给我们设计的流水局在实现和细节处理上，帮我们做了很多事，所以完全的自定义布局是挺麻烦，并且要考虑到各种细节的。在UIcollectionViewLayout头文件中，苹果给我提供很多特定的方法，以供我们自己布局，有仅仅关于布局的、有关于删除插入item的布局、有关于移动item的布局。方法分的很细，我们只了解基本的布局、删除和插入布局等。</p><ul class=" list-paddingleft-2"><li><p>@interface UICollectionViewLayout (UISubclassingHooks) 这个扩展类中，都是用来布局UIcollectionView子视图的</p></li><li><p>@interface UICollectionViewLayout (UIUpdateSupportHooks) 用来布局删除插入动作</p></li><li><p>@interface UICollectionViewLayout (UIReorderingSupportHooks) 移动动作布局</p></li></ul><h4>UISubclassingHooks</h4><p>这个扩展类里面的方法，上面流水布局的代码处已经给列举出来，就不多说了</p><h4>UIUpdateSupportHooks</h4><p>在UIcollectionView中删除或者插入item时，建议使用下面的方式：</p><pre class="line-numbers  language-objectivec">[self.collectionView&nbsp;performBatchUpdates:^{
+&nbsp;&nbsp;&nbsp;&nbsp;[self.collectionView&nbsp;deleteItemsAtIndexPaths:@[pinchIndexPath]];}&nbsp;completion:nil];[self.collectionView&nbsp;performBatchUpdates:^{
+&nbsp;&nbsp;&nbsp;&nbsp;[self.collectionView&nbsp;insertItemsAtIndexPaths:@[[NSIndexPath&nbsp;indexPathForItem:0&nbsp;inSection:0]]];}&nbsp;completion:nil];</pre><p>值得一说的是，在对UIcollectionView插入和删除操作是，不管使用的是上面的更新方式还是reloadData,collectionView都不会刷新全部的cell，具体原因本人也不是很清楚，多说无益，下面上删除、插入的代码：</p><pre class="line-numbers  language-objectivec">/*&nbsp;&nbsp;在insert或者delete之前，prepareForCollectionViewUpdates:会调用，
+&nbsp;&nbsp;&nbsp;&nbsp;可以使用这个方法来完成&nbsp;添加/&nbsp;删除的预处理，将要删除或者插入的indexPath保存
+*/-&nbsp;(void)prepareForCollectionViewUpdates:(NSArray&nbsp;*)updateItems&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Keep&nbsp;track&nbsp;of&nbsp;insert&nbsp;and&nbsp;delete&nbsp;index&nbsp;paths
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;prepareForCollectionViewUpdates:updateItems];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;self.deleteIndexPaths&nbsp;=&nbsp;[NSMutableArray&nbsp;array];
+&nbsp;&nbsp;&nbsp;&nbsp;self.insertIndexPaths&nbsp;=&nbsp;[NSMutableArray&nbsp;array];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(UICollectionViewUpdateItem&nbsp;*update&nbsp;in&nbsp;updateItems)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(update.updateAction&nbsp;==&nbsp;UICollectionUpdateActionDelete)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.deleteIndexPaths&nbsp;addObject:update.indexPathBeforeUpdate];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else&nbsp;if&nbsp;(update.updateAction&nbsp;==&nbsp;UICollectionUpdateActionInsert)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[self.insertIndexPaths&nbsp;addObject:update.indexPathAfterUpdate];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}}//&nbsp;更新结束后调用&nbsp;这个方法在&nbsp;performBatchUpdates:completion:&nbsp;complete的Block之前调用-&nbsp;(void)finalizeCollectionViewUpdates&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;finalizeCollectionViewUpdates];
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;释放insert&nbsp;and&nbsp;delete&nbsp;index&nbsp;paths
+&nbsp;&nbsp;&nbsp;&nbsp;self.deleteIndexPaths&nbsp;=&nbsp;nil;
+&nbsp;&nbsp;&nbsp;&nbsp;self.insertIndexPaths&nbsp;=&nbsp;nil;}/**
+&nbsp;&nbsp;&nbsp;&nbsp;这两个方法是成对出现的，一个是在在屏幕上出现之前调用，一个是在屏幕上出现之后调用
+&nbsp;&nbsp;&nbsp;&nbsp;在[collecView&nbsp;reloadData]或者performBatchUpdates:completion:调用的时候
+&nbsp;&nbsp;&nbsp;&nbsp;只要是有刷新的效果，他们就会被调用多次，视图不断的消失（失效，被摧毁）出现（重组&nbsp;被创建或者回收利用）
+&nbsp;*///&nbsp;For&nbsp;each&nbsp;element&nbsp;on&nbsp;screen&nbsp;before&nbsp;the&nbsp;invalidation,-&nbsp;(nullable&nbsp;UICollectionViewLayoutAttributes&nbsp;*)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath&nbsp;*)itemIndexPath&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Must&nbsp;call&nbsp;super
+&nbsp;&nbsp;&nbsp;&nbsp;UICollectionViewLayoutAttributes&nbsp;*attributes&nbsp;=&nbsp;[super&nbsp;initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
+
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([self.insertIndexPaths&nbsp;containsObject:itemIndexPath])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;只改变插入的&nbsp;attributes
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes&nbsp;=&nbsp;[self&nbsp;layoutAttributesForItemAtIndexPath:itemIndexPath];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;configure&nbsp;attributes...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.alpha&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.center&nbsp;=&nbsp;_center;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.transform3D&nbsp;=&nbsp;CATransform3DMakeScale(0.1,&nbsp;0.1,&nbsp;1.0);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;attributes;}//&nbsp;For&nbsp;each&nbsp;element&nbsp;on&nbsp;screen&nbsp;after&nbsp;the&nbsp;invalidation,-&nbsp;(nullable&nbsp;UICollectionViewLayoutAttributes&nbsp;*)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath&nbsp;*)itemIndexPath&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;UICollectionViewLayoutAttributes&nbsp;*attributes&nbsp;=&nbsp;[super&nbsp;finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;([self.deleteIndexPaths&nbsp;containsObject:itemIndexPath])&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes&nbsp;=&nbsp;[self&nbsp;layoutAttributesForItemAtIndexPath:itemIndexPath];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.alpha&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.center&nbsp;=&nbsp;_center;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes.transform3D&nbsp;=&nbsp;CATransform3DMakeScale(0.1,&nbsp;0.1,&nbsp;1.0);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;attributes;}</pre><h4>UICollectionViewUpdateItem</h4><p>这个类是UIcollectionView更新布局的时候，新旧布局信息交换的媒介，它存储了旧的布局，或者新布局。</p><p><br/>原文链接：https://www.jianshu.com/p/4863a25d3b84<br/><br/></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '2B2C4061';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

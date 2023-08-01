@@ -1,0 +1,11 @@
+{
+	"id":1,
+	"versionName":"v4.1",
+	"shareFrom":0,
+	"versionCode":5,
+	"versionDesc":"1.加入了天气\n 2.推荐算法改进 \n 3. UI美化",
+	"downloadUrl":"http://whqt360.com/config/browser/install/ybj.apk",
+	"downloadPageUrl":"http://whqt360.com/config/browser/share/downloadshare_yibijia.html",
+	"versionSize":"5.3M",
+	"baseUrl":"http://whqt360.com/"
+}

@@ -1,0 +1,272 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>视频录制-iOS开发(高级篇)</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>视频录制-iOS开发(高级篇)</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="06024caB" class="item chapter normal selected">Runtime</div>
+
+<div id="5b514C5a" class="item course normal">方法交换</div>
+<div id="67C92673" class="item course normal">动态添加方法</div>
+<div id="8A546ac3" class="item course normal">关联对象</div><div id="39c93aA5" class="item course normal">KVO的实现</div><div id="93C8046a" class="item chapter normal">内存管理</div><div id="c1944c7C" class="item course normal">TaggedPointer</div><div id="3ABca2ab" class="item course normal">小测验</div><div id="AAB71A4b" class="item course normal">NONPOINTER_ISA</div><div id="3Ac50559" class="item course normal">散列表 </div><div id="8BA7CC22" class="item course normal">Copy和mutableCopy</div><div id="6B5C7c25" class="item course normal">对象的销毁dealloc</div><div id="97cc9C51" class="item course normal">常用lldb命令</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="9ccab66A" class="item chapter normal">RunLoop</div><div id="3C6a652B" class="item course normal">NSTimer应用</div><div id="07A53392" class="item course normal">线程保活</div><div id="4a6ac2bb" class="item course normal">UIImage空闲时渲染</div><div id="A5bCb944" class="item course normal">线程间通信(NSPort)</div><div id="471ab021" class="item course normal">卡顿检测</div><div id="30A6AA7A" class="item course normal">自动释放池</div><div id="2A662A6A" class="item chapter normal">UI视图</div><div id="4b1Aa8ba" class="item course normal">UI绘制原理</div><div id="C1AB418B" class="item course normal">UI事件传递机制</div><div id="3C991812" class="item course normal">事件传递相关练习题</div><div id="12B75430" class="item course normal">事件响应链</div><div id="4Cc0CC83" class="item course normal">相关面试题</div><div id="0CbB19c9" class="item chapter normal">多线程</div><div id="217b960B" class="item course normal">pthread</div><div id="53870C1a" class="item course normal">NSThread</div><div id="3a61B9a4" class="item course normal">GCD基础API(1)</div><div id="88bB0879" class="item course normal">GCD基础API(2)</div><div id="cc300B3b" class="item course normal">GCD经典面试题</div><div id="29108B1C" class="item course normal">GCD高级 API</div><div id="8BC7b1B3" class="item course normal">NSOpreation</div><div id="4635Bb8A" class="item course normal">多线程面试题</div><div id="C5C1C965" class="item course normal">锁</div><div id="28c98C11" class="item course normal">锁相关面试题</div><div id="B529829C" class="item course normal">信号量</div><div id="8a900c58" class="item chapter normal">OC语言</div><div id="A01181B1" class="item course normal">属性关键字</div><div id="a24C78b3" class="item course normal">内存管理</div><div id="1472b4c0" class="item course normal">KVO</div><div id="BC924416" class="item chapter normal">block及其本质</div><div id="61a4a56A" class="item course normal">block按存储区分类</div><div id="C3803054" class="item course normal">变量截取</div><div id="Cc14A93c" class="item course normal">相关面试题</div><div id="a6a97753" class="item chapter normal">第三方库</div><div id="14ab67AB" class="item course normal">AFNetWorking</div><div id="6A235a3B" class="item course normal">SDWebImageView</div><div id="2c7C0120" class="item course normal">ReactiveCocoa</div><div id="a5488b6B" class="item course normal">AsyncDisplayKit</div><div id="B5b3B053" class="item chapter normal">性能优化</div><div id="0A415471" class="item course normal">UI卡顿优化</div><div id="C094BcBc" class="item course normal">离屏渲染优化</div><div id="b2b21885" class="item course normal">卡顿检测</div><div id="56529C54" class="item course normal">电量优化</div><div id="AcaAbB32" class="item course normal">APP冷启动优化</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">这还是第一次接触自定义界面录制视频，包括各种参数的设置，不得不说，录制视频这块，各种类，各种方法，蛮复杂的，网上的资料也是各种杂乱，想要弄清楚还真是得费一番功夫，我参考了大量资料，根据自己的思路整理了一遍，按照我的思路来，保证你看一遍就会，我这里只是简单的录制，压缩，剪裁，导出等功能，不设计滤镜，添加背景音乐，合并，字幕等等，重要的是这个流程，主流程会了，其他也就是锦上添花了。</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p><p>基本属性与类</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>第一种采用系统的录制较为简单，详细介绍后面两种。</p><h3 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 22px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(78, 161, 219); cursor: pointer; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;" name="t3"></a>效果图</h3><p><img src="/upload/image/20191118/112409333907.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>1</p><p><img src="/upload/image/20191118/112410576167.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>2</p><p><img src="/upload/image/20191118/112415646001.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>3</p><p><img src="/upload/image/20191118/112416542505.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>4</p><p><img src="/upload/image/20191118/112418337321.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>5</p><p><img src="/upload/image/20191118/112420871843.png" alt="" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; max-width: 100%; overflow-wrap: break-word; cursor: zoom-in; border: 0px; vertical-align: middle;"/><br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/></p><p>6</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">demo中把三种方式单独分开，便于学习。支持闪光灯，切换镜头，录制不同尺寸的视频等。</p><h3 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 22px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(78, 161, 219); cursor: pointer; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;" name="t4"></a>1.UIImagePickerController</h3><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">这种方式只能设置一些简单参数，自定义程度不高,只能自定义界面上的操作按钮，还有视频的画质等。</p><pre class="hljs objectivec" name="code">-&nbsp;(void)viewDidLoad{
+&nbsp;&nbsp;&nbsp;&nbsp;[super&nbsp;viewDidLoad];
+if&nbsp;([self&nbsp;isVideoRecordingAvailable])&nbsp;
+&nbsp;&nbsp;{return;}
+&nbsp;&nbsp;self.sourceType&nbsp;=&nbsp;UIImagePickerControllerSourceTypeCamera;
+&nbsp;&nbsp;self.mediaTypes&nbsp;=&nbsp;@[(NSString&nbsp;*)kUTTypeMovie];
+&nbsp;&nbsp;self.delegate&nbsp;=&nbsp;self;
+&nbsp;&nbsp;//隐藏系统自带
+&nbsp;&nbsp;UIself.showsCameraControls&nbsp;=&nbsp;NO;
+&nbsp;&nbsp;//设置摄像头
+&nbsp;&nbsp;[self&nbsp;switchCameraIsFront:NO];
+&nbsp;&nbsp;//设置视频画质类别
+&nbsp;&nbsp;self.videoQuality&nbsp;=&nbsp;UIImagePickerControllerQualityTypeMedium;
+&nbsp;&nbsp;//设置散光灯类型
+&nbsp;&nbsp;self.cameraFlashMode&nbsp;=&nbsp;UIImagePickerControllerCameraFlashModeAuto;
+&nbsp;&nbsp;//设置录制的最大时长self.videoMaximumDuration&nbsp;=&nbsp;20;}
+&nbsp;&nbsp;-&nbsp;(BOOL)isVideoRecordingAvailable{
+&nbsp;&nbsp;if([UIImagePickerController&nbsp;isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+&nbsp;&nbsp;{NSArray&nbsp;*availableMediaTypes&nbsp;=&nbsp;[UIImagePickerController&nbsp;availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+&nbsp;&nbsp;if([availableMediaTypes&nbsp;containsObject:(NSString&nbsp;*)kUTTypeMovie]){return&nbsp;YES;}}return&nbsp;NO;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;-&nbsp;(void)switchCameraIsFront:(BOOL)front{
+&nbsp;&nbsp;if&nbsp;(front)&nbsp;{
+&nbsp;&nbsp;if([UIImagePickerController&nbsp;isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]){
+&nbsp;&nbsp;&nbsp;[self&nbsp;setCameraDevice:UIImagePickerControllerCameraDeviceFront];}}
+&nbsp;&nbsp;&nbsp;else&nbsp;{if([UIImagePickerController&nbsp;isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear]){
+&nbsp;&nbsp;&nbsp;[self&nbsp;setCameraDevice:UIImagePickerControllerCameraDeviceRear];
+&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;}</pre><h3 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 22px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(78, 161, 219); cursor: pointer; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;" name="t5"></a>2.AVCaptureSession+AVCaptureMovieFileOutput</h3><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">流程：</p><pre class="hljs basic" name="code">1.&nbsp;创建捕捉会话2.&nbsp;设置视频的输入3.&nbsp;设置音频的输入4.&nbsp;输出源设置,这里视频，音频数据会合并到一起输出，在代理方法中国也可以单独拿到视频或者音频数据，给AVCaptureMovieFileOutput指定路径，开始录制之后就会向这个路径写入数据5.&nbsp;添加视频预览层6.&nbsp;开始采集数据，这个时候还没有写入数据，用户点击录制后就可以开始写入数据</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">0. 创建捕捉会话</h4><pre class="hljs objectivec">self.session&nbsp;=&nbsp;[[AVCaptureSession&nbsp;alloc]&nbsp;init];if&nbsp;([_session&nbsp;canSetSessionPreset:AVCaptureSessionPreset640x480])&nbsp;{//设置分辨率_session.sessionPreset=AVCaptureSessionPreset640x480;}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">1. 视频的输入</h4><pre class="hljs objectivec">-&nbsp;(void)setUpVideo{//&nbsp;1.1&nbsp;获取视频输入设备(摄像头)AVCaptureDevice&nbsp;*videoCaptureDevice=[self&nbsp;getCameraDeviceWithPosition:AVCaptureDevicePositionBack];//取得后置摄像头//&nbsp;视频&nbsp;HDR&nbsp;(高动态范围图像)//&nbsp;videoCaptureDevice.videoHDREnabled&nbsp;=&nbsp;YES;//&nbsp;设置最大，最小帧速率//videoCaptureDevice.activeVideoMinFrameDuration&nbsp;=&nbsp;CMTimeMake(1,&nbsp;60);//&nbsp;1.2&nbsp;创建视频输入源NSError&nbsp;*error=nil;self.videoInput=&nbsp;[[AVCaptureDeviceInput&nbsp;alloc]&nbsp;initWithDevice:videoCaptureDevice&nbsp;error:&amp;error];//&nbsp;1.3&nbsp;将视频输入源添加到会话if&nbsp;([self.session&nbsp;canAddInput:self.videoInput])&nbsp;{[self.session&nbsp;addInput:self.videoInput];}}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">2. 音频的输入</h4><pre class="hljs objectivec">//&nbsp;2.1&nbsp;获取音频输入设备AVCaptureDevice&nbsp;*audioCaptureDevice=[[AVCaptureDevice&nbsp;devicesWithMediaType:AVMediaTypeAudio]&nbsp;firstObject];NSError&nbsp;*error=nil;//&nbsp;2.2&nbsp;创建音频输入源self.audioInput&nbsp;=&nbsp;[[AVCaptureDeviceInput&nbsp;alloc]&nbsp;initWithDevice:audioCaptureDevice&nbsp;error:&amp;error];//&nbsp;2.3&nbsp;将音频输入源添加到会话if&nbsp;([self.session&nbsp;canAddInput:self.audioInput])&nbsp;{[self.session&nbsp;addInput:self.audioInput];}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">3.输出源设置</h4><pre class="hljs objectivec">-&nbsp;(void)setUpFileOut{//&nbsp;3.1初始化设备输出对象，用于获得输出数据self.FileOutput=[[AVCaptureMovieFileOutput&nbsp;alloc]init];//&nbsp;3.2设置输出对象的一些属性AVCaptureConnection&nbsp;*captureConnection=[self.FileOutput&nbsp;connectionWithMediaType:AVMediaTypeVideo];//设置防抖//视频防抖&nbsp;是在&nbsp;iOS&nbsp;6&nbsp;和&nbsp;iPhone&nbsp;4S&nbsp;发布时引入的功能。到了&nbsp;iPhone&nbsp;6，增加了更强劲和流畅的防抖模式，被称为影院级的视频防抖动。相关的&nbsp;API&nbsp;也有所改动&nbsp;(目前为止并没有在文档中反映出来，不过可以查看头文件）。防抖并不是在捕获设备上配置的，而是在&nbsp;AVCaptureConnection&nbsp;上设置。由于不是所有的设备格式都支持全部的防抖模式，所以在实际应用中应事先确认具体的防抖模式是否支持：if&nbsp;([captureConnection&nbsp;isVideoStabilizationSupported&nbsp;])&nbsp;{captureConnection.preferredVideoStabilizationMode=AVCaptureVideoStabilizationModeAuto;}//预览图层和视频方向保持一致captureConnection.videoOrientation&nbsp;=&nbsp;[self.previewlayer&nbsp;connection].videoOrientation;//&nbsp;3.3将设备输出添加到会话中if&nbsp;([_session&nbsp;canAddOutput:_FileOutput])&nbsp;{[_session&nbsp;addOutput:_FileOutput];}}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">4. 视频预览层</h4><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">一进入视频录制界面，这个时候 session就已经在采集数据了，并把数据显示在预览层上，用户选择录制后，再将采集到的数据写入文件。</p><pre class="hljs objectivec">-&nbsp;(void)setUpPreviewLayerWithType:(FMVideoViewType&nbsp;)type{CGRect&nbsp;rect&nbsp;=&nbsp;CGRectZero;switch&nbsp;(type)&nbsp;{case&nbsp;Type1X1:rect&nbsp;=&nbsp;CGRectMake(0,&nbsp;0,&nbsp;kScreenWidth,&nbsp;kScreenWidth);break;case&nbsp;Type4X3:rect&nbsp;=&nbsp;CGRectMake(0,&nbsp;0,&nbsp;kScreenWidth,&nbsp;kScreenWidth*4/3);break;case&nbsp;TypeFullScreen:rect&nbsp;=&nbsp;[UIScreen&nbsp;mainScreen].bounds;break;default:rect&nbsp;=&nbsp;[UIScreen&nbsp;mainScreen].bounds;break;}self.previewlayer.frame&nbsp;=&nbsp;rect;[_superView.layer&nbsp;insertSublayer:self.previewlayer&nbsp;atIndex:0];}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">5. 开始采集画面</h4><pre class="hljs ini">[self.session&nbsp;startRunning];</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">6.开始录制</h4><pre class="hljs objectivec">-&nbsp;(void)writeDataTofile{NSString&nbsp;*videoPath&nbsp;=&nbsp;[self&nbsp;createVideoFilePath];self.videoUrl&nbsp;=&nbsp;[NSURL&nbsp;fileURLWithPath:videoPath];[self.FileOutput&nbsp;startRecordingToOutputFileURL:self.videoUrl&nbsp;recordingDelegate:self];}</pre><h3 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 22px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(78, 161, 219); cursor: pointer; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;" name="t6"></a>3.AVCaptureSession+AVAssetWriter</h3><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">流程：</p><pre class="hljs markdown">1.&nbsp;创建捕捉会话2.&nbsp;设置视频的输入&nbsp;和&nbsp;输出3.&nbsp;设置音频的输入&nbsp;和&nbsp;输出4.&nbsp;添加视频预览层5.&nbsp;开始采集数据，这个时候还没有写入数据，用户点击录制后就可以开始写入数据6.&nbsp;初始化AVAssetWriter,&nbsp;我们会拿到视频和音频的数据流，用AVAssetWriter写入文件，这一步需要我们自己实现。</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">1. 创建捕捉会话</h4><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">需要确保在同一个队列，最好队列只创建一次</p><pre class="hljs objectivec" name="code" style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 24px; padding: 8px; position: relative; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; overflow: auto; color: rgb(101, 123, 131); background-color: rgb(246, 246, 246); white-space: pre-wrap; overflow-wrap: break-word; font-size: 13px; line-height: 1.42857; border: 1px solid rgb(204, 204, 204);">self.session&nbsp;=&nbsp;[[AVCaptureSession&nbsp;alloc]&nbsp;init];if&nbsp;([_session&nbsp;canSetSessionPreset:AVCaptureSessionPreset640x480])&nbsp;{//设置分辨率_session.sessionPreset=AVCaptureSessionPreset640x480;}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">2.设置视频的输入 和 输出</h4><pre class="hljs objectivec" name="code" style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 24px; padding: 8px; position: relative; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; overflow: auto; color: rgb(101, 123, 131); background-color: rgb(246, 246, 246); white-space: pre-wrap; overflow-wrap: break-word; font-size: 13px; line-height: 1.42857; border: 1px solid rgb(204, 204, 204);">-&nbsp;(void)setUpVideo{//&nbsp;2.1&nbsp;获取视频输入设备(摄像头)AVCaptureDevice&nbsp;*videoCaptureDevice=[self&nbsp;getCameraDeviceWithPosition:AVCaptureDevicePositionBack];//取得后置摄像头//&nbsp;2.2&nbsp;创建视频输入源NSError&nbsp;*error=nil;self.videoInput=&nbsp;[[AVCaptureDeviceInput&nbsp;alloc]&nbsp;initWithDevice:videoCaptureDevice&nbsp;error:&amp;error];//&nbsp;2.3&nbsp;将视频输入源添加到会话if&nbsp;([self.session&nbsp;canAddInput:self.videoInput])&nbsp;{[self.session&nbsp;addInput:self.videoInput];}self.videoOutput&nbsp;=&nbsp;[[AVCaptureVideoDataOutput&nbsp;alloc]&nbsp;init];self.videoOutput.alwaysDiscardsLateVideoFrames&nbsp;=&nbsp;YES;&nbsp;//立即丢弃旧帧，节省内存，默认YES[self.videoOutput&nbsp;setSampleBufferDelegate:self&nbsp;queue:self.videoQueue];if&nbsp;([self.session&nbsp;canAddOutput:self.videoOutput])&nbsp;{[self.session&nbsp;addOutput:self.videoOutput];}}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">3. 设置音频的输入 和 输出</h4><pre class="hljs objectivec" name="code" style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 24px; padding: 8px; position: relative; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; overflow: auto; color: rgb(101, 123, 131); background-color: rgb(246, 246, 246); white-space: pre-wrap; overflow-wrap: break-word; font-size: 13px; line-height: 1.42857; border: 1px solid rgb(204, 204, 204);">-&nbsp;(void)setUpAudio{//&nbsp;2.2&nbsp;获取音频输入设备AVCaptureDevice&nbsp;*audioCaptureDevice=[[AVCaptureDevice&nbsp;devicesWithMediaType:AVMediaTypeAudio]&nbsp;firstObject];NSError&nbsp;*error=nil;//&nbsp;2.4&nbsp;创建音频输入源self.audioInput&nbsp;=&nbsp;[[AVCaptureDeviceInput&nbsp;alloc]&nbsp;initWithDevice:audioCaptureDevice&nbsp;error:&amp;error];//&nbsp;2.6&nbsp;将音频输入源添加到会话if&nbsp;([self.session&nbsp;canAddInput:self.audioInput])&nbsp;{[self.session&nbsp;addInput:self.audioInput];}self.audioOutput&nbsp;=&nbsp;[[AVCaptureAudioDataOutput&nbsp;alloc]&nbsp;init];[self.audioOutput&nbsp;setSampleBufferDelegate:self&nbsp;queue:self.videoQueue];if([self.session&nbsp;canAddOutput:self.audioOutput])&nbsp;{[self.session&nbsp;addOutput:self.audioOutput];}}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">4. 添加视频预览层</h4><pre class="hljs objectivec" name="code" style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 24px; padding: 8px; position: relative; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; overflow: auto; color: rgb(101, 123, 131); background-color: rgb(246, 246, 246); white-space: pre-wrap; overflow-wrap: break-word; font-size: 13px; line-height: 1.42857; border: 1px solid rgb(204, 204, 204);">-&nbsp;(void)setUpPreviewLayerWithType:(FMVideoViewType&nbsp;)type{CGRect&nbsp;rect&nbsp;=&nbsp;CGRectZero;switch&nbsp;(type)&nbsp;{case&nbsp;Type1X1:rect&nbsp;=&nbsp;CGRectMake(0,&nbsp;0,&nbsp;kScreenWidth,&nbsp;kScreenWidth);break;case&nbsp;Type4X3:rect&nbsp;=&nbsp;CGRectMake(0,&nbsp;0,&nbsp;kScreenWidth,&nbsp;kScreenWidth*4/3);break;case&nbsp;TypeFullScreen:rect&nbsp;=&nbsp;[UIScreen&nbsp;mainScreen].bounds;break;default:rect&nbsp;=&nbsp;[UIScreen&nbsp;mainScreen].bounds;break;}self.previewlayer.frame&nbsp;=&nbsp;rect;[_superView.layer&nbsp;insertSublayer:self.previewlayer&nbsp;atIndex:0];}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">5. 开始采集画面</h4><pre class="hljs ini">&nbsp;&nbsp;&nbsp;[self.session&nbsp;startRunning];</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">6. 初始化AVAssetWriter</h4><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">AVAssetWriter 写入数据的过程需要在子线程中执行，并且每次写入数据都需要保证在同一个线程。</p><pre class="hljs objectivec">-&nbsp;(void)setUpWriter{self.videoUrl&nbsp;=&nbsp;[[NSURL&nbsp;alloc]&nbsp;initFileURLWithPath:[self&nbsp;createVideoFilePath]];self.writeManager&nbsp;=&nbsp;[[AVAssetWriteManager&nbsp;alloc]&nbsp;initWithURL:self.videoUrl&nbsp;viewType:_viewType];self.writeManager.delegate&nbsp;=&nbsp;self;}</pre><h4 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 20px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">7.拿到数据流后处理</h4><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">视频数据和音频数据需要分开处理</p><pre class="hljs objectivec">-&nbsp;(void)captureOutput:(AVCaptureOutput&nbsp;*)captureOutput&nbsp;didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer&nbsp;fromConnection:(AVCaptureConnection&nbsp;*)connection{@autoreleasepool&nbsp;{//视频if&nbsp;(connection&nbsp;==&nbsp;[self.videoOutput&nbsp;connectionWithMediaType:AVMediaTypeVideo])&nbsp;{if&nbsp;(!self.writeManager.outputVideoFormatDescription)&nbsp;{@synchronized(self)&nbsp;{CMFormatDescriptionRef&nbsp;formatDescription&nbsp;=&nbsp;CMSampleBufferGetFormatDescription(sampleBuffer);self.writeManager.outputVideoFormatDescription&nbsp;=&nbsp;formatDescription;}}&nbsp;else&nbsp;{@synchronized(self)&nbsp;{if&nbsp;(self.writeManager.writeState&nbsp;==&nbsp;FMRecordStateRecording)&nbsp;{[self.writeManager&nbsp;appendSampleBuffer:sampleBuffer&nbsp;ofMediaType:AVMediaTypeVideo];}}}}//音频if&nbsp;(connection&nbsp;==&nbsp;[self.audioOutput&nbsp;connectionWithMediaType:AVMediaTypeAudio])&nbsp;{if&nbsp;(!self.writeManager.outputAudioFormatDescription)&nbsp;{@synchronized(self)&nbsp;{CMFormatDescriptionRef&nbsp;formatDescription&nbsp;=&nbsp;CMSampleBufferGetFormatDescription(sampleBuffer);self.writeManager.outputAudioFormatDescription&nbsp;=&nbsp;formatDescription;}}@synchronized(self)&nbsp;{if&nbsp;(self.writeManager.writeState&nbsp;==&nbsp;FMRecordStateRecording)&nbsp;{[self.writeManager&nbsp;appendSampleBuffer:sampleBuffer&nbsp;ofMediaType:AVMediaTypeAudio];}}}}}</pre><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">我们拿到最原始的数据以后，可以对其进行各种参数的设置</p><pre class="hljs objectivec">-&nbsp;(void)setUpWriter{self.assetWriter&nbsp;=&nbsp;[AVAssetWriter&nbsp;assetWriterWithURL:self.videoUrl&nbsp;fileType:AVFileTypeMPEG4&nbsp;error:nil];//写入视频大小NSInteger&nbsp;numPixels&nbsp;=&nbsp;self.outputSize.width&nbsp;*&nbsp;self.outputSize.height;//每像素比特CGFloat&nbsp;bitsPerPixel&nbsp;=&nbsp;6.0;NSInteger&nbsp;bitsPerSecond&nbsp;=&nbsp;numPixels&nbsp;*&nbsp;bitsPerPixel;//&nbsp;码率和帧率设置NSDictionary&nbsp;*compressionProperties&nbsp;=&nbsp;@{&nbsp;AVVideoAverageBitRateKey&nbsp;:&nbsp;@(bitsPerSecond),AVVideoExpectedSourceFrameRateKey&nbsp;:&nbsp;@(30),AVVideoMaxKeyFrameIntervalKey&nbsp;:&nbsp;@(30),AVVideoProfileLevelKey&nbsp;:&nbsp;AVVideoProfileLevelH264BaselineAutoLevel&nbsp;};//视频属性self.videoCompressionSettings&nbsp;=&nbsp;@{&nbsp;AVVideoCodecKey&nbsp;:&nbsp;AVVideoCodecH264,AVVideoScalingModeKey&nbsp;:&nbsp;AVVideoScalingModeResizeAspectFill,AVVideoWidthKey&nbsp;:&nbsp;@(self.outputSize.height),AVVideoHeightKey&nbsp;:&nbsp;@(self.outputSize.width),AVVideoCompressionPropertiesKey&nbsp;:&nbsp;compressionProperties&nbsp;};_assetWriterVideoInput&nbsp;=&nbsp;[AVAssetWriterInput&nbsp;assetWriterInputWithMediaType:AVMediaTypeVideo&nbsp;outputSettings:self.videoCompressionSettings];//expectsMediaDataInRealTime&nbsp;必须设为yes，需要从capture&nbsp;session&nbsp;实时获取数据_assetWriterVideoInput.expectsMediaDataInRealTime&nbsp;=&nbsp;YES;_assetWriterVideoInput.transform&nbsp;=&nbsp;CGAffineTransformMakeRotation(M_PI&nbsp;/&nbsp;2.0);//&nbsp;音频设置self.audioCompressionSettings&nbsp;=&nbsp;@{&nbsp;AVEncoderBitRatePerChannelKey&nbsp;:&nbsp;@(28000),AVFormatIDKey&nbsp;:&nbsp;@(kAudioFormatMPEG4AAC),AVNumberOfChannelsKey&nbsp;:&nbsp;@(1),AVSampleRateKey&nbsp;:&nbsp;@(22050)&nbsp;};_assetWriterAudioInput&nbsp;=&nbsp;[AVAssetWriterInput&nbsp;assetWriterInputWithMediaType:AVMediaTypeAudio&nbsp;outputSettings:self.audioCompressionSettings];_assetWriterAudioInput.expectsMediaDataInRealTime&nbsp;=&nbsp;YES;if&nbsp;([_assetWriter&nbsp;canAddInput:_assetWriterVideoInput])&nbsp;{[_assetWriter&nbsp;addInput:_assetWriterVideoInput];}else&nbsp;{NSLog(@&quot;AssetWriter&nbsp;videoInput&nbsp;append&nbsp;Failed&quot;);}if&nbsp;([_assetWriter&nbsp;canAddInput:_assetWriterAudioInput])&nbsp;{[_assetWriter&nbsp;addInput:_assetWriterAudioInput];}else&nbsp;{NSLog(@&quot;AssetWriter&nbsp;audioInput&nbsp;Append&nbsp;Failed&quot;);}self.writeState&nbsp;=&nbsp;FMRecordStateRecording;}</pre><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">设置好参数以后，就可以写入文件了。AVAssetWriter数据写入的过程有点复杂，demo中我新建AVAssetWriteManager分离出AVAssetWriter，单独处理写数据，这样逻辑会清晰一点。</p><h3 style="box-sizing: border-box; outline: 0px; margin: 8px 0px 16px; padding: 0px; font-size: 22px; font-family: inherit; color: rgb(79, 79, 79); line-height: 1.7; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(78, 161, 219); cursor: pointer; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;" name="t7"></a>fileOut和writer的相同点和不同点</h3><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">从上面的两个流程大致可以看出来，<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>相同点：数据采集都在AVCaptureSession中进行，视频和音频的输入都一样，画面的预览一致。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>不同点：<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>输出不一致, AVCaptureMovieFileOutput 只需要一个输出即可，指定一个文件路后，视频和音频会写入到指定路径，不需要其他复杂的操作。<br style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; overflow-wrap: break-word;"/>AVAssetWriter 需要 AVCaptureVideoDataOutput 和 AVCaptureAudioDataOutput 两个单独的输出，拿到各自的输出数据后，然后自己进行相应的处理。</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">可配参数不一致，AVAssetWriter可以配置更多的参数。</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">视频剪裁不一致，AVCaptureMovieFileOutput 如果要剪裁视频，因为系统已经把数据写到文件中了，我们需要从文件中独到一个完整的视频，然后处理；而AVAssetWriter我们拿到的是数据流，还没有合成视频，对数据流进行处理，所以两则剪裁方式也是不一样。</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">其他添加背景音乐，水印等也是不一样的，这里没有涉及就不介绍了。到这里也差不多了，文章也有点长了。这些是我自己整理资料总结出来的，不排除会有一些错误之处，供大家学习参考，希望有所收获。如果方便，还请为我star一个，也算是对我的支持。</p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);"><a href="https://github.com/suifengqjn/VideoRecord" rel="nofollow" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; color: rgb(49, 148, 208); text-decoration-line: none; cursor: pointer; overflow-wrap: break-word;">demo地址</a></p><p style="box-sizing: border-box; outline: 0px; margin-top: 0px; margin-bottom: 16px; padding: 0px; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; white-space: normal; background-color: rgb(255, 255, 255);">原文链接:<a href="https://blog.csdn.net/qq_34047841/article/details/65437236">https://blog.csdn.net/qq_34047841/article/details/65437236</a></p><p><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'a948A25C';
+var article_id = '16Bcb7bC';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>

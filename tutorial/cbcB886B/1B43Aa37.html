@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"> -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="description" content="编程">
+ 	<meta name="keywords" content="IT教程 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    
+<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/> -->
+<title>TCP/IP 分层模型-网络协议</title>
+
+
+    
+
+	<link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/css/bootstrap-maizi.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
+    <!-- <script  src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    
+    <script src="/lib/js/jquery.singlePageNav.min.js"></script>
+    <script src="/lib/js/jquery.cookie.js"></script>
+    
+	
+<script src="/js/article.js"></script>
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a684a10bc59d54f03381c502765556bb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<script type="text/javascript">
+    // var siteHome = './';
+    var staticHTMLUri = '/';
+</script>
+
+
+</head>
+<body>
+	
+		  
+		   <div style="height:50px;margin-bottom: 0px;"><nav class="navbar navbar-default navbar-fixed-top" id="topNav">		   <div class="container"> 
+		    <!--导航--> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-header"> 
+		     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+		     <a href="http://qtxjc.com" class="navbar-brand" style="color: #1196EE;"><span>趣通小教程</span>&nbsp;<span>qtxjc.com</span></a> 
+		    </div> 
+		    <!--小屏幕导航按钮和logo--> 
+		    <div class="navbar-collapse collapse"> 
+		     <div class="profile navbar-right"> 
+			      <!-- 	<ul class="nav navbar-nav"> 
+			       		<li><a href="#home" data-toggle="modal" id="collector">收藏夹</a></li>
+			       		<li><a href="#home" data-toggle="modal" id="homePageloginBtn">登录</a></li> 
+			      		<li><a href="#home" data-toggle="modal" id="loginStatus"></a></li> 
+			      	</ul>  -->
+		      		
+		     </div> 
+		     <ul class="nav navbar-nav navbar-center"> 
+		      <li> 
+		       <!--搜索框--> 
+		       <div class="input-group hidden" id="searchBox" style="max-width:300px;height:30px;margin-top:10px;"> 
+		        <input type="text" class="form-control input-md" placeholder="输入关键词" onkeydown="onKeyDown(event)" /> 
+		        <span class="input-group-addon btn btn-primary">搜索</span> 
+		       </div> 
+		       <!--搜索框--></li> 
+	
+		     </ul> 
+		    </div> 
+		   </div> </nav></div>
+		  
+	
+	
+<style type="text/css">
+    .panel-heading{
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .panel-body {
+        padding: 10px;
+    }
+    .panel-body div {
+        padding-left: 20px;
+    }
+
+    .menu-container{
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: green;
+        border:5px solid #f6f4f0;
+    
+    }
+    .menu-container div{
+        padding-right: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .chapter{
+        background-color: #f0f0f0;
+        font-weight: bold;
+
+    }
+    .course{
+        background-color: #e2e2e2;
+        text-indent: 0em;
+    }
+    .normal{
+        color: black;
+    }
+    .selected{
+        background-color: #1196EE;
+        color: white;
+    }
+    .block{
+        /*border: thick solid #e1e1e1;*/
+        
+    }
+    .preview{
+        display: none;
+    }
+    .item{
+        border-bottom-style:solid;
+        border-width: 1px;
+        border-color: #f1f1f1;
+        cursor:pointer;
+    }
+    .content{
+        border-radius: 5px;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+    body{
+        background-color: #dfdfdf;
+    }
+    td {
+        border: 1px solid #ddd
+    }
+</style>
+<div class="container">
+<!-- <div class="row">
+    <div class="col-sm-12" style="background-color: white;border-radius:8px;border-style: solid;border-color:#dfdfdf ">
+        
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 20px;">
+        <strong>TCP/IP 分层模型-网络协议</strong>
+    </div>
+</div>
+<div class="row" style="margin-top:5px;">
+    <div class="col-sm-2" style="overflow-y: auto;max-height:100%;overflow-x: hidden;">
+                <div class="menu-container">
+                    <div id="1B43Aa37" class="item chapter normal selected">TCP/IP 分层模型</div><div id="5aA204BB" class="item chapter normal">TCP协议</div><div id="b2621B44" class="item course normal">TCP滑动窗口</div><div id="715a2990" class="item chapter normal">UDP协议</div><div id="aA37CAbb" class="item chapter normal">HTTP协议</div><div id="048130c2" class="item course normal">HTTPS</div><div id="ACCACac3" class="item chapter normal">DNS</div><div id="B967abc3" class="item course normal preview">练一练</div><div id="ba7c3684" class="item course normal preview">test</div>
+                </div>
+                <div style="float:left;margin-top: 30px;width: 1px;height: 100%;background: darkgray;"></div>
+        </div>
+    <div class="col-sm-10 content" style="overflow-y: auto;height: 100%;background-color: white;padding-top:20px;">
+         <div class="row">
+             <div class="col-sm-12">
+                 <p>目录</p><p>1、TCP/IP各层之间的概述</p><p>2、协议封装</p><p>3、协议拆封</p><p>4、数据传输</p><p><br/></p><p>1、TCP/IP各层之间的概述</p><p><br/></p><p>如上图所示，TCP/IP分为四层结构，自上至下分别是应用层、传输层、网际层和网络接口层，各协议层之间的关系如下图所示：</p><p style="text-align:center"><img src="/upload/image/2019115/195925177430.png" alt="这里写图片描述"/></p><p>2、协议封装</p><p><br/></p><p><br/></p><p>如上图所示，在发送方(也称为源主机)，当应用程序使用TCP或UDP传送用户数据时，将用户数据送人TCP/IP协议栈，然后自上而下地逐个通过每一层，直到被当做一串比特流送入网络。其中每一层对收到的数据都需要增加一些首部信息，有时还需要增加尾部信息。这些操作过程称为封装。</p><p>TCP、UDP、ICMP和IGMP等协议都要使用IP数据报传送数据，所以必须在IP数据报的首部加入某种标识，以说明是哪个协议的数据封装到了IP数据报中。IP数据报首部定义的一个8位的“协议”宇段就是为此目的而设置的。协议宇段的值为1表示ICMP，为2表示IGMP，为6表示TCP，为17表示UDP。</p><p style="text-align:center"><img src="/upload/image/2019115/200038670982.png" alt="这里写图片描述"/></p><p>3、协议拆封</p><p><br/></p><p>类似地，许多应用进程使用TCP或UDP传送数据，则需要在TCP段或UDP数据报首部定义一个应用程序标识符。TCP和UDP都使用一个16位的端口号来标识不同的应用程序，TCP和UDP把“源端口号”和“目的端口号”分别存人TCP段首部和UDP数据报首部。网络接口分别发送和接收IP、ARP、RARP的数据，同理，也必须在以太网(假定物理网络是一个以太网)的首部加入一个字段，用来说明是哪个协议的数据。为此，以太网帧首部定义了一个16位的“类型”字段。当接收方(也称目的主机)收到一个以太网帧时，数据就开始在协议栈中自下而上传送。各层协议利用报文首部所携带的协议控制信息做相应的处理，然后去掉各层协议数据单元的首部，将封装的数据交给上层协议。每层协议都要检查协议首部中的协议标识，以确定让哪一个协议接收数据，这个过程称为拆封，如上图所示。</p><p style="text-align:center"><img src="/upload/image/2019115/200052966930.png" alt="这里写图片描述"/></p><p>4、数据传输</p><p>假设两个主机A和B，主机A发送一串数据至主机B，根据TCP/IP的四层协议规定，自上至下按照格式封装，应用层采用FTP协议，传输层采用TCP协议，数据在网际层封装时，需要考虑主机A和主机B是否在同一个网际中，如果在同一个局域网中则可以直进行数据传输，但是在不同的网际时，需要通过路由转发，特别是在网际接口层中分别采用以太协议和令牌环协议时，需要采用不同的驱动进行数据解析和编码，使其在各自协议网中数据传输。</p><p style="text-align:center"><br/></p><p>4.1 局域网数据传输</p><p><br/></p><p>任何两个对等层(peerlayer)，例如传输层、网际层、网络接口层之间的通信，如同上图中标识的一样，好像是将数据通过水平虚线直接传递给对方，这就是所谓的对等层之间的通信。实际上，协议就是在两个对等层之间传递数据时的各种规定。由此可以这样认为：实际通信是按垂直方向进行的，层与层之间经过封装和拆封这样的操作实现物理通信。但是逻辑上，却是在水平方向上利用协议进行的对等层通信。</p><p style="text-align:center"><img src="https://qtxjc.com/upload/image/2019115/200110735114.png" alt="这里写图片描述" style="text-align: center; white-space: normal;"/></p><p>4.2 广域网数据传输</p><p><br/></p><p>应用层和传输层使用端到端(end-to-end)协议，路由器中没有这两层协议，只有端系统才有这两层协议。网际层是逐跳(hop-by-hop)协议，端系统和路由器都有网际层协议。一个路由器具有两个或多个网络接口，这样才能连接两个或多个网络。互联网的目的之一是在应用程序中屏蔽所有的物理网络细节。在上图中，应用层不需要关心一个端系统是在以太网上还是在令牌环网上，它们通过路由器进行通信。随着不同类型物理网络的增加，互联网的规模变得越来越大，也需要增加路由器，但是应用层仍然是一样的。</p><p style="text-align:center"><img src="https://qtxjc.com/upload/image/2019115/200123313238.png" alt="这里写图片描述"/></p><p><br/></p><p>原文链接：<a href="http://blog.chinaunix.net/uid-26275986-id-4109679.html">http://blog.chinaunix.net/uid-26275986-id-4109679.html</a></p><p style="text-align: center;"><br/></p>
+             </div>
+         </div>
+        <div class="row" style="background-color: #eeeeee;">
+            
+             <div class="col-sm-4 text-left left-arror">
+                 
+             </div>
+       
+             <div class="col-sm-4 col-sm-offset-4 text-right right-arror">
+                
+             </div>
+        
+         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center" style="padding-top: 10px;">
+        <a href="https://www.onlinegdb.com/" target="_blank"><strong><font color="black">在线编程工具</font></strong></a>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+// var siteHome = './';
+var tutorial_id = 'cbcB886B';
+var article_id = '1B43Aa37';
+</script>
+
+	
+	<a href="https://beian.miit.gov.cn"><div style="text-align: center; height: 60px;padding-top: 20px;">鄂ICP备20003145号-1</div></a>	
+	
+</body>
